@@ -1,4 +1,8 @@
 #!/bin/sh
+#
+# Este arquivo deve ficar dentro do diretório Externos, onde estarão todos os repositórios
+# de códigos de terceiros
+#
 #;;************************************************************************************
 #;;
 #;;    
