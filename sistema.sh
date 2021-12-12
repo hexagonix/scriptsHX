@@ -234,6 +234,7 @@ cd Externos
 
 cd ..
 
+echo 
 echo "Aplicativos de terceitos construídos [Ok]"
 
 else 
@@ -457,6 +458,7 @@ cd Externos
 
 cd ..
 
+echo
 echo "Aplicativos de terceitos construídos [Ok]"
 
 else 
