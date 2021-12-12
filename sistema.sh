@@ -222,8 +222,30 @@ echo
 
 cd ..
 
-cd Dist
+if [ -e Externos/Externos.sh ] ; then
 
+echo 
+echo "Construindo aplicativos de terceiros..."
+echo 
+
+cd Externos 
+
+./Externos.sh Andromeda
+
+cd ..
+
+echo "Aplicativos de terceitos construídos [Ok]"
+
+else 
+
+echo "Não existem aplicativos de terceiros marcados para construção."
+echo 
+
+fi 
+
+cd Dist 
+
+echo
 echo "Visualize o arquivo de log 'log.log', para mais informações da montagem."
 echo
 
@@ -423,8 +445,30 @@ cd ..
 echo "Bibliotecas copiadas [Ok]"
 echo
 
+if [ -e Externos/Externos.sh ] ; then
+
+echo 
+echo "Construindo aplicativos de terceiros..."
+echo 
+
+cd Externos 
+
+./Externos.sh Hexagonix
+
 cd ..
 
+echo "Aplicativos de terceitos construídos [Ok]"
+
+else 
+
+echo "Não existem aplicativos de terceiros marcados para construção."
+echo 
+
+fi 
+
+cd Dist 
+
+echo 
 echo "Visualize o arquivo de log 'log.log', para mais informações da montagem."
 echo
 
