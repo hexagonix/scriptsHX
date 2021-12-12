@@ -144,7 +144,7 @@ sudo /mnt/c/Program\ Files/qemu/qemu-system-$sistema.exe -serial stdio -hda $ima
 maquinaVirtualHexagonix()
 {
 
-export imagem="hexagonix.img"
+export imagem="Imagens/hexagonix.img"
 
 clear
 
@@ -254,7 +254,7 @@ fi
 	
 export drvsom="pcspk"
 export sistema="i386"
-export imagem="andromeda.img"
+export imagem="Imagens/andromeda.img"
 export processador="pentium3"
 export memoria=32
 export REG="log.log"

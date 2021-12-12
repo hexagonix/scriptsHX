@@ -151,7 +151,7 @@ cd ..
 
 # Gerar os aplicativos base do Andromeda® e base Unix
 
-cd Distro/Unix
+cd Dist/Unix
 
 ./Unix.sh
 
@@ -222,7 +222,7 @@ echo
 
 cd ..
 
-cd Distro
+cd Dist
 
 echo "Visualize o arquivo de log 'log.log', para mais informações da montagem."
 echo
@@ -364,7 +364,7 @@ cd ..
 
 # Gerar os aplicativos base Unix
 
-cd Distro/Unix
+cd Dist/Unix
 
 ./Unix.sh hexagonix
 

@@ -159,6 +159,8 @@ echo
 
 fi
 
+mv  andromeda.img Imagens/andromeda.img 
+
 echo ";;****************************************************************************"
 echo ";;                                                                           "
 echo ";;                                                                           "
@@ -177,7 +179,7 @@ echo ";;                                                                        
 echo ";;****************************************************************************"
 echo
 echo
-echo "Imagem '$IMG' gerada com sucesso."
+echo "Imagem '$IMG' gerada com sucesso. Ela pode ser encontrada em Imagens/$IMG."
 echo
 echo
 echo ";;****************************************************************************"
@@ -348,6 +350,8 @@ echo
 
 fi
 
+mv hexagonix.img Imagens/hexagonix.img 
+
 echo ";;****************************************************************************"
 echo ";;                                                                           "
 echo ";;                                                                           "
@@ -366,7 +370,7 @@ echo ";;                                                                        
 echo ";;****************************************************************************"
 echo
 echo
-echo "Imagem '$IMG' gerada com sucesso."
+echo "Imagem '$IMG' gerada com sucesso. Ela pode ser encontrada em Imagens/$IMG."
 echo
 echo
 echo ";;****************************************************************************"
