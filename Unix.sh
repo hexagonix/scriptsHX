@@ -26,7 +26,7 @@ echo
 echo "Gerando aplicativos base Unix do Hexagonix®... {"
 echo
 
-echo "Gerando aplicativos base Unix do Hexagonix®... {" $LOG
+echo "Gerando aplicativos base Unix do Hexagonix®... {" >> $LOG
 echo >> $LOG
 	
 # Vamos agora automatizar a construção dos aplicativos base Unix
