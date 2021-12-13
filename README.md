@@ -18,7 +18,7 @@ Este repositório não é necessário para a construção do Hexagonix/Andromeda
 * imagem.sh[^3]: Deve estar no diretório raiz da árvore de construção
 * sistema.sh[^4]: Deve estar no diretório raiz da árvore de construção
 * Unix.sh[^5]: deve estar em Apps/Unix. Cópia backup, uma já disponível no repositório Unix-Apps
-* WSS.sh[^6]: Deve estar no diretório raiz da árvore de construção
+* WSL.sh[^6]: Deve estar no diretório raiz da árvore de construção
 
 [^1]: Script responsável por construir os aplicativos do ambiente Andromeda.
 [^2]: Script responsável por construir e/ou manipular os códigos de terceiros, como aplicativos e bibliotecas, que devem estar na pasta Externos, na raiz da árvore de construção do sistema.
