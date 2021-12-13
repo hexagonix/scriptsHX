@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+# Esse script deve ficar na raiz do projeto
+# 
 #;;************************************************************************************
 #;;
 #;;    
@@ -151,17 +154,24 @@ cd ..
 
 # Gerar os aplicativos base do Andromeda® e base Unix
 
-cd Dist/Unix
+cd Apps/Unix
 
 ./Unix.sh
 
 cd ..
 
-cd Apps/
+cd Andromeda
 	
 ./Apps.sh
 
 cd ..
+
+cp *.app ../Andromeda
+rm *.app
+
+cd ..
+
+cd Dist 
 
 cd etc/
 
@@ -174,6 +184,7 @@ cd Man
 cp *.* ../../Andromeda
 
 cd ..
+cd ..
 
 cd Fontes/
 
@@ -184,7 +195,7 @@ echo
 
 ./fontes.sh
 
-cp *.fnt ../../Andromeda
+cp *.fnt ../Andromeda
 rm *.fnt
 
 echo
@@ -199,28 +210,26 @@ echo
 
 fi
 
-cd ..
-
 echo "Copiando principais bibliotecas de desenvolvimento..."
 echo 
 
 # Vamos copiar também o arquivo de cabeçalho para poder desenvolver sobre o Andromeda(R)
 
+cd ..
+
 cd LibAPP/
 
-cp andrmda.s ../../Andromeda 
+cp andrmda.s ../Andromeda 
 
 cd Estelar
 
-cp estelar.s ../../../Andromeda
+cp estelar.s ../../Andromeda
 
 cd ..
 cd ..
 
 echo "Bibliotecas copiadas [Ok]"
 echo
-
-cd ..
 
 if [ -e Externos/Externos.sh ] ; then
 
@@ -387,11 +396,18 @@ cd ..
 
 # Gerar os aplicativos base Unix
 
-cd Dist/Unix
+cd Apps/Unix
 
 ./Unix.sh hexagonix
 
 cd ..
+
+cp *.app ../Hexagonix
+rm *.app
+
+cd ..
+
+cd Dist 
 
 cd etc/
 
@@ -404,6 +420,7 @@ cd Man
 cp *.* ../../Hexagonix
 
 cd ..
+cd ..
 
 cd Fontes/
 
@@ -414,7 +431,7 @@ echo
 
 ./fontes.sh
 
-cp *.fnt ../../Hexagonix
+cp *.fnt ../Hexagonix
 rm *.fnt
 
 echo
@@ -438,9 +455,8 @@ echo
 
 cd LibAPP/
 
-cp andrmda.s ../../Hexagonix/hexagon.s 
+cp andrmda.s ../Hexagonix/hexagon.s 
 
-cd ..
 cd ..
 
 echo "Bibliotecas copiadas [Ok]"

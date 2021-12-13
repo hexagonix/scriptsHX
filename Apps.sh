@@ -1,4 +1,8 @@
 #!/bin/sh
+#
+# Este arquivo deve estar em Apps/Andromeda para ser executado. Nese diretório deve
+# ser clonado o repositório Andromeda-Apps
+#
 #;;************************************************************************************
 #;;
 #;;    
@@ -24,8 +28,8 @@ gerarApps()
 echo "Gerando aplicativos base do Andromeda®... {"
 echo
 
-echo "Gerando aplicativos base do Andromeda®... {" >> ../../log.log
-echo >> ../../log.log
+echo "Gerando aplicativos base do Andromeda®... {" >> $LOG
+echo >> $LOG
 
 #;;************************************************************************************
 
@@ -40,7 +44,7 @@ do
 	
 	echo >> $LOG
 	
-	fasm $i ../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
+	fasm $i ../../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
 	
 	echo " [Ok]"
 	
@@ -63,7 +67,7 @@ do
 	
 	echo >> $LOG
 	
-	fasm $i ../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
+	fasm $i ../../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
 	
 	echo " [Ok]"
 	
@@ -86,7 +90,7 @@ do
 	
 	echo >> $LOG
 	
-	fasm $i ../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
+	fasm $i ../../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
 	
 	echo " [Ok]"
 	
@@ -100,13 +104,10 @@ cd ..
 
 cd Fasm/
 
-cd Exemplos/
+ cp *.asm ../../../Andromeda
 
-cp *.asm ../../../../Andromeda
-
-cd ..
-cd ..
-
+ cd ..
+ 
 #;;************************************************************************************
 
 cd Piano/
@@ -120,7 +121,7 @@ do
 	
 	echo >> $LOG
 	
-	fasm $i ../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
+	fasm $i ../../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
 	
 	echo " [Ok]"
 	
@@ -143,7 +144,7 @@ do
 	
 	echo >> $LOG
 	
-	fasm $i ../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
+	fasm $i ../../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
 	
 	echo " [Ok]"
 	
@@ -166,7 +167,7 @@ do
 	
 	echo >> $LOG
 	
-	fasm $i ../`basename $i .asm`.app  -d $BANDEIRAS >> $LOG || desmontar
+	fasm $i ../../`basename $i .asm`.app  -d $BANDEIRAS >> $LOG || desmontar
 	
 	echo " [Ok]"
 	
@@ -189,7 +190,7 @@ do
 	
 	echo >> $LOG
 	
-	fasm $i ../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
+	fasm $i ../../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
 	
 	echo " [Ok]"
 	
@@ -212,7 +213,7 @@ do
 	
 	echo >> $LOG
 	
-	fasm $i ../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
+	fasm $i ../../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
 	
 	echo " [Ok]"
 	
@@ -236,7 +237,7 @@ do
 	
 	echo >> $LOG
 	
-	fasm $i ../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
+	fasm $i ../../`basename $i .asm`.app -d $BANDEIRAS >> $LOG || desmontar
 	
 	echo " [Ok]"
 	
@@ -248,18 +249,14 @@ cd ..
 
 #;;************************************************************************************
 
-cp *.app ../../Andromeda
-
-rm -r *.app
-
 echo
 echo "} Aplicativos base gerados com sucesso!"
 echo
 
-echo "} Aplicativos base gerados com sucesso!" >> ../../log.log
-echo >> ../../log.log
-echo "----------------------------------------------------------------------" >> ../../log.log
-echo >> ../../log.log
+echo "} Aplicativos base gerados com sucesso!" >> $LOG
+echo >> $LOG
+echo "----------------------------------------------------------------------" >> $LOG
+echo >> $LOG
 
 }
 
@@ -289,6 +286,6 @@ exit
 	
 }
 
-export LOG="../../../log.log"
+export LOG="/dev/null"
 
 gerarApps
