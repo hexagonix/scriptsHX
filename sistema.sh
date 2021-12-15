@@ -21,7 +21,22 @@
 
 construtor()
 {
-	
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
+export imagemFinal="andromeda.img"
+
+if [ "$IDIOMA" = "pt" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
+export imagemFinal="andromeda.img"
+
+elif [ "$IDIOMA" = "en" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=EN"
+export imagemFinal="en.andromeda.img"
+
+fi
+
 clear
 
 echo ";;****************************************************************************"
@@ -263,7 +278,19 @@ echo
 
 hexagonix()
 {
-	
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=PT"
+
+if [ "$IDIOMA" = "pt" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=PT"
+
+elif [ "$IDIOMA" = "en" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=EN"
+
+fi
+
 clear
 
 echo ";;****************************************************************************"
@@ -695,9 +722,10 @@ export REG="log.log"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM"
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
 export BANDEIRASHEXAGON="VERBOSE=SIM"
 export BANDEIRASHBOOT="TEMATOM=ANDROMEDA"
+export IDIOMA=$2
 
 if [ -e $REG ] ; then
 
@@ -732,6 +760,7 @@ limpar) limpar; exit;;
 mv) maquinaVirtual; exit;;
 kernel) kernel; exit;;
 hexagonix) hexagonix; exit;;
+andromeda) construtor; exit;;
 *) construtor; exit;;
 
 esac 

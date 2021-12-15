@@ -49,7 +49,7 @@ echo
 
 # Agora os arquivos do Sistema serão gerados...
 
-./sistema.sh
+./sistema.sh andromeda $Par
 
 # Agora a imagem do Sistema será preparada...
 
@@ -162,7 +162,7 @@ echo
 
 fi
 
-mv  andromeda.img Imagens/andromeda.img 
+mv  andromeda.img Imagens/$imagemFinal
 
 echo ";;****************************************************************************"
 echo ";;                                                                           "
@@ -182,7 +182,7 @@ echo ";;                                                                        
 echo ";;****************************************************************************"
 echo
 echo
-echo "Imagem '$IMG' gerada com sucesso. Ela pode ser encontrada em Imagens/$IMG."
+echo "Imagem '$IMG' gerada com sucesso. Ela pode ser encontrada em Imagens/$imagemFinal."
 echo
 echo
 echo ";;****************************************************************************"
@@ -231,7 +231,7 @@ echo
 
 # Agora os arquivos do Sistema serão gerados...
 
-./sistema.sh hexagonix
+./sistema.sh hexagonix $PT2
 
 # Agora a imagem do Sistema será preparada...
 
@@ -353,7 +353,7 @@ echo
 
 fi
 
-mv hexagonix.img Imagens/hexagonix.img 
+mv hexagonix.img Imagens/$imagemFinal
 
 echo ";;****************************************************************************"
 echo ";;                                                                           "
@@ -373,7 +373,7 @@ echo ";;                                                                        
 echo ";;****************************************************************************"
 echo
 echo
-echo "Imagem '$IMG' gerada com sucesso. Ela pode ser encontrada em Imagens/$IMG."
+echo "Imagem '$IMG' gerada com sucesso. Ela pode ser encontrada em Imagens/$imagemFinal."
 echo
 echo
 echo ";;****************************************************************************"
@@ -443,6 +443,24 @@ export IMG="hexagonix.img"
 export TAMANHOIMAGEM=2097012
 export TAMANHOTEMP=2048	
 
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=PT"
+export imagemFinal="hexagonix.img"
+export Par="pt"
+
+if [ "$PT2" = "pt" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=PT"
+export imagemFinal="hexagonix.img"
+export Par="pt"
+
+elif [ "$PT2" = "en" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=EN"
+export imagemFinal="en.hexagonix.img"
+export Par="en"
+
+fi
+
 # Agora vamos para a função que vai gerar a imagem para o Hexagonix®
 
 hexagonix
@@ -454,6 +472,24 @@ definirAndromedaTeste()
 
 # Aqui vamos gerar uma imagem pequena, de 2 Mb, menor e apenas para testes. Essa imagem
 # não deve ser utilizada para o pacote de instalação.
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
+export imagemFinal="andromeda.img"
+export Par="pt"
+
+if [ "$PT2" = "pt" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
+export imagemFinal="andromeda.img"
+export Par="pt"
+
+elif [ "$PT2" = "en" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=EN"
+export imagemFinal="en.andromeda.img"
+export Par="en"
+
+fi
 
 export LOG="log.log"
 export IMG="andromeda.img"
