@@ -9,7 +9,7 @@
 #;;        #@@@@@@#@#@#@@
 #;;        @#@@%    %#@#%
 #;;        @#@@@    #@#@@
-#;;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes
+#;;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes
 #;;        @#@%!@&%@&@#@#             Todos os direitos reservados
 #;;        !@@%#%&#&@&@%#
 #;;        @@#!%&@&@#&*@&
@@ -21,7 +21,22 @@
 
 construtor()
 {
-	
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
+export imagemFinal="andromeda.img"
+
+if [ "$IDIOMA" = "pt" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
+export imagemFinal="andromeda.img"
+
+elif [ "$IDIOMA" = "en" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=EN"
+export imagemFinal="en.andromeda.img"
+
+fi
+
 clear
 
 echo ";;****************************************************************************"
@@ -31,7 +46,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
@@ -263,7 +278,19 @@ echo
 
 hexagonix()
 {
-	
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=PT"
+
+if [ "$IDIOMA" = "pt" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=PT"
+
+elif [ "$IDIOMA" = "en" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=EN"
+
+fi
+
 clear
 
 echo ";;****************************************************************************"
@@ -273,7 +300,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Hexagonix®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
@@ -518,7 +545,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
@@ -562,7 +589,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
@@ -597,7 +624,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
@@ -625,7 +652,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
@@ -653,7 +680,7 @@ echo -e
 #
 # Versão do script: 2.0
 #
-# Copyright (C) 2015-2021 Felipe Miguel Nery Lunkes
+# Copyright (C) 2015-2022 Felipe Miguel Nery Lunkes
 # Todos os direitos reservados
 
 if test "`whoami`" != "root" ; then
@@ -667,7 +694,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
@@ -695,9 +722,10 @@ export REG="log.log"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM"
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
 export BANDEIRASHEXAGON="VERBOSE=SIM"
 export BANDEIRASHBOOT="TEMATOM=ANDROMEDA"
+export IDIOMA=$2
 
 if [ -e $REG ] ; then
 
@@ -732,6 +760,7 @@ limpar) limpar; exit;;
 mv) maquinaVirtual; exit;;
 kernel) kernel; exit;;
 hexagonix) hexagonix; exit;;
+andromeda) construtor; exit;;
 *) construtor; exit;;
 
 esac 

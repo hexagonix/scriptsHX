@@ -13,7 +13,7 @@
 #;;        #@@@@@@#@#@#@@
 #;;        @#@@%    %#@#%
 #;;        @#@@@    #@#@@
-#;;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes
+#;;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes
 #;;        @#@%!@&%@&@#@#             Todos os direitos reservados
 #;;        !@@%#%&#&@&@%#
 #;;        @@#!%&@&@#&*@&
@@ -50,7 +50,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
@@ -85,7 +85,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
@@ -120,7 +120,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
@@ -157,7 +157,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Hexagonix®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
@@ -192,7 +192,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
@@ -221,7 +221,7 @@ kernel()
 #
 # Versão do script: 2.0
 #
-# Copyright (C) 2015-2021 Felipe Miguel Nery Lunkes
+# Copyright (C) 2015-2022 Felipe Miguel Nery Lunkes
 # Todos os direitos reservados
 
 if test "`whoami`" != "root" ; then
@@ -235,7 +235,7 @@ echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®      
 echo ";;        #@@@@@@#@#@#@@                                                     "
 echo ";;        @#@@%    %#@#%                                                     "
 echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2021 Felipe Miguel Nery Lunkes "
+echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
 echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
 echo ";;        !@@%#%&#&@&@%#                                                     "
 echo ";;        @@#!%&@&@#&*@&                                                     "
