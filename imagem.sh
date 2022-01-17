@@ -429,7 +429,8 @@ echo
 echo "Utilize o script de geração do Sistema para verificar a origem do problema."
 echo
 
-umount -a >> /dev/null
+umount Sistema/ >> /dev/null
+umount Andromeda/ >> /dev/null
 
 exit
 	

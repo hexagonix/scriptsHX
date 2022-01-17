@@ -528,7 +528,8 @@ echo
 echo "Visualize o arquivo de log 'log.log', para mais informações sobre o(s) erro(s)."
 echo 
 
-umount -a >> /dev/null
+umount Sistema/ >> /dev/null
+umount Andromeda/ >> /dev/null
 
 exit	
 
