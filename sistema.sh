@@ -234,7 +234,7 @@ cd ..
 
 cd LibAPP/
 
-cp andrmda.s ../Andromeda 
+cp hexagon.s ../Andromeda 
 
 cd Estelar
 
@@ -482,7 +482,7 @@ echo
 
 cd LibAPP/
 
-cp andrmda.s ../Hexagonix/hexagon.s 
+cp hexagon.s ../Hexagonix/
 
 cd ..
 
