@@ -1,9 +1,8 @@
 #!/bin/bash
 # Esse script deve ficar na raiz do projeto
 # 
-# Esse script foi adaptado para rodar sobre o Windows Subsystem for Linux versão 2
-# e utilizando a versão do QEMU para Windows 10. Não funciona rodando nativamente
-# sobre o Linux. Para isso, utilize 'sistema.h'
+# Esse script foi adaptado para rodar sobre o Linux e versão do QEMU para Linux.
+# Não funciona rodando nativamente sobre o WSL 2. Para isso, utilize 'WSL.sh'
 #
 #;;************************************************************************************
 #;;

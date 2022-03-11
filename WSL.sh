@@ -4,7 +4,7 @@
 # 
 # Esse script foi adaptado para rodar sobre o Windows Subsystem for Linux versão 2
 # e utilizando a versão do QEMU para Windows 10. Não funciona rodando nativamente
-# sobre o Linux. Para isso, utilize 'sistema.h'
+# sobre o Linux. Para isso, utilize 'linux.sh'
 #
 #;;************************************************************************************
 #;;
