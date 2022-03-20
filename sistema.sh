@@ -100,7 +100,7 @@ fasm hboot.asm ../hboot -d $BANDEIRASHBOOT >> ../../log.log || erroConstrucao
 
 cd Mods
 
-if [ -e *.asm ] ; then
+if [ -e Spartan.asm ] ; then
 
 for i in *.asm
 do
@@ -122,7 +122,7 @@ cd ..
 cp *.img ../Andromeda
 cp hboot ../Andromeda
 
-if [ -e *.mod ] ; then
+if [ -e Spartan.mod ] ; then
 
 cp *.mod ../Andromeda/ 
 rm -r *.mod 

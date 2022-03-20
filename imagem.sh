@@ -88,7 +88,7 @@ cp Andromeda/*.cow Sistema/ >> $LOG || erroMontagem
 cp Andromeda/*.app Sistema/ >> $LOG || erroMontagem
 cp Andromeda/hboot Sistema/ >> $LOG || erroMontagem
 
-if [ -e Andromeda/*.mod ] ; then
+if [ -e Andromeda/Spartan.mod ] ; then
 
 cp Andromeda/*.mod Sistema/ >> $LOG
 
