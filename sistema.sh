@@ -190,7 +190,9 @@ cd Dist
 
 cd etc/
 
-cp *.* ../../Andromeda
+cp *.unx ../../Andromeda
+cp base.ocl ../../Andromeda/andrmda.ocl
+cp base.ocl ../../Andromeda/hexgnix.ocl
 
 cd ..
 
@@ -438,7 +440,8 @@ cd Dist
 
 cd etc/
 
-cp *.* ../../Hexagonix
+cp *.unx ../../Hexagonix
+cp base.ocl ../../Hexagonix/hexgnix.ocl
 
 cd ..
 

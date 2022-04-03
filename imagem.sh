@@ -284,6 +284,7 @@ fi
 
 cp Hexagonix/*.sis Sistema/ >> $LOG || erroMontagem
 cp Hexagonix/*.unx Sistema/ >> $LOG || erroMontagem
+cp Hexagonix/*.ocl Sistema/ >> $LOG || erroMontagem
 
 # Até o momento, nenhum banco de dados utilizado em aplicativos Andromeda® precisam ser copiados
 # para uma imagem Hexagonix® pura.
