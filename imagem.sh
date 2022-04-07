@@ -276,7 +276,7 @@ cp Hexagonix/*.cow Sistema/ >> $LOG || erroMontagem
 cp Hexagonix/*.app Sistema/ >> $LOG || erroMontagem
 cp Hexagonix/hboot Sistema/ >> $LOG || erroMontagem
 
-if [ -e Hexagonix/*.mod ] ; then
+if [ -e Hexagonix/Spartan.mod ] ; then
 
 cp Hexagonix/*.mod Sistema/ >> $LOG
 

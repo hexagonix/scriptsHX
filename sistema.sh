@@ -356,7 +356,7 @@ fasm hboot.asm ../hboot -d $BANDEIRASHBOOT >> ../../log.log || erroConstrucao
 
 cd Mods
 
-if [ -e *.asm ] ; then
+if [ -e Spartan.asm ] ; then
 
 for i in *.asm
 do
@@ -378,7 +378,7 @@ cd ..
 cp *.img ../Hexagonix
 cp hboot ../Hexagonix
 
-if [ -e *.mod ] ; then
+if [ -e Spartan.mod ] ; then
 
 cp *.mod ../Hexagonix/ 
 rm -r *.mod 
