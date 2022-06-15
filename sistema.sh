@@ -12,7 +12,7 @@
 #;;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes
 #;;        @#@%!@&%@&@#@#             Todos os direitos reservados
 #;;        !@@%#%&#&@&@%#
-#;;        @@#!%&@&@#&*@&
+#;;        @@#!%&@&@#&*@&                     Versão 2.0
 #;;        @#@#%    &%@#@
 #;;        @#!@@    !#@#@
 #;;
@@ -234,7 +234,7 @@ echo
 
 cd ..
 
-cd LibAPP/
+cd lib/
 
 cp hexagon.s ../Andromeda 
 
@@ -483,7 +483,7 @@ echo
 
 # Vamos copiar também o arquivo de cabeçalho para poder desenvolver sobre o Andromeda(R)
 
-cd LibAPP/
+cd lib/
 
 cp hexagon.s ../Hexagonix/
 
@@ -730,6 +730,10 @@ export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
 export BANDEIRASHEXAGON="VERBOSE=SIM"
 export BANDEIRASHBOOT="TEMATOM=ANDROMEDA"
 export IDIOMA=$2
+
+# Agora, vamos definir onde estão os cabeçalhos e bibliotecas
+
+export INCLUDE="$(pwd)/lib"
 
 if [ -e $REG ] ; then
 
