@@ -14,7 +14,7 @@
 #;;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes
 #;;        @#@%!@&%@&@#@#             Todos os direitos reservados
 #;;        !@@%#%&#&@&@%#
-#;;        @@#!%&@&@#&*@&
+#;;        @@#!%&@&@#&*@&                       Versão 1.0
 #;;        @#@#%    &%@#@
 #;;        @#!@@    !#@#@
 #;;
