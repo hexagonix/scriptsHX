@@ -234,14 +234,15 @@ echo
 
 cd ..
 
-cd lib/
+cd lib/fasm
 
-cp hexagon.s ../Andromeda 
+cp hexagon.s ../../Andromeda 
 
 cd Estelar
 
-cp estelar.s ../../Andromeda
+cp estelar.s ../../../Andromeda
 
+cd ..
 cd ..
 cd ..
 
@@ -483,10 +484,11 @@ echo
 
 # Vamos copiar também o arquivo de cabeçalho para poder desenvolver sobre o Andromeda(R)
 
-cd lib/
+cd lib/fasm
 
-cp hexagon.s ../Hexagonix/
+cp hexagon.s ../../Hexagonix/
 
+cd ..
 cd ..
 
 echo "Bibliotecas copiadas [Ok]"
@@ -733,7 +735,7 @@ export IDIOMA=$2
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas
 
-export INCLUDE="$(pwd)/lib"
+export INCLUDE="$(pwd)/lib/fasm"
 
 if [ -e $REG ] ; then
 
