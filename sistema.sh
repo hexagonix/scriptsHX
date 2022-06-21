@@ -196,9 +196,9 @@ cp base.ocl ../../Andromeda/hexgnix.ocl
 
 cd ..
 
-cd Man
+cd man
 
-cp *.* ../../Andromeda
+cp *.man ../../Andromeda
 
 cd ..
 cd ..
@@ -446,9 +446,9 @@ cp base.ocl ../../Hexagonix/hexgnix.ocl
 
 cd ..
 
-cd Man
+cd man
 
-cp *.* ../../Hexagonix
+cp *.man ../../Hexagonix
 
 cd ..
 cd ..
