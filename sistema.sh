@@ -553,7 +553,6 @@ echo
 echo
 echo "Limpando componentes gerados e imagens do Sistema..."
 echo
-echo
 	
 rm -r Sistema >> /dev/null
 rm -r Andromeda >> /dev/null
@@ -565,6 +564,12 @@ rm -r COM1.txt >> /dev/null
 rm -r *.sis >> /dev/null
 rm -r *.bin >> /dev/null
 rm -r *.app >> /dev/null
+
+echo
+echo "Removendo arquivos de configuração gerados a cada build."
+echo "Use ./configure para gerar estes arquivos novamente."
+
+rm -r Dist/etc/*.unx >> /dev/null
 
 echo
 echo "Pronto!"
