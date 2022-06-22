@@ -29,8 +29,6 @@ construtor()
 limpar(){
 	
 ./sistema.sh limpar
-
-rm -R Serial.txt
 	
 }
 

@@ -34,7 +34,7 @@ fi
 
 echo -n " > Processando arquivo .conf e definindo arquivo de configuração... "
 echo -e $(cat base.conf)$VERSAO"]"$CODENOME'"'$VERSAO"#"$REVISAO"!"$BUILD">" >> base.ocl 
-echo "[Ok]"
+echo -e "[\e[32mOk\e[0m]"
 
 if [ -e hexgnix.unx ] ; then
 
@@ -48,7 +48,7 @@ echo -n " > Processando arquivo .conf e criando UNX-XML... "
 echo -e $(cat hexgnix.conf)"<BUILD> "$BUILD" </BUILD>" >> hexgnix.unx
 echo -e "<DATA_BUILD> "$(date)" </DATA_BUILD>" >> hexgnix.unx
 echo "</Hexagonix>" >> hexgnix.unx
-echo "[Ok]"
+echo -e "[\e[32mOk\e[0m]"
 cd ..
 cd ..
 
@@ -73,7 +73,7 @@ fi
 
 echo -n " > Processando arquivo .conf e criando configuração de host... "
 echo -e $CODENOME$(cat host.conf) >> host.unx
-echo "[Ok]"
+echo -e "[\e[32mOk\e[0m]"
 
 cd ..
 cd ..
@@ -99,7 +99,7 @@ fi
 
 echo -n " > Processando arquivo .conf e criando banco de dados de usuários... "
 echo -e $(cat usuario.conf) >> usuario.unx
-echo "[Ok]"
+echo -e "[\e[32mOk\e[0m]"
 
 cd ..
 cd ..
@@ -125,7 +125,7 @@ fi
 
 echo -n " > Processando arquivo .conf e criando script de inicialização... "
 echo -e $(cat init.conf) >> init.unx
-echo "[Ok]"
+echo -e "[\e[32mOk\e[0m]"
 
 cd ..
 cd ..
@@ -137,7 +137,7 @@ terminar
 terminar()
 {
 
-echo -e "Etapa concluída."
+echo -e "[\e[32mEtapa concluída com sucesso\e[0m]"
 
 }
 
@@ -159,7 +159,6 @@ echo ";;              └──┘                                              
 echo ";;                                                                            "
 echo ";;****************************************************************************"
 echo
-echo
 echo -e "Gerando configuração..."
 echo
 
@@ -167,6 +166,8 @@ build
 usuarios
 init
 host
+
+echo -e "[\e[32mTudo pronto!\e[0m]"
 
 }
 

@@ -104,7 +104,7 @@ do
 	
 	fasm $i ../../`basename $i .asm`.mod -d $BANDEIRAS >> ../../../log.log 
 	
-	echo " [Ok]"
+	echo -e " [\e[32mOk\e[0m]"
 	
 done
 
@@ -152,7 +152,7 @@ cp Hexagon.sis ../Andromeda
 
 rm -r Hexagon.sis
 
-echo " [Ok]"
+echo -e " [\e[32mOk\e[0m]"
 
 echo >> ../log.log
 echo "Kernel Hexagon® construído com sucesso." >> ../log.log
@@ -211,7 +211,8 @@ cp *.fnt ../Andromeda
 rm *.fnt
 
 echo
-echo "Fontes copiadas [Ok]"
+echo -n "Fontes copiadas"
+echo -e "[\e[32mOk\e[0m]"
 echo
 
 else 
@@ -241,7 +242,8 @@ cd ..
 cd ..
 cd ..
 
-echo "Bibliotecas copiadas [Ok]"
+echo -n "Bibliotecas copiadas"
+echo -e " [\e[32mOk\e[0m]"
 echo
 
 if [ -e Externos/Externos.sh ] ; then
@@ -257,7 +259,8 @@ cd Externos
 cd ..
 
 echo 
-echo "Aplicativos de terceitos construídos [Ok]"
+echo -n "Aplicativos de terceitos construídos"
+echo -e " [\e[32mOk\e[0m]"
 
 else 
 
@@ -358,7 +361,7 @@ do
 	
 	fasm $i ../../`basename $i .asm`.mod -d $BANDEIRAS >> ../../../log.log 
 	
-	echo " [Ok]"
+	echo -e " [\e[32mOk\e[0m]"
 	
 done
 
@@ -406,7 +409,7 @@ cp Hexagon.sis ../Hexagonix
 
 rm -r Hexagon.sis
 
-echo " [Ok]"
+echo -e " [\e[32mOk\e[0m]"
 
 echo >> ../log.log
 echo "Kernel Hexagon® construído com sucesso." >> ../log.log
@@ -458,13 +461,15 @@ cp *.fnt ../Hexagonix
 rm *.fnt
 
 echo
-echo "Fontes copiadas [Ok]"
+echo -n "Fontes copiadas"
+echo -e " [\e[32mOk\e[0m]"
 echo
 
 else 
 
 echo 
-echo "Não existem fontes a serem construidas e copiadas... [Ok]"
+echo -n "Não existem fontes a serem construidas e copiadas..."
+echo -e " [\e[32mOk\e[0m]"
 echo
 
 fi
@@ -483,7 +488,8 @@ cp hexagon.s ../../Hexagonix/
 cd ..
 cd ..
 
-echo "Bibliotecas copiadas [Ok]"
+echo -n "Bibliotecas copiadas"
+echo -e " [\e[32mOk\e[0m]"
 echo
 
 if [ -e Externos/Externos.sh ] ; then
@@ -499,7 +505,8 @@ cd Externos
 cd ..
 
 echo
-echo "Aplicativos de terceitos construídos [Ok]"
+echo -n "Aplicativos de terceitos construídos"
+echo -e " [\e[32mOk\e[0m]"
 
 else 
 
@@ -551,28 +558,21 @@ echo ";;                                                                        
 echo ";;****************************************************************************"
 echo
 echo
-echo "Limpando componentes gerados e imagens do Sistema..."
-echo
+echo "Executando limpeza na árvore do sistema..."
+echo -n " > Limpando componentes gerados e imagens do sistema..."
 	
-rm -r Sistema >> /dev/null
-rm -r Andromeda >> /dev/null
-rm -r Hexagonix >> /dev/null
-rm -r andromeda.img >> /dev/null
-rm -r hexagonix.img >> /dev/null
-rm -r log.log >> /dev/null
-rm -r COM1.txt >> /dev/null
-rm -r *.sis >> /dev/null
-rm -r *.bin >> /dev/null
-rm -r *.app >> /dev/null
+rm -rf Sistema Andromeda Hexagonix andromeda.img hexagonix.img
+rm -rf log.log COM1.txt *.sis *.bin *.app Serial.txt 
 
-echo
-echo "Removendo arquivos de configuração gerados a cada build."
-echo "Use ./configure para gerar estes arquivos novamente."
+echo -e "[\e[32mOk\e[0m]"
+echo " > Use ./imagem com ou sem parâmetros para gerar estes arquivos novamente."
+echo -n " > Removendo arquivos de configuração gerados a cada build..."
 
-rm -r Dist/etc/*.unx >> /dev/null
+rm -rf Dist/etc/*.unx Dist/etc/*.ocl
 
-echo
-echo "Pronto!"
+echo -e "[\e[32mOk\e[0m]"
+echo " > Use ./configure para gerar estes arquivos novamente."
+echo "Tudo pronto!"
 echo
 		
 }
@@ -629,7 +629,7 @@ echo ";;                                                                        
 echo ";;****************************************************************************"
 echo
 echo
-echo "Um erro ocorreu ao iniciar a máquina virtual :("
+echo -e "> \e[31mUm erro ocorreu durante a execução da máquina virtual! :(\e[0m"
 echo
 	
 }
