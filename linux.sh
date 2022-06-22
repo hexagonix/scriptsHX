@@ -7,16 +7,14 @@
 #;;************************************************************************************
 #;;
 #;;    
-#;;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®
-#;;        #@@@@@@#@#@#@@
-#;;        @#@@%    %#@#%
-#;;        @#@@@    #@#@@
-#;;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes
-#;;        @#@%!@&%@&@#@#             Todos os direitos reservados
-#;;        !@@%#%&#&@&@%#
-#;;        @@#!%&@&@#&*@&                       Versão 1.0
-#;;        @#@#%    &%@#@
-#;;        @#!@@    !#@#@
+#;; ┌┐ ┌┐                                 Sistema Operacional Hexagonix®
+#;; ││ ││
+#;; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐    Copyright © 2016-2022 Felipe Miguel Nery Lunkes
+#;; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘          Todos os direitos reservados
+#;; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐
+#;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
+#;;              ┌─┘│          
+#;;              └──┘                             Versão 1.0
 #;;
 #;;
 #;;************************************************************************************
@@ -42,20 +40,17 @@ maquinaVirtual()
 clear
 
 echo ";;****************************************************************************"
-echo ";;                                                                           "
-echo ";;                                                                           "
-echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®          "
-echo ";;        #@@@@@@#@#@#@@                                                     "
-echo ";;        @#@@%    %#@#%                                                     "
-echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
-echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
-echo ";;        !@@%#%&#&@&@%#                                                     "
-echo ";;        @@#!%&@&@#&*@&                                                     "
-echo ";;        @#@#%    &%@#@                                                     "
-echo ";;        @#!@@    !#@#@                                                     "
-echo ";;                                                                           "
-echo ";;                                                                           "
+echo ";;                                                                            "
+echo ";;                                                                            "
+echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
+echo ";; ││ ││                                                                      "
+echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
+echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
+echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo ";;              ┌─┘│                                                          "
+echo ";;              └──┘                                                          "
+echo ";;                                                                            "
 echo ";;****************************************************************************"
 echo
 echo
@@ -77,20 +72,17 @@ maquinaVirtualM()
 clear
 
 echo ";;****************************************************************************"
-echo ";;                                                                           "
-echo ";;                                                                           "
-echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®          "
-echo ";;        #@@@@@@#@#@#@@                                                     "
-echo ";;        @#@@%    %#@#%                                                     "
-echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
-echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
-echo ";;        !@@%#%&#&@&@%#                                                     "
-echo ";;        @@#!%&@&@#&*@&                                                     "
-echo ";;        @#@#%    &%@#@                                                     "
-echo ";;        @#!@@    !#@#@                                                     "
-echo ";;                                                                           "
-echo ";;                                                                           "
+echo ";;                                                                            "
+echo ";;                                                                            "
+echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
+echo ";; ││ ││                                                                      "
+echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
+echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
+echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo ";;              ┌─┘│                                                          "
+echo ";;              └──┘                                                          "
+echo ";;                                                                            "
 echo ";;****************************************************************************"
 echo
 echo
@@ -112,20 +104,17 @@ maquinaVirtualS()
 clear
 
 echo ";;****************************************************************************"
-echo ";;                                                                           "
-echo ";;                                                                           "
-echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®          "
-echo ";;        #@@@@@@#@#@#@@                                                     "
-echo ";;        @#@@%    %#@#%                                                     "
-echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
-echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
-echo ";;        !@@%#%&#&@&@%#                                                     "
-echo ";;        @@#!%&@&@#&*@&                                                     "
-echo ";;        @#@#%    &%@#@                                                     "
-echo ";;        @#!@@    !#@#@                                                     "
-echo ";;                                                                           "
-echo ";;                                                                           "
+echo ";;                                                                            "
+echo ";;                                                                            "
+echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
+echo ";; ││ ││                                                                      "
+echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
+echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
+echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo ";;              ┌─┘│                                                          "
+echo ";;              └──┘                                                          "
+echo ";;                                                                            "
 echo ";;****************************************************************************"
 echo
 echo
@@ -149,20 +138,17 @@ export imagem="Imagens/hexagonix.img"
 clear
 
 echo ";;****************************************************************************"
-echo ";;                                                                           "
-echo ";;                                                                           "
-echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Hexagonix®          "
-echo ";;        #@@@@@@#@#@#@@                                                     "
-echo ";;        @#@@%    %#@#%                                                     "
-echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
-echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
-echo ";;        !@@%#%&#&@&@%#                                                     "
-echo ";;        @@#!%&@&@#&*@&                                                     "
-echo ";;        @#@#%    &%@#@                                                     "
-echo ";;        @#!@@    !#@#@                                                     "
-echo ";;                                                                           "
-echo ";;                                                                           "
+echo ";;                                                                            "
+echo ";;                                                                            "
+echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
+echo ";; ││ ││                                                                      "
+echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
+echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
+echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo ";;              ┌─┘│                                                          "
+echo ";;              └──┘                                                          "
+echo ";;                                                                            "
 echo ";;****************************************************************************"
 echo
 echo
@@ -184,20 +170,17 @@ erroMV()
 clear
 
 echo ";;****************************************************************************"
-echo ";;                                                                           "
-echo ";;                                                                           "
-echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®          "
-echo ";;        #@@@@@@#@#@#@@                                                     "
-echo ";;        @#@@%    %#@#%                                                     "
-echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
-echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
-echo ";;        !@@%#%&#&@&@%#                                                     "
-echo ";;        @@#!%&@&@#&*@&                                                     "
-echo ";;        @#@#%    &%@#@                                                     "
-echo ";;        @#!@@    !#@#@                                                     "
-echo ";;                                                                           "
-echo ";;                                                                           "
+echo ";;                                                                            "
+echo ";;                                                                            "
+echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
+echo ";; ││ ││                                                                      "
+echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
+echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
+echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo ";;              ┌─┘│                                                          "
+echo ";;              └──┘                                                          "
+echo ";;                                                                            "
 echo ";;****************************************************************************"
 echo
 echo
@@ -227,20 +210,17 @@ if test "`whoami`" != "root" ; then
 clear
 
 echo ";;****************************************************************************"
-echo ";;                                                                           "
-echo ";;                                                                           "
-echo ";;        %#@@%&@@%&@@%@             Sistema Operacional Andromeda®          "
-echo ";;        #@@@@@@#@#@#@@                                                     "
-echo ";;        @#@@%    %#@#%                                                     "
-echo ";;        @#@@@    #@#@@                                                     "
-echo ";;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes "
-echo ";;        @#@%!@&%@&@#@#             Todos os direitos reservados            "
-echo ";;        !@@%#%&#&@&@%#                                                     "
-echo ";;        @@#!%&@&@#&*@&                                                     "
-echo ";;        @#@#%    &%@#@                                                     "
-echo ";;        @#!@@    !#@#@                                                     "
-echo ";;                                                                           "
-echo ";;                                                                           "
+echo ";;                                                                            "
+echo ";;                                                                            "
+echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
+echo ";; ││ ││                                                                      "
+echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
+echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
+echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo ";;              ┌─┘│                                                          "
+echo ";;              └──┘                                                          "
+echo ";;                                                                            "
 echo ";;****************************************************************************"
 echo
 echo
