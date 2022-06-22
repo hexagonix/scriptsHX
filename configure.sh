@@ -98,7 +98,7 @@ rm usuario.unx
 fi	
 
 echo -n " > Processando arquivo .conf e criando banco de dados de usuários... "
-echo -e $(cat usuario.conf) >> usuario.unx
+echo -e $(cat usuario.conf)"@"$CODENOME"|root&ash.app# # Usuario da versao" >> usuario.unx
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
