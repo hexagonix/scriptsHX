@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Esse script deve ficar na raiz do projeto
 # 
@@ -212,7 +212,7 @@ rm *.fnt
 
 echo
 echo -n "Fontes copiadas"
-echo -e "[\e[32mOk\e[0m]"
+echo -e " [\e[32mOk\e[0m]"
 echo
 
 else 
@@ -564,13 +564,13 @@ echo -n " > Limpando componentes gerados e imagens do sistema..."
 rm -rf Sistema Andromeda Hexagonix andromeda.img hexagonix.img
 rm -rf log.log COM1.txt *.sis *.bin *.app Serial.txt 
 
-echo -e "[\e[32mOk\e[0m]"
+echo -e " [\e[32mOk\e[0m]"
 echo " > Use ./imagem com ou sem parâmetros para gerar estes arquivos novamente."
 echo -n " > Removendo arquivos de configuração gerados a cada build..."
 
 rm -rf Dist/etc/*.unx Dist/etc/*.ocl
 
-echo -e "[\e[32mOk\e[0m]"
+echo -e " [\e[32mOk\e[0m]"
 echo " > Use ./configure para gerar estes arquivos novamente."
 echo "Tudo pronto!"
 echo

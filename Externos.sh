@@ -1,17 +1,17 @@
-#!/bin/sh
+#!/bin/bash
+# Esse script deve ficar na raiz do projeto
+#
 #;;************************************************************************************
 #;;
 #;;    
-#;;        %#@@%&@@%&@@%@             Sistema Operacional Hexagonix®
-#;;        #@@@@@@#@#@#@@
-#;;        @#@@%    %#@#%
-#;;        @#@@@    #@#@@
-#;;        #@#@@    !@#@#     Copyright © 2016-2022 Felipe Miguel Nery Lunkes
-#;;        @#@%!@&%@&@#@#             Todos os direitos reservados
-#;;        !@@%#%&#&@&@%#
-#;;        @@#!%&@&@#&*@&
-#;;        @#@#%    &%@#@
-#;;        @#!@@    !#@#@
+#;; ┌┐ ┌┐                                 Sistema Operacional Hexagonix®
+#;; ││ ││
+#;; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐    Copyright © 2016-2022 Felipe Miguel Nery Lunkes
+#;; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘          Todos os direitos reservados
+#;; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐
+#;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
+#;;              ┌─┘│          
+#;;              └──┘                             Versão 1.0
 #;;
 #;;
 #;;************************************************************************************
@@ -22,7 +22,7 @@
 
 gerarExternos(){
 
-cd fasm/
+cd fasmX/
 
 cd SOURCE
 cd HEXAGONIX 
@@ -34,7 +34,7 @@ do
 	
 	fasm $i ../../../../$DIRETORIO/`basename $i .asm`.app -d $BANDEIRAS >> /dev/null || echo " [Falha]"
 	
-    echo "[Ok]"
+    echo -e " [\e[32mOk\e[0m]"
 
 done
 

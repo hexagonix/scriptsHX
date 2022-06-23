@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Esse script deve ficar na raiz do projeto
 # 
