@@ -100,7 +100,7 @@ if [ -e Spartan.asm ] ; then
 for i in *.asm
 do
 
-	echo -n Gerando módulo compatível com HBoot® $(basename $i .asm).mod...
+	echo -n Construindo módulo compatível com HBoot® $(basename $i .asm).mod...
 	
 	fasm $i ../../`basename $i .asm`.mod -d $BANDEIRAS >> ../../../log.log 
 	
@@ -128,7 +128,7 @@ rm -r *.img
 rm -r hboot
 
 echo
-echo "} Componentes de inicialização gerados com sucesso."
+echo -e "} \e[32mComponentes de inicialização construídos com sucesso\e[0m]."
 
 echo >> ../log.log
 echo "} Componentes de inicialização do Hexagon® construídos com sucesso." >> ../log.log
@@ -248,19 +248,11 @@ echo
 
 if [ -e Externos/Externos.sh ] ; then
 
-echo 
-echo "Construindo aplicativos de terceiros..."
-echo 
-
 cd Externos 
 
 ./Externos.sh Andromeda
 
 cd ..
-
-echo 
-echo -n "Aplicativos de terceitos construídos"
-echo -e " [\e[32mOk\e[0m]"
 
 else 
 
@@ -357,7 +349,7 @@ if [ -e Spartan.asm ] ; then
 for i in *.asm
 do
 
-	echo -n Gerando módulo compatível com HBoot® $(basename $i .asm).mod...
+	echo -n Construindo módulo compatível com HBoot® $(basename $i .asm).mod...
 	
 	fasm $i ../../`basename $i .asm`.mod -d $BANDEIRAS >> ../../../log.log 
 	
@@ -385,7 +377,7 @@ rm -r *.img
 rm -r hboot
 
 echo
-echo "} Componentes de inicialização gerados com sucesso."
+echo -e "} [\e[32mComponentes de inicialização construídos com sucesso\e[0m]."
 
 echo >> ../log.log
 echo "} Componentes de inicialização do Hexagon® construídos com sucesso." >> ../log.log
@@ -494,19 +486,11 @@ echo
 
 if [ -e Externos/Externos.sh ] ; then
 
-echo 
-echo "Construindo aplicativos de terceiros..."
-echo 
-
 cd Externos 
 
 ./Externos.sh Hexagonix
 
 cd ..
-
-echo
-echo -n "Aplicativos de terceitos construídos"
-echo -e " [\e[32mOk\e[0m]"
 
 else 
 

@@ -22,6 +22,9 @@
 
 gerarExternos(){
 
+echo "Construindo utilitários de terceiros para Hexagonix®... {"
+echo
+
 cd fasmX/
 
 cd SOURCE
@@ -42,7 +45,11 @@ cd ..
 cd ..
 cd ..
 
+echo
+echo -e "} [\e[32mUtilitários de terceiros construídos com sucesso\e[0m]."
+
 }
+
 
 export DIRETORIO=$1
 
