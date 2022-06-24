@@ -154,7 +154,7 @@ echo
 
 fi
 
-mv  andromeda.img $direImagem/$imagemFinal
+mv andromeda.img $dirImagem/$imagemFinal
 
 echo -e ";;****************************************************************************"
 echo -e ";;                                                                            "
@@ -337,7 +337,7 @@ echo
 
 fi
 
-mv  hexagonix.img $direImagem/$imagemFinal
+mv hexagonix.img $dirImagem/$imagemFinal
 
 echo -e ";;****************************************************************************"
 echo -e ";;                                                                            "
