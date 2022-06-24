@@ -11,7 +11,7 @@
 #;; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐
 #;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
 #;;              ┌─┘│          
-#;;              └──┘                             Versão 1.0
+#;;              └──┘                             Versão 2.0
 #;;
 #;;
 #;;************************************************************************************
@@ -87,17 +87,17 @@ terminar
 
 # Agora vamos checar se os scripts estão disponíveis e torná-los executáveis
 
-echo -e "Checando scripts necessários à construção do sistema..."
+echo -e "Checando scripts e utilitários necessários à construção do sistema..."
 
 # Script 1
 
-echo -n " > Script de construção de imagem de disco (imagem.sh) "
+echo -n " > Script de construção e execução do sistema (HX) "
 
-if [ -e imagem.sh ] ; then
+if [ -e HX ] ; then
 
 echo -en "[\e[32mOk\e[0m]"
 
-chmod +x imagem.sh 
+chmod +x HX
 
 echo -e " [\e[94mExecutável\e[0m]"
 
@@ -109,25 +109,6 @@ echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa
 fi	
 
 # Script 2
-
-echo -n " > Script de construção e execução do sistema (HX.sh) "
-
-if [ -e HX.sh ] ; then
-
-echo -en "[\e[32mOk\e[0m]"
-
-chmod +x HX.sh 
-
-echo -e " [\e[94mExecutável\e[0m]"
-
-else
-
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
-
-fi	
-
-# Script 3
 
 echo -n " > Script de construção de utilitários externos (Externos.sh) "
 
@@ -146,7 +127,7 @@ echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa
 
 fi	
 
-# Script 4
+# Script 3
 
 echo -n " > Script de construção de utilitários Unix (Unix.sh) "
 
@@ -165,7 +146,7 @@ echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa
 
 fi	
 
-# Script 5
+# Script 4
 
 echo -n " > Script de construção de aplicativos Andromeda (Apps.sh) "
 
@@ -184,7 +165,7 @@ echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa
 
 fi	
 
-# Script 6
+# Script 5
 
 echo -n " > Script de construção de fontes do Hexagonix (fontes.sh) "
 
@@ -350,7 +331,7 @@ echo -e ";;              └──┘                                           
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
 echo
-echo -e "Verificando dependências e definindo configurações de construção do Hexagonix®..."
+echo -e "Verificando dependências e definindo configurações de construção do sistema..."
 echo
 
 checarDependencias
