@@ -1223,6 +1223,31 @@ echo
 
 }
 
+parametrosNecessarios(){
+
+clear 
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                            \e[1;32mAjuda do HX\e[0m "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "Você precisa fornecer pelo menos um parâmetro para o HX."
+echo 
+echo -e "\e[1;94mDica: utilize \e[1;32m./HX ajuda\e[1;94m para obter os parâmetros disponíveis.\e[0m"
+echo
+
+}
+
 iniciarLog()
 {
 
@@ -1462,13 +1487,19 @@ echo -e ";;                                                                     
 echo -e ";;****************************************************************************"
 echo
 echo
-echo -e "\e[1;31mPara iniciar o processo solicitado, voce deve ser um superusuario ;D\e[0m"
+echo -e "\e[1;94mPara iniciar corretamente o HX, você deve ser um usuário raiz (root) ;D\e[0m"
 echo
-echo -e "\e[1;32mInsira sua senha abaixo para reiniciar o HX em modo de superusuário:\e[0m"
+echo -e "\e[1;32mInsira sua senha abaixo para alterar para o usuário raiz (root) e depois\e[0m"
+echo -e "\e[1;32mexecute o HX novamente, com os parâmetros desejados.\e[0m"
 echo
-sudo HX $1 $2 $3 $4
-	
-fi
+echo -e "\e[1;94mDica: utilize \e[1;32m./HX ajuda\e[1;94m para obter os parâmetros disponíveis.\e[0m"
+echo
+
+su root
+
+exit 
+
+fi 
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 	
@@ -1486,7 +1517,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="6.0"
+export VERSAOHX="6.1"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
@@ -1520,6 +1551,7 @@ ajuda) exibirAjuda; exit;;
 estatisticas) exibirEstatisticas; exit;;
 info) infoBuild; exit;;
 copyright) exibirCopyright; exit;;
+versao) exibirCopyright; exit;;
 dependencias) instalarDependencias; exit;;
 
 # Agora funções de construção e limpeza
@@ -1537,6 +1569,7 @@ configurar) executarConfigure; exit;;
 
 # Função padrão
 
-*) construtorAndromeda; exit;;
+# *) construtorAndromeda; exit;;
+*) parametrosNecessarios; exit;;
 
 esac 
