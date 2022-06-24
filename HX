@@ -14,7 +14,7 @@
 #;; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐
 #;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
 #;;              ┌─┘│          
-#;;              └──┘                             Versão 5.1
+#;;              └──┘                            
 #;;
 #;;
 #;;************************************************************************************
@@ -1114,6 +1114,54 @@ echo -e "[\e[32mTudo pronto!\e[0m]"
 
 }
 
+exibirEstatisticas(){
+
+clear 
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                            \e[1;32mEstatísticas\e[0m "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************" 
+
+if [ -e /usr/bin/cloc ] ; then
+
+for i in */
+do
+
+	echo
+	echo -en "\e[1;94mEstatísticas do diretório $i:\e[0m"
+	echo 
+	echo
+
+	cloc $i
+
+	terminar
+
+done
+
+tudopronto 
+
+else
+
+echo
+echo -e "[\e[1;31mUtilitário cloc não localizado.\e[0m]"
+echo -e "\e[1;94mO HX não pode gerar relatório de estatísticas sem essa dependência.\e[0m"
+
+fi	
+
+echo
+
+}
+
 exibirAjuda() {
 
 clear 
@@ -1144,6 +1192,34 @@ echo -e "\e[1;32mimg.ANDROMEDA.TESTE\e[0m - Construir imagem de disco teste com 
 echo -e "\e[1;32mimg.DISTROS\e[0m - Construir imagem de disco com o Hexagonix e com o Andromeda"
 
 echo 
+
+}
+
+exibirCopyright() {
+
+clear 
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                            \e[1;32mCopyright\e[0m "
+echo -e ";;              └──┘                          \e[1;32mHX versão $VERSAOHX\e[0m"
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "\e[1;94mHX: Ferramenta de construção e testes do Hexagonix® e Andromeda®\e[0m"
+echo
+echo -e "Desenvolvido por \e[1;32mFelipe Miguel Nery Lunkes\e[0m"
+echo 
+echo -e "\e[1;32mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e "\e[1;32mTodos os direitos reservados.\e[0m"
+echo
 
 }
 
@@ -1328,6 +1404,38 @@ cd ..
 
 }
 
+instalarDependencias(){
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                        \e[1;32mInstalar dependências\e[0m "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "O HX irá agora instalar as dependências necessárias à sua execução:"
+echo
+
+apt install fasm nasm cloc qemu qemu-system-i386
+
+terminar 
+
+echo
+echo -e "\e[1mPronto! Agora execute \e[32m./configure.sh\e[0;1m para configurar as dependências."
+
+tudopronto
+
+echo 
+
+}
+
 # Ponto de entrada do Script de construção de todo o Sistema, kernel e distribuição
 #
 # Primeiro, será testado se o usuário possui permissão de execução de superusuário
@@ -1356,7 +1464,9 @@ echo
 echo
 echo -e "\e[1;31mPara iniciar o processo solicitado, voce deve ser um superusuario ;D\e[0m"
 echo
-echo -e "\e[1;32mVoce deve logar como superusuario\nUtilize sudo $0.\n\e[0m" && exit
+echo -e "\e[1;32mInsira sua senha abaixo para reiniciar o HX em modo de superusuário:\e[0m"
+echo
+sudo HX $1 $2 $3 $4
 	
 fi
 
@@ -1376,6 +1486,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
+export VERSAOHX="6.0"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
@@ -1406,13 +1517,20 @@ img.DISTROS) prepDistros; exit;;
 # Funções de ajuda e utilidades
 
 ajuda) exibirAjuda; exit;;
+estatisticas) exibirEstatisticas; exit;;
+info) infoBuild; exit;;
+copyright) exibirCopyright; exit;;
+dependencias) instalarDependencias; exit;;
 
 # Agora funções de construção e limpeza
 
-kernel) kernel; exit;;
+b.Hexagon) construirHexagon; exit;;
+b.HBoot) construirHBoot; exit;;
+b.Saturno) construirSaturno; exit;;
+b.Unix) construirUtilUnix; exit;;
+b.Andromeda) construirBaseAndromeda; exit;;
 hexagonix) hexagonix; exit;;
 andromeda) construtorAndromeda; exit;;
-info) infoBuild; exit;;
 limpar) limpar; exit;;
 configure) executarConfigure; exit;;
 configurar) executarConfigure; exit;;

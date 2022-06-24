@@ -49,7 +49,7 @@ echo -e "[\e[32mOk\e[0m]"
 else
 
 echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema com essa dependência\e[0m."
+echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema sem essa dependência\e[0m."
 
 fi	
 
@@ -64,7 +64,7 @@ echo -e "[\e[32mOk\e[0m]"
 else
 
 echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema com essa dependência\e[0m."
+echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema sem essa dependência\e[0m."
 
 fi	
 
@@ -79,7 +79,7 @@ echo -e "[\e[32mOk\e[0m]"
 else
 
 echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema sem essa dependência\e[0m."
 
 fi	
 
@@ -94,7 +94,22 @@ echo -e "[\e[32mOk\e[0m]"
 else
 
 echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema com essa dependência\e[0m."
+echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema sem essa dependência\e[0m."
+
+fi	
+
+# Dependência 6
+
+echo -n " > cloc "
+
+if [ -e /usr/bin/cloc ] ; then
+
+echo -e "[\e[32mOk\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema sem essa dependência\e[0m."
 
 fi	
 
