@@ -16,6 +16,197 @@
 #;;
 #;;************************************************************************************
 
+checarDependencias()
+{
+
+echo -e "Verificando dependências necessárias à construção do sistema..."
+
+# Agora vamos verificar cada dependência do mecanismo de construção
+
+# Dependência 1
+
+echo -n " > flat assembler "
+
+if [ -e /usr/bin/fasm ] ; then
+
+echo -e "[\e[32mOk\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema sem essa dependência\e[0m."
+
+fi	
+
+# Dependência 2
+
+echo -n " > qemu "
+
+if [ -e /usr/bin/qemu-system-i386 ] ; then
+
+echo -e "[\e[32mOk\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema com essa dependência\e[0m."
+
+fi	
+
+# Dependência 3
+
+echo -n " > nasm "
+
+if [ -e /usr/bin/nasm ] ; then
+
+echo -e "[\e[32mOk\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema com essa dependência\e[0m."
+
+fi	
+
+# Dependência 4
+
+echo -n " > dd "
+
+if [ -e /usr/bin/dd ] ; then
+
+echo -e "[\e[32mOk\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+
+fi	
+
+terminar
+
+# Agora vamos checar se os scripts estão disponíveis e torná-los executáveis
+
+echo -e "Checando scripts necessários à construção do sistema..."
+
+# Script 1
+
+echo -n " > Script de construção de imagem de disco (imagem.sh) "
+
+if [ -e imagem.sh ] ; then
+
+echo -en "[\e[32mOk\e[0m]"
+
+chmod +x imagem.sh 
+
+echo -e " [\e[94mExecutável\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+
+fi	
+
+# Script 2
+
+echo -n " > Script de construção e execução do sistema (HX.sh) "
+
+if [ -e HX.sh ] ; then
+
+echo -en "[\e[32mOk\e[0m]"
+
+chmod +x HX.sh 
+
+echo -e " [\e[94mExecutável\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+
+fi	
+
+# Script 3
+
+echo -n " > Script de construção de utilitários externos (Externos.sh) "
+
+if [ -e Externos/Externos.sh ] ; then
+
+echo -en "[\e[32mOk\e[0m]"
+
+chmod +x Externos/Externos.sh 
+
+echo -e " [\e[94mExecutável\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+
+fi	
+
+# Script 4
+
+echo -n " > Script de construção de utilitários Unix (Unix.sh) "
+
+if [ -e Apps/Unix/Unix.sh ] ; then
+
+echo -en "[\e[32mOk\e[0m]"
+
+chmod +x Apps/Unix/Unix.sh 
+
+echo -e " [\e[94mExecutável\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+
+fi	
+
+# Script 5
+
+echo -n " > Script de construção de aplicativos Andromeda (Apps.sh) "
+
+if [ -e Apps/Andromeda/Apps.sh ] ; then
+
+echo -en "[\e[32mOk\e[0m]"
+
+chmod +x Apps/Andromeda/Apps.sh 
+
+echo -e " [\e[94mExecutável\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+
+fi	
+
+# Script 6
+
+echo -n " > Script de construção de fontes do Hexagonix (fontes.sh) "
+
+if [ -e Fontes/fontes.sh ] ; then
+
+echo -en "[\e[32mOk\e[0m]"
+
+chmod +x Fontes/fontes.sh 
+
+echo -e " [\e[94mExecutável\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+
+fi	
+
+terminar 
+
+}
+
 build() {
 
 echo -e "Configurando dados de build do sistema..."
@@ -159,9 +350,10 @@ echo -e ";;              └──┘                                           
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
 echo
-echo -e "Gerando configuração..."
+echo -e "Verificando dependências e definindo configurações de construção do Hexagonix®..."
 echo
 
+checarDependencias
 build
 usuarios
 init

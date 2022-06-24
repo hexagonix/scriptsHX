@@ -41,7 +41,7 @@ echo
 
 # Agora os arquivos do Sistema serão gerados...
 
-./sistema.sh andromeda $Par
+./HX.sh andromeda $Par
 
 # Agora a imagem do Sistema será preparada...
 
@@ -218,7 +218,7 @@ echo
 
 # Agora os arquivos do Sistema serão gerados...
 
-./sistema.sh hexagonix $PT2
+./HX.sh hexagonix $PT2
 
 # Agora a imagem do Sistema será preparada...
 
