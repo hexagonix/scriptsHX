@@ -14,7 +14,7 @@
 #;; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐
 #;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
 #;;              ┌─┘│          
-#;;              └──┘                             Versão 5.0
+#;;              └──┘                             Versão 5.1
 #;;
 #;;
 #;;************************************************************************************
@@ -554,13 +554,14 @@ rm -rf Sistema Andromeda Hexagonix andromeda.img hexagonix.img
 rm -rf log.log COM1.txt *.sis *.bin *.app Serial.txt 
 
 echo -e " [\e[32mOk\e[0m]"
-echo " > Use ./imagem com ou sem parâmetros para gerar estes arquivos novamente."
+echo -e " > \e[1;94m Use ./HX com parâmetros para gerar estes arquivos novamente.\e[0m"
+echo " > Para ajuda nos parâmetros possíveis, use ./HX ajuda."
 echo -n " > Removendo arquivos de configuração gerados a cada build..."
 
 rm -rf Dist/etc/*.unx Dist/etc/*.ocl
 
 echo -e " [\e[32mOk\e[0m]"
-echo " > Use ./configure para gerar estes arquivos novamente."
+echo -e " > \e[1;94mUse ./configure.sh para gerar estes arquivos novamente."
 echo -e "[\e[32mTudo pronto!\e[0m]"
 echo
 		
@@ -753,6 +754,8 @@ kernel
 
 prepDistros(){
 
+iniciarLog
+
 # Aqui iremos construir as imagens do Andromeda e do Hexagonix ao mesmo tempo
 
 definirHexagonix
@@ -765,6 +768,8 @@ imagemAndromeda
 
 prepImagemHexagonix(){
 
+iniciarLog
+
 definirHexagonix
 imagemHexagonix
 
@@ -772,12 +777,16 @@ imagemHexagonix
 
 prepImagemAndromeda(){
 
+iniciarLog
+
 definirAndromedaOficial
 imagemAndromeda
 
 }
 
 prepImagemAndromedaTeste(){
+
+iniciarLog
 
 definirAndromedaTeste
 imagemAndromeda
@@ -1323,6 +1332,68 @@ echo -e "[\e[32mEtapa concluída com sucesso\e[0m]"
 
 }
 
+exibirAjuda() {
+
+clear 
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                            \e[1;32mAjuda do HX\e[0m "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "Parâmetros \e[1;94mprincipais\e[0m disponíveis:"
+echo 
+echo -e "\e[1;32mmv.HX\e[0m - Iniciar máquina virtual com o Hexagonix"
+echo -e "\e[1;32mmv.ANDROMEDA\e[0m - Iniciar máquina virtual com o Hexagonix/Andromeda"
+echo -e "\e[1;32mmv.ANDROMEDA.MUDO\e[0m - Iniciar máquina virtual com o Andromeda em modo sem som"
+echo -e "\e[1;32mmv.ANDROMEDA.SERIAL\e[0m - Iniciar máquina virtual com o Andromeda sem saída serial"
+echo -e "\e[1;32mimg.HX\e[0m - Construir imagem de disco com o Hexagonix"
+echo -e "\e[1;32mimg.ANDROMEDA\e[0m - Construir imagem de disco com o Hexagonix/Andromeda"
+echo -e "\e[1;32mimg.ANDROMEDA.TESTE\e[0m - Construir imagem de disco teste com o Hexagonix/Andromeda"
+echo -e "\e[1;32mimg.DISTROS\e[0m - Construir imagem de disco com o Hexagonix e com o Andromeda"
+
+echo 
+
+}
+
+iniciarLog()
+{
+
+if [ -e $REG ] ; then
+
+rm -r $REG
+	
+fi	
+
+# Montar o cabeçalho do arquivo de log...
+
+echo "Relatório de montagem e estatísticas do Sistema Operacional Andromeda®" >> $REG
+echo "----------------------------------------------------------------------" >> $REG
+echo >> $REG
+echo "Neste arquivo você poderá encontrar dados e informações de montagem" >> $REG
+echo "dos arquivos do Sistema, podendo entre outras coisas identificar erros" >> $REG
+echo "no processo." >> $REG
+echo >> $REG
+echo -n "Data e hora deste relatório: " >> $REG
+date >> $REG
+echo >> $REG
+echo -n "Usuario atualmente logado: " >> $REG
+whoami >> $REG
+echo >> $REG
+echo "----------------------------------------------------------------------" >> $REG
+echo >> $REG
+
+}
+
 # Ponto de entrada do Script de construção de todo o Sistema, kernel e distribuição
 #
 # Primeiro, será testado se o usuário possui permissão de execução de superusuário
@@ -1383,31 +1454,6 @@ export IDIOMA=$2
 
 export INCLUDE="$(pwd)/lib/fasm"
 
-if [ -e $REG ] ; then
-
-rm -r $REG
-	
-fi	
-
-# Montar o cabeçalho do arquivo de log...
-
-echo "Relatório de montagem e estatísticas do Sistema Operacional Andromeda®" >> $REG
-echo "----------------------------------------------------------------------" >> $REG
-echo >> $REG
-echo "Neste arquivo você poderá encontrar dados e informações de montagem" >> $REG
-echo "dos arquivos do Sistema, podendo entre outras coisas identificar erros" >> $REG
-echo "no processo." >> $REG
-echo >> $REG
-echo -n "Data e hora deste relatório: " >> $REG
-date >> $REG
-echo >> $REG
-echo -n "Usuario atualmente logado: " >> $REG
-whoami >> $REG
-echo >> $REG
-echo "----------------------------------------------------------------------" >> $REG
-echo >> $REG
-
-
 # Realizar a ação determinada pelo parâmetro fornecido
 
 case $1 in
@@ -1422,6 +1468,10 @@ img.HX) prepImagemHexagonix; exit;;
 img.ANDROMEDA) prepImagemAndromeda; exit;;
 img.ANDROMEDA.TESTE) prepImagemAndromedaTeste; exit;;
 img.DISTROS) prepDistros; exit;;
+
+# Funções de ajuda e utilidades
+
+ajuda) exibirAjuda; exit;;
 
 # Agora funções de construção e limpeza
 

@@ -83,6 +83,21 @@ echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa
 
 fi	
 
+# Dependência 5
+
+echo -n " > chown "
+
+if [ -e /usr/bin/chown ] ; then
+
+echo -e "[\e[32mOk\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema com essa dependência\e[0m."
+
+fi	
+
 terminar
 
 # Agora vamos checar se os scripts estão disponíveis e torná-los executáveis
