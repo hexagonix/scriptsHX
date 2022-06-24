@@ -131,7 +131,7 @@ sudo qemu-system-$sistema -serial stdio -hda $imagem -cpu $processador -m $memor
 maquinaVirtualHexagonix()
 {
 
-export imagem="Imagens/hexagonix.img"
+export imagem="hexagonix/hexagonix.img"
 
 clear
 
@@ -232,7 +232,7 @@ fi
 	
 export drvsom="pcspk"
 export sistema="i386"
-export imagem="Imagens/andromeda.img"
+export imagem="hexagonix/andromeda.img"
 export processador="pentium3"
 export memoria=32
 export REG="log.log"

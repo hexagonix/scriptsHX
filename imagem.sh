@@ -22,22 +22,19 @@ andromeda()
 		
 clear
 
-echo ";;****************************************************************************"
-echo ";;                                                                            "
-echo ";;                                                                            "
-echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
-echo ";; ││ ││                                                                      "
-echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
-echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
-echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo ";;              ┌─┘│                                                          "
-echo ";;              └──┘                                                          "
-echo ";;                                                                            "
-echo ";;****************************************************************************"
-echo
-echo
-
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                                                          "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
 echo
 echo "Construindo o Sistema..."
 echo
@@ -157,24 +154,24 @@ echo
 
 fi
 
-mv  andromeda.img Imagens/$imagemFinal
+mv  andromeda.img $direImagem/$imagemFinal
 
-echo ";;****************************************************************************"
-echo ";;                                                                            "
-echo ";;                                                                            "
-echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
-echo ";; ││ ││                                                                      "
-echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
-echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
-echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo ";;              ┌─┘│                                                          "
-echo ";;              └──┘                                                          "
-echo ";;                                                                            "
-echo ";;****************************************************************************"
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                                                          "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
 echo
 echo
-echo "Imagem '$IMG' gerada com sucesso. Ela pode ser encontrada em Imagens/$imagemFinal."
+echo -e "Imagem \e[1;94m'$IMG'\e[0m gerada \e[32mcom sucesso\e[0m. Ela pode ser encontrada em $dirImagem/$imagemFinal."
 echo
 echo
 echo ";;****************************************************************************"
@@ -198,21 +195,19 @@ hexagonix()
 
 clear
 
-echo ";;****************************************************************************"
-echo ";;                                                                            "
-echo ";;                                                                            "
-echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
-echo ";; ││ ││                                                                      "
-echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
-echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
-echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo ";;              ┌─┘│                                                          "
-echo ";;              └──┘                                                          "
-echo ";;                                                                            "
-echo ";;****************************************************************************"
-echo
-echo
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                                                          "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
 echo
 echo "Construindo o Sistema..."
 echo
@@ -342,24 +337,25 @@ echo
 
 fi
 
-mv hexagonix.img Imagens/$imagemFinal
+mv  hexagonix.img $direImagem/$imagemFinal
 
-echo ";;****************************************************************************"
-echo ";;                                                                            "
-echo ";;                                                                            "
-echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
-echo ";; ││ ││                                                                      "
-echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
-echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
-echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo ";;              ┌─┘│                                                          "
-echo ";;              └──┘                                                          "
-echo ";;                                                                            "
-echo ";;****************************************************************************"
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                                                          "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
 echo
 echo
-echo "Imagem '$IMG' gerada com sucesso. Ela pode ser encontrada em Imagens/$imagemFinal."
+echo -e "Imagem \e[1;94m'$IMG'\e[0m gerada \e[32mcom sucesso\e[0m. Ela pode ser encontrada em $dirImagem/$imagemFinal."
+
 echo
 echo
 echo ";;****************************************************************************"
@@ -392,22 +388,22 @@ echo
 fi
 
 
-echo ";;****************************************************************************"
-echo ";;                                                                            "
-echo ";;                                                                            "
-echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
-echo ";; ││ ││                                                                      "
-echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
-echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
-echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo ";;              ┌─┘│                                                          "
-echo ";;              └──┘                                                          "
-echo ";;                                                                            "
-echo ";;****************************************************************************"
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                                                          "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
 echo
 echo
-echo "Algo de errado ocorreu durante a montagem da imagem :("
+echo -e "\e[1;31mAlgo de errado ocorreu durante a montagem da imagem :(\e[0m"
 echo
 echo "Utilize o script de geração do Sistema para verificar a origem do problema."
 echo
@@ -525,24 +521,24 @@ if test "`whoami`" != "root" ; then
 
 clear
 
-echo ";;****************************************************************************"
-echo ";;                                                                            "
-echo ";;                                                                            "
-echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
-echo ";; ││ ││                                                                      "
-echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
-echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
-echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo ";;              ┌─┘│                                                          "
-echo ";;              └──┘                                                          "
-echo ";;                                                                            "
-echo ";;****************************************************************************"
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                                                          "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
 echo
 echo
-echo "Para iniciar o processo solicitado, voce deve ser um superusuario ;D"
+echo -e "\e[1;31mPara iniciar o processo solicitado, voce deve ser um superusuario ;D\e[0m"
 echo
-echo "Voce deve logar como superusuario\nUtilize sudo $0.\n" && exit
+echo -e "\e[1;32mVoce deve logar como superusuario\nUtilize sudo $0.\n\e[0m" && exit
 	
 fi
 
@@ -550,6 +546,7 @@ export PT2=$2
 export PT3=$3
 export PT4=$4
 export PT5=$5
+export dirImagem="hexagonix"
 
 case $1 in
 
