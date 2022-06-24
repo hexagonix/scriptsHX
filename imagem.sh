@@ -170,9 +170,13 @@ echo -e ";;              └──┘                                           
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
 echo
+echo -e "\e[32mSucesso ao construir o sistema e a imagem de disco.\e[0m"
 echo
-echo -e "Imagem \e[1;94m'$IMG'\e[0m gerada \e[32mcom sucesso\e[0m. Ela pode ser encontrada em $dirImagem/$imagemFinal."
-echo
+echo -e "Veja agora algumas informações da construção \e[1matual\e[0m do sistema:"
+echo -e " > Versão do Hexagonix base: \e[1;32m$VERSAO\e[0m"
+echo -e " > Revisão do software: \e[1;32m$REVISAO\e[0m"
+echo -e " > Nome do lançamento: \e[1;32m$CODENOME\e[0m"
+echo -e " > Localização da imagem: \e[1;32m$dirImagem/$imagemFinal\e[0m"
 echo
 echo ";;****************************************************************************"
 echo
@@ -353,10 +357,13 @@ echo -e ";;              └──┘                                           
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
 echo
+echo -e "\e[32mSucesso ao construir o sistema e a imagem de disco.\e[0m"
 echo
-echo -e "Imagem \e[1;94m'$IMG'\e[0m gerada \e[32mcom sucesso\e[0m. Ela pode ser encontrada em $dirImagem/$imagemFinal."
-
-echo
+echo -e "Veja agora algumas informações da construção \e[1matual\e[0m do sistema:"
+echo -e " > Versão do Hexagonix base: \e[1;32m$VERSAO\e[0m"
+echo -e " > Revisão do software: \e[1;32m$REVISAO\e[0m"
+echo -e " > Nome do lançamento: \e[1;32m$CODENOME\e[0m"
+echo -e " > Localização da imagem: \e[1;32m$dirImagem/$imagemFinal\e[0m"
 echo
 echo ";;****************************************************************************"
 echo
@@ -547,6 +554,9 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
+export REVISAO=$(cat Dist/etc/revisao.def)
+export CODENOME=$(cat Dist/etc/codenome.def)
+export VERSAO=$(cat Dist/etc/versao.def)
 
 case $1 in
 
