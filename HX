@@ -37,6 +37,8 @@ export imagemFinal="en.andromeda.img"
 
 fi
 
+export DESTINODISTRO="Andromeda"
+
 clear
 
 echo -e ";;****************************************************************************"
@@ -59,129 +61,11 @@ echo
 
 mkdir -p Andromeda
 
-echo "Componentes de inicialização do Hexagon®... {"
-echo
-
-echo "Componentes de inicialização do Hexagon®... {" >> $REG
-echo >> $REG
-
-echo "Carregador de inicialização do Hexagon® - Saturno® (1º estágio)..."
-echo
-
-echo "Carregador de inicialização do Hexagon® - Saturno® (1º estágio)..." >> $REG
-echo >> $REG
-
-cd Boot
-
-cd Saturno
-
-fasm saturno.asm ../saturno.img >> ../../log.log || erroConstrucao
-
-echo >> ../../log.log
-
-fasm mbr.asm ../mbr.img >> ../../log.log || erroConstrucao
-
-echo >> ../../log.log
-
-cd ..
-
-echo "Hexagon Boot - HBoot (2º estágio)..."
-echo
-
-echo "Hexagon Boot - HBoot (2º estágio)..." >> ../log.log
-echo >> ../log.log
-
-cd "Hexagon Boot"
-
-fasm hboot.asm ../hboot -d $BANDEIRASHBOOT >> ../../log.log || erroConstrucao
-
-cd Mods
-
-if [ -e Spartan.asm ] ; then
-
-for i in *.asm
-do
-
-	echo -n Construindo módulo compatível com HBoot® $(basename $i .asm).mod...
-	
-	fasm $i ../../`basename $i .asm`.mod -d $BANDEIRAS >> ../../../log.log 
-	
-	echo -e " [\e[32mOk\e[0m]"
-	
-done
-
-fi
-
-cd ..
-
-cd ..
-
-cp *.img ../Andromeda
-cp hboot ../Andromeda
-
-if [ -e Spartan.mod ] ; then
-
-cp *.mod ../Andromeda/ 
-rm -r *.mod 
-
-fi	
-
-rm -r *.img
-rm -r hboot
-
-echo
-echo -e "} \e[32mComponentes de inicialização construídos com sucesso\e[0m]."
-
-echo >> ../log.log
-echo "} Componentes de inicialização do Hexagon® construídos com sucesso." >> ../log.log
-echo >> ../log.log
-echo "----------------------------------------------------------------------" >> ../log.log
-echo >> ../log.log
-
-cd ..
-
-cd Hexagon
-
-echo
-echo -n "Kernel Hexagon®..."
-
-echo "Kernel Hexagon®..." >> ../log.log
-echo >> ../log.log
-
-fasm Hexagon.asm Hexagon.sis -d $BANDEIRASHEXAGON >> ../log.log || erroConstrucao
-
-cp Hexagon.sis ../Andromeda
-
-rm -r Hexagon.sis
-
-echo -e " [\e[32mOk\e[0m]"
-
-echo >> ../log.log
-echo "Kernel Hexagon® construído com sucesso." >> ../log.log
-echo >> ../log.log
-echo "----------------------------------------------------------------------" >> ../log.log
-echo >> ../log.log
-
-cd ..
-
-# Gerar os aplicativos base do Andromeda® e base Unix
-
-cd Apps/Unix
-
-./Unix.sh
-
-cd ..
-
-cd Andromeda
-	
-./Apps.sh
-
-cd ..
-
-cp *.app ../Andromeda
-rm *.app
-
-cd ..
+construirSaturno
+construirHBoot
+construirHexagon
+construirUtilUnix
+construirBaseAndromeda
 
 cd Dist 
 
@@ -204,8 +88,7 @@ cd Fontes/
 
 if [ -e Atomic.asm ] ; then
 
-echo -n "Existem fontes a serem construidas e copiadas..."
-echo
+echo -e "Existem fontes a serem construidas e copiadas... [\e[32mOk\e[0m]"
 
 ./fontes.sh
 
@@ -220,7 +103,7 @@ echo
 else 
 
 echo 
-echo "Não existem fontes a serem construidas e copiadas... [Ok]"
+echo -e "Não existem fontes a serem construidas e copiadas... [\e[32mOk\e[0m]"
 echo
 
 fi
@@ -288,6 +171,9 @@ export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=EN"
 
 fi
 
+export DESTINODISTRO="Hexagonix"
+export ALVODISTRO="hexagonix"
+
 clear
 
 echo -e ";;****************************************************************************"
@@ -310,121 +196,10 @@ echo
 
 mkdir -p Hexagonix
 
-echo "Componentes de inicialização do Hexagon®... {"
-echo
-
-echo "Componentes de inicialização do Hexagon®... {" >> $REG
-echo >> $REG
-
-echo "Carregador de inicialização do Hexagon® - Saturno® (1º estágio)..."
-echo
-
-echo "Carregador de inicialização do Hexagon® - Saturno® (1º estágio)..." >> $REG
-echo >> $REG
-
-cd Boot
-
-cd Saturno
-
-fasm saturno.asm ../saturno.img >> ../../log.log || erroConstrucao
-
-echo >> ../../log.log
-
-fasm mbr.asm ../mbr.img >> ../../log.log || erroConstrucao
-
-echo >> ../../log.log
-
-cd ..
-
-echo "Hexagon Boot - HBoot (2º estágio)..."
-echo
-
-echo "Hexagon Boot - HBoot (2º estágio)..." >> ../log.log
-echo >> ../log.log
-
-cd "Hexagon Boot"
-
-fasm hboot.asm ../hboot -d $BANDEIRASHBOOT >> ../../log.log || erroConstrucao
-
-cd Mods
-
-if [ -e Spartan.asm ] ; then
-
-for i in *.asm
-do
-
-	echo -n Construindo módulo compatível com HBoot® $(basename $i .asm).mod...
-	
-	fasm $i ../../`basename $i .asm`.mod -d $BANDEIRAS >> ../../../log.log 
-	
-	echo -e " [\e[32mOk\e[0m]"
-	
-done
-
-fi
-
-cd ..
-
-cd ..
-
-cp *.img ../Hexagonix
-cp hboot ../Hexagonix
-
-if [ -e Spartan.mod ] ; then
-
-cp *.mod ../Hexagonix/ 
-rm -r *.mod 
-
-fi	
-
-rm -r *.img
-rm -r hboot
-
-echo
-echo -e "} [\e[32mComponentes de inicialização construídos com sucesso\e[0m]."
-
-echo >> ../log.log
-echo "} Componentes de inicialização do Hexagon® construídos com sucesso." >> ../log.log
-echo >> ../log.log
-echo "----------------------------------------------------------------------" >> ../log.log
-echo >> ../log.log
-
-cd ..
-
-cd Hexagon
-
-echo
-echo -n "Kernel Hexagon®..."
-
-echo "Kernel Hexagon®..." >> ../log.log
-echo >> ../log.log
-
-fasm Hexagon.asm Hexagon.sis -d $BANDEIRASHEXAGON >> ../log.log || erroConstrucao
-
-cp Hexagon.sis ../Hexagonix
-
-rm -r Hexagon.sis
-
-echo -e " [\e[32mOk\e[0m]"
-
-echo >> ../log.log
-echo "Kernel Hexagon® construído com sucesso." >> ../log.log
-echo >> ../log.log
-echo "----------------------------------------------------------------------" >> ../log.log
-echo >> ../log.log
-
-cd ..
-
-# Gerar os aplicativos base Unix
-
-cd Apps/Unix
-
-./Unix.sh hexagonix
-
-cd ..
-
-cp *.app ../Hexagonix
-rm *.app
+construirSaturno
+construirHBoot
+construirHexagon
+construirUtilUnix
 
 cd ..
 
@@ -448,8 +223,7 @@ cd Fontes/
 
 if [ -e Atomic.asm ] ; then
 
-echo -n "Existem fontes a serem construidas e copiadas..."
-echo
+echo -e "Existem fontes a serem construidas e copiadas... [\e[32mOk\e[0m]"
 
 ./fontes.sh
 
@@ -554,15 +328,17 @@ rm -rf Sistema Andromeda Hexagonix andromeda.img hexagonix.img
 rm -rf log.log COM1.txt *.sis *.bin *.app Serial.txt 
 
 echo -e " [\e[32mOk\e[0m]"
-echo -e " > \e[1;94m Use ./HX com parâmetros para gerar estes arquivos novamente.\e[0m"
+echo -e "   > \e[1;94mUse ./HX com parâmetros para gerar estes arquivos novamente.\e[0m"
 echo " > Para ajuda nos parâmetros possíveis, use ./HX ajuda."
 echo -n " > Removendo arquivos de configuração gerados a cada build..."
 
 rm -rf Dist/etc/*.unx Dist/etc/*.ocl
 
 echo -e " [\e[32mOk\e[0m]"
-echo -e " > \e[1;94mUse ./configure.sh para gerar estes arquivos novamente."
-echo -e "[\e[32mTudo pronto!\e[0m]"
+echo -e "   > \e[1;94mUse ./configure.sh para gerar estes arquivos novamente.\e[0m"
+
+tudopronto
+
 echo
 		
 }
@@ -915,7 +691,7 @@ construtorHexagonix $PT2
 
 # Agora a imagem do Sistema será preparada...
 
-echo "Construindo imagem do sistema..."
+echo -e "\e[1;94mConstruindo imagem do sistema...\e[0m"
 echo
 
 echo "Construindo imagem temporária para manipulação de arquivos......" >> $LOG
@@ -1067,7 +843,7 @@ echo
 
 echo "> Imagem '$IMG' gerada com sucesso." >> $LOG
 echo >> $LOG
-echo "Utilize './sistema mv' para testar a execução do Sistema na imagem gerada ou copie" >> $LOG
+echo "Utilize './HX mv.HX' para testar a execução do sistema na imagem gerada ou copie" >> $LOG
 echo "a imagem para o diretório 'Inst' da raiz do instalador para gerar uma imagem de instalação" >> $LOG
 echo "baseada em Linux para transferência para um disco." >> $LOG
 echo >> $LOG
@@ -1145,7 +921,7 @@ construtorAndromeda $Par
 
 # Agora a imagem do Sistema será preparada...
 
-echo "Construindo imagem do sistema..."
+echo -e "\e[1;94mConstruindo imagem do sistema...\e[0m"
 echo
 
 echo "Construindo imagem temporária para manipulação de arquivos......" >> $LOG
@@ -1197,7 +973,6 @@ if [ -e DOS ] ; then
 cp DOS/*.* Sistema/
 
 fi	
-
 
 # Agora será verificado se alguma fonte deverá ser incluída na imagem
 #
@@ -1287,7 +1062,7 @@ echo
 
 echo "> Imagem '$IMG' gerada com sucesso." >> $LOG
 echo >> $LOG
-echo "Utilize './sistema mv' para testar a execução do Sistema na imagem gerada ou copie" >> $LOG
+echo "Utilize './HX mv.ANDROMEDA' para testar a execução do sistema na imagem gerada ou copie" >> $LOG
 echo "a imagem para o diretório 'Inst' da raiz do instalador para gerar uma imagem de instalação" >> $LOG
 echo "baseada em Linux para transferência para um disco." >> $LOG
 echo >> $LOG
@@ -1322,6 +1097,7 @@ echo -e " > \e[1;31mVocê NÃO pode iniciar a construção do sistema sem essa d
 fi	
 
 terminar
+tudopronto
 
 }
 
@@ -1329,6 +1105,12 @@ terminar()
 {
 
 echo -e "[\e[32mEtapa concluída com sucesso\e[0m]"
+
+}
+
+tudopronto(){
+
+echo -e "[\e[32mTudo pronto!\e[0m]"
 
 }
 
@@ -1391,6 +1173,158 @@ whoami >> $REG
 echo >> $REG
 echo "----------------------------------------------------------------------" >> $REG
 echo >> $REG
+
+}
+
+# Vamos separar aqui as etapas comuns de construção do sistema para reutilizar
+# código e facilitar a busca de erros
+
+construirHexagon(){
+
+cd Hexagon
+
+echo
+echo -en "\e[1;94mConstruindo o Kernel Hexagon®...\e[0m"
+
+echo "Kernel Hexagon®..." >> ../log.log
+echo >> ../log.log
+
+fasm Hexagon.asm Hexagon.sis -d $BANDEIRASHEXAGON >> ../log.log || erroConstrucao
+
+cp Hexagon.sis ../$DESTINODISTRO
+
+rm -r Hexagon.sis
+
+echo -e " [\e[32mOk\e[0m]"
+
+echo >> ../log.log
+echo "Kernel Hexagon® construído com sucesso." >> ../log.log
+echo >> ../log.log
+echo "----------------------------------------------------------------------" >> ../log.log
+echo >> ../log.log
+
+cd ..
+
+}
+
+construirSaturno(){
+
+echo -e "\e[1;94mComponentes de inicialização do Hexagon®...\e[0m {"
+echo
+
+echo "Componentes de inicialização do Hexagon®... {" >> $REG
+echo >> $REG
+
+echo -e "\e[1;94mCarregador de inicialização do Hexagon® - Saturno® (1º estágio)...\e[0m"
+echo
+
+echo "Carregador de inicialização do Hexagon® - Saturno® (1º estágio)..." >> $REG
+echo >> $REG
+
+cd Boot
+
+cd Saturno
+
+fasm saturno.asm ../saturno.img >> ../../log.log || erroConstrucao
+
+echo >> ../../log.log
+
+fasm mbr.asm ../mbr.img >> ../../log.log || erroConstrucao
+
+echo >> ../../log.log
+
+cd ..
+
+
+}
+
+construirHBoot(){
+
+
+echo -e "\e[1;94mHexagon Boot - HBoot (2º estágio)...\e[0m"
+echo
+
+echo "Hexagon Boot - HBoot (2º estágio)..." >> ../log.log
+echo >> ../log.log
+
+cd "Hexagon Boot"
+
+fasm hboot.asm ../hboot -d $BANDEIRASHBOOT >> ../../log.log || erroConstrucao
+
+cd Mods
+
+if [ -e Spartan.asm ] ; then
+
+for i in *.asm
+do
+
+	echo -en "Construindo módulo compatível com HBoot® \e[1;94m$(basename $i .asm).mod\e[0m..."
+	
+	fasm $i ../../`basename $i .asm`.mod -d $BANDEIRAS >> ../../../log.log 
+	
+	echo -e " [\e[32mOk\e[0m]"
+	
+done
+
+fi
+
+cd ..
+
+cd ..
+
+cp *.img ../$DESTINODISTRO
+cp hboot ../$DESTINODISTRO
+
+if [ -e Spartan.mod ] ; then
+
+cp *.mod ../$DESTINODISTRO/ 
+rm -r *.mod 
+
+fi	
+
+rm -r *.img
+rm -r hboot
+
+echo
+echo -e "} [\e[32mComponentes de inicialização construídos com sucesso\e[0m]."
+
+echo >> ../log.log
+echo "} Componentes de inicialização do Hexagon® construídos com sucesso." >> ../log.log
+echo >> ../log.log
+echo "----------------------------------------------------------------------" >> ../log.log
+echo >> ../log.log
+
+cd ..
+
+}
+
+construirUtilUnix(){
+
+# Gerar os aplicativos base Unix
+
+cd Apps/Unix
+
+./Unix.sh $ALVODISTRO
+
+cd ..
+
+cp *.app ../$DESTINODISTRO
+rm *.app
+
+}
+
+construirBaseAndromeda(){
+
+cd Andromeda
+	
+./Apps.sh
+
+cd ..
+
+cp *.app ../$DESTINODISTRO
+rm *.app
+
+cd ..
 
 }
 

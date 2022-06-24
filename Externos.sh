@@ -22,7 +22,7 @@
 
 gerarExternos(){
 
-echo "Construindo utilitários de terceiros para Hexagonix®... {"
+echo -e "\e[1;94mConstruindo utilitários de terceiros para Hexagonix®...\e[0m {"
 echo
 
 cd fasmX/
@@ -33,7 +33,7 @@ cd HEXAGONIX
 for i in *.asm
 do
 
-	echo -n Gerando aplicativo de terceiros $(basename $i .asm).app...
+	echo -en "Gerando aplicativo de terceiros \e[1;94m$(basename $i .asm).app\e[0m..."
 	
 	fasm $i ../../../../$DIRETORIO/`basename $i .asm`.app -d $BANDEIRAS >> /dev/null || echo " [Falha]"
 	
