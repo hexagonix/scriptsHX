@@ -145,19 +145,19 @@ configurar(){
 
 clear
 
-echo ";;****************************************************************************"
-echo ";;                                                                            "
-echo ";;                                                                            "
-echo ";; ┌┐ ┌┐                              Sistema Operacional Hexagonix®          "
-echo ";; ││ ││                                                                      "
-echo ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ Copyright © 2016-2022 Felipe Miguel Nery Lunkes"
-echo ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       Todos os direitos reservados             "
-echo ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo ";;              ┌─┘│                                                          "
-echo ";;              └──┘                                                          "
-echo ";;                                                                            "
-echo ";;****************************************************************************"
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                  \e[1;32mConfigurar ambiente de construção\e[0m        "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
 echo
 echo -e "Gerando configuração..."
 echo

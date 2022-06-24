@@ -12,7 +12,7 @@
 #;; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐
 #;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
 #;;              ┌─┘│          
-#;;              └──┘                             Versão 2.0
+#;;              └──┘                             Versão 3.0
 #;;
 #;;
 #;;************************************************************************************
@@ -536,11 +536,10 @@ echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐�
 echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
 echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
 echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                                                          "
+echo -e ";;              ┌─┘│                      \e[1;32mLimpar árvore do sistema\e[0m"
 echo -e ";;              └──┘                                                          "
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
-echo
 echo
 echo "Executando limpeza na árvore do sistema..."
 echo -n " > Limpando componentes gerados e imagens do sistema..."
@@ -559,63 +558,6 @@ echo " > Use ./configure para gerar estes arquivos novamente."
 echo "Tudo pronto!"
 echo
 		
-}
-
-maquinaVirtual()
-{
-	
-clear
-
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                                                          "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
-echo
-echo "Iniciando máquina virtual com a imagem de sistema do Andromeda®"
-echo 
-echo "Usando as seguintes especificações:"
-echo
-echo "> Arquitetura: $sistema, Imagem: $imagem, Som: $drvsom"
-echo "> Memoria: $memoria megabytes, Processador: $processador"
-echo
-
-sudo qemu-system-$sistema -serial file:"COM1.txt"  -hda $imagem -cpu $processador -m $memoria -soundhw $drvsom -no-kvm >> /dev/null || erroMV
-	
-}	
-	
-erroMV()
-{
-	
-clear
-
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                                                          "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
-echo
-echo -e "> \e[31mUm erro ocorreu durante a execução da máquina virtual! :(\e[0m"
-echo
-	
 }
 
 kernel()
@@ -683,13 +625,10 @@ echo -e "\e[1;32mVoce deve logar como superusuario\nUtilize sudo $0.\n\e[0m" && 
 	
 fi
 
-# Variáveis e constantes utilizados na máquina virtual (QEMU)
+# Variáveis e constantes utilizados
 	
-export drvsom="pcspk"
-export sistema="i386"
+
 export imagem="andromeda.img"
-export processador="core2duo"
-export memoria=128
 export REG="log.log"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
@@ -733,7 +672,6 @@ echo >> $REG
 case $1 in
 
 limpar) limpar; exit;;
-mv) maquinaVirtual; exit;;
 kernel) kernel; exit;;
 hexagonix) hexagonix; exit;;
 andromeda) construtor; exit;;
