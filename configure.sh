@@ -214,9 +214,11 @@ echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa
 
 fi	
 
+# Agora vamos instalar as dependências já presentes (sem necessidade de obtenção)
+
 # Copiar HX
 
-echo -n " > Copiando HX para /usr/bin... "
+echo -n " > Copiando/atualizando HX (destino: /usr/bin)... "
 
 cp HX /usr/bin 
 
@@ -231,7 +233,7 @@ echo -e " [\e[94mExecutável\e[0m]"
 else
 
 echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+echo -e "   > \e[1;31mVocê deve usar a cópia local de HX para executar as operações\e[0m."
 
 fi 
 
@@ -241,7 +243,7 @@ terminar
 
 build() {
 
-echo -e "Configurando dados de build do sistema..."
+echo -e "Configurando dados de construção do sistema..."
 
 # Primeiro, vamos montar a base 
 
@@ -249,7 +251,7 @@ cd Dist/etc
 
 if [ -e base.ocl ] ; then
 
-echo " > Removendo informações de build e versão base anteriores..."
+echo " > Removendo informações de construção e versão base anteriores..."
 
 rm base.ocl
 
@@ -261,7 +263,7 @@ echo -e "[\e[32mOk\e[0m]"
 
 if [ -e hexgnix.unx ] ; then
 
-echo " > Removendo informações de build e versão do Hexagonix anteriores..."
+echo " > Removendo informações de construção e versão do Hexagonix anteriores..."
 
 rm hexgnix.unx
 
