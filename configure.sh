@@ -11,7 +11,7 @@
 #;; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐
 #;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
 #;;              ┌─┘│          
-#;;              └──┘                             Versão 3.0
+#;;              └──┘                             Versão 3.5
 #;;
 #;;
 #;;************************************************************************************
@@ -214,6 +214,27 @@ echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa
 
 fi	
 
+# Copiar HX
+
+echo -n " > Copiando HX para /usr/bin... "
+
+cp HX /usr/bin 
+
+if [ -e /usr/bin/HX ] ; then
+
+echo -en "[\e[32mOk\e[0m]"
+
+chmod +x /usr/bin/HX
+
+echo -e " [\e[94mExecutável\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+
+fi 
+
 terminar 
 
 }
@@ -343,7 +364,60 @@ echo -e "[\e[32mEtapa concluída com sucesso\e[0m]"
 
 }
 
-configurar(){
+limpar()
+{
+
+clear
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                  \e[1;32mConfigurar ambiente de construção\e[0m        "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "Eliminando dependências instaladas em seu computador..."
+echo
+echo -n " > Removendo HX de /usr/bin... "
+
+if [ -e /usr/bin/HX ] ; then
+
+rm -rf /usr/bin/HX 
+
+else
+
+echo -en "[\e[32mOk\e[0m]"
+
+echo -en " [\e[94mPreviamente removido\e[0m] "
+
+
+fi 
+
+if [ -e /usr/bin/HX ] ; then
+
+echo -en "[\e[1;31mFalha\e[0m]"
+
+else
+
+echo -en "[\e[32mOk\e[0m]"
+
+echo -e " [\e[94mRemovido\e[0m]"
+
+fi 
+
+terminar 
+
+}
+
+configurar()
+{
 
 clear
 
@@ -387,6 +461,7 @@ case $1 in
 
 build) build; exit;;
 usuario) usuarios; exit;;
+limpar) limpar; exit;;
 *) configurar; exit;;
 
 esac
