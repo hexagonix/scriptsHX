@@ -1289,7 +1289,7 @@ echo -e "Parâmetros \e[1;94mprincipais\e[0m disponíveis:"
 echo 
 echo -e "\e[1;32mmv.HX\e[0m - Iniciar máquina virtual com o Hexagonix"
 echo -e "\e[1;32mmv.ANDROMEDA\e[0m - Iniciar máquina virtual com o Hexagonix/Andromeda"
-echo -e "\e[1;32mmv.ANDROMEDA.MUDO\e[0m - Iniciar máquina virtual com o Andromeda em modo sem som"
+echo -e "\e[1;32mmv.ANDROMEDA.SOM\e[0m - Iniciar máquina virtual com o Andromeda em modo com som"
 echo -e "\e[1;32mmv.ANDROMEDA.SERIAL\e[0m - Iniciar máquina virtual com o Andromeda sem saída serial"
 echo -e "\e[1;32mimg.HX\e[0m - Construir imagem de disco com o Hexagonix"
 echo -e "\e[1;32mimg.ANDROMEDA\e[0m - Construir imagem de disco com o Hexagonix/Andromeda"
@@ -1641,8 +1641,8 @@ case $1 in
 # Funções para criar imagens de disco e iniciar máquinas virtuais
 
 mv.HX) maquinaVirtualHexagonix; exit;;
-mv.ANDROMEDA) maquinaVirtual; exit;;
-mv.ANDROMEDA.MUDO) maquinaVirtualM; exit;;
+mv.ANDROMEDA) maquinaVirtualM; exit;;
+mv.ANDROMEDA.SOM) maquinaVirtual; exit;;
 mv.ANDROMEDA.SERIAL) maquinaVirtualS; exit;;
 img.HX) prepImagemHexagonix; exit;;
 img.ANDROMEDA) prepImagemAndromeda; exit;;
