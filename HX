@@ -1621,7 +1621,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="6.5"
+export VERSAOHX="6.6"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
