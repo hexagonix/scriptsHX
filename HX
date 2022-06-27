@@ -345,7 +345,9 @@ echo
 
 maquinaVirtual()
 {
-	
+
+if [ -e $imagem ] ; then
+
 clear
 
 echo -e ";;****************************************************************************"
@@ -371,12 +373,38 @@ echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$proc
 echo
 
 sudo qemu-system-$sistema -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria -soundhw $drvsom >> /dev/null || erroMV
+
+else
+
+clear
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "Erro na solicitação: \e[1;94mimagem de disco '$imagem' não localizada\e[0m."
+echo -e " > \e[1;31mVocê NÃO pode iniciar o sistema sem essa dependência\e[0m."
+echo
+
+fi	
 	
 }	
 
 maquinaVirtualM()
 {
-	
+
+if [ -e $imagem ] ; then
+
 clear
 
 echo -e ";;****************************************************************************"
@@ -402,12 +430,38 @@ echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$proc
 echo
 
 sudo qemu-system-$sistema -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
-	
+
+else
+
+clear
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "Erro na solicitação: \e[1;94mimagem de disco '$imagem' não localizada\e[0m."
+echo -e " > \e[1;31mVocê NÃO pode iniciar o sistema sem essa dependência\e[0m."
+echo
+
+fi	
+
 }	
 
 maquinaVirtualS()
 {
-	
+
+if [ -e $imagem ] ; then
+
 clear
 
 echo -e ";;****************************************************************************"
@@ -433,6 +487,30 @@ echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$proc
 echo
 
 sudo qemu-system-$sistema -serial stdio -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
+
+else
+
+clear
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "Erro na solicitação: \e[1;94mimagem de disco '$imagem' não localizada\e[0m."
+echo -e " > \e[1;31mVocê NÃO pode iniciar o sistema sem essa dependência\e[0m."
+echo
+
+fi	
 	
 }	
 
@@ -440,6 +518,8 @@ maquinaVirtualHexagonix()
 {
 
 export imagem="hexagonix/hexagonix.img"
+
+if [ -e $imagem ] ; then
 
 clear
 
@@ -466,7 +546,31 @@ echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$proc
 echo
 
 sudo qemu-system-$sistema -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
-	
+
+else
+
+clear
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "Erro na solicitação: \e[1;94mimagem de disco '$imagem' não localizada\e[0m."
+echo -e " > \e[1;31mVocê NÃO pode iniciar o sistema sem essa dependência\e[0m."
+echo
+
+fi	
+		
 }	
 
 erroMV()
@@ -488,7 +592,8 @@ echo -e ";;              └──┘                                           
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
 echo
-echo -e "\e[1;31mUm erro ocorreu ao iniciar a máquina virtual.\e[0m"
+echo -e "Erro na solicitação: \e[1;94mproblema durante a execução da máquina virtual\e[0m."
+echo -e " > \e[1;31mTente executar a máquina virtual novamente\e[0m."
 echo
 	
 }
@@ -1481,11 +1586,10 @@ echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐�
 echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
 echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
 echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                                                          "
+echo -e ";;              ┌─┘│              \e[1;32mHX: Você precisa ser root para continuar\e[0m"
 echo -e ";;              └──┘                                                          "
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
-echo
 echo
 echo -e "\e[1;94mPara iniciar corretamente o HX, você deve ser um usuário raiz (root) ;D\e[0m"
 echo
@@ -1517,7 +1621,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="6.1"
+export VERSAOHX="6.5"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
