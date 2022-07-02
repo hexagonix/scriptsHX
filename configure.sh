@@ -121,13 +121,13 @@ echo -e "Checando scripts e utilitários necessários à construção do sistema
 
 # Script 1
 
-echo -n " > Script de construção e execução do sistema (HX) "
+echo -n " > Script de construção e execução do sistema (hx) "
 
-if [ -e HX ] ; then
+if [ -e hx ] ; then
 
 echo -en "[\e[32mOk\e[0m]"
 
-chmod +x HX
+chmod +x hx
 
 echo -e " [\e[94mExecutável\e[0m]"
 
@@ -216,24 +216,24 @@ fi
 
 # Agora vamos instalar as dependências já presentes (sem necessidade de obtenção)
 
-# Copiar HX
+# Copiar hx
 
-echo -n " > Copiando/atualizando HX (destino: /usr/bin)... "
+echo -n " > Copiando/atualizando hx (destino: /usr/bin)... "
 
-cp HX /usr/bin 
+cp hx /usr/bin 
 
-if [ -e /usr/bin/HX ] ; then
+if [ -e /usr/bin/hx ] ; then
 
 echo -en "[\e[32mOk\e[0m]"
 
-chmod +x /usr/bin/HX
+chmod +x /usr/bin/hx
 
 echo -e " [\e[94mExecutável\e[0m]"
 
 else
 
 echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;31mVocê deve usar a cópia local de HX para executar as operações\e[0m."
+echo -e "   > \e[1;31mVocê deve usar a cópia local de hx para executar as operações\e[0m."
 
 fi 
 
@@ -387,11 +387,11 @@ echo -e ";;*********************************************************************
 echo
 echo -e "Eliminando dependências instaladas em seu computador..."
 echo
-echo -n " > Removendo HX de /usr/bin... "
+echo -n " > Removendo hx de /usr/bin... "
 
-if [ -e /usr/bin/HX ] ; then
+if [ -e /usr/bin/hx ] ; then
 
-rm -rf /usr/bin/HX 
+rm -rf /usr/bin/hx
 
 else
 
@@ -403,7 +403,7 @@ exit
 
 fi 
 
-if [ -e /usr/bin/HX ] ; then
+if [ -e /usr/bin/hx ] ; then
 
 echo -en "[\e[1;31mFalha\e[0m]"
 

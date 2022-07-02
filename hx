@@ -328,8 +328,8 @@ rm -rf Sistema Andromeda Hexagonix andromeda.img hexagonix.img
 rm -rf log.log COM1.txt *.sis *.bin *.app Serial.txt 
 
 echo -e " [\e[32mOk\e[0m]"
-echo -e "   > \e[1;94mUse ./HX com parâmetros para gerar estes arquivos novamente.\e[0m"
-echo " > Para ajuda nos parâmetros possíveis, use ./HX ajuda."
+echo -e "   > \e[1;94mUse ./hx com parâmetros para gerar estes arquivos novamente.\e[0m"
+echo " > Para ajuda nos parâmetros possíveis, use ./hx ajuda."
 echo -n " > Removendo arquivos de configuração gerados a cada build..."
 
 rm -rf Dist/etc/*.unx Dist/etc/*.ocl
@@ -948,7 +948,7 @@ echo
 
 echo "> Imagem '$IMG' gerada com sucesso." >> $LOG
 echo >> $LOG
-echo "Utilize './HX mv.HX' para testar a execução do sistema na imagem gerada ou copie" >> $LOG
+echo "Utilize './hx mv.HX' para testar a execução do sistema na imagem gerada ou copie" >> $LOG
 echo "a imagem para o diretório 'Inst' da raiz do instalador para gerar uma imagem de instalação" >> $LOG
 echo "baseada em Linux para transferência para um disco." >> $LOG
 echo >> $LOG
@@ -1167,7 +1167,7 @@ echo
 
 echo "> Imagem '$IMG' gerada com sucesso." >> $LOG
 echo >> $LOG
-echo "Utilize './HX mv.ANDROMEDA' para testar a execução do sistema na imagem gerada ou copie" >> $LOG
+echo "Utilize './hx mv.ANDROMEDA' para testar a execução do sistema na imagem gerada ou copie" >> $LOG
 echo "a imagem para o diretório 'Inst' da raiz do instalador para gerar uma imagem de instalação" >> $LOG
 echo "baseada em Linux para transferência para um disco." >> $LOG
 echo >> $LOG
@@ -1348,7 +1348,7 @@ echo -e ";;*********************************************************************
 echo
 echo -e "Você precisa fornecer pelo menos um parâmetro para o HX."
 echo 
-echo -e "\e[1;94mDica: utilize \e[1;32m./HX ajuda\e[1;94m para obter os parâmetros disponíveis.\e[0m"
+echo -e "\e[1;94mDica: utilize \e[1;32m./hx ajuda\e[1;94m para obter os parâmetros disponíveis.\e[0m"
 echo
 
 }
@@ -1596,7 +1596,7 @@ echo
 echo -e "\e[1;32mInsira sua senha abaixo para alterar para o usuário raiz (root) e depois\e[0m"
 echo -e "\e[1;32mexecute o HX novamente, com os parâmetros desejados.\e[0m"
 echo
-echo -e "\e[1;94mDica: utilize \e[1;32m./HX ajuda\e[1;94m para obter os parâmetros disponíveis.\e[0m"
+echo -e "\e[1;94mDica: utilize \e[1;32m./hx ajuda\e[1;94m para obter os parâmetros disponíveis.\e[0m"
 echo
 
 su root
