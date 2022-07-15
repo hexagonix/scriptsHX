@@ -482,13 +482,13 @@ echo -e ";;*********************************************************************
 echo
 echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
 echo
-echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistema\e[0m"
+echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistema\e[0m; Usando KVM!"
 echo -e "> Imagem de disco: \e[1;32m$imagem\e[0m"
 echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
-echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
+echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32mhost\e[0m"
 echo
 
-sudo qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
+sudo qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -cpu host -hda $imagem -m $memoria >> /dev/null || erroMV
 
 else
 
@@ -539,13 +539,13 @@ echo -e ";;*********************************************************************
 echo
 echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
 echo
-echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistema\e[0m"
+echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistema\e[0m; Usando KVM!"
 echo -e "> Imagem de disco: \e[1;32m$imagem\e[0m"
 echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
-echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
+echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32mhost\e[0m"
 echo
 
-sudo qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
+sudo qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -cpu host -hda $imagem -m $memoria >> /dev/null || erroMV
 
 else
 

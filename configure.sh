@@ -270,7 +270,10 @@ rm hexgnix.unx
 fi	
 
 echo -n " > Processando arquivo .conf e criando UNX-XML... "
-echo -e $(cat hexgnix.conf)"<BUILD> "$BUILD" </BUILD>" >> hexgnix.unx
+echo -e $(cat hexgnix.conf)"<VERSAO> "$VERSAO" </VERSAO>" >> hexgnix.unx
+echo -e "<NOME> $CODENOME </NOME>" >> hexgnix.unx
+echo -e "<PACOTE> $VERSAO </PACOTE>" >> hexgnix.unx
+echo -e "<STATUS> $REVISAO </STATUS>" >> hexgnix.unx
 echo -e "<DATA_BUILD> "$(date)" </DATA_BUILD>" >> hexgnix.unx
 echo "</Hexagonix>" >> hexgnix.unx
 echo -e "[\e[32mOk\e[0m]"
