@@ -457,6 +457,122 @@ fi
 
 }	
 
+maquinaVirtualHexagonixKVM()
+{
+
+export imagem="hexagonix/hexagonix.img"
+
+if [ -e $imagem ] ; then
+
+clear
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
+echo
+echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistema\e[0m"
+echo -e "> Imagem de disco: \e[1;32m$imagem\e[0m"
+echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
+echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
+echo
+
+sudo qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
+
+else
+
+clear
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "Erro na solicitação: \e[1;94mimagem de disco '$imagem' não localizada\e[0m."
+echo -e " > \e[1;31mVocê NÃO pode iniciar o sistema sem essa dependência\e[0m."
+echo
+
+fi	
+
+}	
+
+maquinaVirtualAndromedaKVM()
+{
+
+if [ -e $imagem ] ; then
+
+clear
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
+echo
+echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistema\e[0m"
+echo -e "> Imagem de disco: \e[1;32m$imagem\e[0m"
+echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
+echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
+echo
+
+sudo qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
+
+else
+
+clear
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "Erro na solicitação: \e[1;94mimagem de disco '$imagem' não localizada\e[0m."
+echo -e " > \e[1;31mVocê NÃO pode iniciar o sistema sem essa dependência\e[0m."
+echo
+
+fi	
+
+}	
+
 maquinaVirtualS()
 {
 
@@ -1621,7 +1737,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="6.6"
+export VERSAOHX="6.8"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
@@ -1641,9 +1757,11 @@ case $1 in
 # Funções para criar imagens de disco e iniciar máquinas virtuais
 
 mv.HX) maquinaVirtualHexagonix; exit;;
+mv.HX.KVM) maquinaVirtualHexagonixKVM; exit;;
 mv.ANDROMEDA) maquinaVirtualM; exit;;
 mv.ANDROMEDA.SOM) maquinaVirtual; exit;;
 mv.ANDROMEDA.SERIAL) maquinaVirtualS; exit;;
+mv.ANDROMEDA.KVM) maquinaVirtualAndromedaKVM; exit;;
 img.HX) prepImagemHexagonix; exit;;
 img.ANDROMEDA) prepImagemAndromeda; exit;;
 img.ANDROMEDA.TESTE) prepImagemAndromedaTeste; exit;;
