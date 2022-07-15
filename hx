@@ -1033,9 +1033,12 @@ fi
 
 mv hexagonix.img $dirImagem/$imagemFinal
 
+qemu-img convert -O vdi $dirImagem/$imagemFinal $dirImagem/$(basename $imagemFinal .img).vdi 
+
 # Vamos agora trocar a propriedade da imagem para um usuário comum
 
 chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
+chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
 
 echo -e ";;****************************************************************************"
 echo -e ";;                                                                            "
@@ -1252,9 +1255,12 @@ fi
 
 mv andromeda.img $dirImagem/$imagemFinal
 
+qemu-img convert -O vdi $dirImagem/$imagemFinal $dirImagem/$(basename $imagemFinal .img).vdi 
+
 # Vamos agora trocar a propriedade da imagem para um usuário comum
 
 chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
+chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
 
 echo -e ";;****************************************************************************"
 echo -e ";;                                                                            "
@@ -1737,7 +1743,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="6.8"
+export VERSAOHX="6.9"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
