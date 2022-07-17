@@ -1409,14 +1409,17 @@ echo -e ";;*********************************************************************
 echo
 echo -e "Parâmetros \e[1;94mprincipais\e[0m disponíveis:"
 echo 
-echo -e "\e[1;32mmv.HX\e[0m - Iniciar máquina virtual com o Hexagonix"
-echo -e "\e[1;32mmv.ANDROMEDA\e[0m - Iniciar máquina virtual com o Hexagonix/Andromeda"
+echo -e "\e[1;32mmv.HX\e[0m - Iniciar máquina virtual com o Hexagonix com KVM"
+echo -e "\e[1;32mmv.HX.SEMKVM\e[0m - Iniciar máquina virtual com o Hexagonix sem KVM"
+echo -e "\e[1;32mmv.ANDROMEDA\e[0m - Iniciar máquina virtual com o Hexagonix/Andromeda com KVM"
+echo -e "\e[1;32mmv.ANDROMEDA.SEMKVM\e[0m - Iniciar máquina virtual com o Hexagonix/Andromeda sem KVM"
 echo -e "\e[1;32mmv.ANDROMEDA.SOM\e[0m - Iniciar máquina virtual com o Andromeda em modo com som"
 echo -e "\e[1;32mmv.ANDROMEDA.SERIAL\e[0m - Iniciar máquina virtual com o Andromeda sem saída serial"
 echo -e "\e[1;32mimg.HX\e[0m - Construir imagem de disco com o Hexagonix"
 echo -e "\e[1;32mimg.ANDROMEDA\e[0m - Construir imagem de disco com o Hexagonix/Andromeda"
 echo -e "\e[1;32mimg.ANDROMEDA.TESTE\e[0m - Construir imagem de disco teste com o Hexagonix/Andromeda"
 echo -e "\e[1;32mimg.DISTROS\e[0m - Construir imagem de disco com o Hexagonix e com o Andromeda"
+echo -e "\e[1;32mlimpar\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
 
 echo 
 
@@ -1743,7 +1746,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="6.9"
+export VERSAOHX="7.0"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
@@ -1762,12 +1765,12 @@ case $1 in
 
 # Funções para criar imagens de disco e iniciar máquinas virtuais
 
-mv.HX) maquinaVirtualHexagonix; exit;;
-mv.HX.KVM) maquinaVirtualHexagonixKVM; exit;;
-mv.ANDROMEDA) maquinaVirtualM; exit;;
+mv.HX) maquinaVirtualHexagonixKVM; exit;;
+mv.HX.SEMKVM) maquinaVirtualHexagonix; exit;;
+mv.ANDROMEDA) maquinaVirtualAndromedaKVM; exit;;
 mv.ANDROMEDA.SOM) maquinaVirtual; exit;;
 mv.ANDROMEDA.SERIAL) maquinaVirtualS; exit;;
-mv.ANDROMEDA.KVM) maquinaVirtualAndromedaKVM; exit;;
+mv.ANDROMEDA.SEMKVM) maquinaVirtualAndromedaM; exit;;
 img.HX) prepImagemHexagonix; exit;;
 img.ANDROMEDA) prepImagemAndromeda; exit;;
 img.ANDROMEDA.TESTE) prepImagemAndromedaTeste; exit;;
