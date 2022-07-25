@@ -125,6 +125,12 @@ cp estelar.s ../../../Andromeda
 
 cd ..
 cd ..
+
+cd exemplo
+
+cp * ../../Andromeda/
+
+cd ..
 cd ..
 
 echo -n "Bibliotecas copiadas"
@@ -254,6 +260,12 @@ echo
 cd lib/fasm
 
 cp hexagon.s ../../Hexagonix/
+
+cd ..
+
+cd exemplo
+
+cp tapp.asm ../../Hexagonix
 
 cd ..
 cd ..
@@ -951,6 +963,7 @@ fi
 cp Hexagonix/*.s Sistema/ >> $LOG
 cp Hexagonix/*.cow Sistema/ >> $LOG || erroMontagem
 cp Hexagonix/*.app Sistema/ >> $LOG || erroMontagem
+cp Hexagonix/*.asm Sistema/ >> $LOG
 cp Hexagonix/hboot Sistema/ >> $LOG || erroMontagem
 
 if [ -e Hexagonix/Spartan.mod ] ; then
