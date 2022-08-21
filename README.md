@@ -4,6 +4,8 @@ Este repositório contém os shell scripts necessários para construir o sistema
 
 # Informação de localização na árvore de construção do Hexagonix/Andromeda:
 
+<div align="justify">
+
 Este repositório não é necessário para a construção do Hexagonix/Andromeda. Ele serve apenas para armazenar os scripts de construção que por sua vez serão utilizados no processo. Para isso, verifique abaixo a localização de cada script, que deve ser copiado para as localizações adequadas ao iniciar uma nova árvore de construção local:
 
 * Apps.sh[^1]: deve estar em Apps/Andromeda. Cópia backup, uma já disponível no repositório Andromeda-Apps
@@ -19,5 +21,7 @@ Este repositório não é necessário para a construção do Hexagonix/Andromeda
 [^4]: Script responsável por concentrar a operação de construção do sistema, solicitando Apps.sh, Unix.sh e Externos.sh, criando um diretório para receber as imagens e analisando possíveis erros. Também pode receber parâmetros para especificar qual sistema gerar. Esses parametros podem ser "hexagonix" e "verbose", ou ainda "verbose hexagonix" ou "verbose andromeda". Para gerar o Andromeda, nenhum parâmetro precisa ser fornecido, "andromeda" é o padrão. No Linux, ele assume o papel de gerenciar máquinas virtuais, também. Para desenvolvimento no Windows, com WSL2 e Ubuntu instalados, o script WSL.sh deve ser utilizado, uma vez que não é possível executar algumas operações de sistema.sh fora do Linux puro. Não é compatível com sistemas Windows, mesmo com WSL2.
 [^5]: Script responsável por construir os aplicativos do ambiente Hexagonix.
 [^6]: Script responsável por gerenciar máquinas virtuais, remover arquivos temporários e realizar outras funções em ambiente WSL2. Não é compatível com sistemas Linux.
+
+</div>
 
 Versão deste arquivo: 1.0
