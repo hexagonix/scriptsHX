@@ -2,13 +2,6 @@
 
 Este repositório contém os shell scripts necessários para construir o sistema e as imagens de disco do Hexagonix e Andromeda, além de permitir testar os mesmos em uma máquia virtual, fornecendo todos os parâmetros necessários.
 
-## Aviso de direitos autorais
-
-* Sistema Operacional Hexagonix e Sistema Operacional Andromeda. Copyright © 2016-2022 Felipe Miguel Nery Lunkes. Todos os direitos reservados.
-* Kernel Hexagon. Copyright © 2016-2022 Felipe Miguel Nery Lunkes. Todos os direitos reservados.
-* Gerenciador de Boot Saturno. Copyright © 2016-2022 Felipe Miguel Nery Lunkes. Todos os direitos reservados.
-* Hexagon Boot (HBoot). Copyright © 2020-2022 Felipe Miguel Nery Lunkes. Todos os direitos reservados.
-
 # Informação de localização na árvore de construção do Hexagonix/Andromeda:
 
 Este repositório não é necessário para a construção do Hexagonix/Andromeda. Ele serve apenas para armazenar os scripts de construção que por sua vez serão utilizados no processo. Para isso, verifique abaixo a localização de cada script, que deve ser copiado para as localizações adequadas ao iniciar uma nova árvore de construção local:
