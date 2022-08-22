@@ -1,3 +1,3 @@
-#!/bin/bas
+#!/bin/bash
 
-find ./ -iname *.asm -type f -exec bash -c expand -t 4 "$0" | sponge "$0" {} ;
+find . -name '*.asm' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
