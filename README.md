@@ -1,3 +1,22 @@
+<p align="center">
+<img src="https://github.com/hexagonix/Doc/blob/main/Img/Hexagonix.png" width="150" height="150">
+</p>
+
+<div align="center">
+
+![](https://img.shields.io/github/license/hexagonix/scriptsHX.svg)
+![](https://img.shields.io/github/stars/hexagonix/scriptsHX.svg)
+![](https://img.shields.io/github/issues/hexagonix/scriptsHX.svg)
+![](https://img.shields.io/github/issues-closed/hexagonix/scriptsHX.svg)
+![](https://img.shields.io/github/issues-pr/hexagonix/scriptsHX.svg)
+![](https://img.shields.io/github/issues-pr-closed/hexagonix/scriptsHX.svg)
+![](https://img.shields.io/github/downloads/hexagonix/scriptsHX/total.svg)
+![](https://img.shields.io/github/release/hexagonix/scriptsHX.svg)
+
+</div>
+
+<hr>
+
 # Scripts para geração do Hexagonix/Andromeda
 
 Este repositório contém os shell scripts necessários para construir o sistema e as imagens de disco do Hexagonix e Andromeda, além de permitir testar os mesmos em uma máquia virtual, fornecendo todos os parâmetros necessários.
