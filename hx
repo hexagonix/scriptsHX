@@ -897,6 +897,14 @@ esac
 imagemHexagonix()
 {
 
+if test "`whoami`" != "root" ; then
+
+sureq
+
+exit
+
+fi
+
 definirHexagonix
 
 clear
@@ -1102,7 +1110,6 @@ echo
 
 fi
 
-
 echo -e ";;****************************************************************************"
 echo -e ";;                                                                            "
 echo -e ";;                                                                            "
@@ -1132,7 +1139,15 @@ exit
 
 imagemAndromeda()
 {
-		
+
+if test "`whoami`" != "root" ; then
+
+sureq
+
+exit
+
+fi
+
 clear
 
 echo -e ";;****************************************************************************"
@@ -1486,7 +1501,7 @@ echo -e ";;*********************************************************************
 echo
 echo -e "Você precisa fornecer pelo menos um parâmetro para o HX."
 echo 
-echo -e "\e[1;94mDica: utilize \e[1;32m./hx ajuda\e[1;94m para obter os parâmetros disponíveis.\e[0m"
+echo -e "\e[1;94mDica: utilize \e[1;32m./hx ajuda \e[1;94mou \e[1;32m$NOMEHX ajuda\e[1;94m para obter os parâmetros disponíveis.\e[0m"
 echo
 
 }
@@ -1674,6 +1689,14 @@ cd ..
 
 instalarDependencias(){
 
+if test "`whoami`" != "root" ; then
+
+sureq
+
+exit
+
+fi
+
 echo -e ";;****************************************************************************"
 echo -e ";;                                                                            "
 echo -e ";;                                                                            "
@@ -1704,15 +1727,9 @@ echo
 
 }
 
-# Ponto de entrada do Script de construção de todo o Sistema, kernel e distribuição
-#
-# Primeiro, será testado se o usuário possui permissão de execução de superusuário
-#
-# Copyright (C) 2015-2022 Felipe Miguel Nery Lunkes
-# Todos os direitos reservados
+sureq()
+{
 
-if test "`whoami`" != "root" ; then
-	
 clear
 
 echo -e ";;****************************************************************************"
@@ -1729,7 +1746,7 @@ echo -e ";;              └──┘                                           
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
 echo
-echo -e "\e[1;94mPara iniciar corretamente o HX, você deve ser um usuário raiz (root) ;D\e[0m"
+echo -e "\e[1;94mPara executar a ação solicitada, você deve ser um usuário raiz (root) ;D\e[0m"
 echo
 echo -e "\e[1;32mInsira sua senha abaixo para alterar para o usuário raiz (root) e depois\e[0m"
 echo -e "\e[1;32mexecute o HX novamente, com os parâmetros desejados.\e[0m"
@@ -1741,7 +1758,14 @@ su root
 
 exit 
 
-fi 
+} 
+
+# Ponto de entrada do Script de construção de todo o Sistema, kernel e distribuição
+#
+# Primeiro, será testado se o usuário possui permissão de execução de superusuário
+#
+# Copyright (C) 2015-2022 Felipe Miguel Nery Lunkes
+# Todos os direitos reservados
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 	
@@ -1754,12 +1778,13 @@ export REG="log.log"
 export REVISAO=$(cat Dist/etc/revisao.def)
 export CODENOME=$(cat Dist/etc/codenome.def)
 export VERSAO=$(cat Dist/etc/versao.def)
+export NOMEHX=$0
 export PT2=$2
 export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="7.0"
+export VERSAOHX="8.0"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
@@ -1792,11 +1817,11 @@ img.DISTROS) prepDistros; exit;;
 # Funções de ajuda e utilidades
 
 ajuda) exibirAjuda; exit;;
-estatisticas) exibirEstatisticas; exit;;
+estat) exibirEstatisticas; exit;;
 info) infoBuild; exit;;
 copyright) exibirCopyright; exit;;
 versao) exibirCopyright; exit;;
-dependencias) instalarDependencias; exit;;
+depend) instalarDependencias; exit;;
 
 # Agora funções de construção e limpeza
 
