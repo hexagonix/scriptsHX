@@ -1,8 +1,8 @@
 #!/bin/bash
 # Esse script deve ficar na raiz do projeto
 # 
-# Esse script foi adaptado para rodar sobre o Linux e versão do QEMU para Linux.
-# Não funciona rodando nativamente sobre o WSL 2. Para isso, utilize 'WSL.sh'
+# Esse script foi desenvolvido para rodar sobre o Linux e versão do QEMU para Linux.
+# Pode funciona rodando sobre o WSL 2.
 #
 #;;************************************************************************************
 #;;
