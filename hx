@@ -1495,7 +1495,8 @@ echo -e ";;*********************************************************************
 echo
 echo -e "Você precisa fornecer pelo menos um parâmetro para o HX."
 echo 
-echo -e "\e[1;94mDica: utilize \e[1;32m./hx ajuda \e[1;94mou \e[1;32m$NOMEHX ajuda\e[1;94m para obter os parâmetros disponíveis.\e[0m"
+echo -e "\e[1;94mDica: utilize \e[1;32m./hx ajuda \e[1;94mou \e[1;32m$NOMEHX ajuda\e[1;94m para obter os parâmetros"
+echo -e "\e[1;94mdisponíveis.\e[0m"
 echo
 
 }
