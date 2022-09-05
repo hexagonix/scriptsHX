@@ -384,7 +384,7 @@ echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
 echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
 echo
 
-sudo qemu-system-$sistema -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria -soundhw $drvsom >> /dev/null || erroMV
+qemu-system-$sistema -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria -soundhw $drvsom >> /dev/null || erroMV
 
 else
 
@@ -441,7 +441,7 @@ echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
 echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
 echo
 
-sudo qemu-system-$sistema -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
+qemu-system-$sistema -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
 
 else
 
@@ -500,7 +500,7 @@ echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
 echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32mhost\e[0m"
 echo
 
-sudo qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -cpu host -hda $imagem -m $memoria >> /dev/null || erroMV
+qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -cpu host -hda $imagem -m $memoria >> /dev/null || erroMV
 
 else
 
@@ -557,7 +557,7 @@ echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
 echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32mhost\e[0m"
 echo
 
-sudo qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -cpu host -hda $imagem -m $memoria >> /dev/null || erroMV
+qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -cpu host -hda $imagem -m $memoria >> /dev/null || erroMV
 
 else
 
@@ -614,7 +614,7 @@ echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
 echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
 echo
 
-sudo qemu-system-$sistema -serial stdio -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
+qemu-system-$sistema -serial stdio -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
 
 else
 
@@ -673,7 +673,7 @@ echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
 echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
 echo
 
-sudo qemu-system-$sistema -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
+qemu-system-$sistema -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
 
 else
 
@@ -1431,15 +1431,15 @@ echo -e ";;*********************************************************************
 echo
 echo -e "Parâmetros \e[1;94mprincipais\e[0m disponíveis:"
 echo 
-echo -e "\e[1;32mmv.HX\e[0m - Iniciar máquina virtual com o Hexagonix com KVM"
-echo -e "\e[1;32mmv.HX.SEMKVM\e[0m - Iniciar máquina virtual com o Hexagonix sem KVM"
-echo -e "\e[1;32mmv.ANDROMEDA\e[0m - Iniciar máquina virtual com o Hexagonix/Andromeda com KVM"
-echo -e "\e[1;32mmv.ANDROMEDA.SEMKVM\e[0m - Iniciar máquina virtual com o Hexagonix/Andromeda sem KVM"
-echo -e "\e[1;32mmv.ANDROMEDA.SOM\e[0m - Iniciar máquina virtual com o Andromeda em modo com som"
-echo -e "\e[1;32mmv.ANDROMEDA.SERIAL\e[0m - Iniciar máquina virtual com o Andromeda sem saída serial"
+echo -e "\e[1;32mmv.HX\e[0m - Iniciar máquina virtual do Hexagonix com KVM"
+echo -e "\e[1;32mmv.HX.SEMKVM\e[0m - Iniciar máquina virtual do Hexagonix sem KVM"
+echo -e "\e[1;32mmv.AHX\e[0m - Iniciar máquina virtual do Hexagonix/Andromeda com KVM"
+echo -e "\e[1;32mmv.AHX.SEMKVM\e[0m - Iniciar máquina virtual do Hexagonix/Andromeda sem KVM"
+echo -e "\e[1;32mmv.AHX.SOM\e[0m - Iniciar máquina virtual do Andromeda em modo com som"
+echo -e "\e[1;32mmv.AHX.SERIAL\e[0m - Iniciar máquina virtual do Andromeda sem saída serial"
 echo -e "\e[1;32mimg.HX\e[0m - Construir imagem de disco com o Hexagonix"
-echo -e "\e[1;32mimg.ANDROMEDA\e[0m - Construir imagem de disco com o Hexagonix/Andromeda"
-echo -e "\e[1;32mimg.ANDROMEDA.TESTE\e[0m - Construir imagem de disco teste com o Hexagonix/Andromeda"
+echo -e "\e[1;32mimg.AHX\e[0m - Construir imagem de disco com o Hexagonix/Andromeda"
+echo -e "\e[1;32mimg.AHX.TESTE\e[0m - Construir imagem de disco teste com o Hexagonix/Andromeda"
 echo -e "\e[1;32mimg.DISTROS\e[0m - Construir imagem de disco com o Hexagonix e com o Andromeda"
 echo -e "\e[1;32mlimpar\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
 
@@ -1779,7 +1779,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="8.1"
+export VERSAOHX="8.2"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
@@ -1801,12 +1801,18 @@ case $1 in
 mv.HX) maquinaVirtualHexagonixKVM; exit;;
 mv.HX.SEMKVM) maquinaVirtualHexagonix; exit;;
 mv.ANDROMEDA) maquinaVirtualAndromedaKVM; exit;;
+mv.AHX) maquinaVirtualAndromedaKVM; exit;;
 mv.ANDROMEDA.SOM) maquinaVirtual; exit;;
+mv.AHX.SOM) maquinaVirtual; exit;;
 mv.ANDROMEDA.SERIAL) maquinaVirtualS; exit;;
+mv.AHX.SERIAL) maquinaVirtualS; exit;;
 mv.ANDROMEDA.SEMKVM) maquinaVirtualAndromedaM; exit;;
+mv.AHX.SEMKVM) maquinaVirtualAndromedaM; exit;;
 img.HX) prepImagemHexagonix; exit;;
 img.ANDROMEDA) prepImagemAndromeda; exit;;
+img.AHX) prepImagemAndromeda; exit;;
 img.ANDROMEDA.TESTE) prepImagemAndromedaTeste; exit;;
+img.AHX.TESTE) prepImagemAndromedaTeste; exit;;
 img.DISTROS) prepDistros; exit;;
 
 # Funções de ajuda e utilidades
