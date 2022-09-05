@@ -749,8 +749,6 @@ echo -e " > Versão do Hexagonix base: \e[1;32m$VERSAO\e[0m"
 echo -e " > Revisão do software: \e[1;32m$REVISAO\e[0m"
 echo -e " > Nome do lançamento: \e[1;32m$CODENOME\e[0m"
 echo
-echo ";;****************************************************************************"
-echo 
 
 }
 
@@ -1083,8 +1081,6 @@ echo -e " > Revisão do software: \e[1;32m$REVISAO\e[0m"
 echo -e " > Nome do lançamento: \e[1;32m$CODENOME\e[0m"
 echo -e " > Localização da imagem: \e[1;32m$dirImagem/$imagemFinal\e[0m"
 echo
-echo ";;****************************************************************************"
-echo
 
 echo "> Imagem '$IMG' gerada com sucesso." >> $LOG
 echo >> $LOG
@@ -1311,8 +1307,6 @@ echo -e " > Versão do Hexagonix base: \e[1;32m$VERSAO\e[0m"
 echo -e " > Revisão do software: \e[1;32m$REVISAO\e[0m"
 echo -e " > Nome do lançamento: \e[1;32m$CODENOME\e[0m"
 echo -e " > Localização da imagem: \e[1;32m$dirImagem/$imagemFinal\e[0m"
-echo
-echo ";;****************************************************************************"
 echo
 
 echo "> Imagem '$IMG' gerada com sucesso." >> $LOG
@@ -1784,7 +1778,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="8.0"
+export VERSAOHX="8.1"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
@@ -1838,7 +1832,6 @@ configurar) executarConfigure; exit;;
 
 # Função padrão
 
-# *) construtorAndromeda; exit;;
 *) parametrosNecessarios; exit;;
 
 esac 
