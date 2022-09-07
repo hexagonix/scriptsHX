@@ -355,6 +355,57 @@ echo
 		
 }
 
+gerenciarMaquinaVirtual()
+{
+
+case $PT2 in
+
+hx) maquinaVirtualHexagonixKVM; exit;;
+ahx) maquinaVirtualAndromedaKVM; exit;;
+ahx.som) maquinaVirtual; exit;;
+ahx.serial) maquinaVirtualS; exit;;
+
+*) parametrosNecessarios; exit;;
+
+esac
+
+}
+
+gerenciarConstrucao()
+{
+
+case $PT2 in
+
+hx) prepImagemHexagonix; exit;;
+ahx) prepImagemAndromeda; exit;;
+ahx.teste) prepImagemAndromedaTeste; exit;;
+distros) prepDistros; exit;;
+
+*) parametrosNecessarios; exit;;
+
+esac
+
+}
+
+gerenciarConstrucaoComponentes()
+{
+
+case $PT2 in
+
+hexagon) construirHexagon; exit;;
+hBoot) construirHBoot; exit;;
+saturno) construirSaturno; exit;;
+unixland) construirUtilUnix; exit;;
+andromedaland) construirBaseAndromeda; exit;;
+hexagonix) hexagonix; exit;;
+andromeda) construtorAndromeda; exit;;
+
+*) parametrosNecessarios; exit;;
+
+esac
+
+}
+
 maquinaVirtual()
 {
 
@@ -1431,16 +1482,18 @@ echo -e ";;*********************************************************************
 echo
 echo -e "Parâmetros \e[1;94mprincipais\e[0m disponíveis:"
 echo 
-echo -e "\e[1;32mmv.HX\e[0m - Iniciar máquina virtual do Hexagonix com KVM"
-echo -e "\e[1;32mmv.HX.SEMKVM\e[0m - Iniciar máquina virtual do Hexagonix sem KVM"
-echo -e "\e[1;32mmv.AHX\e[0m - Iniciar máquina virtual do Hexagonix/Andromeda com KVM"
-echo -e "\e[1;32mmv.AHX.SEMKVM\e[0m - Iniciar máquina virtual do Hexagonix/Andromeda sem KVM"
-echo -e "\e[1;32mmv.AHX.SOM\e[0m - Iniciar máquina virtual do Andromeda em modo com som"
-echo -e "\e[1;32mmv.AHX.SERIAL\e[0m - Iniciar máquina virtual do Andromeda sem saída serial"
-echo -e "\e[1;32mimg.HX\e[0m - Construir imagem de disco com o Hexagonix"
-echo -e "\e[1;32mimg.AHX\e[0m - Construir imagem de disco com o Hexagonix/Andromeda"
-echo -e "\e[1;32mimg.AHX.TESTE\e[0m - Construir imagem de disco teste com o Hexagonix/Andromeda"
-echo -e "\e[1;32mimg.DISTROS\e[0m - Construir imagem de disco com o Hexagonix e com o Andromeda"
+echo -e "\e[1;32m-v\e[0m - Iniciar uma máquina virtual. Os parâmetros disponíveis são:"
+echo -e "\e[1;32m  hx\e[0m  - Iniciar máquina virtual do Hexagonix"
+echo -e "\e[1;32m  ahx\e[0m - Iniciar máquina virtual do Hexagonix/Andromeda"
+echo -e "\e[1;32m  ahx.som\e[0m - Iniciar máquina virtual do Andromeda em modo com som"
+echo -e "\e[1;32m  ahx.serial\e[0m - Iniciar máquina virtual do Andromeda sem saída serial"
+echo 
+echo -e "\e[1;32m-i\e[0m - Construir imagem de disco. Os parâmetos disponíveis são:"
+echo -e "\e[1;32m  hx\e[0m - Construir imagem de disco com o Hexagonix"
+echo -e "\e[1;32m  ahx\e[0m - Construir imagem de disco com o Hexagonix/Andromeda"
+echo -e "\e[1;32m  ahx.teste\e[0m - Construir imagem de disco teste com o Hexagonix/Andromeda"
+echo -e "\e[1;32m  distros\e[0m - Construir imagem de disco com o Hexagonix e com o Andromeda"
+echo
 echo -e "\e[1;32mlimpar\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
 
 echo 
@@ -1469,8 +1522,8 @@ echo -e "\e[1;94mHX: Ferramenta de construção e testes do Hexagonix® e Androm
 echo
 echo -e "Desenvolvido por \e[1;32mFelipe Miguel Nery Lunkes\e[0m"
 echo 
-echo -e "\e[1;32mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e "\e[1;32mTodos os direitos reservados.\e[0m"
+echo -e "\e[0mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e "\e[0mTodos os direitos reservados.\e[0m"
 echo
 
 }
@@ -1779,7 +1832,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="8.2"
+export VERSAOHX="9.0"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
@@ -1787,6 +1840,7 @@ export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
 export BANDEIRASHEXAGON="VERBOSE=SIM"
 export BANDEIRASHBOOT="TEMATOM=ANDROMEDA"
 export IDIOMA=$2
+export IDIOMANG=$3
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas
 
@@ -1796,46 +1850,19 @@ export INCLUDE="$(pwd)/lib/fasm"
 
 case $1 in
 
-# Funções para criar imagens de disco e iniciar máquinas virtuais
-
-mv.HX) maquinaVirtualHexagonixKVM; exit;;
-mv.HX.SEMKVM) maquinaVirtualHexagonix; exit;;
-mv.ANDROMEDA) maquinaVirtualAndromedaKVM; exit;;
-mv.AHX) maquinaVirtualAndromedaKVM; exit;;
-mv.ANDROMEDA.SOM) maquinaVirtual; exit;;
-mv.AHX.SOM) maquinaVirtual; exit;;
-mv.ANDROMEDA.SERIAL) maquinaVirtualS; exit;;
-mv.AHX.SERIAL) maquinaVirtualS; exit;;
-mv.ANDROMEDA.SEMKVM) maquinaVirtualAndromedaM; exit;;
-mv.AHX.SEMKVM) maquinaVirtualAndromedaM; exit;;
-img.HX) prepImagemHexagonix; exit;;
-img.ANDROMEDA) prepImagemAndromeda; exit;;
-img.AHX) prepImagemAndromeda; exit;;
-img.ANDROMEDA.TESTE) prepImagemAndromedaTeste; exit;;
-img.AHX.TESTE) prepImagemAndromedaTeste; exit;;
-img.DISTROS) prepDistros; exit;;
-
-# Funções de ajuda e utilidades
-
-ajuda) exibirAjuda; exit;;
-estat) exibirEstatisticas; exit;;
-info) infoBuild; exit;;
-copyright) exibirCopyright; exit;;
-versao) exibirCopyright; exit;;
-depend) instalarDependencias; exit;;
-
-# Agora funções de construção e limpeza
-
-b.Hexagon) construirHexagon; exit;;
-b.HBoot) construirHBoot; exit;;
-b.Saturno) construirSaturno; exit;;
-b.Unix) construirUtilUnix; exit;;
-b.Andromeda) construirBaseAndromeda; exit;;
-hexagonix) hexagonix; exit;;
-andromeda) construtorAndromeda; exit;;
 limpar) limpar; exit;;
-configure) executarConfigure; exit;;
-configurar) executarConfigure; exit;;
+
+# Novo mecanismo de gerenciamento de parâmetros
+
+-v) gerenciarMaquinaVirtual; exit;;
+-i) gerenciarConstrucao; exit;;
+-h) exibirAjuda; exit;;
+-b) gerenciarConstrucaoComponentes; exit;;
+--ver) exibirCopyright; exit;;
+--depend) instalarDependencias; exit;; 
+--info) infoBuild; exit;;
+--configure) executarConfigure; exit;;
+--stat) exibirEstatisticas; exit;;
 
 # Função padrão
 
