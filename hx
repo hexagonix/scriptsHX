@@ -1448,6 +1448,15 @@ do
 
 done
 
+	echo
+	echo -en "\e[1;94mEstatísticas globais do sistema:\e[0m"
+	echo 
+	echo 
+
+	cloc $(pwd)
+
+	terminar 
+
 tudopronto 
 
 else
@@ -1832,7 +1841,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="9.0"
+export VERSAOHX="9.1"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
