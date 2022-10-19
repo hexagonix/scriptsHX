@@ -19,16 +19,16 @@
 #;;
 #;;************************************************************************************
 
-construtorAndromeda()
+construtorHexagonix()
 {
 
 export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
-export imagemFinal="andromeda.img"
+export imagemFinal="hexagonix.img"
 
 if [ "$IDIOMA" = "pt" ]; then
 
 export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
-export imagemFinal="andromeda.img"
+export imagemFinal="hexagonix.img"
 
 elif [ "$IDIOMA" = "en" ]; then
 
@@ -50,13 +50,13 @@ echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐�
 echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
 echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
 echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                  \e[1;32mConstruir o Hexagonix/Andromeda\e[0m "
+echo -e ";;              ┌─┘│                     \e[1;32mConstruir o Hexagonix\e[0m   "
 echo -e ";;              └──┘                                                          "
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
 echo
 echo
-echo "Construindo o Sistema Operacional Andromeda® (Hexagonix base + utilitários)..."
+echo "Construindo o Sistema Operacional Hexagonix® (Hexagonix base + utilitários)..."
 echo
 
 mkdir -p Andromeda
@@ -72,7 +72,6 @@ cd Dist
 cd etc/
 
 cp *.unx ../../Andromeda
-cp base.ocl ../../Andromeda/andrmda.ocl
 cp base.ocl ../../Andromeda/hexgnix.ocl
 
 cd ..
@@ -162,143 +161,6 @@ cd ..
 
 }
 
-construtorHexagonix()
-{
-
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=PT"
-
-if [ "$IDIOMA" = "pt" ]; then
-
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=PT"
-
-elif [ "$IDIOMA" = "en" ]; then
-
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=EN"
-
-fi
-
-export DESTINODISTRO="Hexagonix"
-export ALVODISTRO="hexagonix"
-
-clear
-
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                       \e[1;32mConstruir o Hexagonix\e[0m "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
-echo
-echo "Construindo o Sistema Operacional Hexagonix®..."
-echo
-
-mkdir -p Hexagonix
-
-construirSaturno
-construirHBoot
-construirHexagon
-construirUtilUnix
-
-cd ..
-
-cd Dist 
-
-cd etc/
-
-cp *.unx ../../Hexagonix
-cp base.ocl ../../Hexagonix/hexgnix.ocl
-
-cd ..
-
-cd man
-
-cp *.man ../../Hexagonix
-
-cd ..
-cd ..
-
-cd Fontes/
-
-if [ -e Atomic.asm ] ; then
-
-echo -e "Existem fontes a serem construidas e copiadas... [\e[32mOk\e[0m]"
-
-./fontes.sh
-
-cp *.fnt ../Hexagonix
-rm *.fnt
-
-echo
-echo -n "Fontes copiadas"
-echo -e " [\e[32mOk\e[0m]"
-echo
-
-else 
-
-echo 
-echo -n "Não existem fontes a serem construidas e copiadas..."
-echo -e " [\e[32mOk\e[0m]"
-echo
-
-fi
-
-cd ..
-
-echo "Copiando principais bibliotecas de desenvolvimento..."
-echo 
-
-# Vamos copiar também o arquivo de cabeçalho para poder desenvolver sobre o Andromeda(R)
-
-cd lib/fasm
-
-cp hexagon.s ../../Hexagonix/
-
-cd ..
-
-cd exemplo
-
-cp tapp.asm ../../Hexagonix
-
-cd ..
-cd ..
-
-echo -n "Bibliotecas copiadas"
-echo -e " [\e[32mOk\e[0m]"
-echo
-
-if [ -e Externos/Externos.sh ] ; then
-
-cd Externos 
-
-./Externos.sh Hexagonix
-
-cd ..
-
-else 
-
-echo "Não existem aplicativos de terceiros marcados para construção."
-echo 
-
-fi 
-
-cd Dist 
-
-echo 
-echo "Visualize o arquivo de log 'log.log', para mais informações da montagem."
-echo
-
-cd ..
-
-}
-
 erroConstrucao(){
 	
 echo "Um erro ocorreu durante a construção de algum componente do sistema."
@@ -360,10 +222,9 @@ gerenciarMaquinaVirtual()
 
 case $PT2 in
 
-hx) maquinaVirtualHexagonixKVM; exit;;
-ahx) maquinaVirtualAndromedaKVM; exit;;
-ahx.som) maquinaVirtual; exit;;
-ahx.serial) maquinaVirtualS; exit;;
+hx) maquinaVirtualAndromedaKVM; exit;;
+hx.som) maquinaVirtual; exit;;
+hx.serial) maquinaVirtualS; exit;;
 
 *) parametrosNecessarios; exit;;
 
@@ -377,8 +238,7 @@ gerenciarConstrucao()
 case $PT2 in
 
 hx) prepImagemHexagonix; exit;;
-ahx) prepImagemAndromeda; exit;;
-ahx.teste) prepImagemAndromedaTeste; exit;;
+hx.teste) prepImagemHexagonixTeste; exit;;
 distros) prepDistros; exit;;
 
 *) parametrosNecessarios; exit;;
@@ -625,44 +485,21 @@ kernel
 
 }
 
-prepDistros(){
-
-iniciarLog
-
-# Aqui iremos construir as imagens do Andromeda e do Hexagonix ao mesmo tempo
-
-definirHexagonix
-imagemHexagonix
-
-definirAndromedaOficial
-imagemAndromeda
-
-}
-
 prepImagemHexagonix(){
 
 iniciarLog
 
-definirHexagonix
+definirHexagonixOficial
 imagemHexagonix
 
 }
 
-prepImagemAndromeda(){
+prepImagemHexagonixTeste(){
 
 iniciarLog
 
-definirAndromedaOficial
-imagemAndromeda
-
-}
-
-prepImagemAndromedaTeste(){
-
-iniciarLog
-
-definirAndromedaTeste
-imagemAndromeda
+definirHexagonixTeste
+imagemHexagonix
 
 }
 
@@ -670,48 +507,20 @@ imagemAndromeda
 #
 # Incluído a partir do script imagem.sh
 
-definirHexagonix()
-{
-
-export LOG="log.log"
-export IMG="hexagonix.img"
-export TAMANHOIMAGEM=2097012
-export TAMANHOTEMP=2048	
-
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=PT"
-export imagemFinal="hexagonix.img"
-export Par="pt"
-
-if [ "$PT2" = "pt" ]; then
-
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=PT"
-export imagemFinal="hexagonix.img"
-export Par="pt"
-
-elif [ "$PT2" = "en" ]; then
-
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=UNIX -d VERBOSE=SIM -d IDIOMA=EN"
-export imagemFinal="en.hexagonix.img"
-export Par="en"
-
-fi
-
-}
-
-definirAndromedaTeste()
+definirHexagonixTeste()
 {
 
 # Aqui vamos gerar uma imagem pequena, de 2 Mb, menor e apenas para testes. Essa imagem
 # não deve ser utilizada para o pacote de instalação.
 
 export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
-export imagemFinal="andromeda.img"
+export imagemFinal="hexagonix.img"
 export Par="pt"
 
 if [ "$PT2" = "pt" ]; then
 
 export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
-export imagemFinal="andromeda.img"
+export imagemFinal="hexagonix.img"
 export Par="pt"
 
 elif [ "$PT2" = "en" ]; then
@@ -723,20 +532,20 @@ export Par="en"
 fi
 
 export LOG="log.log"
-export IMG="andromeda.img"
+export IMG="hexagonix.img"
 export TAMANHOIMAGEM=2097012
 export TAMANHOTEMP=2048	
 
 }
 
-definirAndromedaOficial()
+definirHexagonixOficial()
 {
 
 # Aqui vamos definir uma imagem de tamanho oficial, que demora mais a ser gerada. Essa imagem é
 # apropriada para o pacote de instalação do Andromeda®
 
 export LOG="log.log"
-export IMG="andromeda.img"
+export IMG="hexagonix.img"
 export TAMANHOIMAGEM=47185920
 export TAMANHOTEMP=92160	
 
@@ -755,207 +564,6 @@ oficial) definirAndromedaOficial; exit;;
 *) definirAndromedaTeste; exit;;
 
 esac
-
-}
-
-imagemHexagonix()
-{
-
-if test "`whoami`" != "root" ; then
-
-sureq
-
-exit
-
-fi
-
-definirHexagonix
-
-clear
-
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                       \e[1;32mConstruir o Hexagonix\e[0m "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
-echo "Construindo o Hexagonix®..."
-echo
-
-# Agora os arquivos do Sistema serão gerados...
-
-construtorHexagonix $PT2
-
-# Agora a imagem do Sistema será preparada...
-
-echo -e "\e[1;94mConstruindo imagem do sistema...\e[0m"
-echo
-
-echo "Construindo imagem temporária para manipulação de arquivos......" >> $LOG
-
-dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
-
-if [ ! -e hexagonix.img ] ; then
-
-echo >> $LOG
-echo "Construindo imagem que receberá os arquivos do sistema..." >> $LOG
-echo >> $LOG
-
-dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMG >> $LOG || erroMontagem
-	
-fi	
-
-echo "> Copiando carregador de inicialização para a imagem..." >> $LOG
-
-dd status=none conv=notrunc if=Hexagonix/saturno.img of=temp.img >> $LOG || erroMontagem
-
-echo "> Montando a imagem..." >> $LOG
- 
-mkdir -p Sistema && mount -o loop -t vfat temp.img Sistema/ || erroMontagem
-
-echo "> Copiando arquivos do sistema para a imagem..." >> $LOG
-echo >> $LOG
-
-cp Hexagonix/*.man Sistema/ >> $LOG || erroMontagem
-
-if [ -e Hexagonix/*.asm ] ; then
-
-cp Hexagonix/*.asm Sistema/ >> $LOG
-
-fi	
-
-cp Hexagonix/*.s Sistema/ >> $LOG
-cp Hexagonix/*.cow Sistema/ >> $LOG || erroMontagem
-cp Hexagonix/*.app Sistema/ >> $LOG || erroMontagem
-cp Hexagonix/*.asm Sistema/ >> $LOG
-cp Hexagonix/hboot Sistema/ >> $LOG || erroMontagem
-
-if [ -e Hexagonix/Spartan.mod ] ; then
-
-cp Hexagonix/*.mod Sistema/ >> $LOG
-
-fi	
-
-cp Hexagonix/*.sis Sistema/ >> $LOG || erroMontagem
-cp Hexagonix/*.unx Sistema/ >> $LOG || erroMontagem
-cp Hexagonix/*.ocl Sistema/ >> $LOG || erroMontagem
-
-# Até o momento, nenhum banco de dados utilizado em aplicativos Andromeda® precisam ser copiados
-# para uma imagem Hexagonix® pura.
-
-# cp Hexagonix/*.ocl Sistema/ >> $LOG || erroMontagem
-
-# Caso a imagem deva conter uma cópia dos arquivos do FreeDOS para testes...
-
-if [ -e DOS ] ; then
-
-cp DOS/*.* Sistema/
-
-fi	
-
-# Agora será verificado se alguma fonte deverá ser incluída na imagem
-#
-# Se o arquivo de fonte padrão estiver disponível, usar essa informação como interruptor
-# para ligar a cópia
-
-echo >> $LOG
-echo -n "> Verificando se existem fontes para copiar..." >> $LOG
-
-if [ -e Hexagonix/Atomic.fnt ] ; then
-
-echo " [Sim]" >> $LOG
-
-cp Hexagonix/*.fnt Sistema/ || erroMontagem
-	
-fi	
-
-if [ ! -e Hexagonix/Atomic.fnt ] ; then
-
-echo " [Não]" >> $LOG
-	
-fi	
-
-echo >> $LOG
-
-sleep 1.0 || erroMontagem
-
-echo "> Desmontando imagem..." >> $LOG
-
-umount Sistema >> /dev/null || erroMontagem
-
-echo "> Montando imagem final..." >> $LOG
-
-echo "  * Copiando imagem temporária para a imagem final..." >> $LOG
-
-dd status=none conv=notrunc if=temp.img of=$IMG seek=1 >> $LOG || erroMontagem 
-
-echo "  * Copiando MBR e tabela de partição para a imagem e finalizando-a..." >> $LOG
-
-dd status=none conv=notrunc if=Hexagonix/mbr.img of=$IMG >> $LOG || erroMontagem
-
-echo "> Removendo arquivos e pastas temporárias, além de binários que não são mais necessários..." >> $LOG
-echo >> $LOG
-
-rm -rf Sistema Hexagonix temp.img >> $LOG
-
-if test $VERBOSE -e 0; then
-
-clear
-
-elif test $VERBOSE -e 1; then
-
-echo 
-
-fi
-
-mv hexagonix.img $dirImagem/$imagemFinal
-
-qemu-img convert -O vdi $dirImagem/$imagemFinal $dirImagem/$(basename $imagemFinal .img).vdi 
-
-# Vamos agora trocar a propriedade da imagem para um usuário comum
-
-chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
-chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
-
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                       \e[1;32mConstruir o Hexagonix\e[0m "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
-echo -e "\e[32mSucesso ao construir o sistema e a imagem de disco.\e[0m"
-echo
-echo -e "Veja agora algumas informações da construção \e[1matual\e[0m do sistema:"
-echo -e " > Versão do Hexagonix base: \e[1;32m$VERSAO\e[0m"
-echo -e " > Revisão do software: \e[1;32m$REVISAO\e[0m"
-echo -e " > Nome do lançamento: \e[1;32m$CODENOME\e[0m"
-echo -e " > Localização da imagem: \e[1;32m$dirImagem/$imagemFinal\e[0m"
-echo
-
-echo "> Imagem '$IMG' gerada com sucesso." >> $LOG
-echo >> $LOG
-echo "Utilize './hx mv.HX' para testar a execução do sistema na imagem gerada ou copie" >> $LOG
-echo "a imagem para o diretório 'Inst' da raiz do instalador para gerar uma imagem de instalação" >> $LOG
-echo "baseada em Linux para transferência para um disco." >> $LOG
-echo >> $LOG
-echo "----------------------------------------------------------------------" >> $LOG
-echo >> $LOG
 
 }
 
@@ -999,7 +607,7 @@ exit
 	
 }
 
-imagemAndromeda()
+imagemHexagonix()
 {
 
 if test "`whoami`" != "root" ; then
@@ -1021,17 +629,17 @@ echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐�
 echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
 echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
 echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                  \e[1;32mConstruir o Hexagonix/Andromeda\e[0m "
+echo -e ";;              ┌─┘│                    \e[1;32mConstruir o Hexagonix\e[0m    "
 echo -e ";;              └──┘                                                          "
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
 echo
-echo "Construindo o Hexagonix/Andromeda..."
+echo "Construindo o Hexagonix..."
 echo
 
 # Agora os arquivos do Sistema serão gerados...
 
-construtorAndromeda $Par
+construtorHexagonix $Par
 
 # Agora a imagem do Sistema será preparada...
 
@@ -1143,7 +751,7 @@ echo
 
 fi
 
-mv andromeda.img $dirImagem/$imagemFinal
+mv hexagonix.img $dirImagem/$imagemFinal
 
 qemu-img convert -O vdi $dirImagem/$imagemFinal $dirImagem/$(basename $imagemFinal .img).vdi 
 
@@ -1161,7 +769,7 @@ echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐�
 echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
 echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
 echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                  \e[1;32mConstruir o Hexagonix/Andromeda\e[0m "
+echo -e ";;              ┌─┘│                    \e[1;32mConstruir o Hexagonix\e[0m    "
 echo -e ";;              └──┘                                                          "
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
@@ -1177,7 +785,7 @@ echo
 
 echo "> Imagem '$IMG' gerada com sucesso." >> $LOG
 echo >> $LOG
-echo "Utilize './hx mv.ANDROMEDA' para testar a execução do sistema na imagem gerada ou copie" >> $LOG
+echo "Utilize './hx -v hx' para testar a execução do sistema na imagem gerada ou copie" >> $LOG
 echo "a imagem para o diretório 'Inst' da raiz do instalador para gerar uma imagem de instalação" >> $LOG
 echo "baseada em Linux para transferência para um disco." >> $LOG
 echo >> $LOG
@@ -1308,15 +916,12 @@ echo -e "Parâmetros \e[1;94mprincipais\e[0m disponíveis:"
 echo 
 echo -e "\e[1;32m-v\e[0m - Iniciar uma máquina virtual. Os parâmetros disponíveis são:"
 echo -e "\e[1;32m  hx\e[0m  - Iniciar máquina virtual do Hexagonix"
-echo -e "\e[1;32m  ahx\e[0m - Iniciar máquina virtual do Hexagonix/Andromeda"
-echo -e "\e[1;32m  ahx.som\e[0m - Iniciar máquina virtual do Andromeda em modo com som"
-echo -e "\e[1;32m  ahx.serial\e[0m - Iniciar máquina virtual do Andromeda sem saída serial"
+echo -e "\e[1;32m  hx.som\e[0m - Iniciar máquina virtual do Hexagonix em modo com som"
+echo -e "\e[1;32m  hx.serial\e[0m - Iniciar máquina virtual do Hexagonix sem saída serial"
 echo 
 echo -e "\e[1;32m-i\e[0m - Construir imagem de disco. Os parâmetos disponíveis são:"
 echo -e "\e[1;32m  hx\e[0m - Construir imagem de disco com o Hexagonix"
-echo -e "\e[1;32m  ahx\e[0m - Construir imagem de disco com o Hexagonix/Andromeda"
-echo -e "\e[1;32m  ahx.teste\e[0m - Construir imagem de disco teste com o Hexagonix/Andromeda"
-echo -e "\e[1;32m  distros\e[0m - Construir imagem de disco com o Hexagonix e com o Andromeda"
+echo -e "\e[1;32m  hx.teste\e[0m - Construir imagem de disco teste com o Hexagonix"
 echo
 echo -e "\e[1;32mlimpar\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
 
@@ -1342,7 +947,7 @@ echo -e ";;              └──┘                          \e[1;32mHX versã
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
 echo
-echo -e "\e[1;94mHX: Ferramenta de construção e testes do Hexagonix® e Andromeda®\e[0m"
+echo -e "\e[1;94mHX: Ferramenta de construção e testes do Hexagonix®\e[0m"
 echo
 echo -e "Desenvolvido por \e[1;32mFelipe Miguel Nery Lunkes\e[0m"
 echo 
@@ -1389,7 +994,7 @@ fi
 
 # Montar o cabeçalho do arquivo de log...
 
-echo "Relatório de montagem e estatísticas do Sistema Operacional Andromeda®" >> $REG
+echo "Relatório de montagem e estatísticas do Sistema Operacional Hexagonix®" >> $REG
 echo "----------------------------------------------------------------------" >> $REG
 echo >> $REG
 echo "Neste arquivo você poderá encontrar dados e informações de montagem" >> $REG
@@ -1643,7 +1248,7 @@ exit
 	
 export drvsom="pcspk"
 export sistema="i386"
-export imagem="hexagonix/andromeda.img"
+export imagem="hexagonix/hexagonix.img"
 export processador="pentium3"
 export memoria=32
 export REG="log.log"
@@ -1656,7 +1261,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="9.2"
+export VERSAOHX="10.0"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
