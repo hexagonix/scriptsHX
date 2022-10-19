@@ -60,6 +60,7 @@ echo "Construindo o Sistema Operacional Hexagonix® (Hexagonix base + utilitári
 echo
 
 mkdir -p Andromeda
+mkdir -p Andromeda/bin
 
 construirSaturno
 construirHBoot
@@ -675,7 +676,7 @@ cp Andromeda/*.man Sistema/ >> $LOG || erroMontagem
 cp Andromeda/*.asm Sistema/ >> $LOG
 cp Andromeda/*.s Sistema/ >> $LOG
 cp Andromeda/*.cow Sistema/ >> $LOG || erroMontagem
-cp Andromeda/*.app Sistema/ >> $LOG || erroMontagem
+cp Andromeda/bin/* Sistema/ >> $LOG || erroMontagem
 cp Andromeda/hboot Sistema/ >> $LOG || erroMontagem
 
 if [ -e Andromeda/Spartan.mod ] ; then
@@ -684,7 +685,6 @@ cp Andromeda/*.mod Sistema/ >> $LOG
 
 fi	
 
-cp Andromeda/*.sis Sistema/ >> $LOG || erroMontagem
 cp Andromeda/*.unx Sistema/ >> $LOG || erroMontagem
 cp Andromeda/*.ocl Sistema/ >> $LOG || erroMontagem
 
@@ -1025,11 +1025,11 @@ echo -en "\e[1;94mConstruindo o Kernel Hexagon®...\e[0m"
 echo "Kernel Hexagon®..." >> ../log.log
 echo >> ../log.log
 
-fasm Hexagon.asm Hexagon.sis -d $BANDEIRASHEXAGON >> ../log.log || erroConstrucao
+fasm Hexagon.asm Hexagon -d $BANDEIRASHEXAGON >> ../log.log || erroConstrucao
 
-cp Hexagon.sis ../$DESTINODISTRO
+cp Hexagon ../$DESTINODISTRO/bin
 
-rm -r Hexagon.sis
+rm -r Hexagon
 
 echo -e " [\e[32mOk\e[0m]"
 
@@ -1144,9 +1144,6 @@ cd Apps/Unix
 
 cd ..
 
-cp *.app ../$DESTINODISTRO
-rm *.app
-
 }
 
 construirBaseAndromeda(){
@@ -1156,9 +1153,6 @@ cd Andromeda
 ./Apps.sh
 
 cd ..
-
-cp *.app ../$DESTINODISTRO
-rm *.app
 
 cd ..
 
