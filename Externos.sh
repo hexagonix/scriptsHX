@@ -33,9 +33,9 @@ cd HEXAGONIX
 for i in *.asm
 do
 
-	echo -en "Gerando aplicativo de terceiros \e[1;94m$(basename $i .asm).app\e[0m..."
+	echo -en "Gerando aplicativo de terceiros \e[1;94m$(basename $i .asm)\e[0m..."
 	
-	fasm $i ../../../../$DIRETORIO/`basename $i .asm`.app -d $BANDEIRAS >> /dev/null || echo " [Falha]"
+	fasm $i ../../../../$DIRETORIO/bin/`basename $i .asm` -d $BANDEIRAS >> /dev/null || echo " [Falha]"
 	
     echo -e " [\e[32mOk\e[0m]"
 
