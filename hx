@@ -929,6 +929,8 @@ echo -e "\e[1;32m-i\e[0m - Construir imagem de disco. Os parâmetos disponíveis
 echo -e "\e[1;32m  hx\e[0m - Construir imagem de disco com o Hexagonix"
 echo -e "\e[1;32m  hx.teste\e[0m - Construir imagem de disco teste com o Hexagonix"
 echo
+echo -e "\e[1;32m-u\e[0m - Sincronizar as imagens do Hexagonix com o repositório oficial"
+echo
 echo -e "\e[1;32mlimpar\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
 
 echo 
@@ -1204,6 +1206,65 @@ echo
 
 }
 
+atualizarImagens()
+{
+
+clear 
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                          \e[1;32mAtualizar imagens\e[0m  "
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo 
+echo "Você está prestes a atualizar as imagens de disco do Hexagonix, sincronizando-as"
+echo "com as disponíveis no repositório de imagens, no ramo principal (estável)."
+echo -e "\e[1;31mAtenção! Esse processo destruirá qualquer modificação dentro das imagens locais!\e[0m"
+echo
+echo 
+echo -n "Você deseja continuar [y/N]: "
+read OPCAO 
+
+case $OPCAO in
+
+y) atualizarAutorizado; exit;;
+Y) atualizarAutorizado; exit;;
+n) finalizar; exit;;
+N) finalizar; exit;;
+*) finalizar; exit;;
+
+esac
+
+}
+
+atualizarAutorizado()
+{
+
+cd hexagonix 
+
+wget https://github.com/hexagonix/hexagonix/blob/main/hexagonix.img
+wget https://github.com/hexagonix/hexagonix/blob/main/hexagonix.vdi
+
+terminar
+tudopronto
+
+}
+
+finalizar()
+{
+
+exit 
+
+}
+
 sureq()
 {
 
@@ -1287,6 +1348,7 @@ limpar) limpar; exit;;
 -i) gerenciarConstrucao; exit;;
 -h) exibirAjuda; exit;;
 -b) gerenciarConstrucaoComponentes; exit;;
+-u) atualizarImagens; exit;;
 --ver) exibirCopyright; exit;;
 --depend) instalarDependencias; exit;; 
 --info) infoBuild; exit;;
