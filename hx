@@ -679,6 +679,12 @@ cp Andromeda/*.cow Sistema/ >> $LOG || erroMontagem
 cp Andromeda/bin/* Sistema/ >> $LOG || erroMontagem
 cp Andromeda/hboot Sistema/ >> $LOG || erroMontagem
 
+# A licença deve ser copiada
+
+cp hexagonix/LICENSE Sistema/ >> $LOG || erroMontagem
+
+# Agora, copiar módulos do HBoot
+
 if [ -e Andromeda/Spartan.mod ] ; then
 
 cp Andromeda/*.mod Sistema/ >> $LOG
