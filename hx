@@ -1230,7 +1230,8 @@ echo "com as disponíveis no repositório de imagens, no ramo principal (estáve
 echo -e "\e[1;31mAtenção! Esse processo destruirá qualquer modificação dentro das imagens locais!\e[0m"
 echo
 echo 
-echo -n "Você deseja continuar [y/N]: "
+echo -n "Você deseja continuar [y/N] (pressione ENTER após a seleção): "
+
 read OPCAO 
 
 case $OPCAO in
@@ -1249,6 +1250,8 @@ atualizarAutorizado()
 {
 
 cd hexagonix 
+
+rm -rf hexagonix.img hexagonix.vdi 
 
 wget https://github.com/hexagonix/hexagonix/blob/main/hexagonix.img
 wget https://github.com/hexagonix/hexagonix/blob/main/hexagonix.vdi
@@ -1322,7 +1325,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="10.0"
+export VERSAOHX="10.1"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
