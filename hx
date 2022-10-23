@@ -59,8 +59,8 @@ echo
 echo "Construindo o Sistema Operacional Hexagonix® (Hexagonix base + utilitários)..."
 echo
 
-mkdir -p Andromeda
-mkdir -p Andromeda/bin
+mkdir -p $DESTINODISTRO
+mkdir -p $DESTINODISTRO/bin
 
 construirSaturno
 construirHBoot
@@ -72,14 +72,14 @@ cd Dist
 
 cd etc/
 
-cp *.unx ../../Andromeda
-cp base.ocl ../../Andromeda/hexgnix.ocl
+cp *.unx ../../$DESTINODISTRO
+cp base.ocl ../../$DESTINODISTRO/hexgnix.ocl
 
 cd ..
 
 cd man
 
-cp *.man ../../Andromeda
+cp *.man ../../$DESTINODISTRO
 
 cd ..
 cd ..
@@ -92,7 +92,7 @@ echo -e "Existem fontes a serem construidas e copiadas... [\e[32mOk\e[0m]"
 
 ./fontes.sh
 
-cp *.fnt ../Andromeda
+cp *.fnt ../$DESTINODISTRO
 rm *.fnt
 
 echo
@@ -111,24 +111,24 @@ fi
 echo "Copiando principais bibliotecas de desenvolvimento..."
 echo 
 
-# Vamos copiar também o arquivo de cabeçalho para poder desenvolver sobre o Andromeda(R)
+# Vamos copiar também o arquivo de cabeçalho para poder desenvolver sobre o Hexagonix(R)
 
 cd ..
 
 cd lib/fasm
 
-cp hexagon.s ../../Andromeda 
+cp hexagon.s ../../$DESTINODISTRO 
 
 cd Estelar
 
-cp estelar.s ../../../Andromeda
+cp estelar.s ../../../$DESTINODISTRO
 
 cd ..
 cd ..
 
 cd exemplo
 
-cp * ../../Andromeda/
+cp * ../../$DESTINODISTRO/
 
 cd ..
 cd ..
@@ -172,7 +172,7 @@ echo "Visualize o arquivo de log 'log.log', para mais informações sobre o(s) e
 echo 
 
 umount Sistema/ >> /dev/null
-umount Andromeda/ >> /dev/null
+umount $DESTINODISTRO/ >> /dev/null
 
 exit	
 
@@ -199,7 +199,7 @@ echo
 echo "Executando limpeza na árvore do sistema..."
 echo -n " > Limpando componentes gerados e imagens do sistema..."
 	
-rm -rf Sistema Andromeda Hexagonix andromeda.img hexagonix.img
+rm -rf Sistema $DESTINODISTRO Hexagonix andromeda.img hexagonix.img
 rm -rf log.log COM1.txt *.sis *.bin *.app Serial.txt 
 
 echo -e " [\e[32mOk\e[0m]"
@@ -602,7 +602,7 @@ echo "Utilize o script de geração do Sistema para verificar a origem do proble
 echo
 
 umount Sistema/ >> /dev/null
-umount Andromeda/ >> /dev/null
+umount $DESTINODISTRO/ >> /dev/null
 
 exit
 	
@@ -651,7 +651,7 @@ echo "Construindo imagem temporária para manipulação de arquivos......" >> $L
 
 dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
 
-if [ ! -e andromeda.img ] ; then
+if [ ! -e hexagonix.img ] ; then
 
 echo >> $LOG
 echo "Construindo imagem que receberá os arquivos do sistema..." >> $LOG
@@ -663,7 +663,7 @@ fi
 
 echo "> Copiando carregador de inicialização para a imagem..." >> $LOG
 
-dd status=none conv=notrunc if=Andromeda/saturno.img of=temp.img >> $LOG || erroMontagem
+dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
 
 echo "> Montando a imagem..." >> $LOG
  
@@ -672,12 +672,12 @@ mkdir -p Sistema && mount -o loop -t vfat temp.img Sistema/ || erroMontagem
 echo "> Copiando arquivos do sistema para a imagem..." >> $LOG
 echo >> $LOG
 
-cp Andromeda/*.man Sistema/ >> $LOG || erroMontagem
-cp Andromeda/*.asm Sistema/ >> $LOG
-cp Andromeda/*.s Sistema/ >> $LOG
-cp Andromeda/*.cow Sistema/ >> $LOG || erroMontagem
-cp Andromeda/bin/* Sistema/ >> $LOG || erroMontagem
-cp Andromeda/hboot Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.man Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.asm Sistema/ >> $LOG
+cp $DESTINODISTRO/*.s Sistema/ >> $LOG
+cp $DESTINODISTRO/*.cow Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/bin/* Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/hboot Sistema/ >> $LOG || erroMontagem
 
 # A licença deve ser copiada
 
@@ -685,14 +685,14 @@ cp hexagonix/LICENSE Sistema/ >> $LOG || erroMontagem
 
 # Agora, copiar módulos do HBoot
 
-if [ -e Andromeda/Spartan.mod ] ; then
+if [ -e $DESTINODISTRO/Spartan.mod ] ; then
 
-cp Andromeda/*.mod Sistema/ >> $LOG
+cp $DESTINODISTRO/*.mod Sistema/ >> $LOG
 
 fi	
 
-cp Andromeda/*.unx Sistema/ >> $LOG || erroMontagem
-cp Andromeda/*.ocl Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.unx Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.ocl Sistema/ >> $LOG || erroMontagem
 
 # Caso a imagem deva conter uma cópia dos arquivos do FreeDOS para testes...
 
@@ -710,15 +710,15 @@ fi
 echo >> $LOG
 echo -n "> Verificando se existem fontes para copiar..." >> $LOG
 
-if [ -e Andromeda/Atomic.fnt ] ; then
+if [ -e $DESTINODISTRO/Atomic.fnt ] ; then
 
 echo " [Sim]" >> $LOG
 
-cp Andromeda/*.fnt Sistema/ || erroMontagem
+cp $DESTINODISTRO/*.fnt Sistema/ || erroMontagem
 	
 fi	
 
-if [ ! -e Andromeda/Atomic.fnt ] ; then
+if [ ! -e $DESTINODISTRO/Atomic.fnt ] ; then
 
 echo " [Não]" >> $LOG
 	
@@ -740,12 +740,12 @@ dd status=none conv=notrunc if=temp.img of=$IMG seek=1 >> $LOG || erroMontagem
 
 echo "  * Copiando MBR e tabela de partição para a imagem e finalizando-a..." >> $LOG
 
-dd status=none conv=notrunc if=Andromeda/mbr.img of=$IMG >> $LOG || erroMontagem
+dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$IMG >> $LOG || erroMontagem
 
 echo "> Removendo arquivos e pastas temporárias, além de binários que não são mais necessários..." >> $LOG
 echo >> $LOG
 
-rm -rf Sistema Andromeda temp.img >> $LOG
+rm -rf Sistema $DESTINODISTRO temp.img >> $LOG
 
 if test $VERBOSE -e 0; then
 
@@ -1156,7 +1156,7 @@ cd ..
 
 construirBaseAndromeda(){
 
-cd Andromeda
+cd $DESTINODISTRO
 	
 ./Apps.sh
 
@@ -1325,7 +1325,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="10.1"
+export VERSAOHX="10.2"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
