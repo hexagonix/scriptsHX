@@ -17,15 +17,15 @@
 
 <hr>
 
-# Scripts para geração do Hexagonix/Andromeda
+# Scripts para geração do Hexagonix
 
-Este repositório contém os shell scripts necessários para construir o sistema e as imagens de disco do Hexagonix e Andromeda, além de permitir testar os mesmos em uma máquia virtual, fornecendo todos os parâmetros necessários.
+Este repositório contém os shell scripts necessários para construir o sistema e as imagens de disco do Hexagonix, além de permitir testar o sistema em uma máquia virtual, fornecendo todos os parâmetros necessários.
 
-# Informação de localização na árvore de construção do Hexagonix/Andromeda:
+# Informação de localização na árvore de construção do Hexagonix:
 
 <div align="justify">
 
-Este repositório não é necessário para a construção do Hexagonix/Andromeda. Ele serve apenas para armazenar os scripts de construção que por sua vez serão utilizados no processo. Para isso, verifique abaixo a localização de cada script, que deve ser copiado para as localizações adequadas ao iniciar uma nova árvore de construção local:
+Este repositório não é necessário para a construção do Hexagonix. Ele serve apenas para armazenar os scripts de construção que por sua vez serão utilizados no processo. Para isso, verifique abaixo a localização de cada script, que deve ser copiado para as localizações adequadas ao iniciar uma nova árvore de construção local:
 
 * Apps.sh[^1]: deve estar em Apps/Andromeda. Cópia backup, uma já disponível no repositório Andromeda-Apps
 * Externos.sh[^2]: deve estar no diretório Externos, na raiz da árvore. Todos os repositórios com códigos de terceiros devem ser clonados no interior do diretório Externos
