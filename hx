@@ -1033,7 +1033,7 @@ echo -en "\e[1;94mConstruindo o Kernel Hexagon®...\e[0m"
 echo "Kernel Hexagon®..." >> ../log.log
 echo >> ../log.log
 
-fasm Hexagon.asm Hexagon -d $BANDEIRASHEXAGON >> ../log.log || erroConstrucao
+fasm kern/Hexagon.asm Hexagon -d $BANDEIRASHEXAGON >> ../log.log || erroConstrucao
 
 cp Hexagon ../$DESTINODISTRO/bin
 
