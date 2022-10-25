@@ -330,9 +330,9 @@ echo -e ";;*********************************************************************
 echo
 echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
 echo
-echo -e "\e[1;31mUsando parâmetros compatíveis com sistemas BSD (FreeBSD como modelo\e[0m"
+echo -e "\e[1;31mUsando parâmetros compatíveis com sistemas BSD (FreeBSD como modelo)\e[0m"
 echo
-echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistemaBSD\e[0m; Modo BSD!"
+echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistemaBSD\e[0m; \e[1;31mModo BSD!\e[0m"
 echo -e "> Imagem de disco: \e[1;32m$imagem\e[0m"
 echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
 echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
