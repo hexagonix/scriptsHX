@@ -223,9 +223,10 @@ gerenciarMaquinaVirtual()
 
 case $PT2 in
 
-hx) maquinaVirtualAndromedaKVM; exit;;
-hx.som) maquinaVirtual; exit;;
-hx.serial) maquinaVirtualS; exit;;
+bsd-hx) mvHexagonixSobreBSD; exit;;
+hx) mvHexagonixKVM; exit;;
+hx.som) mvHexagonixSnd; exit;;
+hx.serial) mvHexagonixSerial; exit;;
 
 *) parametrosNecessarios; exit;;
 
@@ -267,7 +268,7 @@ esac
 
 }
 
-maquinaVirtual()
+mvHexagonixSnd()
 {
 
 if [ -e $imagem ] ; then
@@ -306,10 +307,49 @@ fi
 	
 }	
 
-maquinaVirtualHexagonixKVM()
+mvHexagonixSobreBSD()
 {
 
-export imagem="hexagonix/hexagonix.img"
+if [ -e $imagem ] ; then
+
+clear
+
+echo -e ";;****************************************************************************"
+echo -e ";;                                                                            "
+echo -e ";;                                                                            "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ││ ││                                                                      "
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
+echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
+echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
+echo -e ";;              └──┘                                                          "
+echo -e ";;                                                                            "
+echo -e ";;****************************************************************************"
+echo
+echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
+echo
+echo -e "\e[1;31mUsando parâmetros compatíveis com sistemas BSD (FreeBSD como modelo\e[0m"
+echo
+echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistemaBSD\e[0m; Modo BSD!"
+echo -e "> Imagem de disco: \e[1;32m$imagem\e[0m"
+echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
+echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
+echo
+
+qemu-system-$sistemaBSD -cpu $processador -hda $imagem -m $memoria >> /dev/null || erroMV
+
+else
+
+erroMV
+
+fi	
+
+}	
+
+mvHexagonixKVM()
+{
 
 if [ -e $imagem ] ; then
 
@@ -347,46 +387,7 @@ fi
 
 }	
 
-maquinaVirtualAndromedaKVM()
-{
-
-if [ -e $imagem ] ; then
-
-clear
-
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
-echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
-echo
-echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistema\e[0m; Usando KVM!"
-echo -e "> Imagem de disco: \e[1;32m$imagem\e[0m"
-echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
-echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32mhost\e[0m"
-echo
-
-qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -cpu host -hda $imagem -m $memoria >> /dev/null || erroMV
-
-else
-
-erroMV
-
-fi	
-
-}	
-
-maquinaVirtualS()
+mvHexagonixSerial()
 {
 
 if [ -e $imagem ] ; then
@@ -924,6 +925,7 @@ echo -e "\e[1;32m-v\e[0m - Iniciar uma máquina virtual. Os parâmetros disponí
 echo -e "\e[1;32m  hx\e[0m  - Iniciar máquina virtual do Hexagonix"
 echo -e "\e[1;32m  hx.som\e[0m - Iniciar máquina virtual do Hexagonix em modo com som"
 echo -e "\e[1;32m  hx.serial\e[0m - Iniciar máquina virtual do Hexagonix sem saída serial"
+echo -e "\e[1;32m  bsd-hx\e[0m - Iniciar máquina virtual compatível com host BSD"
 echo 
 echo -e "\e[1;32m-i\e[0m - Construir imagem de disco. Os parâmetos disponíveis são:"
 echo -e "\e[1;32m  hx\e[0m - Construir imagem de disco com o Hexagonix"
@@ -1312,6 +1314,7 @@ exit
 	
 export drvsom="pcspk"
 export sistema="i386"
+export sistemaBSD="x86_64"
 export imagem="hexagonix/hexagonix.img"
 export processador="pentium3"
 export memoria=32
@@ -1325,7 +1328,7 @@ export PT3=$3
 export PT4=$4
 export PT5=$5
 export dirImagem="hexagonix"
-export VERSAOHX="10.2"
+export VERSAOHX="10.3"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
