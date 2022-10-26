@@ -2,7 +2,10 @@
 # Esse script deve ficar na raiz do projeto
 # 
 # Esse script foi desenvolvido para rodar sobre o Linux e versão do QEMU para Linux.
-# Pode funciona rodando sobre o WSL 2.
+# Pode funciona rodando sobre o WSL 2. 
+# Aviso! Até o momento, o script não é compatível com a geração do sistema sobre o
+# FreeBSD. Entretanto, já é compatível para a execução de máquinas virtuais. O suporte
+# total ao FreeBSD está a caminho.
 #
 #;;************************************************************************************
 #;;
@@ -103,10 +106,6 @@ imagemHexagonix
 
 }
 
-# Porção de código responsável por gerar a imagem do sistema
-#
-# Incluído a partir do script imagem.sh
-
 definirHexagonixTeste()
 {
 
@@ -117,13 +116,7 @@ export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
 export imagemFinal="hexagonix.img"
 export Par="pt"
 
-if [ "$PT2" = "pt" ]; then
-
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
-export imagemFinal="hexagonix.img"
-export Par="pt"
-
-elif [ "$PT2" = "en" ]; then
+if [ "$PT2" = "en" ]; then
 
 export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=EN"
 export imagemFinal="en.andromeda.img"
@@ -233,7 +226,6 @@ cd ..
 
 construirHBoot(){
 
-
 echo -e "\e[1;94mHexagon Boot - HBoot (2º estágio)...\e[0m"
 echo
 
@@ -304,6 +296,8 @@ cd ..
 }
 
 construirBaseAndromeda(){
+
+# Gerar os aplicativos Hexagonix-Andromeda
 
 cd $DESTINODISTRO
 	
@@ -393,12 +387,7 @@ construtorHexagonix()
 export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
 export imagemFinal="hexagonix.img"
 
-if [ "$IDIOMA" = "pt" ]; then
-
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
-export imagemFinal="hexagonix.img"
-
-elif [ "$IDIOMA" = "en" ]; then
+if [ "$IDIOMA" = "en" ]; then
 
 export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=EN"
 export imagemFinal="en.andromeda.img"
@@ -1154,9 +1143,8 @@ exit
 
 } 
 
-# Ponto de entrada do Script de construção de todo o Sistema, kernel e distribuição
+# Ponto de entrada do hx, definição de variáveis e processamento de parâmetros
 #
-# Primeiro, será testado se o usuário possui permissão de execução de superusuário
 #
 # Copyright (C) 2015-2022 Felipe Miguel Nery Lunkes
 # Todos os direitos reservados
@@ -1201,9 +1189,9 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="11.1"
+export VERSAOHX="11.1.1"
 
-# Agora, vamos definir onde estão os cabeçalhos e bibliotecas
+# Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
 export INCLUDE="$(pwd)/lib/fasm"
 
