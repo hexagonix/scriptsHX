@@ -338,7 +338,7 @@ echo
 echo "Utilize o script de geração do Sistema para verificar a origem do problema."
 echo
 
-umount Sistema/ >> /dev/null
+umount $PWD/Sistema >> /dev/null
 umount $DESTINODISTRO/ >> /dev/null
 
 exit
@@ -713,9 +713,7 @@ echo
 
 echo "Construindo imagem temporária para manipulação de arquivos......" >> $LOG
 
-dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
-
-if [ ! -e hexagonix.img ] ; then
+dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img
 
 echo >> $LOG
 echo "Construindo imagem que receberá os arquivos do sistema..." >> $LOG
@@ -725,9 +723,11 @@ dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMG >> $LOG || erroMon
 	
 # Aqui entrará a lógica do BSD
 
-# Daqui pra baixo será igual
+mdconfig -a -t vnode -f temp.img -u 4
 
-fi	
+newfs_msdos -F 16 -B $DESTINODISTRO/saturno.img /dev/md4
+
+# Daqui pra baixo será igual
 
 echo "> Montando a imagem..." >> $LOG
  
@@ -735,40 +735,40 @@ mkdir -p Sistema
 
 # Aqui entrará a lógica do BSD
 
-mount -o loop -t vfat temp.img Sistema/ || erroMontagem
+mount -t msdos /dev/md4 $PWD/Sistema || erroMontagem
 
 # Daqui pra baixo será igual
 
 echo "> Copiando arquivos do sistema para a imagem..." >> $LOG
 echo >> $LOG
 
-cp $DESTINODISTRO/*.man Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/*.asm Sistema/ >> $LOG
-cp $DESTINODISTRO/*.s Sistema/ >> $LOG
-cp $DESTINODISTRO/*.cow Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/bin/* Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/hboot Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.man $PWD/Sistema >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.asm $PWD/Sistema >> $LOG
+cp $DESTINODISTRO/*.s $PWD/Sistema >> $LOG
+cp $DESTINODISTRO/*.cow $PWD/Sistema >> $LOG || erroMontagem
+cp $DESTINODISTRO/bin/* $PWD/Sistema >> $LOG || erroMontagem
+cp $DESTINODISTRO/hboot $PWD/Sistema >> $LOG || erroMontagem
 
 # A licença deve ser copiada
 
-cp hexagonix/LICENSE Sistema/ >> $LOG || erroMontagem
+cp hexagonix/LICENSE $PWD/Sistema >> $LOG || erroMontagem
 
 # Agora, copiar módulos do HBoot
 
 if [ -e $DESTINODISTRO/Spartan.mod ] ; then
 
-cp $DESTINODISTRO/*.mod Sistema/ >> $LOG
+cp $DESTINODISTRO/*.mod $PWD/Sistema >> $LOG
 
 fi	
 
-cp $DESTINODISTRO/*.unx Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/*.ocl Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.unx $PWD/Sistema >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.ocl $PWD/Sistema >> $LOG || erroMontagem
 
 # Caso a imagem deva conter uma cópia dos arquivos do FreeDOS para testes...
 
 if [ -e DOS ] ; then
 
-cp DOS/*.* Sistema/
+cp DOS/*.* $PWD/Sistema
 
 fi	
 
@@ -784,7 +784,7 @@ if [ -e $DESTINODISTRO/Atomic.fnt ] ; then
 
 echo " [Sim]" >> $LOG
 
-cp $DESTINODISTRO/*.fnt Sistema/ || erroMontagem
+cp $DESTINODISTRO/*.fnt $PWD/Sistema || erroMontagem
 	
 fi	
 
@@ -800,11 +800,9 @@ sleep 1.0 || erroMontagem
 
 echo "> Desmontando imagem..." >> $LOG
 
-umount Sistema >> /dev/null || erroMontagem
+umount $PWD/Sistema >> /dev/null || erroMontagem
 
-echo "> Copiando carregador de inicialização para a imagem..." >> $LOG
-
-dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
+mdconfig -d -u 4
 
 echo "> Montando imagem final..." >> $LOG
 
@@ -837,8 +835,8 @@ qemu-img convert -O vdi $dirImagem/$imagemFinal $dirImagem/$(basename $imagemFin
 
 # Vamos agora trocar a propriedade da imagem para um usuário comum
 
-chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
-chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
+# chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
+# chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
 
 export MSG="Construir o Hexagonix"
 
