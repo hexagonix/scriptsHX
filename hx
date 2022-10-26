@@ -23,22 +23,12 @@
 
 exibirAjuda() {
 
-clear 
+clear
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                            \e[1;32mAjuda do HX\e[0m "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
+export MSG="Ajuda do hx"
+
+banner 
+
 echo -e "Parâmetros \e[1;94mprincipais\e[0m disponíveis:"
 echo 
 echo -e "\e[1;32m-v\e[0m - Iniciar uma máquina virtual. Os parâmetros disponíveis são:"
@@ -63,21 +53,11 @@ exibirCopyright() {
 
 clear 
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                            \e[1;32mCopyright\e[0m "
-echo -e ";;              └──┘                          \e[1;32mHX versão $VERSAOHX\e[0m"
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
-echo -e "\e[1;94mHX: Ferramenta de construção e testes do Hexagonix®\e[0m"
+export MSG="Copyright"
+
+banner
+
+echo -e "\e[1;94mHX: Ferramenta de construção e testes do Hexagonix® versão $VERSAOHX\e[0m"
 echo
 echo -e "Desenvolvido por \e[1;32mFelipe Miguel Nery Lunkes\e[0m"
 echo 
@@ -89,22 +69,12 @@ echo
 
 parametrosNecessarios(){
 
-clear 
+clear
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                            \e[1;32mAjuda do HX\e[0m "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
+export MSG="Ajuda do hx"
+
+banner 
+
 echo -e "Você precisa fornecer pelo menos um parâmetro para o HX."
 echo 
 echo -e "\e[1;94mDica: utilize \e[1;32m./hx ajuda \e[1;94mou \e[1;32m$NOMEHX ajuda\e[1;94m para obter os parâmetros"
@@ -197,7 +167,7 @@ esac
 
 }
 
-# Sessão de construtores indivisuais dos componentes do sistema
+# Sessão de construtores individuais dos componentes do sistema
 
 # Vamos separar aqui as etapas comuns de construção do sistema para reutilizar
 # código e facilitar a busca de erros
@@ -345,6 +315,42 @@ cd ..
 
 }
 
+kernel()
+{
+
+kernel
+
+}
+
+erroMontagem()
+{
+
+if test $VERBOSE -e 0; then
+
+clear
+
+elif test $VERBOSE -e 1; then
+
+echo 
+
+fi
+
+export MSG="Erro na construção do sistema"
+
+banner 
+echo
+echo -e "\e[1;31mAlgo de errado ocorreu durante a montagem da imagem :(\e[0m"
+echo
+echo "Utilize o script de geração do Sistema para verificar a origem do problema."
+echo
+
+umount Sistema/ >> /dev/null
+umount $DESTINODISTRO/ >> /dev/null
+
+exit
+	
+}
+
 # Sessão de construção coletiva dos componentes do sistema
 
 gerenciarConstrucao()
@@ -400,23 +406,10 @@ export imagemFinal="en.andromeda.img"
 fi
 
 export DESTINODISTRO="Andromeda"
+export MSG="Construir o hx"
 
-clear
+banner 
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                     \e[1;32mConstruir o Hexagonix\e[0m   "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
 echo
 echo "Construindo o Sistema Operacional Hexagonix® (Hexagonix base + utilitários)..."
 echo
@@ -553,22 +546,12 @@ exit
 
 fi
 
-clear
+clear 
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                    \e[1;32mConstruir o Hexagonix\e[0m    "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
+export MSG="Construir o Hexagonix"
+
+banner
+
 echo "Construindo o Hexagonix..."
 echo
 
@@ -700,19 +683,10 @@ qemu-img convert -O vdi $dirImagem/$imagemFinal $dirImagem/$(basename $imagemFin
 chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
 chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                    \e[1;32mConstruir o Hexagonix\e[0m    "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
+export MSG="Construir o Hexagonix"
+
+banner 
+
 echo
 echo -e "\e[32mSucesso ao construir o sistema e a imagem de disco.\e[0m"
 echo
@@ -761,19 +735,10 @@ if [ -e $imagem ] ; then
 
 clear
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
+export MSG="HX: iniciar máquina virtual"
+
+banner 
+
 echo
 echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
 echo
@@ -800,20 +765,10 @@ if [ -e $imagem ] ; then
 
 clear
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
+export MSG="HX: iniciar máquina virtual"
+
+banner 
+
 echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
 echo
 echo -e "\e[1;31mUsando parâmetros compatíveis com sistemas BSD (FreeBSD como modelo)\e[0m"
@@ -841,20 +796,10 @@ if [ -e $imagem ] ; then
 
 clear
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
+export MSG="HX: iniciar máquina virtual"
+
+banner 
+
 echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
 echo
 echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistema\e[0m; Usando KVM!"
@@ -880,20 +825,10 @@ if [ -e $imagem ] ; then
 
 clear
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
+export MSG="HX: iniciar máquina virtual"
+
+banner 
+
 echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
 echo
 echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistema\e[0m"
@@ -917,21 +852,11 @@ erroMV()
 	
 clear
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                      \e[1;32mHX: iniciar máquina virtual\e[0m"
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
-echo -e "Erro na solicitação: \e[1;94mimagem de disco '$imagem' não localizada ou falha\e[0m."
+export MSG="HX: iniciar máquina virtual"
+
+banner 
+
+echo -e "Erro na solicitação: \e[1;94mimagem de disco '$imagem' não localizada ou falha\e[0m"
 echo -e "\e[0mem algum componente ou parâmetro fornecido."
 echo -e " > \e[1;31mVocê NÃO pode iniciar o sistema sem essa dependência\e[0m."
 echo -e "Erro na solicitação: \e[1;94mproblema durante a execução da máquina virtual\e[0m."
@@ -946,20 +871,10 @@ limpar(){
 	
 clear
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                      \e[1;32mLimpar árvore do sistema\e[0m"
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
+export MSG="HX: limpar árvore do sistema"
+
+banner 
+
 echo "Executando limpeza na árvore do sistema..."
 echo -n " > Limpando componentes gerados e imagens do sistema..."
 	
@@ -986,73 +901,15 @@ infoBuild(){
 
 clear
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                        \e[1;32mInformações do sistema\e[0m"
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
+export MSG="Informações do sistema"
+
+banner 
 echo -e "Veja agora algumas informações e definições da construção \e[1matual\e[0m do sistema:"
 echo -e " > Versão do Hexagonix base: \e[1;32m$VERSAO\e[0m"
 echo -e " > Revisão do software: \e[1;32m$REVISAO\e[0m"
 echo -e " > Nome do lançamento: \e[1;32m$CODENOME\e[0m"
 echo
 
-}
-
-kernel()
-{
-
-kernel
-
-}
-
-erroMontagem()
-{
-
-if test $VERBOSE -e 0; then
-
-clear
-
-elif test $VERBOSE -e 1; then
-
-echo 
-
-fi
-
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                       \e[1;31mErro na construção do sistema\e[0m"
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
-echo
-echo -e "\e[1;31mAlgo de errado ocorreu durante a montagem da imagem :(\e[0m"
-echo
-echo "Utilize o script de geração do Sistema para verificar a origem do problema."
-echo
-
-umount Sistema/ >> /dev/null
-umount $DESTINODISTRO/ >> /dev/null
-
-exit
-	
 }
 
 executarConfigure()
@@ -1100,19 +957,9 @@ exibirEstatisticas(){
 
 clear 
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                            \e[1;32mEstatísticas\e[0m "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************" 
+export MSG="Estatísticas"
+
+banner 
 
 if [ -e /usr/bin/cloc ] ; then
 
@@ -1193,19 +1040,10 @@ exit
 
 fi
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                        \e[1;32mInstalar dependências\e[0m "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
+export MSG="Instalar dependências"
+
+banner 
+
 echo
 echo -e "O HX irá agora instalar as dependências necessárias à sua execução:"
 echo
@@ -1223,10 +1061,8 @@ echo
 
 }
 
-atualizarImagens()
-{
-
-clear 
+banner()
+{ 
 
 echo -e ";;****************************************************************************"
 echo -e ";;                                                                            "
@@ -1237,11 +1073,21 @@ echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐�
 echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
 echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
 echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                          \e[1;32mAtualizar imagens\e[0m  "
+echo -e ";;              ┌─┘│                       \e[1;32m$MSG\e[0m "
 echo -e ";;              └──┘                                                          "
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
-echo 
+echo
+
+}
+
+atualizarImagens()
+{
+
+export MSG="Atualizar imagens"
+
+banner 
+
 echo "Você está prestes a atualizar as imagens de disco do Hexagonix, sincronizando-as"
 echo "com as disponíveis no repositório de imagens, no ramo principal (estável)."
 echo -e "\e[1;31mAtenção! Esse processo destruirá qualquer modificação dentro das imagens locais!\e[0m"
@@ -1290,20 +1136,10 @@ sureq()
 
 clear
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│              \e[1;32mHX: Você precisa ser root para continuar\e[0m"
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
+export MSG="HX: você precisa ser root"
+
+banner 
+
 echo -e "\e[1;94mPara executar a ação solicitada, você deve ser um usuário raiz (root) ;D\e[0m"
 echo
 echo -e "\e[1;32mInsira sua senha abaixo para alterar para o usuário raiz (root) e depois\e[0m"
@@ -1365,7 +1201,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="11"
+export VERSAOHX="11.1"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas
 
