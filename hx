@@ -691,6 +691,172 @@ exit
 
 }
 
+imagemHexagonixSobreBSD()
+{
+
+if test "`whoami`" != "root" ; then
+
+sureq
+
+exit
+
+fi
+
+# Agora os arquivos do Sistema serão gerados...
+
+construtorHexagonix $Par
+
+# Agora a imagem do Sistema será preparada...
+
+echo -e "\e[1;94mConstruindo imagem do sistema...\e[0m"
+echo
+
+echo "Construindo imagem temporária para manipulação de arquivos......" >> $LOG
+
+dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
+
+if [ ! -e hexagonix.img ] ; then
+
+echo >> $LOG
+echo "Construindo imagem que receberá os arquivos do sistema..." >> $LOG
+echo >> $LOG
+
+dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMG >> $LOG || erroMontagem
+	
+fi	
+
+echo "> Montando a imagem..." >> $LOG
+ 
+mkdir -p Sistema && mount -o loop -t vfat temp.img Sistema/ || erroMontagem
+
+echo "> Copiando arquivos do sistema para a imagem..." >> $LOG
+echo >> $LOG
+
+cp $DESTINODISTRO/*.man Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.asm Sistema/ >> $LOG
+cp $DESTINODISTRO/*.s Sistema/ >> $LOG
+cp $DESTINODISTRO/*.cow Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/bin/* Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/hboot Sistema/ >> $LOG || erroMontagem
+
+# A licença deve ser copiada
+
+cp hexagonix/LICENSE Sistema/ >> $LOG || erroMontagem
+
+# Agora, copiar módulos do HBoot
+
+if [ -e $DESTINODISTRO/Spartan.mod ] ; then
+
+cp $DESTINODISTRO/*.mod Sistema/ >> $LOG
+
+fi	
+
+cp $DESTINODISTRO/*.unx Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.ocl Sistema/ >> $LOG || erroMontagem
+
+# Caso a imagem deva conter uma cópia dos arquivos do FreeDOS para testes...
+
+if [ -e DOS ] ; then
+
+cp DOS/*.* Sistema/
+
+fi	
+
+# Agora será verificado se alguma fonte deverá ser incluída na imagem
+#
+# Se o arquivo de fonte padrão estiver disponível, usar essa informação como interruptor
+# para ligar a cópia
+
+echo >> $LOG
+echo -n "> Verificando se existem fontes para copiar..." >> $LOG
+
+if [ -e $DESTINODISTRO/Atomic.fnt ] ; then
+
+echo " [Sim]" >> $LOG
+
+cp $DESTINODISTRO/*.fnt Sistema/ || erroMontagem
+	
+fi	
+
+if [ ! -e $DESTINODISTRO/Atomic.fnt ] ; then
+
+echo " [Não]" >> $LOG
+	
+fi	
+
+echo >> $LOG
+
+sleep 1.0 || erroMontagem
+
+echo "> Desmontando imagem..." >> $LOG
+
+umount Sistema >> /dev/null || erroMontagem
+
+echo "> Copiando carregador de inicialização para a imagem..." >> $LOG
+
+dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
+
+echo "> Montando imagem final..." >> $LOG
+
+echo "  * Copiando imagem temporária para a imagem final..." >> $LOG
+
+dd status=none conv=notrunc if=temp.img of=$IMG seek=1 >> $LOG || erroMontagem 
+
+echo "  * Copiando MBR e tabela de partição para a imagem e finalizando-a..." >> $LOG
+
+dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$IMG >> $LOG || erroMontagem
+
+echo "> Removendo arquivos e pastas temporárias, além de binários que não são mais necessários..." >> $LOG
+echo >> $LOG
+
+rm -rf Sistema $DESTINODISTRO temp.img >> $LOG
+
+if test $VERBOSE -e 0; then
+
+clear
+
+elif test $VERBOSE -e 1; then
+
+echo 
+
+fi
+
+mv hexagonix.img $dirImagem/$imagemFinal
+
+qemu-img convert -O vdi $dirImagem/$imagemFinal $dirImagem/$(basename $imagemFinal .img).vdi 
+
+# Vamos agora trocar a propriedade da imagem para um usuário comum
+
+chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
+chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
+
+export MSG="Construir o Hexagonix"
+
+banner 
+
+echo
+echo -e "\e[32mSucesso ao construir o sistema e a imagem de disco.\e[0m"
+echo
+echo -e "Veja agora algumas informações da construção \e[1matual\e[0m do sistema:"
+echo -e " > Versão do Hexagonix base: \e[1;32m$VERSAO\e[0m"
+echo -e " > Revisão do software: \e[1;32m$REVISAO\e[0m"
+echo -e " > Nome do lançamento: \e[1;32m$CODENOME\e[0m"
+echo -e " > Localização da imagem: \e[1;32m$dirImagem/$imagemFinal\e[0m"
+echo
+
+echo "> Imagem '$IMG' gerada com sucesso." >> $LOG
+echo >> $LOG
+echo "Utilize './hx -v hx' para testar a execução do sistema na imagem gerada ou copie" >> $LOG
+echo "a imagem para o diretório 'Inst' da raiz do instalador para gerar uma imagem de instalação" >> $LOG
+echo "baseada em Linux para transferência para um disco." >> $LOG
+echo >> $LOG
+echo "----------------------------------------------------------------------" >> $LOG
+echo >> $LOG
+
+exit
+
+}
+
 # Sessão de gerenciamento de máquinas virtuais do hx
 
 gerenciarMaquinaVirtual()
