@@ -395,12 +395,13 @@ export imagemFinal="en.andromeda.img"
 fi
 
 export DESTINODISTRO="Andromeda"
-export MSG="Construir o hx"
+export MSG="Construir o Hexagonix"
+
+clear 
 
 banner 
 
-echo
-echo "Construindo o Sistema Operacional Hexagonix® (Hexagonix base + utilitários)..."
+echo "Construindo o Hexagonix®..."
 echo
 
 mkdir -p $DESTINODISTRO
@@ -534,15 +535,6 @@ sureq
 exit
 
 fi
-
-clear 
-
-export MSG="Construir o Hexagonix"
-
-banner
-
-echo "Construindo o Hexagonix..."
-echo
 
 # Agora os arquivos do Sistema serão gerados...
 
