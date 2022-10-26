@@ -723,11 +723,21 @@ echo >> $LOG
 
 dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMG >> $LOG || erroMontagem
 	
+# Aqui entrará a lógica do BSD
+
+# Daqui pra baixo será igual
+
 fi	
 
 echo "> Montando a imagem..." >> $LOG
  
-mkdir -p Sistema && mount -o loop -t vfat temp.img Sistema/ || erroMontagem
+mkdir -p Sistema 
+
+# Aqui entrará a lógica do BSD
+
+mount -o loop -t vfat temp.img Sistema/ || erroMontagem
+
+# Daqui pra baixo será igual
 
 echo "> Copiando arquivos do sistema para a imagem..." >> $LOG
 echo >> $LOG
