@@ -26,26 +26,21 @@
 
 exibirAjuda() {
 
-clear
-
-export MSG="Ajuda do hx"
-
-banner 
-
-echo -e "Parâmetros \e[1;94mprincipais\e[0m disponíveis:"
+echo
+echo -e "Ajuda de uso do hx:"
+echo
+echo -e "\e[1;94mPrincipais\e[0m parâmetros disponíveis:"
 echo 
 echo -e "\e[1;32m-v\e[0m - Iniciar uma máquina virtual. Os parâmetros disponíveis são:"
 echo -e "\e[1;32m  hx\e[0m  - Iniciar máquina virtual do Hexagonix"
 echo -e "\e[1;32m  hx.som\e[0m - Iniciar máquina virtual do Hexagonix em modo com som"
 echo -e "\e[1;32m  hx.serial\e[0m - Iniciar máquina virtual do Hexagonix sem saída serial"
 echo -e "\e[1;32m  bsd-hx\e[0m - Iniciar máquina virtual compatível com host BSD"
-echo 
 echo -e "\e[1;32m-i\e[0m - Construir imagem de disco. Os parâmetos disponíveis são:"
 echo -e "\e[1;32m  hx\e[0m - Construir imagem de disco com o Hexagonix"
 echo -e "\e[1;32m  hx.teste\e[0m - Construir imagem de disco teste com o Hexagonix"
-echo
 echo -e "\e[1;32m-u\e[0m - Sincronizar as imagens do Hexagonix com o repositório oficial"
-echo
+echo -e "\e[1;32m-uf\e[0m - Atualiza todos os repositórios com o servidor (ramo atual)"
 echo -e "\e[1;32mlimpar\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
 
 echo 
@@ -80,7 +75,7 @@ banner
 
 echo -e "Você precisa fornecer pelo menos um parâmetro para o HX."
 echo 
-echo -e "\e[1;94mDica: utilize \e[1;32m./hx ajuda \e[1;94mou \e[1;32m$NOMEHX ajuda\e[1;94m para obter os parâmetros"
+echo -e "\e[1;94mDica: utilize \e[1;32m./hx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros"
 echo -e "\e[1;94mdisponíveis.\e[0m"
 echo
 
@@ -1285,6 +1280,52 @@ tudopronto
 
 }
 
+atualizarRepos()
+{
+
+export MSG="Atualizar repositórios"
+
+banner 
+
+echo "Você está prestes a atualizar todos os repositórios do sistema com o servidor,"
+echo "mantendo o ramo atual. Para alterar o ramo e atualar, use hx -un (em breve)."
+echo 
+
+cd Apps/Unix && git pull
+cd ..
+cd Andromeda && git pull
+cd ..
+cd ..
+cd Boot/Saturno && git pull
+cd ..
+cd "Hexagon Boot" && git pull 
+cd ..
+cd ..
+cd Dist/etc && git pull
+cd ..
+cd man && git pull
+cd ..
+cd ..
+cd Doc && git pull
+cd ..
+cd Externos/fasmX && git pull
+cd .. 
+cd ..
+cd Fontes && git pull
+cd ..
+cd Hexagon && git pull
+cd ..
+cd hexagonix && git pull
+cd ..
+cd lib && git pull
+cd ..
+cd Scripts && git pull
+
+terminar
+tudopronto
+
+}
+
 finalizar()
 {
 
@@ -1361,7 +1402,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="11.1.1"
+export VERSAOHX="11.2"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
@@ -1380,6 +1421,7 @@ limpar) limpar; exit;;
 -h) exibirAjuda; exit;;
 -b) gerenciarConstrucaoComponentes; exit;;
 -u) atualizarImagens; exit;;
+-uf) atualizarRepos; exit;;
 --ver) exibirCopyright; exit;;
 --depend) instalarDependencias; exit;; 
 --info) infoBuild; exit;;
