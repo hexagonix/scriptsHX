@@ -26,26 +26,21 @@
 
 exibirAjuda() {
 
-clear
-
-export MSG="Ajuda do hx"
-
-banner 
-
-echo -e "Parâmetros \e[1;94mprincipais\e[0m disponíveis:"
+echo
+echo -e "Ajuda de uso do hx:"
+echo
+echo -e "\e[1;94mPrincipais\e[0m parâmetros disponíveis:"
 echo 
 echo -e "\e[1;32m-v\e[0m - Iniciar uma máquina virtual. Os parâmetros disponíveis são:"
 echo -e "\e[1;32m  hx\e[0m  - Iniciar máquina virtual do Hexagonix"
 echo -e "\e[1;32m  hx.som\e[0m - Iniciar máquina virtual do Hexagonix em modo com som"
 echo -e "\e[1;32m  hx.serial\e[0m - Iniciar máquina virtual do Hexagonix sem saída serial"
 echo -e "\e[1;32m  bsd-hx\e[0m - Iniciar máquina virtual compatível com host BSD"
-echo 
 echo -e "\e[1;32m-i\e[0m - Construir imagem de disco. Os parâmetos disponíveis são:"
 echo -e "\e[1;32m  hx\e[0m - Construir imagem de disco com o Hexagonix"
 echo -e "\e[1;32m  hx.teste\e[0m - Construir imagem de disco teste com o Hexagonix"
-echo
 echo -e "\e[1;32m-u\e[0m - Sincronizar as imagens do Hexagonix com o repositório oficial"
-echo
+echo -e "\e[1;32m-uf\e[0m - Atualiza todos os repositórios com o servidor (ramo atual)"
 echo -e "\e[1;32mlimpar\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
 
 echo 
@@ -80,7 +75,7 @@ banner
 
 echo -e "Você precisa fornecer pelo menos um parâmetro para o HX."
 echo 
-echo -e "\e[1;94mDica: utilize \e[1;32m./hx ajuda \e[1;94mou \e[1;32m$NOMEHX ajuda\e[1;94m para obter os parâmetros"
+echo -e "\e[1;94mDica: utilize \e[1;32m./hx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros"
 echo -e "\e[1;94mdisponíveis.\e[0m"
 echo
 
@@ -338,7 +333,7 @@ echo
 echo "Utilize o script de geração do Sistema para verificar a origem do problema."
 echo
 
-umount Sistema/ >> /dev/null
+umount $PWD/Sistema >> /dev/null
 umount $DESTINODISTRO/ >> /dev/null
 
 exit
@@ -713,21 +708,23 @@ echo
 
 echo "Construindo imagem temporária para manipulação de arquivos......" >> $LOG
 
-dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
-
-if [ ! -e hexagonix.img ] ; then
+dd status=none bs=$TAMANHOTEMP count=512 if=/dev/zero of=temp.img
 
 echo >> $LOG
 echo "Construindo imagem que receberá os arquivos do sistema..." >> $LOG
 echo >> $LOG
 
 dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMG >> $LOG || erroMontagem
-	
+
 # Aqui entrará a lógica do BSD
 
-# Daqui pra baixo será igual
+mdconfig -a -t vnode -f temp.img -u 4
 
-fi	
+gpart create -s mbr md4
+gpart add -t FAT16 -a 1 md4
+newfs_msdos -F 16 -B /dev/md4s1 
+
+# Daqui pra baixo será igual
 
 echo "> Montando a imagem..." >> $LOG
  
@@ -735,40 +732,40 @@ mkdir -p Sistema
 
 # Aqui entrará a lógica do BSD
 
-mount -o loop -t vfat temp.img Sistema/ || erroMontagem
+mount -t msdos -o rw /dev/md4s1 $PWD/Sistema
 
 # Daqui pra baixo será igual
 
 echo "> Copiando arquivos do sistema para a imagem..." >> $LOG
 echo >> $LOG
 
-cp $DESTINODISTRO/*.man Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/*.asm Sistema/ >> $LOG
-cp $DESTINODISTRO/*.s Sistema/ >> $LOG
-cp $DESTINODISTRO/*.cow Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/bin/* Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/hboot Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/hboot $PWD/Sistema >> $LOG 
+cp $DESTINODISTRO/*.man $PWD/Sistema >> $LOG 
+cp $DESTINODISTRO/*.asm $PWD/Sistema >> $LOG
+cp $DESTINODISTRO/*.s $PWD/Sistema >> $LOG
+cp $DESTINODISTRO/*.cow $PWD/Sistema >> $LOG
+cp $DESTINODISTRO/bin/* $PWD/Sistema >> $LOG
 
 # A licença deve ser copiada
 
-cp hexagonix/LICENSE Sistema/ >> $LOG || erroMontagem
+cp hexagonix/LICENSE $PWD/Sistema >> $LOG || erroMontagem
 
 # Agora, copiar módulos do HBoot
 
 if [ -e $DESTINODISTRO/Spartan.mod ] ; then
 
-cp $DESTINODISTRO/*.mod Sistema/ >> $LOG
+cp $DESTINODISTRO/*.mod $PWD/Sistema >> $LOG
 
 fi	
 
-cp $DESTINODISTRO/*.unx Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/*.ocl Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.unx $PWD/Sistema >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.ocl $PWD/Sistema >> $LOG || erroMontagem
 
 # Caso a imagem deva conter uma cópia dos arquivos do FreeDOS para testes...
 
 if [ -e DOS ] ; then
 
-cp DOS/*.* Sistema/
+cp DOS/*.* $PWD/Sistema
 
 fi	
 
@@ -784,7 +781,7 @@ if [ -e $DESTINODISTRO/Atomic.fnt ] ; then
 
 echo " [Sim]" >> $LOG
 
-cp $DESTINODISTRO/*.fnt Sistema/ || erroMontagem
+cp $DESTINODISTRO/*.fnt $PWD/Sistema || erroMontagem
 	
 fi	
 
@@ -800,11 +797,13 @@ sleep 1.0 || erroMontagem
 
 echo "> Desmontando imagem..." >> $LOG
 
-umount Sistema >> /dev/null || erroMontagem
+sync 
 
-echo "> Copiando carregador de inicialização para a imagem..." >> $LOG
+umount -f $PWD/Sistema >> /dev/null || erroMontagem
 
 dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
+
+mdconfig -d -u 4
 
 echo "> Montando imagem final..." >> $LOG
 
@@ -837,8 +836,8 @@ qemu-img convert -O vdi $dirImagem/$imagemFinal $dirImagem/$(basename $imagemFin
 
 # Vamos agora trocar a propriedade da imagem para um usuário comum
 
-chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
-chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
+# chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
+# chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
 
 export MSG="Construir o Hexagonix"
 
@@ -1281,6 +1280,52 @@ tudopronto
 
 }
 
+atualizarRepos()
+{
+
+export MSG="Atualizar repositórios"
+
+banner 
+
+echo "Você está prestes a atualizar todos os repositórios do sistema com o servidor,"
+echo "mantendo o ramo atual. Para alterar o ramo e atualar, use hx -un (em breve)."
+echo 
+
+cd Apps/Unix && git pull
+cd ..
+cd Andromeda && git pull
+cd ..
+cd ..
+cd Boot/Saturno && git pull
+cd ..
+cd "Hexagon Boot" && git pull 
+cd ..
+cd ..
+cd Dist/etc && git pull
+cd ..
+cd man && git pull
+cd ..
+cd ..
+cd Doc && git pull
+cd ..
+cd Externos/fasmX && git pull
+cd .. 
+cd ..
+cd Fontes && git pull
+cd ..
+cd Hexagon && git pull
+cd ..
+cd hexagonix && git pull
+cd ..
+cd lib && git pull
+cd ..
+cd Scripts && git pull
+
+terminar
+tudopronto
+
+}
+
 finalizar()
 {
 
@@ -1357,7 +1402,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="11.1.1"
+export VERSAOHX="11.2"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
@@ -1376,6 +1421,7 @@ limpar) limpar; exit;;
 -h) exibirAjuda; exit;;
 -b) gerenciarConstrucaoComponentes; exit;;
 -u) atualizarImagens; exit;;
+-uf) atualizarRepos; exit;;
 --ver) exibirCopyright; exit;;
 --depend) instalarDependencias; exit;; 
 --info) infoBuild; exit;;
