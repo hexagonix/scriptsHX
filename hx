@@ -713,19 +713,21 @@ echo
 
 echo "Construindo imagem temporária para manipulação de arquivos......" >> $LOG
 
-dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img
+dd status=none bs=$TAMANHOTEMP count=512 if=/dev/zero of=temp.img
 
 echo >> $LOG
 echo "Construindo imagem que receberá os arquivos do sistema..." >> $LOG
 echo >> $LOG
 
 dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMG >> $LOG || erroMontagem
-	
+
 # Aqui entrará a lógica do BSD
 
 mdconfig -a -t vnode -f temp.img -u 4
 
-newfs_msdos -F 16 -B $DESTINODISTRO/saturno.img /dev/md4
+gpart create -s mbr md4
+gpart add -t FAT16 -a 1 md4
+newfs_msdos -F 16 -B /dev/md4s1 
 
 # Daqui pra baixo será igual
 
@@ -735,19 +737,19 @@ mkdir -p Sistema
 
 # Aqui entrará a lógica do BSD
 
-mount -t msdos /dev/md4 $PWD/Sistema || erroMontagem
+mount -t msdos -o rw /dev/md4s1 $PWD/Sistema
 
 # Daqui pra baixo será igual
 
 echo "> Copiando arquivos do sistema para a imagem..." >> $LOG
 echo >> $LOG
 
-cp $DESTINODISTRO/*.man $PWD/Sistema >> $LOG || erroMontagem
+cp $DESTINODISTRO/hboot $PWD/Sistema >> $LOG 
+cp $DESTINODISTRO/*.man $PWD/Sistema >> $LOG 
 cp $DESTINODISTRO/*.asm $PWD/Sistema >> $LOG
 cp $DESTINODISTRO/*.s $PWD/Sistema >> $LOG
-cp $DESTINODISTRO/*.cow $PWD/Sistema >> $LOG || erroMontagem
-cp $DESTINODISTRO/bin/* $PWD/Sistema >> $LOG || erroMontagem
-cp $DESTINODISTRO/hboot $PWD/Sistema >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.cow $PWD/Sistema >> $LOG
+cp $DESTINODISTRO/bin/* $PWD/Sistema >> $LOG
 
 # A licença deve ser copiada
 
@@ -800,7 +802,11 @@ sleep 1.0 || erroMontagem
 
 echo "> Desmontando imagem..." >> $LOG
 
-umount $PWD/Sistema >> /dev/null || erroMontagem
+sync 
+
+umount -f $PWD/Sistema >> /dev/null || erroMontagem
+
+dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
 
 mdconfig -d -u 4
 
