@@ -70,14 +70,10 @@ parametrosNecessarios(){
 
 clear
 
-export MSG="Ajuda do hx"
-
-banner 
-
+echo
 echo -e "Você precisa fornecer pelo menos um parâmetro para o HX."
 echo 
-echo -e "\e[1;94mDica: utilize \e[1;32mhx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros"
-echo -e "\e[1;94mdisponíveis.\e[0m"
+echo -e "\e[1;94mDica: utilize \e[1;32mhx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros disponíveis.\e[0m"
 echo
 
 }
@@ -1413,7 +1409,7 @@ exit
 
 # Dados de versão do Hexagonix
 
-export REVISAO=$(cat Dist/etc/revisao.def)
+export REVISAO=$(cat Dist/etc/revisao.def) 
 export CODENOME=$(cat Dist/etc/codenome.def)
 export VERSAO=$(cat Dist/etc/versao.def)
 
