@@ -41,6 +41,7 @@ echo -e "\e[1;32m  hx\e[0m - Construir imagem de disco com o Hexagonix"
 echo -e "\e[1;32m  hx.teste\e[0m - Construir imagem de disco teste com o Hexagonix"
 echo -e "\e[1;32m-u\e[0m - Sincronizar as imagens do Hexagonix com o repositório oficial"
 echo -e "\e[1;32m-uf\e[0m - Atualiza todos os repositórios com o servidor (ramo atual)"
+echo -e "\e[1;32m-un <ramo>\e[0m - Troca de ramo para <ramo> e atualiza todos os repositórios"
 echo -e "\e[1;32mlimpar\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
 
 echo 
@@ -1288,7 +1289,7 @@ export MSG="Atualizar repositórios"
 banner 
 
 echo "Você está prestes a atualizar todos os repositórios do sistema com o servidor,"
-echo "mantendo o ramo atual. Para alterar o ramo e atualar, use hx -un (em breve)."
+echo "mantendo o ramo atual. Para alterar o ramo e atualar, use hx -un <ramo>."
 echo 
 
 cd Apps/Unix && git pull
@@ -1320,6 +1321,52 @@ cd ..
 cd lib && git pull
 cd ..
 cd Scripts && git pull
+
+terminar
+tudopronto
+
+}
+
+trocarRamoAtualizar()
+{
+
+export MSG="Atualizar ramo e repositórios"
+
+banner 
+
+echo "Você está prestes a atualizar todos os repositórios do sistema com o servidor,"
+echo "após trocar para o ramo fornecido."
+echo 
+
+cd Apps/Unix && git switch $PT2 && git pull
+cd ..
+cd Andromeda && git switch $PT2 && git pull
+cd ..
+cd ..
+cd Boot/Saturno && git switch $PT2 && git pull
+cd ..
+cd "Hexagon Boot" && git switch $PT2 && git pull 
+cd ..
+cd ..
+cd Dist/etc && git switch $PT2 && git pull
+cd ..
+cd man && git switch $PT2 && git pull
+cd ..
+cd ..
+cd Doc && git switch $PT2 && git pull
+cd ..
+cd Externos/fasmX && git switch $PT2 && git pull
+cd .. 
+cd ..
+cd Fontes && git switch $PT2 && git pull
+cd ..
+cd Hexagon && git switch $PT2 && git pull
+cd ..
+cd hexagonix && git switch $PT2 && git pull
+cd ..
+cd lib && git switch $PT2 && git pull
+cd ..
+cd Scripts && git switch $PT2 && git pull
 
 terminar
 tudopronto
@@ -1402,7 +1449,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="11.2"
+export VERSAOHX="11.3"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
@@ -1422,6 +1469,7 @@ limpar) limpar; exit;;
 -b) gerenciarConstrucaoComponentes; exit;;
 -u) atualizarImagens; exit;;
 -uf) atualizarRepos; exit;;
+-un) trocarRamoAtualizar; exit;;
 --ver) exibirCopyright; exit;;
 --depend) instalarDependencias; exit;; 
 --info) infoBuild; exit;;
