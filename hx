@@ -68,10 +68,8 @@ echo
 
 parametrosNecessarios(){
 
-clear
-
 echo
-echo -e "Você precisa fornecer pelo menos um parâmetro para o HX."
+echo -e "Você precisa fornecer pelo menos um parâmetro \e[1;94mválido \e[0mpara o HX."
 echo 
 echo -e "\e[1;94mDica: utilize \e[1;32mhx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros disponíveis.\e[0m"
 echo
@@ -341,6 +339,8 @@ exit
 
 gerenciarConstrucao()
 {
+
+obterInfoBuild
 
 case $PT2 in
 
@@ -1050,6 +1050,17 @@ echo
 		
 }
 
+obterInfoBuild()
+{
+
+# Dados de versão do Hexagonix
+
+export REVISAO=$(cat Dist/etc/revisao.def) 
+export CODENOME=$(cat Dist/etc/codenome.def)
+export VERSAO=$(cat Dist/etc/versao.def)
+
+}
+
 infoBuild(){
 
 clear
@@ -1406,12 +1417,6 @@ exit
 # Todos os direitos reservados
 
 # Variáveis e constantes utilizados na montagem e no QEMU
-
-# Dados de versão do Hexagonix
-
-export REVISAO=$(cat Dist/etc/revisao.def) 
-export CODENOME=$(cat Dist/etc/codenome.def)
-export VERSAO=$(cat Dist/etc/versao.def)
 
 # Constantes para execução da máquina virtual (QEMU) 
 
