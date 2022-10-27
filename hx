@@ -76,7 +76,7 @@ banner
 
 echo -e "Você precisa fornecer pelo menos um parâmetro para o HX."
 echo 
-echo -e "\e[1;94mDica: utilize \e[1;32m./hx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros"
+echo -e "\e[1;94mDica: utilize \e[1;32mhx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros"
 echo -e "\e[1;94mdisponíveis.\e[0m"
 echo
 
