@@ -16,11 +16,47 @@
 #;; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘          Todos os direitos reservados
 #;; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐
 #;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
-#;;              ┌─┘│          
-#;;              └──┘                            
+#;;              ┌─┘│                 Licenciado sob licença BSD-3-Clause
+#;;              └──┘          
 #;;
 #;;
 #;;************************************************************************************
+#;;
+#;; Este arquivo é licenciado sob licença BSD-3-Clause. Observe o arquivo de licença 
+#;; disponível no repositório para mais informações sobre seus direitos e deveres ao 
+#;; utilizar qualquer trecho deste arquivo.
+#;;
+#;; BSD 3-Clause License
+#;;
+#;; Copyright (c) 2015-2022, Felipe Miguel Nery Lunkes
+#;; All rights reserved.
+#;; 
+#;; Redistribution and use in source and binary forms, with or without
+#;; modification, are permitted provided that the following conditions are met:
+#;; 
+#;; 1. Redistributions of source code must retain the above copyright notice, this
+#;;    list of conditions and the following disclaimer.
+#;;
+#;; 2. Redistributions in binary form must reproduce the above copyright notice,
+#;;    this list of conditions and the following disclaimer in the documentation
+#;;    and/or other materials provided with the distribution.
+#;;
+#;; 3. Neither the name of the copyright holder nor the names of its
+#;;    contributors may be used to endorse or promote products derived from
+#;;    this software without specific prior written permission.
+#;; 
+#;; THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+#;; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#;; IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+#;; DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+#;; FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+#;; DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+#;; SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+#;; CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+#;; OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+#;; OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#;;
+#;; $HexagonixOS$
 
 # Sessão de ajuda e informações sobre o hx
 
@@ -41,6 +77,7 @@ echo -e "\e[1;32m  hx\e[0m - Construir imagem de disco com o Hexagonix"
 echo -e "\e[1;32m  hx.teste\e[0m - Construir imagem de disco teste com o Hexagonix"
 echo -e "\e[1;32m-u\e[0m - Sincronizar as imagens do Hexagonix com o repositório oficial"
 echo -e "\e[1;32m-uf\e[0m - Atualiza todos os repositórios com o servidor (ramo atual)"
+echo -e "\e[1;32m-un <ramo>\e[0m - Troca de ramo para <ramo> e atualiza todos os repositórios"
 echo -e "\e[1;32mlimpar\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
 
 echo 
@@ -67,16 +104,10 @@ echo
 
 parametrosNecessarios(){
 
-clear
-
-export MSG="Ajuda do hx"
-
-banner 
-
-echo -e "Você precisa fornecer pelo menos um parâmetro para o HX."
+echo
+echo -e "Você precisa fornecer pelo menos um parâmetro \e[1;94mválido \e[0mpara o HX."
 echo 
-echo -e "\e[1;94mDica: utilize \e[1;32m./hx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros"
-echo -e "\e[1;94mdisponíveis.\e[0m"
+echo -e "\e[1;94mDica: utilize \e[1;32mhx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros disponíveis.\e[0m"
 echo
 
 }
@@ -107,13 +138,13 @@ definirHexagonixTeste()
 # Aqui vamos gerar uma imagem pequena, de 2 Mb, menor e apenas para testes. Essa imagem
 # não deve ser utilizada para o pacote de instalação.
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT"
 export imagemFinal="hexagonix.img"
 export Par="pt"
 
 if [ "$PT2" = "en" ]; then
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=EN"
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN"
 export imagemFinal="en.andromeda.img"
 export Par="en"
 
@@ -345,6 +376,8 @@ exit
 gerenciarConstrucao()
 {
 
+obterInfoBuild
+
 case $PT2 in
 
 hx) prepImagemHexagonix; exit;;
@@ -379,12 +412,12 @@ esac
 construtorHexagonix()
 {
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT"
 export imagemFinal="hexagonix.img"
 
 if [ "$IDIOMA" = "en" ]; then
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=EN"
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN"
 export imagemFinal="en.andromeda.img"
 
 fi
@@ -574,7 +607,7 @@ cp $DESTINODISTRO/hboot Sistema/ >> $LOG || erroMontagem
 
 # A licença deve ser copiada
 
-cp hexagonix/LICENSE Sistema/ >> $LOG || erroMontagem
+cp Dist/man/LICENSE Sistema/ >> $LOG || erroMontagem
 
 # Agora, copiar módulos do HBoot
 
@@ -748,7 +781,7 @@ cp $DESTINODISTRO/bin/* $PWD/Sistema >> $LOG
 
 # A licença deve ser copiada
 
-cp hexagonix/LICENSE $PWD/Sistema >> $LOG || erroMontagem
+cp Dist/man/LICENSE $PWD/Sistema >> $LOG || erroMontagem
 
 # Agora, copiar módulos do HBoot
 
@@ -1053,6 +1086,17 @@ echo
 		
 }
 
+obterInfoBuild()
+{
+
+# Dados de versão do Hexagonix
+
+export REVISAO=$(cat Dist/etc/revisao.def) 
+export CODENOME=$(cat Dist/etc/codenome.def)
+export VERSAO=$(cat Dist/etc/versao.def)
+
+}
+
 infoBuild(){
 
 clear
@@ -1288,7 +1332,7 @@ export MSG="Atualizar repositórios"
 banner 
 
 echo "Você está prestes a atualizar todos os repositórios do sistema com o servidor,"
-echo "mantendo o ramo atual. Para alterar o ramo e atualar, use hx -un (em breve)."
+echo "mantendo o ramo atual. Para alterar o ramo e atualar, use hx -un <ramo>."
 echo 
 
 cd Apps/Unix && git pull
@@ -1320,6 +1364,52 @@ cd ..
 cd lib && git pull
 cd ..
 cd Scripts && git pull
+
+terminar
+tudopronto
+
+}
+
+trocarRamoAtualizar()
+{
+
+export MSG="Atualizar ramo e repositórios"
+
+banner 
+
+echo "Você está prestes a atualizar todos os repositórios do sistema com o servidor,"
+echo "após trocar para o ramo fornecido."
+echo 
+
+cd Apps/Unix && git switch $PT2 && git pull
+cd ..
+cd Andromeda && git switch $PT2 && git pull
+cd ..
+cd ..
+cd Boot/Saturno && git switch $PT2 && git pull
+cd ..
+cd "Hexagon Boot" && git switch $PT2 && git pull 
+cd ..
+cd ..
+cd Dist/etc && git switch $PT2 && git pull
+cd ..
+cd man && git switch $PT2 && git pull
+cd ..
+cd ..
+cd Doc && git switch $PT2 && git pull
+cd ..
+cd Externos/fasmX && git switch $PT2 && git pull
+cd .. 
+cd ..
+cd Fontes && git switch $PT2 && git pull
+cd ..
+cd Hexagon && git switch $PT2 && git pull
+cd ..
+cd hexagonix && git switch $PT2 && git pull
+cd ..
+cd lib && git switch $PT2 && git pull
+cd ..
+cd Scripts && git switch $PT2 && git pull
 
 terminar
 tudopronto
@@ -1364,12 +1454,6 @@ exit
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 
-# Dados de versão do Hexagonix
-
-export REVISAO=$(cat Dist/etc/revisao.def)
-export CODENOME=$(cat Dist/etc/codenome.def)
-export VERSAO=$(cat Dist/etc/versao.def)
-
 # Constantes para execução da máquina virtual (QEMU) 
 
 export drvsom="pcspk"
@@ -1386,7 +1470,7 @@ export dirImagem="hexagonix"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT"
 export BANDEIRASHEXAGON="VERBOSE=SIM"
 export BANDEIRASHBOOT="TEMATOM=ANDROMEDA"
 
@@ -1402,7 +1486,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="11.2"
+export VERSAOHX="11.3"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
@@ -1422,6 +1506,7 @@ limpar) limpar; exit;;
 -b) gerenciarConstrucaoComponentes; exit;;
 -u) atualizarImagens; exit;;
 -uf) atualizarRepos; exit;;
+-un) trocarRamoAtualizar; exit;;
 --ver) exibirCopyright; exit;;
 --depend) instalarDependencias; exit;; 
 --info) infoBuild; exit;;
