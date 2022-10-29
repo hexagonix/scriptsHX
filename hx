@@ -16,9 +16,18 @@
 #;; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘          Todos os direitos reservados
 #;; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐
 #;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
-#;;              ┌─┘│          
-#;;              └──┘                            
+#;;              ┌─┘│                 Licenciado sob licença BSD-3-Clause
+#;;              └──┘          
 #;;
+#;;
+#;;************************************************************************************
+#;;
+#;; Este arquivo é licenciado sob licença BSD-3-Clause. Observe o arquivo de licença 
+#;; disponível no repositório para mais informações sobre seus direitos e deveres ao 
+#;; utilizar qualquer trecho deste arquivo.
+#;;
+#;; Copyright (C) 2016-2022 Felipe Miguel Nery Lunkes
+#;; Todos os direitos reservados.
 #;;
 #;;************************************************************************************
 
@@ -102,13 +111,13 @@ definirHexagonixTeste()
 # Aqui vamos gerar uma imagem pequena, de 2 Mb, menor e apenas para testes. Essa imagem
 # não deve ser utilizada para o pacote de instalação.
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT"
 export imagemFinal="hexagonix.img"
 export Par="pt"
 
 if [ "$PT2" = "en" ]; then
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=EN"
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN"
 export imagemFinal="en.andromeda.img"
 export Par="en"
 
@@ -376,12 +385,12 @@ esac
 construtorHexagonix()
 {
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT"
 export imagemFinal="hexagonix.img"
 
 if [ "$IDIOMA" = "en" ]; then
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=EN"
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN"
 export imagemFinal="en.andromeda.img"
 
 fi
@@ -1434,7 +1443,7 @@ export dirImagem="hexagonix"
 
 # Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Andromeda -d VERBOSE=SIM -d IDIOMA=PT"
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT"
 export BANDEIRASHEXAGON="VERBOSE=SIM"
 export BANDEIRASHBOOT="TEMATOM=ANDROMEDA"
 
