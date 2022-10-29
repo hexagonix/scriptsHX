@@ -607,7 +607,7 @@ cp $DESTINODISTRO/hboot Sistema/ >> $LOG || erroMontagem
 
 # A licença deve ser copiada
 
-cp hexagonix/LICENSE Sistema/ >> $LOG || erroMontagem
+cp Dist/man/LICENSE Sistema/ >> $LOG || erroMontagem
 
 # Agora, copiar módulos do HBoot
 
