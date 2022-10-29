@@ -781,7 +781,7 @@ cp $DESTINODISTRO/bin/* $PWD/Sistema >> $LOG
 
 # A licença deve ser copiada
 
-cp hexagonix/LICENSE $PWD/Sistema >> $LOG || erroMontagem
+cp Dist/man/LICENSE $PWD/Sistema >> $LOG || erroMontagem
 
 # Agora, copiar módulos do HBoot
 
