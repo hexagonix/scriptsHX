@@ -63,22 +63,24 @@
 exibirAjuda() {
 
 echo
-echo -e "Ajuda de uso do hx:"
+echo -e "Ajuda de uso do hx $VERSAOHX:"
 echo
 echo -e "\e[1;94mPrincipais\e[0m parâmetros disponíveis:"
 echo 
-echo -e "\e[1;32m-v\e[0m - Iniciar uma máquina virtual. Os parâmetros disponíveis são:"
-echo -e "\e[1;32m  hx\e[0m  - Iniciar máquina virtual do Hexagonix"
-echo -e "\e[1;32m  hx.som\e[0m - Iniciar máquina virtual do Hexagonix em modo com som"
+echo -e "\e[1;32m-v\e[0m - Iniciar uma máquina virtual. Os parâmetros disponíveis são\e[1;31m (hx padrão)*\e[0m:"
+echo -e "\e[1;32m  hx\e[0m        - Iniciar máquina virtual do Hexagonix"
+echo -e "\e[1;32m  hx.som\e[0m    - Iniciar máquina virtual do Hexagonix em modo com som"
 echo -e "\e[1;32m  hx.serial\e[0m - Iniciar máquina virtual do Hexagonix sem saída serial"
-echo -e "\e[1;32m  bsd-hx\e[0m - Iniciar máquina virtual compatível com host BSD"
-echo -e "\e[1;32m-i\e[0m - Construir imagem de disco. Os parâmetos disponíveis são:"
-echo -e "\e[1;32m  hx\e[0m - Construir imagem de disco com o Hexagonix"
+echo -e "\e[1;32m  bsd-hx\e[0m    - Iniciar máquina virtual compatível com host BSD"
+echo -e "\e[1;31m  * A opção 'hx' será selecionada se nenhum parâmetro for passado após '-v'!\e[0m"
+echo -e "\e[1;32m-i\e[0m - Construir imagem de disco. Os parâmetos disponíveis são\e[1;31m (hx padrão)*\e[0m:"
+echo -e "\e[1;32m  hx\e[0m       - Construir imagem de disco com o Hexagonix"
 echo -e "\e[1;32m  hx.teste\e[0m - Construir imagem de disco teste com o Hexagonix"
-echo -e "\e[1;32m-u\e[0m - Sincronizar as imagens do Hexagonix com o repositório oficial"
+echo -e "\e[1;31m  * A opção 'hx' será selecionada se nenhum parâmetro for passado após '-i'!\e[0m"
+echo -e "\e[1;32m-u\e[0m  - Sincronizar as imagens do Hexagonix com o repositório oficial"
 echo -e "\e[1;32m-uf\e[0m - Atualiza todos os repositórios com o servidor (ramo atual)"
 echo -e "\e[1;32m-un <ramo>\e[0m - Troca de ramo para <ramo> e atualiza todos os repositórios"
-echo -e "\e[1;32mlimpar\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
+echo -e "\e[1;32m-c\e[0m  - Limpa os arquivos de configuração e binários da árvore do sistema"
 
 echo 
 
@@ -107,7 +109,7 @@ parametrosNecessarios(){
 echo
 echo -e "Você precisa fornecer pelo menos um parâmetro \e[1;94mválido \e[0mpara o HX."
 echo 
-echo -e "\e[1;94mDica: utilize \e[1;32mhx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros disponíveis.\e[0m"
+echo -e "\e[1;94mDica: utilize \e[1;32m./hx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros disponíveis.\e[0m"
 echo
 
 }
@@ -115,6 +117,8 @@ echo
 # Sessão de configuração para montagem do sistema
 
 prepImagemHexagonix(){
+
+verificarEstaticos
 
 iniciarLog
 
@@ -124,6 +128,8 @@ imagemHexagonix
 }
 
 prepImagemHexagonixTeste(){
+
+verificarEstaticos
 
 iniciarLog
 
@@ -382,9 +388,7 @@ case $PT2 in
 
 hx) prepImagemHexagonix; exit;;
 hx.teste) prepImagemHexagonixTeste; exit;;
-distros) prepDistros; exit;;
-
-*) parametrosNecessarios; exit;;
+*) prepImagemHexagonix; exit;; # Assimir hx -i hx
 
 esac
 
@@ -910,8 +914,7 @@ bsd-hx) mvHexagonixSobreBSD; exit;;
 hx) mvHexagonixKVM; exit;;
 hx.som) mvHexagonixSnd; exit;;
 hx.serial) mvHexagonixSerial; exit;;
-
-*) parametrosNecessarios; exit;;
+*) mvHexagonixKVM; exit;; # Assumir hx -v hx
 
 esac
 
@@ -1150,6 +1153,38 @@ echo -e "[\e[32mEtapa concluída com sucesso\e[0m]"
 tudopronto(){
 
 echo -e "[\e[32mTudo pronto!\e[0m]"
+
+}
+
+verificarEstaticos()
+{
+
+# Vamos verificar se antes os arquivos estáticos essenciais já foram gerados.
+# Se não, vamos gerá-los
+
+if [ -e Dist/etc/base.ocl ] ; then
+
+echo "Arquivos estáticos presentes."
+
+else
+
+clear 
+
+export MSG="Construção do Hexagonix"
+
+banner 
+
+echo "Os arquivos estáticos necessários à construção do sistema não foram encontrados."
+echo "A construção não pode ser iniciada. Para isso, o hx irá executar ./configure.sh"
+echo "para configurar a construção e gerar os arquivos necessários."
+echo
+echo "Pressione <ENTER> para continuar ou CTRL-C para cancelar..."
+
+read resposta
+
+./configure.sh
+
+fi
 
 }
 
@@ -1486,7 +1521,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="11.3"
+export VERSAOHX="11.4.2"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
@@ -1496,7 +1531,7 @@ export INCLUDE="$(pwd)/lib/fasm"
 
 case $1 in
 
-limpar) limpar; exit;;
+-c) limpar; exit;;
 
 # Novo mecanismo de gerenciamento de parâmetros
 
@@ -1507,6 +1542,9 @@ limpar) limpar; exit;;
 -u) atualizarImagens; exit;;
 -uf) atualizarRepos; exit;;
 -un) trocarRamoAtualizar; exit;;
+
+# Parâmetros com --
+
 --ver) exibirCopyright; exit;;
 --depend) instalarDependencias; exit;; 
 --info) infoBuild; exit;;
