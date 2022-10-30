@@ -109,7 +109,7 @@ parametrosNecessarios(){
 echo
 echo -e "Você precisa fornecer pelo menos um parâmetro \e[1;94mválido \e[0mpara o HX."
 echo 
-echo -e "\e[1;94mDica: utilize \e[1;32mhx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros disponíveis.\e[0m"
+echo -e "\e[1;94mDica: utilize \e[1;32m./hx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros disponíveis.\e[0m"
 echo
 
 }
