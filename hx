@@ -1543,6 +1543,9 @@ case $1 in
 -u) atualizarImagens; exit;;
 -uf) atualizarRepos; exit;;
 -un) trocarRamoAtualizar; exit;;
+
+# Parâmetros com --
+
 --ver) exibirCopyright; exit;;
 --depend) instalarDependencias; exit;; 
 --info) infoBuild; exit;;
