@@ -68,19 +68,19 @@ echo
 echo -e "\e[1;94mPrincipais\e[0m parâmetros disponíveis:"
 echo 
 echo -e "\e[1;32m-v\e[0m - Iniciar uma máquina virtual. Os parâmetros disponíveis são\e[1;31m (hx padrão)*\e[0m:"
-echo -e "\e[1;32m  hx\e[0m  - Iniciar máquina virtual do Hexagonix"
-echo -e "\e[1;32m  hx.som\e[0m - Iniciar máquina virtual do Hexagonix em modo com som"
+echo -e "\e[1;32m  hx\e[0m        - Iniciar máquina virtual do Hexagonix"
+echo -e "\e[1;32m  hx.som\e[0m    - Iniciar máquina virtual do Hexagonix em modo com som"
 echo -e "\e[1;32m  hx.serial\e[0m - Iniciar máquina virtual do Hexagonix sem saída serial"
-echo -e "\e[1;32m  bsd-hx\e[0m - Iniciar máquina virtual compatível com host BSD"
+echo -e "\e[1;32m  bsd-hx\e[0m    - Iniciar máquina virtual compatível com host BSD"
 echo -e "\e[1;31m  * A opção 'hx' será selecionada se nenhum parâmetro for passado após '-v'!\e[0m"
 echo -e "\e[1;32m-i\e[0m - Construir imagem de disco. Os parâmetos disponíveis são\e[1;31m (hx padrão)*\e[0m:"
-echo -e "\e[1;32m  hx\e[0m - Construir imagem de disco com o Hexagonix"
+echo -e "\e[1;32m  hx\e[0m       - Construir imagem de disco com o Hexagonix"
 echo -e "\e[1;32m  hx.teste\e[0m - Construir imagem de disco teste com o Hexagonix"
 echo -e "\e[1;31m  * A opção 'hx' será selecionada se nenhum parâmetro for passado após '-i'!\e[0m"
-echo -e "\e[1;32m-u\e[0m - Sincronizar as imagens do Hexagonix com o repositório oficial"
+echo -e "\e[1;32m-u\e[0m  - Sincronizar as imagens do Hexagonix com o repositório oficial"
 echo -e "\e[1;32m-uf\e[0m - Atualiza todos os repositórios com o servidor (ramo atual)"
 echo -e "\e[1;32m-un <ramo>\e[0m - Troca de ramo para <ramo> e atualiza todos os repositórios"
-echo -e "\e[1;32m-c\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
+echo -e "\e[1;32m-c\e[0m  - Limpa os arquivos de configuração e binários da árvore do sistema"
 
 echo 
 
