@@ -1532,7 +1532,11 @@ export INCLUDE="$(pwd)/lib/fasm"
 
 case $1 in
 
+# Alias para português e inglês
+
+clean) limpar; exit;;
 limpar) limpar; exit;;
+-c) limpar; exit;;
 
 # Novo mecanismo de gerenciamento de parâmetros
 
