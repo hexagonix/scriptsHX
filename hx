@@ -116,6 +116,8 @@ echo
 
 prepImagemHexagonix(){
 
+verificarEstaticos
+
 iniciarLog
 
 definirHexagonixOficial
@@ -124,6 +126,8 @@ imagemHexagonix
 }
 
 prepImagemHexagonixTeste(){
+
+verificarEstaticos
 
 iniciarLog
 
@@ -1153,6 +1157,38 @@ echo -e "[\e[32mTudo pronto!\e[0m]"
 
 }
 
+verificarEstaticos()
+{
+
+# Vamos verificar se antes os arquivos estáticos essenciais já foram gerados.
+# Se não, vamos gerá-los
+
+if [ -e Dist/etc/base.ocl ] ; then
+
+echo "Arquivos estáticos presentes."
+
+else
+
+clear 
+
+export MSG="Construção do Hexagonix"
+
+banner 
+
+echo "Os arquivos estáticos necessários à construção do sistema não foram encontrados."
+echo "A construção não pode ser iniciada. Para isso, o hx irá executar ./configure.sh"
+echo "para configurar a construção e gerar os arquivos necessários."
+echo
+echo "Pressione <ENTER> para continuar ou CTRL-C para cancelar..."
+
+read resposta
+
+./configure.sh
+
+fi
+
+}
+
 exibirEstatisticas(){
 
 clear 
@@ -1486,7 +1522,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="11.3"
+export VERSAOHX="11.4"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
