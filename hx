@@ -78,7 +78,7 @@ echo -e "\e[1;32m  hx.teste\e[0m - Construir imagem de disco teste com o Hexagon
 echo -e "\e[1;32m-u\e[0m - Sincronizar as imagens do Hexagonix com o repositório oficial"
 echo -e "\e[1;32m-uf\e[0m - Atualiza todos os repositórios com o servidor (ramo atual)"
 echo -e "\e[1;32m-un <ramo>\e[0m - Troca de ramo para <ramo> e atualiza todos os repositórios"
-echo -e "\e[1;32mlimpar\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
+echo -e "\e[1;32m-c\e[0m - Limpa os arquivos de configuração e binários da árvore do sistema"
 
 echo 
 
@@ -1522,7 +1522,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="11.4"
+export VERSAOHX="11.4.1"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
@@ -1532,10 +1532,6 @@ export INCLUDE="$(pwd)/lib/fasm"
 
 case $1 in
 
-# Alias para português e inglês
-
-clean) limpar; exit;;
-limpar) limpar; exit;;
 -c) limpar; exit;;
 
 # Novo mecanismo de gerenciamento de parâmetros
