@@ -63,7 +63,7 @@
 exibirAjuda() {
 
 echo
-echo -e "Ajuda de uso do hx:"
+echo -e "Ajuda de uso do hx $VERSAOHX:"
 echo
 echo -e "\e[1;94mPrincipais\e[0m parâmetros disponíveis:"
 echo 
