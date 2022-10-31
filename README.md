@@ -17,7 +17,9 @@
 
 <hr>
 
-# English
+<details title="English" align='left'>
+<br>
+<summary align='left'><strong>English</strong></summary>
 
 ### Tools for building Hexagonix
 
@@ -61,9 +63,11 @@ This repository contains tools to build Hexagonix and the system disk images, in
 
 </details>
 
-<hr>
+</details>
 
-# Português
+<details title="Português" align='left'>
+<br>
+<summary align='left'><strong>Português</strong></summary>
 
 ### Ferramentas para construção do Hexagonix
 
@@ -104,6 +108,8 @@ O `HX` é a ferramenta responsável por unificar toda a construção do Hexagoni
 * configure.sh: Deve estar no diretório raiz da árvore de construção. Ele é responsável por criar arquivos estáticos necessários à construção do Hexagonix. Sua execução pode ser iniciada pelo `HX`, caso os arquivos estáticos necessários não sejam localizados.
 
 </div>
+
+</details>
 
 </details>
 
