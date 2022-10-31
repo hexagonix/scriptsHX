@@ -32,7 +32,7 @@ This repository contains tools to build Hexagonix and the system disk images, in
 <summary align='left'><strong>HX</strong></summary>
 
 <p align="center">
-<img src="https://github.com/hexagonix/Doc/blob/main/Img/HX.png">
+<img width="150px" height="150px" src="https://github.com/hexagonix/Doc/blob/main/Img/HX.png">
 </p>
 
 <div align="justify">
@@ -78,14 +78,14 @@ Este repositório contém ferramentas para construir o Hexagonix e as imagens de
 <summary align='left'><strong>HX</strong></summary>
 
 <p align="center">
-<img width="100px" height="100px" src="https://github.com/hexagonix/Doc/blob/main/Img/HX.png">
+<img width="150px" height="150px" src="https://github.com/hexagonix/Doc/blob/main/Img/HX.png">
 </p>
 
 <div align="justify">
 
 O `HX` é a ferramenta responsável por unificar toda a construção do Hexagonix, criação de imagens de disco e execução de testes em uma máquina virtual. O `HX` aceita uma série de parâmetros para personalizar a construção do sistema e o ambiente de testes. O `HX`deve estar no diretório raiz da árvore de construção do Hexagonix. Veja abaixo alguns dos parâmetros aceitos.
 
-* `-i`: Criar uma imagem de disco contendo o Hexagonix. Esse parâmetro necessita de um segundo, especificando o tipo de imagem. O parâmetro secundário padrão para `-i`é `hx`, como em `hx -i hx`. Essa opção cria uma imagem de disco padrão do Hexagonix, construído com as definições padrão. Use `hx -h`para mais informações.
+* `-i`: Criar uma imagem de disco contendo o Hexagonix. Esse parâmetro necessita de um segundo, especificando o tipo de imagem. O parâmetro secundário padrão para `-i` é `hx`, como em `hx -i hx`. Essa opção cria uma imagem de disco padrão do Hexagonix, construído com as definições padrão. Use `hx -h`para mais informações.
 * `-v`: Inicia um ambiente virtual para executar o Hexagonix no `qemu`. Esse parâmetro necessita de um segundo, especificando o ambiente virtual a ser utilizado. O parâmetro secundário padrão para `-v`é `hx`, como em `hx -v hx`. Essa opção inicia uma máquina virtual com as definições padrão. Use `hx -h`para mais informações.
 * `-c`: Limpa os arquivos objeto da árvore de fontes do sistema. Use `hx -h`para mais informações.
 * `-h`: Exibe a ajuda padrão do `HX`, com todas as opções disponíveis.
