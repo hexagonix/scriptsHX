@@ -32,7 +32,7 @@ This repository contains tools to build Hexagonix and the system disk images, in
 <summary align='left'><strong>HX</strong></summary>
 
 <p align="center">
-<img src="https://github.com/hexagonix/Doc/blob/main/Img/banner.png">
+<img src="https://github.com/hexagonix/Doc/blob/main/Img/HX.png">
 </p>
 
 <div align="justify">
@@ -45,6 +45,8 @@ This repository contains tools to build Hexagonix and the system disk images, in
 * `-h`: Displays the standard `HX` help, with all available options.
 
 </div>
+
+</details>
 
 <details title="Other Tools" align='left'>
 <br>
@@ -76,7 +78,7 @@ Este repositório contém ferramentas para construir o Hexagonix e as imagens de
 <summary align='left'><strong>HX</strong></summary>
 
 <p align="center">
-<img src="https://github.com/hexagonix/Doc/blob/main/Img/banner.png">
+<img src="https://github.com/hexagonix/Doc/blob/main/Img/HX.png">
 </p>
 
 <div align="justify">
@@ -89,6 +91,8 @@ O `HX` é a ferramenta responsável por unificar toda a construção do Hexagoni
 * `-h`: Exibe a ajuda padrão do `HX`, com todas as opções disponíveis.
 
 </div>
+
+</details>
 
 <details title="Outras ferramentas" align='left'>
 <br>
