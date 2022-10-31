@@ -78,7 +78,7 @@ Este repositório contém ferramentas para construir o Hexagonix e as imagens de
 <summary align='left'><strong>HX</strong></summary>
 
 <p align="center">
-<img weight= "150" src="https://github.com/hexagonix/Doc/blob/main/Img/HX.png">
+<img weight= "150px" src="https://github.com/hexagonix/Doc/blob/main/Img/HX.png">
 </p>
 
 <div align="justify">
