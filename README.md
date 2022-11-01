@@ -87,7 +87,7 @@ Este repositório contém ferramentas para construir o Hexagonix e as imagens de
 
 <div align="justify">
 
-O `HX` é a ferramenta responsável por unificar toda a construção do Hexagonix, criação de imagens de disco e execução de testes em uma máquina virtual. O `HX` aceita uma série de parâmetros para personalizar a construção do sistema e o ambiente de testes. O `HX`deve estar no diretório raiz da árvore de construção do Hexagonix. Veja abaixo alguns dos parâmetros aceitos.
+O `HX` é a ferramenta responsável por unificar toda a construção do Hexagonix, criação de imagens de disco e execução de testes em uma máquina virtual. O `HX` aceita uma série de parâmetros para personalizar a construção do sistema e o ambiente de testes. O `HX` deve estar no diretório raiz da árvore de construção do Hexagonix. Veja abaixo alguns dos parâmetros aceitos.
 
 * `-i`: Criar uma imagem de disco contendo o Hexagonix. Esse parâmetro necessita de um segundo, especificando o tipo de imagem. O parâmetro secundário padrão para `-i` é `hx`, como em `hx -i hx`. Essa opção cria uma imagem de disco padrão do Hexagonix, construído com as definições padrão. Use `hx -h`para mais informações.
 * `-v`: Inicia um ambiente virtual para executar o Hexagonix no `qemu`. Esse parâmetro necessita de um segundo, especificando o ambiente virtual a ser utilizado. O parâmetro secundário padrão para `-v`é `hx`, como em `hx -v hx`. Essa opção inicia uma máquina virtual com as definições padrão. Use `hx -h`para mais informações.
