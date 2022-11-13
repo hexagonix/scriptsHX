@@ -80,6 +80,7 @@ echo -e "\e[1;31m  * A opção 'hx' será selecionada se nenhum parâmetro for p
 echo -e "\e[1;32m-u\e[0m  - Sincronizar as imagens do Hexagonix com o repositório oficial"
 echo -e "\e[1;32m-uf\e[0m - Atualiza todos os repositórios com o servidor (ramo atual)"
 echo -e "\e[1;32m-un <ramo>\e[0m - Troca de ramo para <ramo> e atualiza todos os repositórios"
+echo -e "\e[1;32m-m\e[0m - Clona os repositórios para o local e configura o ambiente de construção"
 echo -e "\e[1;32m-c\e[0m  - Limpa os arquivos de configuração e binários da árvore do sistema"
 
 echo 
@@ -1451,6 +1452,124 @@ tudopronto
 
 }
 
+clonarRepos()
+{
+
+clear
+
+export MSG="Construir o Hexagonix®"
+
+banner 
+
+echo "Clonando os repositórios necessários para construir o Hexagonix®..."
+echo 
+
+# Primeiro, vamos criar os diretórios comuns
+
+cd Hexagonix 
+
+mkdir -p Apps/
+mkdir -p Boot/
+mkdir -p Externos/
+mkdir -p Dist/
+
+# Vamos clonar o Hexagon
+
+git clone https://github.com/hexagonix/Hexagon Hexagon
+
+# Vamos clonar o Saturno e o HBoot
+
+git clone https://github.com/hexagonix/Saturno Boot/Saturno
+git clone https://github.com/hexagonix/HBoot "Boot/Hexagon Boot"
+
+# Vamos agora clonar os respositórios de utilitários
+
+git clone https://github.com/hexagonix/Unix-Apps Apps/Unix
+git clone https://github.com/hexagonix/Andromeda-Apps Apps/Andromeda
+
+# Vamos clonar as bibliotecas 
+
+git clone https://github.com/hexagonix/lib lib
+
+# Agora vamos clocar arquivos estáticos e manuais
+
+git clone https://github.com/hexagonix/man Dist/man
+git clone https://github.com/hexagonix/etc Dist/etc
+
+# Vamos clonar as fontes gráficas
+
+git clone https://github.com/hexagonix/xfnt Fontes
+
+# Agora, fasmX
+
+git clone https://github.com/hexagonix/fasmX Externos/fasmX
+
+# Agora o repositório de imagens
+
+git clone https://github.com/hexagonix/hexagonix hexagonix
+
+# Agora, a documentação
+
+git clone https://github.com/hexagonix/Doc
+
+# Por último, os scripts de geração do sistema
+
+git clone https://github.com/hexagonix/scriptsHX Scripts
+
+# Agora vamos colocar as coisas no lugar 
+
+cd Scripts 
+
+cp configure.sh hx ../
+cp Externos.sh ../Externos
+
+cd ..
+
+chmod +x configure.sh hx 
+
+echo
+echo -e "[\e[32mTudo pronto!\e[0m]"
+echo
+
+exit 
+
+}
+
+checarDependenciasClonagem()
+{
+
+clear
+
+export MSG="Construir o Hexagonix®"
+
+banner 
+
+echo -e "Verificando dependências necessárias para clonar os repositórios..."
+echo 
+
+# Agora vamos verificar cada dependência do mecanismo de construção
+
+# Dependência 1
+
+echo -n " > git "
+
+if [ -e /usr/bin/git ] ; then
+
+echo -e "[\e[32mOk\e[0m]"
+
+else
+
+echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "   > \e[1;31mVocê NÃO pode iniciar sem essa dependência\e[0m."
+
+exit
+
+fi	
+
+clonarRepos
+
+}
+
 finalizar()
 {
 
@@ -1521,7 +1640,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="11.4.2"
+export VERSAOHX="11.5"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
@@ -1542,6 +1661,7 @@ case $1 in
 -u) atualizarImagens; exit;;
 -uf) atualizarRepos; exit;;
 -un) trocarRamoAtualizar; exit;;
+-m) checarDependenciasClonagem; exit;;
 
 # Parâmetros com --
 
