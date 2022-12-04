@@ -55,7 +55,7 @@
 checarDependencias()
 {
 
-echo -e "Verificando dependências necessárias à construção do sistema..."
+echo -e "Checking dependencies needed to build the system..."
 
 # Agora vamos verificar cada dependência do mecanismo de construção
 
@@ -69,8 +69,8 @@ echo -e "[\e[32mOk\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema sem essa dependência\e[0m."
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
 fi	
 
@@ -84,8 +84,8 @@ echo -e "[\e[32mOk\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema sem essa dependência\e[0m."
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
 
 fi	
 
@@ -99,8 +99,8 @@ echo -e "[\e[32mOk\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema sem essa dependência\e[0m."
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
 
 fi	
 
@@ -114,8 +114,8 @@ echo -e "[\e[32mOk\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema sem essa dependência\e[0m."
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
 fi	
 
@@ -129,8 +129,8 @@ echo -e "[\e[32mOk\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema sem essa dependência\e[0m."
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
 
 fi	
 
@@ -144,8 +144,8 @@ echo -e "[\e[32mOk\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;94mVocê pode iniciar a construção do sistema sem essa dependência\e[0m."
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
 
 fi	
 
@@ -153,11 +153,11 @@ terminar
 
 # Agora vamos checar se os scripts estão disponíveis e torná-los executáveis
 
-echo -e "Checando scripts e utilitários necessários à construção do sistema..."
+echo -e "Checking scripts and utilities needed to build the system..."
 
 # Script 1
 
-echo -n " > Script de construção e execução do sistema (hx) "
+echo -n " > System build and run script (hx) "
 
 if [ -e hx ] ; then
 
@@ -165,18 +165,18 @@ echo -en "[\e[32mOk\e[0m]"
 
 chmod +x hx
 
-echo -e " [\e[94mExecutável\e[0m]"
+echo -e " [\e[94mExecutable\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
 fi	
 
 # Script 2
 
-echo -n " > Script de construção de utilitários externos (Externos.sh) "
+echo -n " > Script for building external utilities (Externos.sh) "
 
 if [ -e Externos/Externos.sh ] ; then
 
@@ -184,18 +184,18 @@ echo -en "[\e[32mOk\e[0m]"
 
 chmod +x Externos/Externos.sh 
 
-echo -e " [\e[94mExecutável\e[0m]"
+echo -e " [\e[94mExecutable\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
 fi	
 
 # Script 3
 
-echo -n " > Script de construção de utilitários Unix (Unix.sh) "
+echo -n " > Unix utilities build script (Unix.sh) "
 
 if [ -e Apps/Unix/Unix.sh ] ; then
 
@@ -203,18 +203,18 @@ echo -en "[\e[32mOk\e[0m]"
 
 chmod +x Apps/Unix/Unix.sh 
 
-echo -e " [\e[94mExecutável\e[0m]"
+echo -e " [\e[94mExecutable\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
 fi	
 
 # Script 4
 
-echo -n " > Script de construção de aplicativos Andromeda (Apps.sh) "
+echo -n " > Andromeda-Hexagonix application build script (Apps.sh) "
 
 if [ -e Apps/Andromeda/Apps.sh ] ; then
 
@@ -222,18 +222,18 @@ echo -en "[\e[32mOk\e[0m]"
 
 chmod +x Apps/Andromeda/Apps.sh 
 
-echo -e " [\e[94mExecutável\e[0m]"
+echo -e " [\e[94mExecutable\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
 fi	
 
 # Script 5
 
-echo -n " > Script de construção de fontes do Hexagonix (fontes.sh) "
+echo -n " > Hexagonix font build script (fonts.sh) "
 
 if [ -e Fontes/fontes.sh ] ; then
 
@@ -241,12 +241,12 @@ echo -en "[\e[32mOk\e[0m]"
 
 chmod +x Fontes/fontes.sh 
 
-echo -e " [\e[94mExecutável\e[0m]"
+echo -e " [\e[94mExecutable\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;31mVocê NÃO pode iniciar a construção do sistema com essa dependência\e[0m."
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
 fi	
 
@@ -254,7 +254,7 @@ fi
 
 # Copiar hx
 
-echo -n " > Copiando/atualizando hx (destino: /usr/bin)... "
+echo -n " > Copying/updating hx (destination: /usr/bin)... "
 
 cp hx /usr/bin 
 
@@ -264,11 +264,11 @@ echo -en "[\e[32mOk\e[0m]"
 
 chmod +x /usr/bin/hx
 
-echo -e " [\e[94mExecutável\e[0m]"
+echo -e " [\e[94mExecutable\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
+echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mVocê deve usar a cópia local de hx para executar as operações\e[0m."
 
 fi 
@@ -279,7 +279,7 @@ terminar
 
 build() {
 
-echo -e "Configurando dados de construção do sistema..."
+echo -e "Configuring system build data..."
 
 # Primeiro, vamos montar a base 
 
@@ -287,25 +287,25 @@ cd Dist/etc
 
 if [ -e base.ocl ] ; then
 
-echo " > Removendo informações de construção e versão base anteriores..."
+echo " > Removing previous build and base version information..."
 
 rm base.ocl
 
 fi	
 
-echo -n " > Processando arquivo .conf e definindo arquivo de configuração... "
+echo -n " > Processing .conf file and setting configuration file... "
 echo -e $(cat base.conf)$VERSAO"]"$CODENOME'"'$VERSAO"#"$REVISAO"!"$BUILD">" >> base.ocl 
 echo -e "[\e[32mOk\e[0m]"
 
 if [ -e hexgnix.unx ] ; then
 
-echo " > Removendo informações de construção e versão do Hexagonix anteriores..."
+echo " > Removing previous Hexagonix build and version information..."
 
 rm hexgnix.unx
 
 fi	
 
-echo -n " > Processando arquivo .conf e criando UNX-XML... "
+echo -n " > Processing .conf file and creating UNX-XML... "
 echo -e $(cat hexgnix.conf)"<VERSAO> "$VERSAO" </VERSAO>" >> hexgnix.unx
 echo -e "<NOME> $CODENOME </NOME>" >> hexgnix.unx
 echo -e "<PACOTE> $VERSAO </PACOTE>" >> hexgnix.unx
@@ -323,19 +323,19 @@ terminar
 host()
 {
 
-echo -e "Configurando nome de host..."
+echo -e "Configuring hostname..."
 
 cd Dist/etc 
 
 if [ -e host.unx ] ; then
 
-echo " > Removendo configuração de host anterior..."
+echo " > Removing previous host configuration..."
 
 rm host.unx
 
 fi	
 
-echo -n " > Processando arquivo .conf e criando configuração de host... "
+echo -n " > Processing .conf file and creating host configuration... "
 echo -e $CODENOME$(cat host.conf) >> host.unx
 echo -e "[\e[32mOk\e[0m]"
 
@@ -349,19 +349,19 @@ terminar
 usuarios()
 {
 
-echo -e "Configurando usuários..."
+echo -e "Configuring users..."
 
 cd Dist/etc 
 
 if [ -e usuario.unx ] ; then
 
-echo " > Removendo base de usuários anterior..."
+echo " > Removing previous user base..."
 
 rm usuario.unx
 
 fi	
 
-echo -n " > Processando arquivo .conf e criando banco de dados de usuários... "
+echo -n " > Processing .conf file and creating user database... "
 echo -e $(cat usuario.conf)"@"$CODENOME"|root&ash.app# # Usuario da versao" >> usuario.unx
 echo -e "[\e[32mOk\e[0m]"
 
@@ -375,19 +375,19 @@ terminar
 init()
 {
 
-echo -e "Configurando script de inicialização..."
+echo -e "Configuring startup script..."
 
 cd Dist/etc 
 
 if [ -e init.unx ] ; then
 
-echo " > Removendo script de inicialização anterior..."
+echo " > Removing previous startup script..."
 
 rm init.unx
 
 fi	
 
-echo -n " > Processando arquivo .conf e criando script de inicialização... "
+echo -n " > Processing .conf file and creating startup script... "
 echo -e $(cat init.conf) >> init.unx
 echo -e "[\e[32mOk\e[0m]"
 
@@ -401,7 +401,7 @@ terminar
 terminar()
 {
 
-echo -e "[\e[32mEtapa concluída com sucesso\e[0m]"
+echo -e "[\e[32mStep completed successfully\e[0m]"
 
 }
 
@@ -413,20 +413,20 @@ clear
 echo -e ";;****************************************************************************"
 echo -e ";;                                                                            "
 echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mHexagonix® Operating System\e[0m          "
 echo -e ";; ││ ││                                                                      "
 echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m             "
 echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
 echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                  \e[1;32mConfigurar ambiente de construção\e[0m        "
+echo -e ";;              ┌─┘│                   \e[1;32mConfigure build environment\e[0m        "
 echo -e ";;              └──┘                                                          "
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
 echo
-echo -e "Eliminando dependências instaladas em seu computador..."
+echo -e "Removing dependencies installed on your computer..."
 echo
-echo -n " > Removendo hx de /usr/bin... "
+echo -n " > Removing hx from /usr/bin... "
 
 if [ -e /usr/bin/hx ] ; then
 
@@ -434,7 +434,7 @@ rm -rf /usr/bin/hx
 
 else
 
-echo -e "[\e[94mPreviamente removido\e[0m] "
+echo -e "[\e[94mPreviously removed\e[0m] "
 
 terminar 
 
@@ -444,13 +444,13 @@ fi
 
 if [ -e /usr/bin/hx ] ; then
 
-echo -en "[\e[1;31mFalha\e[0m]"
+echo -en "[\e[1;31mFail\e[0m]"
 
 else
 
 echo -en "[\e[32mOk\e[0m]"
 
-echo -e " [\e[94mRemovido\e[0m]"
+echo -e " [\e[94mRemoved\e[0m]"
 
 fi 
 
@@ -466,18 +466,18 @@ clear
 echo -e ";;****************************************************************************"
 echo -e ";;                                                                            "
 echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mHexagonix® Operating System\e[0m          "
 echo -e ";; ││ ││                                                                      "
 echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m             "
 echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
 echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                  \e[1;32mConfigurar ambiente de construção\e[0m        "
+echo -e ";;              ┌─┘│                   \e[1;32mConfigure build environment\e[0m        "
 echo -e ";;              └──┘                                                          "
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
 echo
-echo -e "Verificando dependências e definindo configurações de construção do sistema..."
+echo -e "Checking dependencies and configuring system build settings..."
 echo
 
 checarDependencias
@@ -486,7 +486,7 @@ usuarios
 init
 host
 
-echo -e "[\e[32mTudo pronto!\e[0m]"
+echo -e "[\e[32mAll ready!\e[0m]"
 
 }
 
