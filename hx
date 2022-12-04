@@ -62,27 +62,25 @@
 
 exibirAjuda() {
 
+echo -e "hx usage help $VERSAOHX:"
 echo
-echo -e "Ajuda de uso do hx $VERSAOHX:"
+echo -e "\e[1;94mMain\e[0m available parameters:"
 echo
-echo -e "\e[1;94mPrincipais\e[0m parâmetros disponíveis:"
-echo 
-echo -e "\e[1;32m-v\e[0m - Iniciar uma máquina virtual. Os parâmetros disponíveis são\e[1;31m (hx padrão)*\e[0m:"
-echo -e "\e[1;32m  hx\e[0m        - Iniciar máquina virtual do Hexagonix"
-echo -e "\e[1;32m  hx.som\e[0m    - Iniciar máquina virtual do Hexagonix em modo com som"
-echo -e "\e[1;32m  hx.serial\e[0m - Iniciar máquina virtual do Hexagonix sem saída serial"
-echo -e "\e[1;32m  bsd-hx\e[0m    - Iniciar máquina virtual compatível com host BSD"
-echo -e "\e[1;31m  * A opção 'hx' será selecionada se nenhum parâmetro for passado após '-v'!\e[0m"
-echo -e "\e[1;32m-i\e[0m - Construir imagem de disco. Os parâmetos disponíveis são\e[1;31m (hx padrão)*\e[0m:"
-echo -e "\e[1;32m  hx\e[0m       - Construir imagem de disco com o Hexagonix"
-echo -e "\e[1;32m  hx.teste\e[0m - Construir imagem de disco teste com o Hexagonix"
-echo -e "\e[1;31m  * A opção 'hx' será selecionada se nenhum parâmetro for passado após '-i'!\e[0m"
-echo -e "\e[1;32m-u\e[0m  - Sincronizar as imagens do Hexagonix com o repositório oficial"
-echo -e "\e[1;32m-uf\e[0m - Atualiza todos os repositórios com o servidor (ramo atual)"
-echo -e "\e[1;32m-un <ramo>\e[0m - Troca de ramo para <ramo> e atualiza todos os repositórios"
-echo -e "\e[1;32m-m\e[0m - Clona os repositórios para o local e configura o ambiente de construção"
-echo -e "\e[1;32m-c\e[0m  - Limpa os arquivos de configuração e binários da árvore do sistema"
-
+echo -e "\e[1;32m-v\e[0m         - Start a virtual machine. The available parameters are\e[1;31m (default hx)*\e[0m:"
+echo -e "\e[1;32m hx\e[0m        - Start Hexagonix virtual machine"
+echo -e "\e[1;32m hx.som\e[0m    - Start Hexagonix virtual machine in sound mode"
+echo -e "\e[1;32m hx.serial\e[0m - Start Hexagonix virtual machine with no serial output"
+echo -e "\e[1;32m bsd-hx\e[0m    - Start BSD host compatible virtual machine"
+echo -e "\e[1;31m * The 'hx' option will be selected if no parameter is passed after '-v'!\e[0m"
+echo -e "\e[1;32m-i\e[0m - Build disk image. Available parameters are\e[1;31m (default hx)*\e[0m:"
+echo -e "\e[1;32m hx\e[0m      - Build disk image with Hexagonix"
+echo -e "\e[1;32m hx.test\e[0m - Build test disk image with Hexagonix"
+echo -e "\e[1;31m * The 'hx' option will be selected if no parameter is passed after '-i'!\e[0m"
+echo -e "\e[1;32m-u\e[0m  - Sync Hexagonix images with the official repository"
+echo -e "\e[1;32m-uf\e[0m - Update all repositories with server (current branch)"
+echo -e "\e[1;32m -un <branch>\e[0m - Switch branch to <branch> and update all repositories"
+echo -e "\e[1;32m-m\e[0m - Clone repositories to location and configure build environment"
+echo -e "\e[1;32m-c\e[0m - Clear system tree binary and configuration files"
 echo 
 
 }
@@ -95,12 +93,12 @@ export MSG="Copyright"
 
 banner
 
-echo -e "\e[1;94mHX: Ferramenta de construção e testes do Hexagonix® versão $VERSAOHX\e[0m"
+echo -e "\e[1;94mHX: Hexagonix® build and test tool version $VERSAOHX\e[0m"
 echo
-echo -e "Desenvolvido por \e[1;32mFelipe Miguel Nery Lunkes\e[0m"
+echo -e "Developed by \e[1;32mFelipe Miguel Nery Lunkes\e[0m"
 echo 
 echo -e "\e[0mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e "\e[0mTodos os direitos reservados.\e[0m"
+echo -e "\e[0mAll rights reserved.\e[0m"
 echo
 
 }
@@ -108,9 +106,9 @@ echo
 parametrosNecessarios(){
 
 echo
-echo -e "Você precisa fornecer pelo menos um parâmetro \e[1;94mválido \e[0mpara o HX."
+echo -e "You must provide at least one parameter \e[1;94mvalid\e[0m to HX."
 echo 
-echo -e "\e[1;94mDica: utilize \e[1;32m./hx -h \e[1;94mou \e[1;32m$NOMEHX -h\e[1;94m para obter os parâmetros disponíveis.\e[0m"
+echo -e "\e[1;94mTip: use \e[1;32m./hx -h \e[1;94mor \e[1;32m$NOMEHX -h\e[1;94m to get the available parameters.\e[0m"
 echo
 
 }
@@ -203,7 +201,7 @@ construirHexagon(){
 cd Hexagon
 
 echo
-echo -en "\e[1;94mConstruindo o Kernel Hexagon®...\e[0m"
+echo -en "\e[1;94mBuilding the Hexagon® kernel...\e[0m"
 
 echo "Kernel Hexagon®..." >> ../log.log
 echo >> ../log.log
@@ -217,7 +215,7 @@ rm -r Hexagon
 echo -e " [\e[32mOk\e[0m]"
 
 echo >> ../log.log
-echo "Kernel Hexagon® construído com sucesso." >> ../log.log
+echo "Hexagon® kernel built successfully." >> ../log.log
 echo >> ../log.log
 echo "----------------------------------------------------------------------" >> ../log.log
 echo >> ../log.log
@@ -228,16 +226,16 @@ cd ..
 
 construirSaturno(){
 
-echo -e "\e[1;94mComponentes de inicialização do Hexagon®...\e[0m {"
+echo -e "\e[1;94mHexagon® startup components...\e[0m {"
 echo
 
-echo "Componentes de inicialização do Hexagon®... {" >> $REG
+echo "Hexagon® startup components... {" >> $REG
 echo >> $REG
 
-echo -e "\e[1;94mCarregador de inicialização do Hexagon® - Saturno® (1º estágio)...\e[0m"
+echo -e "\e[1;94mHexagon® bootloader - Saturno® (1st stage)...\e[0m"
 echo
 
-echo "Carregador de inicialização do Hexagon® - Saturno® (1º estágio)..." >> $REG
+echo "Hexagon® bootloader - Saturno® (1st stage)..." >> $REG
 echo >> $REG
 
 cd Boot
@@ -259,10 +257,10 @@ cd ..
 
 construirHBoot(){
 
-echo -e "\e[1;94mHexagon Boot - HBoot (2º estágio)...\e[0m"
+echo -e "\e[1;94mHexagon Boot - HBoot (2nd stage)...\e[0m"
 echo
 
-echo "Hexagon Boot - HBoot (2º estágio)..." >> ../log.log
+echo "Hexagon Boot - HBoot (2nd stage)..." >> ../log.log
 echo >> ../log.log
 
 cd "Hexagon Boot"
@@ -276,7 +274,7 @@ if [ -e Spartan.asm ] ; then
 for i in *.asm
 do
 
-	echo -en "Construindo módulo compatível com HBoot® \e[1;94m$(basename $i .asm).mod\e[0m..."
+	echo -en "Building HBoot® compatible module \e[1;94m$(basename $i .asm).mod\e[0m..."
 	
 	fasm $i ../../`basename $i .asm`.mod -d $BANDEIRAS >> ../../../log.log 
 	
@@ -304,10 +302,10 @@ rm -r *.img
 rm -r hboot
 
 echo
-echo -e "} [\e[32mComponentes de inicialização construídos com sucesso\e[0m]."
+echo -e "} [\e[32mStartup components built successfully\e[0m]."
 
 echo >> ../log.log
-echo "} Componentes de inicialização do Hexagon® construídos com sucesso." >> ../log.log
+echo "} Successfully built Hexagon® startup components." >> ../log.log
 echo >> ../log.log
 echo "----------------------------------------------------------------------" >> ../log.log
 echo >> ../log.log
@@ -362,13 +360,13 @@ echo
 
 fi
 
-export MSG="Erro na construção do sistema"
+export MSG="System build error"
 
 banner 
 echo
-echo -e "\e[1;31mAlgo de errado ocorreu durante a montagem da imagem :(\e[0m"
+echo -e "\e[1;31mSomething went wrong while mounting the image:(\e[0m"
 echo
-echo "Utilize o script de geração do Sistema para verificar a origem do problema."
+echo "Use the system generation script to verify the source of the problem."
 echo
 
 umount $PWD/Sistema >> /dev/null
@@ -434,7 +432,7 @@ clear
 
 banner 
 
-echo "Construindo o Hexagonix®..."
+echo "Building the Hexagonix®..."
 echo
 
 mkdir -p $DESTINODISTRO
@@ -466,7 +464,7 @@ cd Fontes/
 
 if [ -e Atomic.asm ] ; then
 
-echo -e "Existem fontes a serem construidas e copiadas... [\e[32mOk\e[0m]"
+echo -e "There are fonts to be built and copied... [\e[32mOk\e[0m]"
 
 ./fontes.sh
 
@@ -474,19 +472,19 @@ cp *.fnt ../$DESTINODISTRO
 rm *.fnt
 
 echo
-echo -n "Fontes copiadas"
+echo -n "Fonts copied"
 echo -e " [\e[32mOk\e[0m]"
 echo
 
 else 
 
 echo 
-echo -e "Não existem fontes a serem construidas e copiadas... [\e[32mOk\e[0m]"
+echo -e "There are no fonts to build and copy... [\e[32mOk\e[0m]"
 echo
 
 fi
 
-echo "Copiando principais bibliotecas de desenvolvimento..."
+echo "Copying core development libraries..."
 echo 
 
 # Vamos copiar também o arquivo de cabeçalho para poder desenvolver sobre o Hexagonix(R)
@@ -511,7 +509,7 @@ cp * ../../$DESTINODISTRO/
 cd ..
 cd ..
 
-echo -n "Bibliotecas copiadas"
+echo -n "Libraries copied"
 echo -e " [\e[32mOk\e[0m]"
 echo
 
@@ -525,7 +523,7 @@ cd ..
 
 else 
 
-echo "Não existem aplicativos de terceiros marcados para construção."
+echo "There are no third-party applications marked for construction."
 echo 
 
 fi 
@@ -533,7 +531,7 @@ fi
 cd Dist 
 
 echo
-echo "Visualize o arquivo de log 'log.log', para mais informações da montagem."
+echo "View the 'log.log' log file for more information of the mount."
 echo
 
 cd ..
@@ -542,12 +540,12 @@ cd ..
 
 erroConstrucao(){
 	
-echo "Um erro ocorreu durante a construção de algum componente do sistema."
-echo 
-echo "Verifique o status dos componentes e utilize as saídas de erro acima para verificar o problema."
-echo 
-echo "Visualize o arquivo de log 'log.log', para mais informações sobre o(s) erro(s)."
-echo 
+echo "An error occurred while building some system component."
+echo
+echo "Check the status of the components and use the above error outputs to verify the problem."
+echo
+echo "View the log file 'log.log', for more information about the error(s)."
+echo
 
 umount Sistema/ >> /dev/null
 umount $DESTINODISTRO/ >> /dev/null
@@ -575,32 +573,32 @@ construtorHexagonix $Par
 
 # Agora a imagem do Sistema será preparada...
 
-echo -e "\e[1;94mConstruindo imagem do sistema...\e[0m"
+echo -e "\e[1;94mBuilding system image...\e[0m"
 echo
 
-echo "Construindo imagem temporária para manipulação de arquivos......" >> $LOG
+echo "Building temporary image for file manipulation......" >> $LOG
 
 dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
 
 if [ ! -e hexagonix.img ] ; then
 
 echo >> $LOG
-echo "Construindo imagem que receberá os arquivos do sistema..." >> $LOG
+echo "Building image that will receive system files..." >> $LOG
 echo >> $LOG
 
 dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMG >> $LOG || erroMontagem
 	
 fi	
 
-echo "> Copiando carregador de inicialização para a imagem..." >> $LOG
+echo "> Copying bootloader to image..." >> $LOG
 
 dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
 
-echo "> Montando a imagem..." >> $LOG
+echo "> Mounting the image..." >> $LOG
  
 mkdir -p Sistema && mount -o loop -t vfat temp.img Sistema/ || erroMontagem
 
-echo "> Copiando arquivos do sistema para a imagem..." >> $LOG
+echo "> Copying system files to the image..." >> $LOG
 echo >> $LOG
 
 cp $DESTINODISTRO/*.man Sistema/ >> $LOG || erroMontagem
@@ -639,11 +637,11 @@ fi
 # para ligar a cópia
 
 echo >> $LOG
-echo -n "> Verificando se existem fontes para copiar..." >> $LOG
+echo -n "> Checking if there are fonts to copy..." >> $LOG
 
 if [ -e $DESTINODISTRO/Atomic.fnt ] ; then
 
-echo " [Sim]" >> $LOG
+echo " [Yes]" >> $LOG
 
 cp $DESTINODISTRO/*.fnt Sistema/ || erroMontagem
 	
@@ -651,7 +649,7 @@ fi
 
 if [ ! -e $DESTINODISTRO/Atomic.fnt ] ; then
 
-echo " [Não]" >> $LOG
+echo " [No]" >> $LOG
 	
 fi	
 
@@ -659,21 +657,21 @@ echo >> $LOG
 
 sleep 1.0 || erroMontagem
 
-echo "> Desmontando imagem..." >> $LOG
+echo "> Unmounting the image..." >> $LOG
 
 umount Sistema >> /dev/null || erroMontagem
 
-echo "> Montando imagem final..." >> $LOG
+echo "> Mounting the final image..." >> $LOG
 
-echo "  * Copiando imagem temporária para a imagem final..." >> $LOG
+echo "  * Copying temp image to final image..." >> $LOG
 
 dd status=none conv=notrunc if=temp.img of=$IMG seek=1 >> $LOG || erroMontagem 
 
-echo "  * Copiando MBR e tabela de partição para a imagem e finalizando-a..." >> $LOG
+echo "  * Copying MBR and partition table to image and finalizing it..." >> $LOG
 
 dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$IMG >> $LOG || erroMontagem
 
-echo "> Removendo arquivos e pastas temporárias, além de binários que não são mais necessários..." >> $LOG
+echo "> Removing temporary files and folders, as well as binaries that are no longer needed..." >> $LOG
 echo >> $LOG
 
 rm -rf Sistema $DESTINODISTRO temp.img >> $LOG
@@ -697,27 +695,27 @@ qemu-img convert -O vdi $dirImagem/$imagemFinal $dirImagem/$(basename $imagemFin
 chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
 chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
 
-export MSG="Construir o Hexagonix"
+export MSG="Build the Hexagonix"
 
 banner 
 
 echo
-echo -e "\e[32mSucesso ao construir o sistema e a imagem de disco.\e[0m"
+echo -e "\e[32mSuccessful build system and disk image.\e[0m"
 echo
-echo -e "Veja agora algumas informações da construção \e[1matual\e[0m do sistema:"
-echo -e " > Versão do Hexagonix base: \e[1;32m$VERSAO\e[0m"
-echo -e " > Revisão do software: \e[1;32m$REVISAO\e[0m"
-echo -e " > Nome do lançamento: \e[1;32m$CODENOME\e[0m"
-echo -e " > Localização da imagem: \e[1;32m$dirImagem/$imagemFinal\e[0m"
+echo -e "Now see some information about the \e[1matual\e[0m construction of the system:"
+echo -e " > Base Hexagonix version: \e[1;32m$VERSAO\e[0m"
+echo -e " > Software revision: \e[1;32m$REVISAO\e[0m"
+echo -e " > Release name: \e[1;32m$CODENOME\e[0m"
+echo -e " > Image location: \e[1;32m$dirImage/$imagemFinal\e[0m"
 echo
 
-echo "> Imagem '$IMG' gerada com sucesso." >> $LOG
+echo "> Image '$IMG' generated successfully." >> $LOG
 echo >> $LOG
-echo "Utilize './hx -v hx' para testar a execução do sistema na imagem gerada ou copie" >> $LOG
-echo "a imagem para o diretório 'Inst' da raiz do instalador para gerar uma imagem de instalação" >> $LOG
-echo "baseada em Linux para transferência para um disco." >> $LOG
+echo "Use './hx -v hx' to test running the system on the generated image or copy" >> $LOG
+echo "the image to the installer root 'Inst' directory to generate an install image" >> $LOG
+echo "Linux-based for transfer to disk." >> $LOG
 echo >> $LOG
-echo "----------------------------------------------------------------------" >> $LOG
+echo "------------------------------------------------ ----------------------" >> $LOG
 echo >> $LOG
 
 exit
@@ -928,17 +926,17 @@ if [ -e $imagem ] ; then
 
 clear
 
-export MSG="HX: iniciar máquina virtual"
+export MSG="HX: start virtual machine"
 
 banner 
 
 echo
-echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
+echo -e "\e[1mStarting virtual machine with the following specifications:\e[0m"
 echo
-echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistema\e[0m"
-echo -e "> Imagem de disco: \e[1;32m$imagem\e[0m"
-echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
-echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
+echo -e "> Image target architecture: \e[1;32m$sistema\e[0m"
+echo -e "> Disk image: \e[1;32m$imagem\e[0m"
+echo -e "> Output sound: \e[1;32m$drvsom\e[0m"
+echo -e "> Memory: \e[1;32m$memoria megabytes\e[0m; processor: \e[1;32m$processador\e[0m"
 echo
 
 qemu-system-$sistema -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria -soundhw $drvsom >> /dev/null || erroMV
@@ -958,18 +956,18 @@ if [ -e $imagem ] ; then
 
 clear
 
-export MSG="HX: iniciar máquina virtual"
+export MSG="HX: start virtual machine"
 
 banner 
 
-echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
+echo -e "\e[1mStarting virtual machine with the following specifications:\e[0m"
 echo
-echo -e "\e[1;31mUsando parâmetros compatíveis com sistemas BSD (FreeBSD como modelo)\e[0m"
+echo -e "\e[1;31mUsing parameters compatible with BSD systems (FreeBSD as a model)\e[0m"
 echo
-echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistemaBSD\e[0m; \e[1;31mModo BSD!\e[0m"
-echo -e "> Imagem de disco: \e[1;32m$imagem\e[0m"
-echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
-echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
+echo -e "> Image target architecture: \e[1;32m$sistemaBSD\e[0m; \e[1;31mBSD mode!\e[0m"
+echo -e "> Disk image: \e[1;32m$imagem\e[0m"
+echo -e "> Output sound: \e[1;32m$drvsom\e[0m"
+echo -e "> Memory: \e[1;32m$memoria megabytes\e[0m; processor: \e[1;32m$processador\e[0m"
 echo
 
 qemu-system-$sistemaBSD -cpu $processador -hda $imagem -m $memoria >> /dev/null || erroMV
@@ -989,16 +987,16 @@ if [ -e $imagem ] ; then
 
 clear
 
-export MSG="HX: iniciar máquina virtual"
+export MSG="HX: start virtual machine"
 
 banner 
 
-echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
+echo -e "\e[1mStarting virtual machine with the following specifications:\e[0m"
 echo
-echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistema\e[0m; Usando KVM!"
-echo -e "> Imagem de disco: \e[1;32m$imagem\e[0m"
-echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
-echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32mhost\e[0m"
+echo -e "> Image target architecture: \e[1;32m$sistema\e[0m; Using KVM!"
+echo -e "> Disk image: \e[1;32m$imagem\e[0m"
+echo -e "> Output sound: \e[1;32m$drvsom\e[0m"
+echo -e "> Memory: \e[1;32m$memoria megabytes\e[0m; processor: \e[1;32mhost\e[0m"
 echo
 
 qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -cpu host -hda $imagem -m $memoria >> /dev/null || erroMV
@@ -1018,16 +1016,16 @@ if [ -e $imagem ] ; then
 
 clear
 
-export MSG="HX: iniciar máquina virtual"
+export MSG="HX: start virtual machine"
 
 banner 
 
-echo -e "\e[1mIniciando máquina virtual com as seguintes especificações:\e[0m"
+echo -e "\e[1mStarting virtual machine with the following specifications:\e[0m"
 echo
-echo -e "> Arquitetura de destino da imagem: \e[1;32m$sistema\e[0m"
-echo -e "> Imagem de disco: \e[1;32m$imagem\e[0m"
-echo -e "> Saída de som: \e[1;32m$drvsom\e[0m"
-echo -e "> Memória: \e[1;32m$memoria megabytes\e[0m; processador: \e[1;32m$processador\e[0m"
+echo -e "> Image target architecture: \e[1;32m$sistema\e[0m"
+echo -e "> Disk image: \e[1;32m$imagem\e[0m"
+echo -e "> Output sound: \e[1;32m$drvsom\e[0m"
+echo -e "> Memory: \e[1;32m$memoria megabytes\e[0m; processor: \e[1;32m$processador\e[0m"
 echo
 
 qemu-system-$sistema -serial stdio -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
@@ -1045,15 +1043,15 @@ erroMV()
 	
 clear
 
-export MSG="HX: iniciar máquina virtual"
+export MSG="HX: start virtual machine"
 
 banner 
 
-echo -e "Erro na solicitação: \e[1;94mimagem de disco '$imagem' não localizada ou falha\e[0m"
-echo -e "\e[0mem algum componente ou parâmetro fornecido."
-echo -e " > \e[1;31mVocê NÃO pode iniciar o sistema sem essa dependência\e[0m."
-echo -e "Erro na solicitação: \e[1;94mproblema durante a execução da máquina virtual\e[0m."
-echo -e " > \e[1;31mTente executar a máquina virtual novamente\e[0m."
+echo -e "Error in request: \e[1;94m disk image '$imagem' not found or failed\e[0m"
+echo -e "\e[0min some given component or parameter."
+echo -e " > \e[1;31mYou CANNOT boot the system without this dependency\e[0m."
+echo -e "Error in request: \e[1;94mproblem while running virtual machine\e[0m."
+echo -e " > \e[1;31mTry running the virtual machine again\e[0m."
 echo
 	
 }
@@ -1064,25 +1062,25 @@ limpar(){
 	
 clear
 
-export MSG="HX: limpar árvore do sistema"
+export MSG="HX: clear system tree"
 
 banner 
 
-echo "Executando limpeza na árvore do sistema..."
-echo -n " > Limpando componentes gerados e imagens do sistema..."
+echo "Performing system tree cleanup..."
+echo -n " > Cleaning up generated components and system images..."
 	
 rm -rf Sistema $DESTINODISTRO Hexagonix andromeda.img hexagonix.img
 rm -rf log.log COM1.txt *.sis *.bin *.app Serial.txt 
 
 echo -e " [\e[32mOk\e[0m]"
-echo -e "   > \e[1;94mUse ./hx com parâmetros para gerar estes arquivos novamente.\e[0m"
-echo " > Para ajuda nos parâmetros possíveis, use ./hx ajuda."
-echo -n " > Removendo arquivos de configuração gerados a cada build..."
+echo -e " > \e[1;94mUse ./hx with parameters to regenerate these files.\e[0m"
+echo " > For help on possible parameters, use ./hx -h."
+echo -n " > Removing configuration files generated every build..."
 
 rm -rf Dist/etc/*.unx Dist/etc/*.ocl
 
 echo -e " [\e[32mOk\e[0m]"
-echo -e "   > \e[1;94mUse ./configure.sh para gerar estes arquivos novamente.\e[0m"
+echo -e "   > \e[1;94mUse ./configure.sh to regenerate these files.\e[0m"
 
 tudopronto
 
@@ -1105,13 +1103,14 @@ infoBuild(){
 
 clear
 
-export MSG="Informações do sistema"
+export MSG="System information"
 
 banner 
-echo -e "Veja agora algumas informações e definições da construção \e[1matual\e[0m do sistema:"
-echo -e " > Versão do Hexagonix base: \e[1;32m$VERSAO\e[0m"
-echo -e " > Revisão do software: \e[1;32m$REVISAO\e[0m"
-echo -e " > Nome do lançamento: \e[1;32m$CODENOME\e[0m"
+
+echo -e "See now some information and definitions of the \e[1matual\e[0m construction of the system:"
+echo -e " > Base Hexagonix version: \e[1;32m$VERSAO\e[0m"
+echo -e " > Software revision: \e[1;32m$REVISAO\e[0m"
+echo -e " > Release name: \e[1;32m$CODENOME\e[0m"
 echo
 
 }
@@ -1124,7 +1123,7 @@ clear
 if [ -e configure.sh ] ; then
 
 echo
-echo -e "[\e[32mPermitindo execução e iniciando configure.sh...\e[0m]"
+echo -e "[\e[32mAllowing execution and starting configure.sh...\e[0m]"
 
 # Primeiro, ter certeza que o arquivo pode ser executado
 
@@ -1134,8 +1133,8 @@ chmod +x configure.sh
 
 else
 
-echo -e "[\e[31mErro: configure.sh não localizado\e[0m]"
-echo -e " > \e[1;31mVocê NÃO pode iniciar a construção do sistema sem essa dependência\e[0m."
+echo -e "[\e[31mError: configure.sh not found\e[0m]"
+echo -e " > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
 fi	
 
@@ -1147,13 +1146,13 @@ tudopronto
 terminar()
 {
 
-echo -e "[\e[32mEtapa concluída com sucesso\e[0m]"
+echo -e "[\e[32mStep completed successfully\e[0m]"
 
 }
 
 tudopronto(){
 
-echo -e "[\e[32mTudo pronto!\e[0m]"
+echo -e "[\e[32mAll ready!\e[0m]"
 
 }
 
@@ -1165,21 +1164,21 @@ verificarEstaticos()
 
 if [ -e Dist/etc/base.ocl ] ; then
 
-echo "Arquivos estáticos presentes."
+echo "Static files present."
 
 else
 
 clear 
 
-export MSG="Construção do Hexagonix"
+export MSG="Building the Hexagonix"
 
 banner 
 
-echo "Os arquivos estáticos necessários à construção do sistema não foram encontrados."
-echo "A construção não pode ser iniciada. Para isso, o hx irá executar ./configure.sh"
-echo "para configurar a construção e gerar os arquivos necessários."
+echo "The static files needed to build the system were not found."
+echo "Build could not be started. To do so, hx will run ./configure.sh"
+echo "to set up the build and generate the necessary files."
 echo
-echo "Pressione <ENTER> para continuar ou CTRL-C para cancelar..."
+echo "Press <ENTER> to continue or CTRL-C to cancel..."
 
 read resposta
 
@@ -1193,7 +1192,7 @@ exibirEstatisticas(){
 
 clear 
 
-export MSG="Estatísticas"
+export MSG="Statistics"
 
 banner 
 
@@ -1203,7 +1202,7 @@ for i in */
 do
 
 	echo
-	echo -en "\e[1;94mEstatísticas do diretório $i:\e[0m"
+	echo -en "\e[1;94mStats of the directory $i:\e[0m"
 	echo 
 	echo
 
@@ -1214,7 +1213,7 @@ do
 done
 
 	echo
-	echo -en "\e[1;94mEstatísticas globais do sistema:\e[0m"
+	echo -en "\e[1;94mSystem global statistics:\e[0m"
 	echo 
 	echo 
 
@@ -1227,8 +1226,8 @@ tudopronto
 else
 
 echo
-echo -e "[\e[1;31mUtilitário cloc não localizado.\e[0m]"
-echo -e "\e[1;94mO HX não pode gerar relatório de estatísticas sem essa dependência.\e[0m"
+echo -e "[\e[1;31mCloc utility not found.\e[0m]"
+echo -e "\e[1;94mHX cannot report statistics without this dependency.\e[0m"
 
 fi	
 
@@ -1248,20 +1247,20 @@ fi
 
 # Montar o cabeçalho do arquivo de log...
 
-echo "Relatório de montagem e estatísticas do Sistema Operacional Hexagonix®" >> $REG
-echo "----------------------------------------------------------------------" >> $REG
+echo "Hexagonix® Operating System build and statistics report" >> $REG
+echo "-------------------------------------------------------" >> $REG
 echo >> $REG
-echo "Neste arquivo você poderá encontrar dados e informações de montagem" >> $REG
-echo "dos arquivos do Sistema, podendo entre outras coisas identificar erros" >> $REG
-echo "no processo." >> $REG
+echo "In this file you can find data and build information" >> $REG
+echo "of the system files, being able to identify errors among other things" >> $REG
+echo "in process." >> $REG
 echo >> $REG
-echo -n "Data e hora deste relatório: " >> $REG
+echo -n "Date and time of this report: " >> $REG
 date >> $REG
 echo >> $REG
-echo -n "Usuario atualmente logado: " >> $REG
+echo -n "User currently logged in: " >> $REG
 whoami >> $REG
 echo >> $REG
-echo "----------------------------------------------------------------------" >> $REG
+echo "------------------------------------------------ ----------------------" >> $REG
 echo >> $REG
 
 }
@@ -1276,12 +1275,12 @@ exit
 
 fi
 
-export MSG="Instalar dependências"
+export MSG="Install dependencies"
 
 banner 
 
 echo
-echo -e "O HX irá agora instalar as dependências necessárias à sua execução:"
+echo -e "HX will now install the necessary dependencies to run it:"
 echo
 
 apt install fasm nasm cloc qemu qemu-system-i386
@@ -1289,7 +1288,7 @@ apt install fasm nasm cloc qemu qemu-system-i386
 terminar 
 
 echo
-echo -e "\e[1mPronto! Agora execute \e[32m./configure.sh\e[0;1m para configurar as dependências."
+echo -e "\e[1mReady! Now run \e[32m./configure.sh\e[0;1m to configure the dependencies."
 
 tudopronto
 
@@ -1303,13 +1302,13 @@ banner()
 echo -e ";;****************************************************************************"
 echo -e ";;                                                                            "
 echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mSistema Operacional Hexagonix®\e[0m          "
+echo -e ";; ┌┐ ┌┐                              \e[1;94mHexagonix® Operating System\e[0m"
 echo -e ";; ││ ││                                                                      "
 echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘       \e[1;94mTodos os direitos reservados\e[0m             "
+echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m  "
 echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
 echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                       \e[1;32m$MSG\e[0m "
+echo -e ";;              ┌─┘│                       \e[1;32m$MSG\e[0m                  "
 echo -e ";;              └──┘                                                          "
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
@@ -1320,16 +1319,16 @@ echo
 atualizarImagens()
 {
 
-export MSG="Atualizar imagens"
+export MSG="Update images"
 
 banner 
 
-echo "Você está prestes a atualizar as imagens de disco do Hexagonix, sincronizando-as"
-echo "com as disponíveis no repositório de imagens, no ramo principal (estável)."
-echo -e "\e[1;31mAtenção! Esse processo destruirá qualquer modificação dentro das imagens locais!\e[0m"
+echo "You are about to update the Hexagonix disk images by synchronizing them"
+echo "with those available in the image repository, in the main (stable) branch."
+echo -e "\e[1;31mWarning! This process will destroy any modifications within the local images!\e[0m"
 echo
-echo 
-echo -n "Você deseja continuar [y/N] (pressione ENTER após a seleção): "
+echo
+echo -n "Do you want to continue [y/N] (press ENTER after selection): "
 
 read OPCAO 
 
@@ -1363,13 +1362,13 @@ tudopronto
 atualizarRepos()
 {
 
-export MSG="Atualizar repositórios"
+export MSG="Update repos"
 
 banner 
 
-echo "Você está prestes a atualizar todos os repositórios do sistema com o servidor,"
-echo "mantendo o ramo atual. Para alterar o ramo e atualar, use hx -un <ramo>."
-echo 
+echo "You are about to update all system repositories with the server,"
+echo "keeping current branch. To change branch and update, use hx -un <branch>."
+echo
 
 cd Apps/Unix && git pull
 cd ..
@@ -1409,13 +1408,13 @@ tudopronto
 trocarRamoAtualizar()
 {
 
-export MSG="Atualizar ramo e repositórios"
+export MSG="Update branch and repositories"
 
 banner 
 
-echo "Você está prestes a atualizar todos os repositórios do sistema com o servidor,"
-echo "após trocar para o ramo fornecido."
-echo 
+echo "You are about to update all system repositories with the server,"
+echo "after switching to the given branch."
+echo
 
 cd Apps/Unix && git switch $PT2 && git pull
 cd ..
@@ -1457,11 +1456,11 @@ clonarRepos()
 
 clear
 
-export MSG="Construir o Hexagonix®"
+export MSG="Build the Hexagonix®"
 
 banner 
 
-echo "Clonando os repositórios necessários para construir o Hexagonix®..."
+echo "Cloning the repositories needed to build Hexagonix®..."
 echo 
 
 # Primeiro, vamos criar os diretórios comuns
@@ -1528,7 +1527,7 @@ cd ..
 chmod +x configure.sh hx 
 
 echo
-echo -e "[\e[32mTudo pronto!\e[0m]"
+echo -e "[\e[32mAll ready!\e[0m]"
 echo
 
 exit 
@@ -1540,11 +1539,11 @@ checarDependenciasClonagem()
 
 clear
 
-export MSG="Construir o Hexagonix®"
+export MSG="Build the Hexagonix®"
 
 banner 
 
-echo -e "Verificando dependências necessárias para clonar os repositórios..."
+echo -e "Checking required dependencies to clone the repositories..."
 echo 
 
 # Agora vamos verificar cada dependência do mecanismo de construção
@@ -1559,8 +1558,8 @@ echo -e "[\e[32mOk\e[0m]"
 
 else
 
-echo -e "[\e[31mNão localizado\e[0m]"
-echo -e "   > \e[1;31mVocê NÃO pode iniciar sem essa dependência\e[0m."
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;31mYou CANNOT start without this dependency\e[0m."
 
 exit
 
@@ -1582,16 +1581,16 @@ sureq()
 
 clear
 
-export MSG="HX: você precisa ser root"
+export MSG="HX: you need to be root"
 
 banner 
 
-echo -e "\e[1;94mPara executar a ação solicitada, você deve ser um usuário raiz (root) ;D\e[0m"
+echo -e "\e[1;94mYou must be a root user to perform the requested action ;D\e[0m"
 echo
-echo -e "\e[1;32mInsira sua senha abaixo para alterar para o usuário raiz (root) e depois\e[0m"
-echo -e "\e[1;32mexecute o HX novamente, com os parâmetros desejados.\e[0m"
+echo -e "\e[1;32mEnter your password below to change to the root user (root) and then\e[0m"
+echo -e "\e[1;32mrun HX again, with the desired parameters.\e[0m"
 echo
-echo -e "\e[1;94mDica: utilize \e[1;32m./hx ajuda\e[1;94m para obter os parâmetros disponíveis.\e[0m"
+echo -e "\e[1;94mHint: use \e[1;32m./hx help\e[1;94m to get available parameters.\e[0m"
 echo
 
 su root
@@ -1640,7 +1639,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="11.5"
+export VERSAOHX="12.0"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
