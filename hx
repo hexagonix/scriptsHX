@@ -62,11 +62,12 @@
 
 exibirAjuda() {
 
-echo -e "hx usage help $VERSAOHX:"
+echo
+echo -e "hx $VERSAOHX help:"
 echo
 echo -e "\e[1;94mMain\e[0m available parameters:"
 echo
-echo -e "\e[1;32m-v\e[0m         - Start a virtual machine. The available parameters are\e[1;31m (default hx)*\e[0m:"
+echo -e "\e[1;32m-v\e[0m - Start a virtual machine. The available parameters are\e[1;31m (default hx)*\e[0m:"
 echo -e "\e[1;32m hx\e[0m        - Start Hexagonix virtual machine"
 echo -e "\e[1;32m hx.som\e[0m    - Start Hexagonix virtual machine in sound mode"
 echo -e "\e[1;32m hx.serial\e[0m - Start Hexagonix virtual machine with no serial output"
@@ -78,7 +79,7 @@ echo -e "\e[1;32m hx.test\e[0m - Build test disk image with Hexagonix"
 echo -e "\e[1;31m * The 'hx' option will be selected if no parameter is passed after '-i'!\e[0m"
 echo -e "\e[1;32m-u\e[0m  - Sync Hexagonix images with the official repository"
 echo -e "\e[1;32m-uf\e[0m - Update all repositories with server (current branch)"
-echo -e "\e[1;32m -un <branch>\e[0m - Switch branch to <branch> and update all repositories"
+echo -e "\e[1;32m-un <branch>\e[0m - Switch branch to <branch> and update all repositories"
 echo -e "\e[1;32m-m\e[0m - Clone repositories to location and configure build environment"
 echo -e "\e[1;32m-c\e[0m - Clear system tree binary and configuration files"
 echo 
