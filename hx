@@ -532,7 +532,7 @@ fi
 cd Dist 
 
 echo
-echo "View the 'log.log' log file for more information of the mount."
+echo "View the 'log.log' log file for more information of the build."
 echo
 
 cd ..
