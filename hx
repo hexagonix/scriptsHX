@@ -532,7 +532,7 @@ fi
 cd Dist 
 
 echo
-echo "View the 'log.log' log file for more information of the mount."
+echo "View the 'log.log' log file for more information of the build."
 echo
 
 cd ..
@@ -1309,7 +1309,7 @@ echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐�
 echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m  "
 echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
 echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                       \e[1;32m$MSG\e[0m                  "
+echo -e ";;              ┌─┘│                       \e[1;32m$MSG\e[0m"
 echo -e ";;              └──┘                                                          "
 echo -e ";;                                                                            "
 echo -e ";;****************************************************************************"
