@@ -463,7 +463,7 @@ cd ..
 
 cd Fontes/
 
-if [ -e Atomic.asm ] ; then
+if [ -e aurora.asm ] ; then
 
 echo -e "There are fonts to be built and copied... [\e[32mOk\e[0m]"
 
@@ -479,8 +479,7 @@ echo
 
 else 
 
-echo 
-echo -e "There are no fonts to build and copy... [\e[32mOk\e[0m]"
+echo -e "There are no graphic fonts to build and copy... [\e[32mOk\e[0m]"
 echo
 
 fi
@@ -1640,7 +1639,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="12.0"
+export VERSAOHX="12.1"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
