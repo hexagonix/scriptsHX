@@ -639,7 +639,7 @@ fi
 echo >> $LOG
 echo -n "> Checking if there are fonts to copy..." >> $LOG
 
-if [ -e $DESTINODISTRO/Atomic.fnt ] ; then
+if [ -e $DESTINODISTRO/aurora.fnt ] ; then
 
 echo " [Yes]" >> $LOG
 
@@ -647,7 +647,7 @@ cp $DESTINODISTRO/*.fnt Sistema/ || erroMontagem
 	
 fi	
 
-if [ ! -e $DESTINODISTRO/Atomic.fnt ] ; then
+if [ ! -e $DESTINODISTRO/aurora.fnt ] ; then
 
 echo " [No]" >> $LOG
 	
@@ -813,7 +813,7 @@ fi
 echo >> $LOG
 echo -n "> Verificando se existem fontes para copiar..." >> $LOG
 
-if [ -e $DESTINODISTRO/Atomic.fnt ] ; then
+if [ -e $DESTINODISTRO/aurora.fnt ] ; then
 
 echo " [Sim]" >> $LOG
 
@@ -821,7 +821,7 @@ cp $DESTINODISTRO/*.fnt $PWD/Sistema || erroMontagem
 	
 fi	
 
-if [ ! -e $DESTINODISTRO/Atomic.fnt ] ; then
+if [ ! -e $DESTINODISTRO/aurora.fnt ] ; then
 
 echo " [Não]" >> $LOG
 	
