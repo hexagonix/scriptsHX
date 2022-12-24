@@ -12,7 +12,7 @@
 #;;    
 #;; ┌┐ ┌┐                                 Sistema Operacional Hexagonix®
 #;; ││ ││
-#;; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐    Copyright © 2016-2023 Felipe Miguel Nery Lunkes
+#;; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐    Copyright © 2016-2022 Felipe Miguel Nery Lunkes
 #;; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘          Todos os direitos reservados
 #;; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐
 #;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
@@ -28,7 +28,7 @@
 #;;
 #;; BSD 3-Clause License
 #;;
-#;; Copyright (c) 2015-2023, Felipe Miguel Nery Lunkes
+#;; Copyright (c) 2015-2022, Felipe Miguel Nery Lunkes
 #;; All rights reserved.
 #;; 
 #;; Redistribution and use in source and binary forms, with or without
@@ -77,8 +77,8 @@ echo -e "\e[1;32m-i\e[0m - Build disk image. Available parameters are\e[1;31m (d
 echo -e "\e[1;32m hx\e[0m      - Build disk image with Hexagonix"
 echo -e "\e[1;32m hx.test\e[0m - Build test disk image with Hexagonix"
 echo -e "\e[1;31m * The 'hx' option will be selected if no parameter is passed after '-i'!\e[0m"
-echo -e "\e[1;32m-u\e[0m  - Sync Hexagonix images with the official repository"
-echo -e "\e[1;32m-uf\e[0m - Update all repositories with server (current branch)"
+echo -e "\e[1;32m-u\e[0m  - Update all repositories with server (current branch)"
+echo -e "\e[1;32m-ui\e[0m - Sync Hexagonix images with the official repository"
 echo -e "\e[1;32m-un <branch>\e[0m - Switch branch to <branch> and update all repositories"
 echo -e "\e[1;32m-m\e[0m - Clone repositories to location and configure build environment"
 echo -e "\e[1;32m-c\e[0m - Clear system tree binary and configuration files"
@@ -98,7 +98,7 @@ echo -e "\e[1;94mHX: Hexagonix® build and test tool version $VERSAOHX\e[0m"
 echo
 echo -e "Developed by \e[1;32mFelipe Miguel Nery Lunkes\e[0m"
 echo 
-echo -e "\e[0mCopyright © 2016-2023 Felipe Miguel Nery Lunkes\e[0m"
+echo -e "\e[0mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
 echo -e "\e[0mAll rights reserved.\e[0m"
 echo
 
@@ -1304,7 +1304,7 @@ echo -e ";;                                                                     
 echo -e ";;                                                                            "
 echo -e ";; ┌┐ ┌┐                              \e[1;94mHexagonix® Operating System\e[0m"
 echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2023 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2016-2022 Felipe Miguel Nery Lunkes\e[0m"
 echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m  "
 echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
 echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
@@ -1602,7 +1602,7 @@ exit
 # Ponto de entrada do hx, definição de variáveis e processamento de parâmetros
 #
 #
-# Copyright (C) 2015-2023 Felipe Miguel Nery Lunkes
+# Copyright (C) 2015-2022 Felipe Miguel Nery Lunkes
 # Todos os direitos reservados
 
 # Variáveis e constantes utilizados na montagem e no QEMU
@@ -1639,7 +1639,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="12.1"
+export VERSAOHX="12.2"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
@@ -1657,8 +1657,8 @@ case $1 in
 -i) gerenciarConstrucao; exit;;
 -h) exibirAjuda; exit;;
 -b) gerenciarConstrucaoComponentes; exit;;
--u) atualizarImagens; exit;;
--uf) atualizarRepos; exit;;
+-u) atualizarRepos; exit;;
+-ui) atualizarImagens; exit;;
 -un) trocarRamoAtualizar; exit;;
 -m) checarDependenciasClonagem; exit;;
 
