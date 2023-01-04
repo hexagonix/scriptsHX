@@ -204,7 +204,7 @@ cd Hexagon
 echo
 echo -en "\e[1;94mBuilding the Hexagon® kernel...\e[0m"
 
-echo "Kernel Hexagon®..." >> ../log.log
+echo "Hexagon® kernel..." >> ../log.log
 echo >> ../log.log
 
 fasm kern/Hexagon.asm Hexagon -d $BANDEIRASHEXAGON >> ../log.log || erroConstrucao
@@ -465,7 +465,7 @@ cd Fontes/
 
 if [ -e aurora.asm ] ; then
 
-echo -e "There are fonts to be built and copied... [\e[32mOk\e[0m]"
+echo -e "There are graphical fonts to be built and copied... [\e[32mOk\e[0m]"
 
 ./fontes.sh
 
@@ -637,7 +637,7 @@ fi
 # para ligar a cópia
 
 echo >> $LOG
-echo -n "> Checking if there are fonts to copy..." >> $LOG
+echo -n "> Checking if there are grpahical fonts to copy..." >> $LOG
 
 if [ -e $DESTINODISTRO/aurora.fnt ] ; then
 
@@ -663,7 +663,7 @@ umount Sistema >> /dev/null || erroMontagem
 
 echo "> Mounting the final image..." >> $LOG
 
-echo "  * Copying temp image to final image..." >> $LOG
+echo "  * Copying temporary image to final image..." >> $LOG
 
 dd status=none conv=notrunc if=temp.img of=$IMG seek=1 >> $LOG || erroMontagem 
 
@@ -1639,7 +1639,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="12.2"
+export VERSAOHX="12.3"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
