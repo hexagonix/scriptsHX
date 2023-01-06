@@ -107,7 +107,7 @@ echo
 parametrosNecessarios(){
 
 echo
-echo -e "You must provide at least one parameter \e[1;94mvalid\e[0m to HX."
+echo -e "You must provide at least one \e[1;94mvalid\e[0m parameter to HX."
 echo 
 echo -e "\e[1;94mTip: use \e[1;32m./hx -h \e[1;94mor \e[1;32m$NOMEHX -h\e[1;94m to get the available parameters.\e[0m"
 echo
