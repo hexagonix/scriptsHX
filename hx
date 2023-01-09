@@ -438,6 +438,7 @@ echo
 
 mkdir -p $DESTINODISTRO
 mkdir -p $DESTINODISTRO/bin
+mkdir -p $DESTINODISTRO/etc
 
 construirSaturno
 construirHBoot
@@ -449,7 +450,8 @@ cd Dist
 
 cd etc/
 
-cp *.unx ../../$DESTINODISTRO
+cp rc passwd ../../$DESTINODISTRO/etc
+cp *.unx ../../$DESTINODISTRO/etc
 cp base.ocl ../../$DESTINODISTRO/hexgnix.ocl
 
 cd ..
@@ -620,7 +622,7 @@ cp $DESTINODISTRO/*.mod Sistema/ >> $LOG
 
 fi	
 
-cp $DESTINODISTRO/*.unx Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/etc/* Sistema/>> $LOG || erroMontagem
 cp $DESTINODISTRO/*.ocl Sistema/ >> $LOG || erroMontagem
 
 # Caso a imagem deva conter uma cópia dos arquivos do FreeDOS para testes...
@@ -1077,7 +1079,7 @@ echo -e " > \e[1;94mUse ./hx with parameters to regenerate these files.\e[0m"
 echo " > For help on possible parameters, use ./hx -h."
 echo -n " > Removing configuration files generated every build..."
 
-rm -rf Dist/etc/*.unx Dist/etc/*.ocl
+rm -rf Dist/etc/*.unx Dist/etc/*.ocl Dist/etc/rc Dist/etc/passwd
 
 echo -e " [\e[32mOk\e[0m]"
 echo -e "   > \e[1;94mUse ./configure.sh to regenerate these files.\e[0m"
@@ -1639,7 +1641,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="12.3"
+export VERSAOHX="12.4"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
