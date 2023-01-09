@@ -727,6 +727,7 @@ exit
 imagemHexagonixSobreBSD()
 {
 
+
 if test "`whoami`" != "root" ; then
 
 sureq
@@ -741,20 +742,28 @@ construtorHexagonix $Par
 
 # Agora a imagem do Sistema será preparada...
 
-echo -e "\e[1;94mConstruindo imagem do sistema...\e[0m"
+echo -e "\e[1;94mBuilding system image...\e[0m"
 echo
 
-echo "Construindo imagem temporária para manipulação de arquivos......" >> $LOG
+echo "Building temporary image for file manipulation......" >> $LOG
 
-dd status=none bs=$TAMANHOTEMP count=512 if=/dev/zero of=temp.img
+dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
+
+if [ ! -e hexagonix.img ] ; then
 
 echo >> $LOG
-echo "Construindo imagem que receberá os arquivos do sistema..." >> $LOG
+echo "Building image that will receive system files..." >> $LOG
 echo >> $LOG
 
 dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMG >> $LOG || erroMontagem
+	
+fi	
 
-# Aqui entrará a lógica do BSD
+echo "> Copying bootloader to image..." >> $LOG
+
+dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
+
+# BSD logic
 
 mdconfig -a -t vnode -f temp.img -u 4
 
@@ -762,48 +771,42 @@ gpart create -s mbr md4
 gpart add -t FAT16 -a 1 md4
 newfs_msdos -F 16 -B /dev/md4s1 
 
-# Daqui pra baixo será igual
+# "Normal" logic 
 
-echo "> Montando a imagem..." >> $LOG
+echo "> Mounting the image..." >> $LOG
  
-mkdir -p Sistema 
+mkdir -p Sistema && mount -o loop -t vfat temp.img Sistema/ || erroMontagem
 
-# Aqui entrará a lógica do BSD
-
-mount -t msdos -o rw /dev/md4s1 $PWD/Sistema
-
-# Daqui pra baixo será igual
-
-echo "> Copiando arquivos do sistema para a imagem..." >> $LOG
+echo "> Copying system files to the image..." >> $LOG
 echo >> $LOG
 
-cp $DESTINODISTRO/hboot $PWD/Sistema >> $LOG 
-cp $DESTINODISTRO/*.man $PWD/Sistema >> $LOG 
-cp $DESTINODISTRO/*.asm $PWD/Sistema >> $LOG
-cp $DESTINODISTRO/*.s $PWD/Sistema >> $LOG
-cp $DESTINODISTRO/*.cow $PWD/Sistema >> $LOG
-cp $DESTINODISTRO/bin/* $PWD/Sistema >> $LOG
+cp $DESTINODISTRO/*.man Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/*.asm Sistema/ >> $LOG
+cp $DESTINODISTRO/*.s Sistema/ >> $LOG
+cp $DESTINODISTRO/*.cow Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/bin/* Sistema/ >> $LOG || erroMontagem
+cp $DESTINODISTRO/hboot Sistema/ >> $LOG || erroMontagem
 
 # A licença deve ser copiada
 
-cp Dist/man/LICENSE $PWD/Sistema >> $LOG || erroMontagem
+cp Dist/man/LICENSE Sistema/ >> $LOG || erroMontagem
 
 # Agora, copiar módulos do HBoot
 
 if [ -e $DESTINODISTRO/Spartan.mod ] ; then
 
-cp $DESTINODISTRO/*.mod $PWD/Sistema >> $LOG
+cp $DESTINODISTRO/*.mod Sistema/ >> $LOG
 
 fi	
 
-cp $DESTINODISTRO/*.unx $PWD/Sistema >> $LOG || erroMontagem
-cp $DESTINODISTRO/*.ocl $PWD/Sistema >> $LOG || erroMontagem
+cp $DESTINODISTRO/etc/* Sistema/>> $LOG || erroMontagem
+cp $DESTINODISTRO/*.ocl Sistema/ >> $LOG || erroMontagem
 
 # Caso a imagem deva conter uma cópia dos arquivos do FreeDOS para testes...
 
 if [ -e DOS ] ; then
 
-cp DOS/*.* $PWD/Sistema
+cp DOS/*.* Sistema/
 
 fi	
 
@@ -813,19 +816,19 @@ fi
 # para ligar a cópia
 
 echo >> $LOG
-echo -n "> Verificando se existem fontes para copiar..." >> $LOG
+echo -n "> Checking if there are grpahical fonts to copy..." >> $LOG
 
 if [ -e $DESTINODISTRO/aurora.fnt ] ; then
 
-echo " [Sim]" >> $LOG
+echo " [Yes]" >> $LOG
 
-cp $DESTINODISTRO/*.fnt $PWD/Sistema || erroMontagem
+cp $DESTINODISTRO/*.fnt Sistema/ || erroMontagem
 	
 fi	
 
 if [ ! -e $DESTINODISTRO/aurora.fnt ] ; then
 
-echo " [Não]" >> $LOG
+echo " [No]" >> $LOG
 	
 fi	
 
@@ -833,27 +836,21 @@ echo >> $LOG
 
 sleep 1.0 || erroMontagem
 
-echo "> Desmontando imagem..." >> $LOG
+echo "> Unmounting the image..." >> $LOG
 
-sync 
+umount Sistema >> /dev/null || erroMontagem
 
-umount -f $PWD/Sistema >> /dev/null || erroMontagem
+echo "> Mounting the final image..." >> $LOG
 
-dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
-
-mdconfig -d -u 4
-
-echo "> Montando imagem final..." >> $LOG
-
-echo "  * Copiando imagem temporária para a imagem final..." >> $LOG
+echo "  * Copying temporary image to final image..." >> $LOG
 
 dd status=none conv=notrunc if=temp.img of=$IMG seek=1 >> $LOG || erroMontagem 
 
-echo "  * Copiando MBR e tabela de partição para a imagem e finalizando-a..." >> $LOG
+echo "  * Copying MBR and partition table to image and finalizing it..." >> $LOG
 
 dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$IMG >> $LOG || erroMontagem
 
-echo "> Removendo arquivos e pastas temporárias, além de binários que não são mais necessários..." >> $LOG
+echo "> Removing temporary files and folders, as well as binaries that are no longer needed..." >> $LOG
 echo >> $LOG
 
 rm -rf Sistema $DESTINODISTRO temp.img >> $LOG
@@ -874,30 +871,30 @@ qemu-img convert -O vdi $dirImagem/$imagemFinal $dirImagem/$(basename $imagemFin
 
 # Vamos agora trocar a propriedade da imagem para um usuário comum
 
-# chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
-# chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
+chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
+chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
 
-export MSG="Construir o Hexagonix"
+export MSG="Build the Hexagonix"
 
 banner 
 
 echo
-echo -e "\e[32mSucesso ao construir o sistema e a imagem de disco.\e[0m"
+echo -e "\e[32mSuccessful build system and disk image.\e[0m"
 echo
-echo -e "Veja agora algumas informações da construção \e[1matual\e[0m do sistema:"
-echo -e " > Versão do Hexagonix base: \e[1;32m$VERSAO\e[0m"
-echo -e " > Revisão do software: \e[1;32m$REVISAO\e[0m"
-echo -e " > Nome do lançamento: \e[1;32m$CODENOME\e[0m"
-echo -e " > Localização da imagem: \e[1;32m$dirImagem/$imagemFinal\e[0m"
+echo -e "Now see some information about the \e[1matual\e[0m construction of the system:"
+echo -e " > Base Hexagonix version: \e[1;32m$VERSAO\e[0m"
+echo -e " > Software revision: \e[1;32m$REVISAO\e[0m"
+echo -e " > Release name: \e[1;32m$CODENOME\e[0m"
+echo -e " > Image location: \e[1;32m$dirImage/$imagemFinal\e[0m"
 echo
 
-echo "> Imagem '$IMG' gerada com sucesso." >> $LOG
+echo "> Image '$IMG' generated successfully." >> $LOG
 echo >> $LOG
-echo "Utilize './hx -v hx' para testar a execução do sistema na imagem gerada ou copie" >> $LOG
-echo "a imagem para o diretório 'Inst' da raiz do instalador para gerar uma imagem de instalação" >> $LOG
-echo "baseada em Linux para transferência para um disco." >> $LOG
+echo "Use './hx -v hx' to test running the system on the generated image or copy" >> $LOG
+echo "the image to the installer root 'Inst' directory to generate an install image" >> $LOG
+echo "Linux-based for transfer to disk." >> $LOG
 echo >> $LOG
-echo "----------------------------------------------------------------------" >> $LOG
+echo "------------------------------------------------ ----------------------" >> $LOG
 echo >> $LOG
 
 exit
@@ -1641,7 +1638,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="12.4"
+export VERSAOHX="13"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
 
