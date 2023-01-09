@@ -353,16 +353,16 @@ echo -e "Configuring users..."
 
 cd Dist/etc 
 
-if [ -e usuario.unx ] ; then
+if [ -e passwd ] ; then
 
 echo " > Removing previous user base..."
 
-rm usuario.unx
+rm passwd
 
 fi	
 
 echo -n " > Processing .conf file and creating user database... "
-echo -e $(cat usuario.conf)"@"$CODENOME"|root&ash.app# # Usuario da versao" >> usuario.unx
+echo -e $(cat usuario.conf)"@"$CODENOME"|root&ash.app# # Usuario da versao" >> passwd
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
@@ -379,16 +379,16 @@ echo -e "Configuring startup script..."
 
 cd Dist/etc 
 
-if [ -e init.unx ] ; then
+if [ -e rc ] ; then
 
 echo " > Removing previous startup script..."
 
-rm init.unx
+rm rc
 
 fi	
 
 echo -n " > Processing .conf file and creating startup script... "
-echo -e $(cat init.conf) >> init.unx
+echo -e $(cat init.conf) >> rc
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
