@@ -388,7 +388,7 @@ rm rc
 fi	
 
 echo -n " > Processing .conf file and creating rc (startup script)... "
-echo -e $(cat init.conf) >> rc
+echo -e $(cat rc.conf) >> rc
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
