@@ -362,7 +362,7 @@ rm passwd
 fi	
 
 echo -n " > Processing .conf file and creating user database... "
-echo -e $(cat usuario.conf)"@"$CODENOME"|root&ash.app# # Usuario da versao" >> passwd
+echo -e $(cat passwd.conf)"@"$CODENOME"|root&ash.app# # Normal user" >> passwd
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
