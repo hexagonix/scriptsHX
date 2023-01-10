@@ -12,7 +12,7 @@
 #;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
 #;;              ┌─┘│                 Licenciado sob licença BSD-3-Clause
 #;;              └──┘          
-#;;                                               Versão 3.5.1
+#;;                                               Versão 4.0.0
 #;;
 #;;************************************************************************************
 #;;
@@ -299,7 +299,7 @@ echo -e "[\e[32mOk\e[0m]"
 
 if [ -e hexgnix.unx ] ; then
 
-echo " > Removing previous Hexagonix build and version information..."
+echo " > Removing previous Hexagonix build and version database..."
 
 rm hexgnix.unx
 
@@ -355,7 +355,7 @@ cd Dist/etc
 
 if [ -e passwd ] ; then
 
-echo " > Removing previous user base..."
+echo " > Removing previous user database..."
 
 rm passwd
 
@@ -375,19 +375,19 @@ terminar
 init()
 {
 
-echo -e "Configuring startup script..."
+echo -e "Configuring rc (startup script)..."
 
 cd Dist/etc 
 
 if [ -e rc ] ; then
 
-echo " > Removing previous startup script..."
+echo " > Removing previous rc (startup script)..."
 
 rm rc
 
 fi	
 
-echo -n " > Processing .conf file and creating startup script... "
+echo -n " > Processing .conf file and creating rc (startup script)... "
 echo -e $(cat init.conf) >> rc
 echo -e "[\e[32mOk\e[0m]"
 
