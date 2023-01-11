@@ -20,57 +20,8 @@
 
 <img src="https://github.com/hexagonix/Doc/blob/main/Img/hr.png" width="100%" height="2px" />
 
-<details title="English" align='left'>
-<br>
-<summary align='left'><strong>English</strong></summary>
-
-### Tools for building Hexagonix
-
-<div align="justify">
-
-This repository contains tools to build Hexagonix and the system disk images, in addition to allowing you to test it in a virtual machine, applying all the necessary parameters.
-
-</div>
-
-<details title="HX" align='left'>
-<br>
-<summary align='center'>HX</summary>
-
-<p align="center">
-<img width="150px" height="150px" src="https://github.com/hexagonix/Doc/blob/main/Img/HX.png">
-</p>
-
-<div align="justify">
-
-`HX` is the tool responsible for unifying all the construction of Hexagonix, creating disk images and running tests in a virtual machine. `HX` accepts a number of parameters to customize the system build and testing environment. The `HX` must be in the root directory of the Hexagonix build tree. See below for some of the accepted parameters.
-
-* `-i`: Create a disk image containing Hexagonix. This parameter takes a second, specifying the image type. The default secondary parameter for `-i` is `hx`, as in `hx -i hx`. This option creates a standard Hexagonix disk image, built from the default settings. Use `hx -h` for more information.
-* `-v`: Starts a virtual environment to run Hexagonix on `qemu`. This parameter needs a second, specifying the virtual environment to use. The default secondary parameter for `-v` is `hx`, as in `hx -v hx`. This option starts a virtual machine with default settings. Use `hx -h` for more information.
-* `-c`: Clears object files from the system font tree. Use `hx -h` for more information.
-* `-h`: Displays the standard `HX` help, with all available options.
-
-</div>
-
-</details>
-
-<details title="Other Tools" align='left'>
-<br>
-<summary align='center'>Other tools</summary>
-
-<div align="justify">
-
-* Externos.sh: must be in the `Externos` directory, at the root of the Hexagonix tree. All repositories with third party code must be cloned inside the `Externos` directory. `Externos.sh` is responsible for building and/or manipulating third-party code, such as applications and libraries.
-* configure.sh: Must be in the root directory of the build tree. He is responsible for creating static files needed to build Hexagonix. Its execution can be started by `HX`, in case the necessary static files are not found.
-
-</div>
-
-</details>
-
-</details>
-
 <details title="Português" align='left'>
-<br>
-<summary align='left'><strong>Português</strong></summary>
+<summary align='left'><strong>:brazil: Português</strong></summary>
 
 ### Ferramentas para construção do Hexagonix
 
@@ -109,6 +60,53 @@ O `HX` é a ferramenta responsável por unificar toda a construção do Hexagoni
 
 * Externos.sh: deve estar no diretório `Externos`, na raiz da árvore do Hexagonix. Todos os repositórios com códigos de terceiros devem ser clonados no interior do diretório `Externos`. `Externos.sh`é responsável por construir e/ou manipular os códigos de terceiros, como aplicativos e bibliotecas.
 * configure.sh: Deve estar no diretório raiz da árvore de construção. Ele é responsável por criar arquivos estáticos necessários à construção do Hexagonix. Sua execução pode ser iniciada pelo `HX`, caso os arquivos estáticos necessários não sejam localizados.
+
+</div>
+
+</details>
+
+</details>
+
+<details title="English" align='left'>
+<summary align='left'><strong>:uk:English</strong></summary>
+
+### Tools for building Hexagonix
+
+<div align="justify">
+
+This repository contains tools to build Hexagonix and the system disk images, in addition to allowing you to test it in a virtual machine, applying all the necessary parameters.
+
+</div>
+
+<details title="HX" align='left'>
+<br>
+<summary align='center'>HX</summary>
+
+<p align="center">
+<img width="150px" height="150px" src="https://github.com/hexagonix/Doc/blob/main/Img/HX.png">
+</p>
+
+<div align="justify">
+
+`HX` is the tool responsible for unifying all the construction of Hexagonix, creating disk images and running tests in a virtual machine. `HX` accepts a number of parameters to customize the system build and testing environment. The `HX` must be in the root directory of the Hexagonix build tree. See below for some of the accepted parameters.
+
+* `-i`: Create a disk image containing Hexagonix. This parameter takes a second, specifying the image type. The default secondary parameter for `-i` is `hx`, as in `hx -i hx`. This option creates a standard Hexagonix disk image, built from the default settings. Use `hx -h` for more information.
+* `-v`: Starts a virtual environment to run Hexagonix on `qemu`. This parameter needs a second, specifying the virtual environment to use. The default secondary parameter for `-v` is `hx`, as in `hx -v hx`. This option starts a virtual machine with default settings. Use `hx -h` for more information.
+* `-c`: Clears object files from the system font tree. Use `hx -h` for more information.
+* `-h`: Displays the standard `HX` help, with all available options.
+
+</div>
+
+</details>
+
+<details title="Other Tools" align='left'>
+<br>
+<summary align='center'>Other tools</summary>
+
+<div align="justify">
+
+* Externos.sh: must be in the `Externos` directory, at the root of the Hexagonix tree. All repositories with third party code must be cloned inside the `Externos` directory. `Externos.sh` is responsible for building and/or manipulating third-party code, such as applications and libraries.
+* configure.sh: Must be in the root directory of the build tree. He is responsible for creating static files needed to build Hexagonix. Its execution can be started by `HX`, in case the necessary static files are not found.
 
 </div>
 
