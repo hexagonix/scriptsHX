@@ -2,7 +2,7 @@
 # Esse script deve ficar na raiz do projeto
 # 
 # Esse script foi desenvolvido para rodar sobre o Linux e versão do QEMU para Linux.
-# Pode funciona rodando sobre o WSL 2. 
+# A versão atual é totalmente compatível com o ambiente WSL 2 (e apenas a versão 2).
 # Aviso! Até o momento, o script não é compatível com a geração do sistema sobre o
 # FreeBSD. Entretanto, já é compatível para a execução de máquinas virtuais. O suporte
 # total ao FreeBSD está a caminho.
@@ -151,7 +151,7 @@ export Par="pt"
 if [ "$PT2" = "en" ]; then
 
 export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN"
-export imagemFinal="en.andromeda.img"
+export imagemFinal="en.hexagonix.img"
 export Par="en"
 
 fi
@@ -400,12 +400,11 @@ gerenciarConstrucaoComponentes()
 case $PT2 in
 
 hexagon) construirHexagon; exit;;
-hBoot) construirHBoot; exit;;
+HBoot) construirHBoot; exit;;
 saturno) construirSaturno; exit;;
 unixland) construirUtilUnix; exit;;
 andromedaland) construirBaseAndromeda; exit;;
 hexagonix) hexagonix; exit;;
-andromeda) construtorAndromeda; exit;;
 
 *) parametrosNecessarios; exit;;
 
@@ -422,12 +421,12 @@ export imagemFinal="hexagonix.img"
 if [ "$IDIOMA" = "en" ]; then
 
 export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN"
-export imagemFinal="en.andromeda.img"
+export imagemFinal="en.hexagonix.img"
 
 fi
 
 export DESTINODISTRO="Andromeda"
-export MSG="Construir o Hexagonix"
+export MSG="Building the Hexagonix®"
 
 clear 
 
@@ -701,24 +700,9 @@ export MSG="Build the Hexagonix"
 
 banner 
 
-echo
-echo -e "\e[32mSuccessful build system and disk image.\e[0m"
-echo
-echo -e "Now see some information about the \e[1matual\e[0m construction of the system:"
-echo -e " > Base Hexagonix version: \e[1;32m$VERSAO\e[0m"
-echo -e " > Software revision: \e[1;32m$REVISAO\e[0m"
-echo -e " > Release name: \e[1;32m$CODENOME\e[0m"
-echo -e " > Image location: \e[1;32m$dirImage/$imagemFinal\e[0m"
-echo
+infoBuild
 
-echo "> Image '$IMG' generated successfully." >> $LOG
-echo >> $LOG
-echo "Use './hx -v hx' to test running the system on the generated image or copy" >> $LOG
-echo "the image to the installer root 'Inst' directory to generate an install image" >> $LOG
-echo "Linux-based for transfer to disk." >> $LOG
-echo >> $LOG
-echo "------------------------------------------------ ----------------------" >> $LOG
-echo >> $LOG
+avisoCriarInstalador
 
 exit
 
@@ -878,24 +862,9 @@ export MSG="Build the Hexagonix"
 
 banner 
 
-echo
-echo -e "\e[32mSuccessful build system and disk image.\e[0m"
-echo
-echo -e "Now see some information about the \e[1matual\e[0m construction of the system:"
-echo -e " > Base Hexagonix version: \e[1;32m$VERSAO\e[0m"
-echo -e " > Software revision: \e[1;32m$REVISAO\e[0m"
-echo -e " > Release name: \e[1;32m$CODENOME\e[0m"
-echo -e " > Image location: \e[1;32m$dirImage/$imagemFinal\e[0m"
-echo
+infoBuild
 
-echo "> Image '$IMG' generated successfully." >> $LOG
-echo >> $LOG
-echo "Use './hx -v hx' to test running the system on the generated image or copy" >> $LOG
-echo "the image to the installer root 'Inst' directory to generate an install image" >> $LOG
-echo "Linux-based for transfer to disk." >> $LOG
-echo >> $LOG
-echo "------------------------------------------------ ----------------------" >> $LOG
-echo >> $LOG
+avisoCriarInstalador
 
 exit
 
@@ -1057,7 +1026,8 @@ echo
 
 # Sessão de utilidades do hx
 
-limpar(){
+limpar()
+{
 	
 clear
 
@@ -1098,7 +1068,8 @@ export VERSAO=$(cat Dist/etc/versao.def)
 
 }
 
-infoBuild(){
+infoBuild()
+{
 
 clear
 
@@ -1106,10 +1077,11 @@ export MSG="System information"
 
 banner 
 
-echo -e "See now some information and definitions of the \e[1matual\e[0m construction of the system:"
-echo -e " > Base Hexagonix version: \e[1;32m$VERSAO\e[0m"
+echo -e "Information about the \e[1mcurrent\e[0m construction of the system:"
+echo -e " > Hexagonix version: \e[1;32m$VERSAO\e[0m"
 echo -e " > Software revision: \e[1;32m$REVISAO\e[0m"
 echo -e " > Release name: \e[1;32m$CODENOME\e[0m"
+echo -e " > Disk image location: \e[1;32m$dirImagem/$imagemFinal\e[0m"
 echo
 
 }
@@ -1149,7 +1121,8 @@ echo -e "[\e[32mStep completed successfully\e[0m]"
 
 }
 
-tudopronto(){
+tudopronto()
+{
 
 echo -e "[\e[32mAll ready!\e[0m]"
 
@@ -1253,6 +1226,14 @@ echo "In this file you can find data and build information" >> $REG
 echo "of the system files, being able to identify errors among other things" >> $REG
 echo "in process." >> $REG
 echo >> $REG
+echo "hx version: $VERSAOHX" >> $REG
+echo >> $REG
+echo "Information about the current construction of the system:" >> $REG
+echo " > Hexagonix version: $VERSAO" >> $REG
+echo " > Software revision: $REVISAO" >> $REG
+echo " > Release name: $CODENOME" >> $REG
+echo " > Disk image location: $dirImagem/$imagemFinal" >> $REG
+echo >> $REG
 echo -n "Date and time of this report: " >> $REG
 date >> $REG
 echo >> $REG
@@ -1264,7 +1245,22 @@ echo >> $REG
 
 }
 
-instalarDependencias(){
+avisoCriarInstalador()
+{
+
+echo "> Disk image '$IMG' and VM disk image '$(basename $imagemFinal .img).vdi' generated successfully." >> $LOG
+echo >> $LOG
+echo "Use './hx -v hx' to test running the system on the generated image or copy" >> $LOG
+echo "the image to the installer 'Inst' directory to generate an Linux-based install" >> $LOG
+echo "image for transfer to physical disk." >> $LOG
+echo >> $LOG
+echo "------------------------------------------------ ----------------------" >> $LOG
+echo >> $LOG
+
+}
+
+instalarDependencias()
+{
 
 if test "`whoami`" != "root" ; then
 
@@ -1598,6 +1594,8 @@ exit
 
 } 
 
+#;;************************************************************************************
+
 # Ponto de entrada do hx, definição de variáveis e processamento de parâmetros
 #
 #
@@ -1638,9 +1636,9 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13"
+export VERSAOHX="13.5"
 
-# Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm
+# Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
 export INCLUDE="$(pwd)/lib/fasm"
 
@@ -1648,9 +1646,7 @@ export INCLUDE="$(pwd)/lib/fasm"
 
 case $1 in
 
--c) limpar; exit;;
-
-# Novo mecanismo de gerenciamento de parâmetros
+# Gerenciar os parâmetros iniciados com '-'
 
 -v) gerenciarMaquinaVirtual; exit;;
 -i) gerenciarConstrucao; exit;;
@@ -1660,8 +1656,9 @@ case $1 in
 -ui) atualizarImagens; exit;;
 -un) trocarRamoAtualizar; exit;;
 -m) checarDependenciasClonagem; exit;;
+-c) limpar; exit;;
 
-# Parâmetros com --
+# Gerenciar os parâmetros iniciados com '--'
 
 --ver) exibirCopyright; exit;;
 --depend) instalarDependencias; exit;; 
