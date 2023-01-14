@@ -277,7 +277,8 @@ terminar
 
 }
 
-build() {
+build() 
+{
 
 echo -e "Configuring system build data..."
 
