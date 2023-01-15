@@ -1,5 +1,4 @@
 #!/bin/bash
-# Esse script deve ficar na raiz do projeto
 #
 #;;************************************************************************************
 #;;
@@ -51,6 +50,14 @@
 #;; OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #;;
 #;; $HexagonixOS$
+
+# $PORTUGUÊS$
+#
+# Esse script deve ficar na raiz do projeto
+# 
+# $ENGLISH$
+#
+# This script must be in the root of the project
 
 # Este arquivo constrói os utilitários e aplicativos de terceiros
 

@@ -51,6 +51,14 @@
 #;;
 #;; $HexagonixOS$
 
+# $PORTUGUÊS$
+#
+# Esse script deve ficar na raiz do projeto
+# 
+# $ENGLISH$
+#
+# This script must be in the root of the project
+
 find . -name '*.asm' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 find . -name '*.s' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 find . -name '*.man' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
