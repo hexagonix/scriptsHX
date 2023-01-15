@@ -1,11 +1,4 @@
 #!/bin/bash
-# Esse script deve ficar na raiz do projeto
-# 
-# Esse script foi desenvolvido para rodar sobre o Linux e versão do QEMU para Linux.
-# A versão atual é totalmente compatível com o ambiente WSL 2 (e apenas a versão 2).
-# Aviso! Até o momento, o script não é compatível com a geração do sistema sobre o
-# FreeBSD. Entretanto, já é compatível para a execução de máquinas virtuais. O suporte
-# total ao FreeBSD está a caminho.
 #
 #;;************************************************************************************
 #;;
@@ -57,6 +50,27 @@
 #;; OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #;;
 #;; $HexagonixOS$
+
+# $PORTUGUÊS$
+#
+# Esse script deve ficar na raiz do projeto
+# 
+# Esse script foi desenvolvido para rodar sobre o Linux e versão do QEMU para Linux.
+# A versão atual é totalmente compatível com o ambiente WSL 2 (e apenas a versão 2).
+# Aviso! Até o momento, o script não é compatível com a geração do sistema sobre o
+# FreeBSD. Entretanto, já é compatível para a execução de máquinas virtuais. O suporte
+# total ao FreeBSD está a caminho.
+#
+#
+# $ENGLISH$
+#
+# This script must be in the root of the project
+#
+# This script was developed to run on Linux and the Linux version of QEMU.
+# The current version is fully compatible with the WSL 2 environment (and version 2 only).
+# Warning! At this time, the script does not support system generation over FreeBSD.
+# However, it is already supported for running virtual machines. The full support to
+# FreeBSD is on the way.
 
 # Sessão de ajuda e informações sobre o hx
 
