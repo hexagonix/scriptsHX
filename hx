@@ -1408,6 +1408,10 @@ cd ..
 cd lib && git pull
 cd ..
 cd Scripts && git pull
+cp hx configure.sh ../
+cp Externos.sh ../Externos/
+cd ..
+chmod +x configure.sh hx Externos/Externos.sh
 
 terminar
 tudopronto
@@ -1650,7 +1654,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.5"
+export VERSAOHX="13.6"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
