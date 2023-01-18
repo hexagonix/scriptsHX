@@ -1056,8 +1056,8 @@ rm -rf Sistema $DESTINODISTRO Hexagonix andromeda.img hexagonix.img
 rm -rf log.log COM1.txt *.sis *.bin *.app Serial.txt 
 
 echo -e " [\e[32mOk\e[0m]"
-echo -e " > \e[1;94mUse ./hx with parameters to regenerate these files.\e[0m"
-echo " > For help on possible parameters, use ./hx -h."
+echo -e "   > \e[1;94mUse ./hx with parameters to regenerate these files.\e[0m"
+echo -e "   > For help on possible parameters, use ./hx -h."
 echo -n " > Removing configuration files generated every build..."
 
 rm -rf Dist/etc/*.unx Dist/etc/*.ocl Dist/etc/rc Dist/etc/passwd
