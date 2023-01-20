@@ -79,7 +79,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi	
+fi  
 
 # Dependência 2
 
@@ -94,7 +94,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
 
-fi	
+fi  
 
 # Dependência 3
 
@@ -109,7 +109,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
 
-fi	
+fi  
 
 # Dependência 4
 
@@ -124,7 +124,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi	
+fi  
 
 # Dependência 5
 
@@ -139,7 +139,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
 
-fi	
+fi  
 
 # Dependência 6
 
@@ -154,7 +154,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
 
-fi	
+fi  
 
 terminar
 
@@ -179,7 +179,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi	
+fi  
 
 # Script 2
 
@@ -198,7 +198,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi	
+fi  
 
 # Script 3
 
@@ -217,7 +217,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi	
+fi  
 
 # Script 4
 
@@ -236,7 +236,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi	
+fi  
 
 # Script 5
 
@@ -255,7 +255,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi	
+fi  
 
 # Agora vamos instalar as dependências já presentes (sem necessidade de obtenção)
 
@@ -299,7 +299,7 @@ echo " > Removing previous build and base version information..."
 
 rm base.ocl
 
-fi	
+fi  
 
 echo -n " > Processing .conf file and setting configuration file... "
 echo -e $(cat base.conf)$VERSAO"]"$CODENOME'"'$VERSAO"#"$REVISAO"!"$BUILD">" >> base.ocl 
@@ -311,7 +311,7 @@ echo " > Removing previous Hexagonix build and version database..."
 
 rm hexgnix.unx
 
-fi	
+fi  
 
 echo -n " > Processing .conf file and creating UNX-XML... "
 echo -e $(cat hexgnix.conf)"<VERSAO> "$VERSAO" </VERSAO>" >> hexgnix.unx
@@ -341,7 +341,7 @@ echo " > Removing previous host configuration..."
 
 rm host.unx
 
-fi	
+fi  
 
 echo -n " > Processing .conf file and creating host configuration... "
 echo -e $CODENOME$(cat host.conf) >> host.unx
@@ -367,7 +367,7 @@ echo " > Removing previous user database..."
 
 rm passwd
 
-fi	
+fi  
 
 echo -n " > Processing .conf file and creating user database... "
 echo -e $(cat passwd.conf)"@"$CODENOME"|root&ash.app# # Normal user" >> passwd
@@ -393,7 +393,7 @@ echo " > Removing previous rc (startup script)..."
 
 rm rc
 
-fi	
+fi  
 
 echo -n " > Processing .conf file and creating rc (startup script)... "
 echo -e $(cat rc.conf) >> rc

@@ -76,10 +76,10 @@ cd HEXAGONIX
 for i in *.asm
 do
 
-	echo -en "Generating third-party application \e[1;94m$(basename $i .asm)\e[0m..."
-	
-	fasm $i ../../../../$DIRETORIO/bin/`basename $i .asm` -d $BANDEIRAS >> /dev/null || echo " [Fail]"
-	
+    echo -en "Generating third-party application \e[1;94m$(basename $i .asm)\e[0m..."
+    
+    fasm $i ../../../../$DIRETORIO/bin/`basename $i .asm` -d $BANDEIRAS >> /dev/null || echo " [Fail]"
+    
     echo -e " [\e[32mOk\e[0m]"
 
 done
