@@ -1412,6 +1412,7 @@ cd Scripts && git pull
 
 echo 
 echo -e "> \e[32mUpdating building scripts and utilities...\e[0m"
+echo 
 
 cp hx configure.sh ../
 cp Externos.sh ../Externos/
@@ -1469,6 +1470,7 @@ cd Scripts && git switch $PT2 && git pull
 
 echo 
 echo -e "> \e[32mUpdating building scripts and utilities...\e[0m"
+echo 
 
 cp hx configure.sh ../
 cp Externos.sh ../Externos/
