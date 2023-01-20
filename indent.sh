@@ -11,7 +11,7 @@
 #;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
 #;;              ┌─┘│                 Licenciado sob licença BSD-3-Clause
 #;;              └──┘          
-#;;
+#;;                                               Versão 1.0
 #;;
 #;;************************************************************************************
 #;;
@@ -59,9 +59,25 @@
 #
 # This script must be in the root of the project
 
+export VERSAO="1.0"
+
+echo
+echo "hx indentation helper version $VERSAO"
+echo 
+echo "This tool looks for and fixes indentation and formatting problems in the "
+echo "files thatmake up the Hexagonix project."
+echo
+echo -e "> \e[32mSearching and fixing indentation in Hexagonix source and related files...\e[0m"
+echo
+
 find . -name '*.asm' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 find . -name '*.s' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 find . -name '*.man' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 find . -name '*.conf' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 find . -name '*.def' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+find . -name '*.cow' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+find . -name '*.sh' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 
+echo -e "> \e[32mTuning executable and script files...\e[0m"
+echo
+find . -name '*.sh' ! -type d -exec bash -c 'chmod +x *.sh' {} \;
