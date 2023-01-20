@@ -1378,7 +1378,8 @@ banner
 echo "You are about to update all system repositories with the server,"
 echo "keeping current branch. To change branch and update, use hx -un <branch>."
 echo
-
+echo -e "> \e[32mUpdating repositories...\e[0m"
+echo
 cd Apps/Unix && git pull
 cd ..
 cd Andromeda && git pull
@@ -1408,9 +1409,14 @@ cd ..
 cd lib && git pull
 cd ..
 cd Scripts && git pull
+
+echo 
+echo -e "> \e[32mUpdating building scripts and utilities...\e[0m"
+
 cp hx configure.sh ../
 cp Externos.sh ../Externos/
 cd ..
+
 chmod +x configure.sh hx Externos/Externos.sh
 
 terminar
@@ -1427,6 +1433,8 @@ banner
 
 echo "You are about to update all system repositories with the server,"
 echo "after switching to the given branch."
+echo
+echo -e "> \e[32mUpdating repositories...\e[0m"
 echo
 
 cd Apps/Unix && git switch $PT2 && git pull
@@ -1458,6 +1466,15 @@ cd ..
 cd lib && git switch $PT2 && git pull
 cd ..
 cd Scripts && git switch $PT2 && git pull
+
+echo 
+echo -e "> \e[32mUpdating building scripts and utilities...\e[0m"
+
+cp hx configure.sh ../
+cp Externos.sh ../Externos/
+cd ..
+
+chmod +x configure.sh hx Externos/Externos.sh
 
 terminar
 tudopronto
@@ -1654,7 +1671,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.6"
+export VERSAOHX="13.7"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
