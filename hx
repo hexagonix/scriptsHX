@@ -1372,7 +1372,7 @@ tudopronto
 infoRepo()
 {
 
-export MSG="Repos info"
+export MSG="Repos information"
 
 banner 
 
