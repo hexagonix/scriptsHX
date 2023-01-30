@@ -1403,6 +1403,7 @@ echo -e " > Server: \e[1;94mhttps://github.com/hexagonix\e[0m"
 echo 
 echo -e "> \e[1;32mUpdating repositories...\e[0m"
 echo
+
 cd Apps/Unix && git pull
 cd ..
 cd Andromeda && git pull
@@ -1458,7 +1459,11 @@ banner
 echo "You are about to update all system repositories with the server,"
 echo "after switching to the given branch."
 echo
-echo -e "> \e[32mUpdating repositories...\e[0m"
+echo "Update info:"
+echo -e " > Branch: \e[1;94m$PT2\e[0m"
+echo -e " > Server: \e[1;94mhttps://github.com/hexagonix\e[0m"
+echo 
+echo -e "> \e[1;32mUpdating repositories...\e[0m"
 echo
 
 cd Apps/Unix && git switch $PT2 && git pull
@@ -1492,7 +1497,7 @@ cd ..
 cd Scripts && git switch $PT2 && git pull
 
 echo 
-echo -e "> \e[32mUpdating building scripts and utilities...\e[0m"
+echo -e "> \e[1;32mUpdating building scripts and utilities...\e[0m"
 echo 
 
 cp hx configure.sh ../
