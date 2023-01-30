@@ -93,6 +93,7 @@ echo -e "\e[1;32m hx.test\e[0m - Build test disk image with Hexagonix"
 echo -e "\e[1;31m * The 'hx' option will be selected if no parameter is passed after '-i'!\e[0m"
 echo -e "\e[1;32m-u\e[0m  - Update all repositories with server (current branch)"
 echo -e "\e[1;32m-ui\e[0m - Sync Hexagonix images with the official repository"
+echo -e "\e[1;32m-br\e[0m - Get information about current used branch"
 echo -e "\e[1;32m-un <branch>\e[0m - Switch branch to <branch> and update all repositories"
 echo -e "\e[1;32m-m\e[0m - Clone repositories to location and configure build environment"
 echo -e "\e[1;32m-c\e[0m - Clear system tree binary and configuration files"
@@ -1368,6 +1369,24 @@ tudopronto
 
 }
 
+infoRepo()
+{
+
+export MSG="Repos info"
+
+banner 
+
+echo
+echo "Currently, you are using this configuration for the repositories:"
+echo -e " > Branch: \e[1;94m$RAMO\e[0m"
+echo -e " > Server: \e[1;94mhttps://github.com/hexagonix\e[0m"
+echo 
+
+terminar
+tudopronto
+
+}
+
 atualizarRepos()
 {
 
@@ -1375,10 +1394,14 @@ export MSG="Update repos"
 
 banner 
 
-echo "You are about to update all system repositories with the server,"
-echo "keeping current branch. To change branch and update, use hx -un <branch>."
+echo "You are about to update all repositories with the server, keeping current"
+echo "branch. To change branch and update, use hx -un <branch>."
 echo
-echo -e "> \e[32mUpdating repositories...\e[0m"
+echo "Update info:"
+echo -e " > Branch: \e[1;94m$RAMO\e[0m"
+echo -e " > Server: \e[1;94mhttps://github.com/hexagonix\e[0m"
+echo 
+echo -e "> \e[1;32mUpdating repositories...\e[0m"
 echo
 cd Apps/Unix && git pull
 cd ..
@@ -1411,7 +1434,7 @@ cd ..
 cd Scripts && git pull
 
 echo 
-echo -e "> \e[32mUpdating building scripts and utilities...\e[0m"
+echo -e "> \e[1;32mUpdating building scripts and utilities...\e[0m"
 echo 
 
 cp hx configure.sh ../
@@ -1661,6 +1684,10 @@ export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT"
 export BANDEIRASHEXAGON="VERBOSE=SIM"
 export BANDEIRASHBOOT="TEMATOM=ANDROMEDA"
 
+cd hexagonix 
+export RAMO=$(git branch --show-current)
+cd ..
+
 # Constantes com informações de parâmetros
 
 export NOMEHX=$0
@@ -1673,7 +1700,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.7"
+export VERSAOHX="13.8"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
@@ -1689,6 +1716,7 @@ case $1 in
 -i) gerenciarConstrucao; exit;;
 -h) exibirAjuda; exit;;
 -b) gerenciarConstrucaoComponentes; exit;;
+-br) infoRepo; exit;;
 -u) atualizarRepos; exit;;
 -ui) atualizarImagens; exit;;
 -un) trocarRamoAtualizar; exit;;
