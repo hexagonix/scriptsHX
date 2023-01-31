@@ -142,6 +142,17 @@ imagemHexagonix
 
 }
 
+prepImagemHexagonixBSD(){
+
+verificarEstaticos
+
+iniciarLog
+
+definirHexagonixOficial
+imagemHexagonixSobreBSD
+
+}
+
 prepImagemHexagonixTeste(){
 
 verificarEstaticos
@@ -182,7 +193,7 @@ definirHexagonixOficial()
 {
 
 # Aqui vamos definir uma imagem de tamanho oficial, que demora mais a ser gerada. Essa imagem é
-# apropriada para o pacote de instalação do Andromeda®
+# apropriada para o pacote de instalação do Hexagonix®
 
 export LOG="log.log"
 export IMG="hexagonix.img"
@@ -199,9 +210,7 @@ definirVerbose()
 case $PT2 in
 
 hexagonix) definirHexagonix; exit;;
-andromeda) definirAndromedaTeste; exit;;
-oficial) definirAndromedaOficial; exit;;
-*) definirAndromedaTeste; exit;;
+*) definirHexagonix; exit;;
 
 esac
 
@@ -403,6 +412,7 @@ case $PT2 in
 
 hx) prepImagemHexagonix; exit;;
 hx.teste) prepImagemHexagonixTeste; exit;;
+bsd) prepImagemHexagonixBSD; exit;;
 *) prepImagemHexagonix; exit;; # Assimir hx -i hx
 
 esac
@@ -744,37 +754,36 @@ construtorHexagonix $Par
 echo -e "\e[1;94mBuilding system image...\e[0m"
 echo
 
-echo "Building temporary image for file manipulation......" >> $LOG
+echo "Building temporary image for file manipulation......"
 
-dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
+# Setores reservados = 16
+# Fats = 2
+# Entradas raiz = 512 
+# Setores por fat = 16
+# Setores por trilha = 63
+# Cabeças = 255
+# Setores ocultos = 0
+# Total setores = 92160
+
+newfs_msdos -C 45m -F 16 -B $DESTINODISTRO/saturno.img temp.img
 
 if [ ! -e hexagonix.img ] ; then
 
-echo >> $LOG
-echo "Building image that will receive system files..." >> $LOG
-echo >> $LOG
+echo "Building image that will receive system files..." 
 
-dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMG >> $LOG || erroMontagem
+newfs_msdos -C 90m -F 16 hexagonix.img
 	
 fi	
 
-echo "> Copying bootloader to image..." >> $LOG
-
-dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
-
 # BSD logic
 
-mdconfig -a -t vnode -f temp.img -u 4
-
-gpart create -s mbr md4
-gpart add -t FAT16 -a 1 md4
-newfs_msdos -F 16 -B /dev/md4s1 
+mdconfig -a -t vnode -f temp.img -o force -u 4
 
 # "Normal" logic 
 
 echo "> Mounting the image..." >> $LOG
  
-mkdir -p Sistema && mount -o loop -t vfat temp.img Sistema/ || erroMontagem
+mkdir -p Sistema && mount_msdosfs /dev/md4 Sistema/ || erroMontagem
 
 echo "> Copying system files to the image..." >> $LOG
 echo >> $LOG
@@ -837,7 +846,10 @@ sleep 1.0 || erroMontagem
 
 echo "> Unmounting the image..." >> $LOG
 
+sync 
+
 umount Sistema >> /dev/null || erroMontagem
+mdconfig -d -u 4
 
 echo "> Mounting the final image..." >> $LOG
 
@@ -1053,7 +1065,7 @@ banner
 echo "Performing system tree cleanup..."
 echo -n " > Cleaning up generated components and system images..."
 	
-rm -rf Sistema $DESTINODISTRO Hexagonix andromeda.img hexagonix.img
+rm -rf Sistema $DESTINODISTRO Hexagonix temp.img hexagonix.img
 rm -rf log.log COM1.txt *.sis *.bin *.app Serial.txt 
 
 echo -e " [\e[32mOk\e[0m]"
@@ -1705,7 +1717,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.8"
+export VERSAOHX="13.9"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
