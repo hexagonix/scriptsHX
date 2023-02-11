@@ -1452,9 +1452,24 @@ echo
 
 cp hx configure.sh ../
 cp Externos.sh ../Externos/
+
 cd ..
 
 chmod +x configure.sh hx Externos/Externos.sh
+
+if [ -e autohx.py ] ; then
+
+# O autohx está presente e deve ser atualizado
+
+cd autohx && git pull
+
+cp autohx.py ../
+
+cd ..
+
+chmod +x autohx.py 
+
+fi
 
 terminar
 tudopronto
@@ -1517,6 +1532,20 @@ cp Externos.sh ../Externos/
 cd ..
 
 chmod +x configure.sh hx Externos/Externos.sh
+
+if [ -e autohx.py ] ; then
+
+# O autohx está presente e deve ser atualizado
+
+cd autohx && git pull
+
+cp autohx.py ../
+
+cd ..
+
+chmod +x autohx.py 
+
+fi
 
 terminar
 tudopronto
@@ -1717,7 +1746,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.9"
+export VERSAOHX="13.10"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
