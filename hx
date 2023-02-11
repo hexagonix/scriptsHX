@@ -1616,6 +1616,10 @@ git clone https://github.com/hexagonix/Doc
 
 git clone https://github.com/hexagonix/scriptsHX Scripts
 
+# Agora, o utilitário autohx
+
+git clone https://github.com/felipenlunkes/hexagonix-autobuild autohx
+
 # Agora vamos colocar as coisas no lugar 
 
 cd Scripts 
@@ -1625,7 +1629,13 @@ cp Externos.sh ../Externos
 
 cd ..
 
-chmod +x configure.sh hx 
+cd autohx 
+
+cp autohx.py ../
+
+cd ..
+
+chmod +x configure.sh hx autohx.py
 
 echo
 echo -e "[\e[32mAll ready!\e[0m]"
