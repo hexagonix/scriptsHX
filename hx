@@ -679,6 +679,8 @@ echo " [No]" >> $LOG
 	
 fi	
 
+checarContrib
+
 echo >> $LOG
 
 sleep 1.0 || erroMontagem
@@ -840,6 +842,8 @@ echo " [No]" >> $LOG
 	
 fi	
 
+checarContrib 
+
 echo >> $LOG
 
 sleep 1.0 || erroMontagem
@@ -896,6 +900,21 @@ avisoCriarInstalador
 exit
 
 }
+
+checarContrib()
+{
+
+# Verificar se existem arquivos complementares a serem adicionados
+# na imagem. Esses arquivos devem estar no diretório contrib.
+
+if [ -e contrib/ ] ; then
+
+cp contrib/* Sistema/
+	
+fi	
+
+}
+
 
 # Sessão de gerenciamento de máquinas virtuais do hx
 
@@ -1756,7 +1775,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.10"
+export VERSAOHX="13.11"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
