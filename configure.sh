@@ -11,7 +11,7 @@
 #;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
 #;;              ┌─┘│                 Licenciado sob licença BSD-3-Clause
 #;;              └──┘          
-#;;                                               Versão 4.0.0
+#;;                                               Versão 4.1.0
 #;;
 #;;************************************************************************************
 #;;
@@ -370,7 +370,7 @@ rm shrc
 fi  
 
 echo -n " > Creating shrc configuration... "
-echo "Welcome to Hexagonix $VERSAO!"  >> shrc
+echo "Welcome to Hexagonix $VERSAO-$REVISAO"  >> shrc
 echo "Hexagonix is licenced under BSD-3-Clause and comes with no warranty." >> shrc
 echo -e "[\e[32mOk\e[0m]"
 
