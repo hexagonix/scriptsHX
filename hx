@@ -477,7 +477,7 @@ cd etc/
 cp rc passwd ../../$DESTINODISTRO/etc
 cp *.unx ../../$DESTINODISTRO/etc
 cp base.ocl ../../$DESTINODISTRO/hexgnix.ocl
-cp shrc ../../$DESTINODISTRO/shrc
+cp shrc ../../$DESTINODISTRO/etc
 
 cd ..
 

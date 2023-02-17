@@ -371,7 +371,7 @@ fi
 
 echo -n " > Creating shrc configuration... "
 echo "Welcome to Hexagonix $VERSAO!"  >> shrc
-echo "Hexagonix is ​​licensed under a BSD-3-Clause license and comes with no warranty." >> shrc
+echo "Hexagonix is licenced under BSD-3-Clause and comes with no warranty." >> shrc
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
