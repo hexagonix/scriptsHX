@@ -1093,7 +1093,7 @@ echo -e "   > \e[1;94mUse ./hx with parameters to regenerate these files.\e[0m"
 echo -e "   > For help on possible parameters, use ./hx -h."
 echo -n " > Removing configuration files generated every build..."
 
-rm -rf Dist/etc/*.unx Dist/etc/*.ocl Dist/etc/rc Dist/etc/passwd
+rm -rf Dist/etc/*.unx Dist/etc/*.ocl Dist/etc/rc Dist/etc/passwd Dist/etc/shrc
 
 echo -e " [\e[32mOk\e[0m]"
 echo -e "   > \e[1;94mUse ./configure.sh to regenerate these files.\e[0m"
@@ -1776,7 +1776,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.11"
+export VERSAOHX="13.11.1"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
