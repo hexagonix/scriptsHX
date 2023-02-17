@@ -1802,7 +1802,7 @@ case $1 in
 
 --ver) exibirCopyright; exit;;
 --depend) instalarDependencias; exit;; 
---info) infoBuild; exit;;
+--info) obterInfoBuild; infoBuild; exit;;
 --configure) executarConfigure; exit;;
 --stat) exibirEstatisticas; exit;;
 
