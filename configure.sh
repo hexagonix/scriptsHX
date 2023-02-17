@@ -302,7 +302,7 @@ rm base.ocl
 fi  
 
 echo -n " > Processing .conf file and setting configuration file... "
-echo -e $(cat base.conf)$VERSAO"]"$CODENOME'"'$VERSAO"#"$REVISAO"!"$BUILD">" >> base.ocl 
+echo $(cat base.conf)$VERSAO"]"$CODENOME'"'$VERSAO"#"$REVISAO"!"$BUILD">" >> base.ocl 
 echo -e "[\e[32mOk\e[0m]"
 
 if [ -e hexgnix.unx ] ; then
@@ -314,11 +314,11 @@ rm hexgnix.unx
 fi  
 
 echo -n " > Processing .conf file and creating UNX-XML... "
-echo -e $(cat hexgnix.conf)"<VERSAO> "$VERSAO" </VERSAO>" >> hexgnix.unx
-echo -e "<NOME> $CODENOME </NOME>" >> hexgnix.unx
-echo -e "<PACOTE> $VERSAO </PACOTE>" >> hexgnix.unx
-echo -e "<STATUS> $REVISAO </STATUS>" >> hexgnix.unx
-echo -e "<DATA_BUILD> "$(date)" </DATA_BUILD>" >> hexgnix.unx
+echo $(cat hexgnix.conf)"<VERSAO> "$VERSAO" </VERSAO>" >> hexgnix.unx
+echo "<NOME> $CODENOME </NOME>" >> hexgnix.unx
+echo "<PACOTE> $VERSAO </PACOTE>" >> hexgnix.unx
+echo "<STATUS> $REVISAO </STATUS>" >> hexgnix.unx
+echo "<DATA_BUILD> "$(date)" </DATA_BUILD>" >> hexgnix.unx
 echo "</Hexagonix>" >> hexgnix.unx
 echo -e "[\e[32mOk\e[0m]"
 cd ..
@@ -344,7 +344,34 @@ rm host.unx
 fi  
 
 echo -n " > Processing .conf file and creating host configuration... "
-echo -e $CODENOME$(cat host.conf) >> host.unx
+echo $CODENOME$(cat host.conf) >> host.unx
+echo -e "[\e[32mOk\e[0m]"
+
+cd ..
+cd ..
+
+terminar 
+
+}
+
+shrc()
+{
+
+echo -e "Configuring shrc..."
+
+cd Dist/etc 
+
+if [ -e shrc ] ; then
+
+echo " > Removing previous shrc configuration..."
+
+rm shrc
+
+fi  
+
+echo -n " > Creating shrc configuration... "
+echo "Welcome to Hexagonix $VERSAO!"  >> shrc
+echo "Hexagonix is ​​licensed under a BSD-3-Clause license and comes with no warranty." >> shrc
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
@@ -493,6 +520,7 @@ build
 usuarios
 init
 host
+shrc
 
 echo -e "[\e[32mAll ready!\e[0m]"
 
