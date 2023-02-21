@@ -11,7 +11,7 @@
 #;; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘
 #;;              ┌─┘│                 Licenciado sob licença BSD-3-Clause
 #;;              └──┘          
-#;;                                               Versão 4.1.0
+#;;                                               Versão 4.1.1
 #;;
 #;;************************************************************************************
 #;;
@@ -302,7 +302,7 @@ rm base.ocl
 fi  
 
 echo -n " > Processing .conf file and setting configuration file... "
-echo $(cat base.conf)$VERSAO"]"$CODENOME'"'$VERSAO"#"$REVISAO"!"$BUILD">" >> base.ocl 
+echo -e $(cat base.conf)$VERSAO"]"$CODENOME'"'$VERSAO"#"$REVISAO"!"$BUILD">" >> base.ocl 
 echo -e "[\e[32mOk\e[0m]"
 
 if [ -e hexgnix.unx ] ; then
@@ -314,11 +314,11 @@ rm hexgnix.unx
 fi  
 
 echo -n " > Processing .conf file and creating UNX-XML... "
-echo $(cat hexgnix.conf)"<VERSAO> "$VERSAO" </VERSAO>" >> hexgnix.unx
-echo "<NOME> $CODENOME </NOME>" >> hexgnix.unx
-echo "<PACOTE> $VERSAO </PACOTE>" >> hexgnix.unx
+echo -e $(cat hexgnix.conf)"<VERSION> "$VERSAO" </VERSION>" >> hexgnix.unx
+echo "<CODENAME> $CODENOME </CODENAME>" >> hexgnix.unx
+echo "<UPDATEPACK> $VERSAO </UPDATEPACK>" >> hexgnix.unx
 echo "<STATUS> $REVISAO </STATUS>" >> hexgnix.unx
-echo "<DATA_BUILD> "$(date)" </DATA_BUILD>" >> hexgnix.unx
+echo "<BUILDDATE> "$(date)" </BUILDDATE>" >> hexgnix.unx
 echo "</Hexagonix>" >> hexgnix.unx
 echo -e "[\e[32mOk\e[0m]"
 cd ..
