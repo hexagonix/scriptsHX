@@ -317,7 +317,7 @@ echo -n " > Processing .conf file and creating UNX-XML... "
 echo -e $(cat hexgnix.conf)"<VERSION> "$VERSAO" </VERSION>" >> hexgnix.unx
 echo "<CODENAME> $CODENOME </CODENAME>" >> hexgnix.unx
 echo "<UPDATEPACK> $VERSAO </UPDATEPACK>" >> hexgnix.unx
-echo "<STATUS> $REVISAO </STATUS>" >> hexgnix.unx
+echo "<BRANCH> $REVISAO </BRANCH>" >> hexgnix.unx
 echo "<BUILDDATE> "$(date)" </BUILDDATE>" >> hexgnix.unx
 echo "</Hexagonix>" >> hexgnix.unx
 echo -e "[\e[32mOk\e[0m]"
