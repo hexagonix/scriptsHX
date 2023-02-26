@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Versão 4.1.1
+# Versão 4.1.2
 
 # $PORTUGUÊS$
 #
@@ -259,7 +259,7 @@ fi
 
 # Script 5
 
-echo -n " > Hexagonix font build script (fonts.sh) "
+echo -n " > Hexagonix font build script (fontes.sh) "
 
 if [ -e Fontes/fontes.sh ] ; then
 
