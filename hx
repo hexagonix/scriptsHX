@@ -509,7 +509,7 @@ cd Fontes/
 
 if [ -e aurora.asm ] ; then
 
-echo -e "There are graphical fonts to be built and copied... [\e[32mOk\e[0m]"
+echo -e "There are graphic fonts to be built and copied... [\e[32mOk\e[0m]"
 
 ./fontes.sh
 
@@ -681,7 +681,7 @@ fi
 # para ligar a cópia
 
 echo >> $LOG
-echo -n "> Checking if there are grpahical fonts to copy..." >> $LOG
+echo -n "> Checking if there are graphic fonts to copy..." >> $LOG
 
 if [ -e $DESTINODISTRO/aurora.fnt ] ; then
 
@@ -844,7 +844,7 @@ fi
 # para ligar a cópia
 
 echo >> $LOG
-echo -n "> Checking if there are grpahical fonts to copy..." >> $LOG
+echo -n "> Checking if there are graphic fonts to copy..." >> $LOG
 
 if [ -e $DESTINODISTRO/aurora.fnt ] ; then
 
@@ -1792,7 +1792,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.11.1"
+export VERSAOHX="13.11.2"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
