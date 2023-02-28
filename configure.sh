@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Versão 4.1.2
+# Versão 4.1.3
 
 # $PORTUGUÊS$
 #
@@ -321,7 +321,7 @@ rm base.ocl
 fi  
 
 echo -n " > Processing .conf file and setting configuration file... "
-echo -e $(cat base.conf)$VERSAO"]"$CODENOME'"'$VERSAO"#"$REVISAO"!"$BUILD">" >> base.ocl 
+echo -e $(cat base.conf)$VERSAO"]"$CODENOME'"'$VERSAO"#"$LANCAMENTO"!"$BUILD">" >> base.ocl 
 echo -e "[\e[32mOk\e[0m]"
 
 if [ -e hexgnix.unx ] ; then
@@ -336,7 +336,7 @@ echo -n " > Processing .conf file and creating UNX-XML... "
 echo -e $(cat hexgnix.conf)"<VERSION> "$VERSAO" </VERSION>" >> hexgnix.unx
 echo "<CODENAME> $CODENOME </CODENAME>" >> hexgnix.unx
 echo "<UPDATEPACK> $VERSAO </UPDATEPACK>" >> hexgnix.unx
-echo "<BRANCH> $REVISAO </BRANCH>" >> hexgnix.unx
+echo "<BRANCH> $LANCAMENTO </BRANCH>" >> hexgnix.unx
 echo "<BUILDDATE> "$(date)" </BUILDDATE>" >> hexgnix.unx
 echo "</Hexagonix>" >> hexgnix.unx
 echo -e "[\e[32mOk\e[0m]"
@@ -389,7 +389,7 @@ rm shrc
 fi  
 
 echo -n " > Creating shrc configuration... "
-echo "Welcome to Hexagonix $VERSAO-$REVISAO"  >> shrc
+echo "Welcome to Hexagonix $VERSAO ($LANCAMENTO)"  >> shrc
 echo "Hexagonix is licenced under BSD-3-Clause and comes with no warranty." >> shrc
 echo -e "[\e[32mOk\e[0m]"
 
@@ -550,7 +550,7 @@ export CONFIGURE2=$3
 export CONFIGURE3=$4
 export CONFIGURE4=$5
 export BUILD=$RANDOM
-export REVISAO=$(cat Dist/etc/revisao.def)
+export LANCAMENTO=$(cat Dist/etc/release.def)
 export CODENOME=$(cat Dist/etc/codenome.def)
 export VERSAO=$(cat Dist/etc/versao.def)
 
