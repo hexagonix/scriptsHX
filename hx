@@ -538,6 +538,8 @@ cd ..
 cd lib/fasm
 
 cp hexagon.s ../../$DESTINODISTRO 
+cp console.s ../../$DESTINODISTRO
+cp macros.s ../../$DESTINODISTRO
 
 cd Estelar
 
@@ -1792,7 +1794,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.11.2"
+export VERSAOHX="13.1"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
