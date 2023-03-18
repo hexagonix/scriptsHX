@@ -1794,7 +1794,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.1"
+export VERSAOHX="13.12"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
