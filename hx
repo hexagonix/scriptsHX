@@ -1128,7 +1128,7 @@ obterInfoBuild()
 
 # Dados de versão do Hexagonix
 
-export REVISAO=$(cat Dist/etc/revisao.def) 
+export REVISAO=$(cat Dist/etc/release.def) 
 export CODENOME=$(cat Dist/etc/codenome.def)
 export VERSAO=$(cat Dist/etc/versao.def)
 
@@ -1794,7 +1794,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.12"
+export VERSAOHX="13.12.1"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
