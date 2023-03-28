@@ -467,7 +467,6 @@ export imagemFinal="en.hexagonix.img"
 
 fi
 
-export DESTINODISTRO="Andromeda"
 export MSG="Building the Hexagonix®"
 
 clear 
@@ -563,7 +562,7 @@ if [ -e Externos/Externos.sh ] ; then
 
 cd Externos 
 
-./Externos.sh Andromeda
+./Externos.sh $DESTINODISTRO
 
 cd ..
 
@@ -1777,6 +1776,7 @@ export dirImagem="hexagonix"
 export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT"
 export BANDEIRASHEXAGON="VERBOSE=SIM"
 export BANDEIRASHBOOT="TEMATOM=ANDROMEDA"
+export DESTINODISTRO="Andromeda"
 
 cd hexagonix 
 export RAMO=$(git branch --show-current)
@@ -1794,7 +1794,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.12.1"
+export VERSAOHX="13.12.2"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
