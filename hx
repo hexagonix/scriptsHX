@@ -245,7 +245,7 @@ cd Hexagon
 echo
 echo -en "\e[1;94mBuilding the Hexagon® kernel...\e[0m"
 
-echo "Hexagon® kernel..." >> ../log.log
+echo "Building the Hexagon® kernel..." >> ../log.log
 echo >> ../log.log
 
 fasm kern/Hexagon.asm Hexagon -d $BANDEIRASHEXAGON >> ../log.log || erroConstrucao
@@ -268,16 +268,16 @@ cd ..
 
 construirSaturno(){
 
-echo -e "\e[1;94mHexagon® startup components...\e[0m {"
+echo -e "\e[1;94mBuilding Hexagon® startup components...\e[0m {"
 echo
 
-echo "Hexagon® startup components... {" >> $REG
+echo "Building Hexagon® startup components... {" >> $REG
 echo >> $REG
 
-echo -e "\e[1;94mHexagon® bootloader - Saturno® (1st stage)...\e[0m"
+echo -e "\e[1;94m > Hexagon® bootloader - Saturno® (1st stage)...\e[0m"
 echo
 
-echo "Hexagon® bootloader - Saturno® (1st stage)..." >> $REG
+echo " > Hexagon® bootloader - Saturno® (1st stage)..." >> $REG
 echo >> $REG
 
 cd Boot
@@ -299,10 +299,10 @@ cd ..
 
 construirHBoot(){
 
-echo -e "\e[1;94mHexagon Boot - HBoot (2nd stage)...\e[0m"
+echo -e "\e[1;94mBuilding Hexagon Boot - HBoot (2nd stage)...\e[0m"
 echo
 
-echo "Hexagon Boot - HBoot (2nd stage)..." >> ../log.log
+echo " > Building Hexagon Boot - HBoot (2nd stage)..." >> ../log.log
 echo >> ../log.log
 
 cd "Hexagon Boot"
@@ -317,11 +317,14 @@ for i in *.asm
 do
 
 	echo -en "Building HBoot® compatible module \e[1;94m$(basename $i .asm).mod\e[0m..."
+
+	echo >> ../../../log.log
+	echo " > Building HBoot® compatible module $(basename $i .asm).mod..." >> ../../../log.log
 	
 	fasm $i ../../`basename $i .asm`.mod -d $BANDEIRAS >> ../../../log.log 
 	
 	echo -e " [\e[32mOk\e[0m]"
-	
+
 done
 
 fi
@@ -362,7 +365,7 @@ construirUtilUnix(){
 
 cd Apps/Unix
 
-./Unix.sh $ALVODISTRO
+./Unix.sh $DESTINODISTRO
 
 cd ..
 
@@ -372,9 +375,9 @@ construirBaseAndromeda(){
 
 # Gerar os aplicativos Hexagonix-Andromeda
 
-cd $DESTINODISTRO
+cd Andromeda
 	
-./Apps.sh
+./Apps.sh $DESTINODISTRO
 
 cd ..
 
@@ -621,21 +624,21 @@ construtorHexagonix $Par
 echo -e "\e[1;94mBuilding system image...\e[0m"
 echo
 
-echo "Building temporary image for file manipulation......" >> $LOG
+echo "> Building temporary image for file manipulation..." >> $LOG
 
 dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
 
 if [ ! -e hexagonix.img ] ; then
 
 echo >> $LOG
-echo "Building image that will receive system files..." >> $LOG
+echo "> Building image that will receive system files..." >> $LOG
 echo >> $LOG
 
 dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMG >> $LOG || erroMontagem
 	
 fi	
 
-echo "> Copying bootloader to image..." >> $LOG
+echo "> Copying bootloader (Saturno) to image..." >> $LOG
 
 dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
 
@@ -681,7 +684,6 @@ fi
 # Se o arquivo de fonte padrão estiver disponível, usar essa informação como interruptor
 # para ligar a cópia
 
-echo >> $LOG
 echo -n "> Checking if there are graphic fonts to copy..." >> $LOG
 
 if [ -e $DESTINODISTRO/aurora.fnt ] ; then
@@ -714,7 +716,7 @@ echo "  * Copying temporary image to final image..." >> $LOG
 
 dd status=none conv=notrunc if=temp.img of=$IMG seek=1 >> $LOG || erroMontagem 
 
-echo "  * Copying MBR and partition table to image and finalizing it..." >> $LOG
+echo "  * Copying MBR and partition table to image..." >> $LOG
 
 dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$IMG >> $LOG || erroMontagem
 
@@ -775,7 +777,7 @@ construtorHexagonix $Par
 echo -e "\e[1;94mBuilding system image...\e[0m"
 echo
 
-echo "Building temporary image for file manipulation......"
+echo "> Building temporary image for file manipulation..."
 
 # Setores reservados = 16
 # Fats = 2
@@ -790,7 +792,7 @@ newfs_msdos -C 45m -F 16 -B $DESTINODISTRO/saturno.img temp.img
 
 if [ ! -e hexagonix.img ] ; then
 
-echo "Building image that will receive system files..." 
+echo "> Building image that will receive system files..." 
 
 newfs_msdos -C 90m -F 16 hexagonix.img
 	
@@ -880,7 +882,7 @@ echo "  * Copying temporary image to final image..." >> $LOG
 
 dd status=none conv=notrunc if=temp.img of=$IMG seek=1 >> $LOG || erroMontagem 
 
-echo "  * Copying MBR and partition table to image and finalizing it..." >> $LOG
+echo "  * Copying MBR and partition table to image..." >> $LOG
 
 dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$IMG >> $LOG || erroMontagem
 
@@ -1287,25 +1289,33 @@ fi
 echo "Hexagonix® Operating System build and statistics report" >> $REG
 echo "-------------------------------------------------------" >> $REG
 echo >> $REG
-echo "In this file you can find data and build information" >> $REG
-echo "of the system files, being able to identify errors among other things" >> $REG
-echo "in process." >> $REG
+echo "In this file, you have access to the complete log of the build process of" >> $REG
+echo "Hexagonix components. You can also use it to identify the environment used in" >> $REG
+echo "construction, as well as errors found in the process." >> $REG
 echo >> $REG
 echo "hx version: $VERSAOHX" >> $REG
 echo >> $REG
-echo "Information about the current construction of the system:" >> $REG
+echo "Information about the current build of Hexagonix:" >> $REG
 echo " > Hexagonix version: $VERSAO" >> $REG
 echo " > Software revision: $REVISAO" >> $REG
 echo " > Release name: $CODENOME" >> $REG
 echo " > Disk image location: $dirImagem/$imagemFinal" >> $REG
 echo >> $REG
-echo -n "Date and time of this report: " >> $REG
+echo "Information about the current build environment:" >> $REG
+echo -n " > Date and time of this report: " >> $REG
 date >> $REG
-echo >> $REG
-echo -n "User currently logged in: " >> $REG
+echo -n " > User currently logged in: " >> $REG
 whoami >> $REG
+echo -n " > Operating system details: " >> $REG
+uname -srmpi >> $REG
+echo -n " > fasm version: " >> $REG
+fasm | grep flat >> $REG
+echo -n " > GNU bash version: " >> $REG
+bash --version | grep "GNU bash" >> $REG
+echo -n " > qemu version (only for running a vm): " >> $REG
+qemu-system-i386 --version | grep "QEMU emulator" >> $REG
 echo >> $REG
-echo "------------------------------------------------ ----------------------" >> $REG
+echo "----------------------------------------------------------------------" >> $REG
 echo >> $REG
 
 }
@@ -1794,7 +1804,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.12.2"
+export VERSAOHX="13.13"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
