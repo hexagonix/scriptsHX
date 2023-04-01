@@ -245,7 +245,7 @@ cd Hexagon
 echo
 echo -en "\e[1;94mBuilding the Hexagon® kernel...\e[0m"
 
-echo "Building the Hexagon® kernel..." >> ../log.log
+echo "Building the Hexagon® kernel... {" >> ../log.log
 echo >> ../log.log
 
 fasm kern/Hexagon.asm Hexagon -d $BANDEIRASHEXAGON >> ../log.log || erroConstrucao
@@ -257,7 +257,7 @@ rm -r Hexagon
 echo -e " [\e[32mOk\e[0m]"
 
 echo >> ../log.log
-echo "Hexagon® kernel built successfully." >> ../log.log
+echo "} Hexagon® kernel built successfully." >> ../log.log
 echo >> ../log.log
 echo "----------------------------------------------------------------------" >> ../log.log
 echo >> ../log.log
@@ -277,7 +277,7 @@ echo >> $REG
 echo -e "\e[1;94m > Hexagon® bootloader - Saturno® (1st stage)...\e[0m"
 echo
 
-echo " > Hexagon® bootloader - Saturno® (1st stage)..." >> $REG
+echo " > Hexagon® bootloader - Saturno (1st stage)..." >> $REG
 echo >> $REG
 
 cd Boot
@@ -576,13 +576,9 @@ echo
 
 fi 
 
-cd Dist 
-
 echo
 echo "View the 'log.log' log file for more information of the build."
 echo
-
-cd ..
 
 }
 
@@ -1804,7 +1800,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.13"
+export VERSAOHX="13.13.1"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
