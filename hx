@@ -1741,13 +1741,11 @@ banner
 
 echo -e "\e[1;94mYou must be a root user to perform the requested action ;D\e[0m"
 echo
-echo -e "\e[1;32mEnter your password below to change to the root user (root) and then\e[0m"
-echo -e "\e[1;32mrun HX again, with the desired parameters.\e[0m"
-echo
-echo -e "\e[1;94mHint: use \e[1;32m./hx help\e[1;94m to get available parameters.\e[0m"
+echo -e "\e[1;32mEnter your password below to change to the root user (root) an run HX again with\e[0m"
+echo -e "\e[1;32mgiven parameters.\e[0m"
 echo
 
-su root
+sudo hx $PT1 $PT2 $PT3 $PT4 $PT5
 
 exit 
 
@@ -1791,6 +1789,7 @@ cd ..
 # Constantes com informações de parâmetros
 
 export NOMEHX=$0
+export PT1=$1
 export PT2=$2
 export PT3=$3
 export PT4=$4
@@ -1800,7 +1799,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.13.1"
+export VERSAOHX="13.13.2"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
