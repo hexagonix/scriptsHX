@@ -78,13 +78,13 @@
 #
 # This script must be in the root of the project
 
-export VERSAO="1.0"
+export VERSAO="1.1"
 
 echo
 echo "hx indentation helper version $VERSAO"
 echo 
-echo "This tool looks for and fixes indentation and formatting problems in the "
-echo "files thatmake up the Hexagonix project."
+echo "This tool looks for and fixes indentation and formatting problems in the files"
+echo "that make up the Hexagonix project."
 echo
 echo -e "> \e[32mSearching and fixing indentation in Hexagonix source and related files...\e[0m"
 echo
