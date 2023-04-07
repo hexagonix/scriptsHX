@@ -561,11 +561,11 @@ echo -n "Libraries copied"
 echo -e " [\e[32mOk\e[0m]"
 echo
 
-if [ -e Externos/Externos.sh ] ; then
+if [ -e Contrib/Contrib.sh ] ; then
 
-cd Externos 
+cd Contrib 
 
-./Externos.sh $DESTINODISTRO
+./Contrib.sh $DESTINODISTRO
 
 cd ..
 
@@ -1325,7 +1325,7 @@ echo "Use './hx -v hx' to test running the system on the generated image or copy
 echo "the image to the installer 'Inst' directory to generate an Linux-based install" >> $LOG
 echo "image for transfer to physical disk." >> $LOG
 echo >> $LOG
-echo "------------------------------------------------ ----------------------" >> $LOG
+echo "----------------------------------------------------------------------" >> $LOG
 echo >> $LOG
 
 }
@@ -1476,7 +1476,7 @@ cd ..
 cd ..
 cd Doc && git pull
 cd ..
-cd Externos/fasmX && git pull
+cd Contrib/fasmX && git pull
 cd .. 
 cd ..
 cd Fontes && git pull
@@ -1494,11 +1494,11 @@ echo -e "> \e[1;32mUpdating building scripts and utilities...\e[0m"
 echo 
 
 cp hx configure.sh ../
-cp Externos.sh ../Externos/
+cp Contrib.sh ../Contrib/
 
 cd ..
 
-chmod +x configure.sh hx Externos/Externos.sh
+chmod +x configure.sh hx Contrib/Contrib.sh
 
 if [ -e autohx.py ] ; then
 
@@ -1553,7 +1553,7 @@ cd ..
 cd ..
 cd Doc && git switch $PT2 && git pull
 cd ..
-cd Externos/fasmX && git switch $PT2 && git pull
+cd Contrib/fasmX && git switch $PT2 && git pull
 cd .. 
 cd ..
 cd Fontes && git switch $PT2 && git pull
@@ -1571,10 +1571,10 @@ echo -e "> \e[1;32mUpdating building scripts and utilities...\e[0m"
 echo 
 
 cp hx configure.sh ../
-cp Externos.sh ../Externos/
+cp Contrib.sh ../Contrib/
 cd ..
 
-chmod +x configure.sh hx Externos/Externos.sh
+chmod +x configure.sh hx Contrib/Contrib.sh
 
 if [ -e autohx.py ] ; then
 
@@ -1613,7 +1613,7 @@ cd Hexagonix
 
 mkdir -p Apps/
 mkdir -p Boot/
-mkdir -p Externos/
+mkdir -p Contrib/
 mkdir -p Dist/
 
 # Vamos clonar o Hexagon
@@ -1645,7 +1645,7 @@ git clone https://github.com/hexagonix/xfnt Fontes
 
 # Agora, fasmX
 
-git clone https://github.com/hexagonix/fasmX Externos/fasmX
+git clone https://github.com/hexagonix/fasmX Contrib/fasmX
 
 # Agora o repositório de imagens
 
@@ -1668,7 +1668,7 @@ git clone https://github.com/felipenlunkes/hexagonix-autobuild autohx
 cd Scripts 
 
 cp configure.sh hx ../
-cp Externos.sh ../Externos
+cp Contrib.sh ../Contrib
 
 cd ..
 
@@ -1799,7 +1799,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.13.2"
+export VERSAOHX="13.13.3"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 

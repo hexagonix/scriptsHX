@@ -84,7 +84,7 @@
 
 gerarExternos(){
 
-echo -e "\e[1;94mBuilding third-party utilities for Hexagonix®...\e[0m {"
+echo -e "\e[1;94mBuilding third-party (contrib) utilities for Hexagonix®...\e[0m {"
 echo
 
 cd fasmX/
@@ -95,7 +95,7 @@ cd HEXAGONIX
 for i in *.asm
 do
 
-    echo -en "Generating third-party application \e[1;94m$(basename $i .asm)\e[0m..."
+    echo -en "Generating third-party (contrib) application \e[1;94m$(basename $i .asm)\e[0m..."
     
     fasm $i ../../../../$DIRETORIO/bin/`basename $i .asm` -d $BANDEIRAS >> /dev/null || echo " [Fail]"
     
@@ -108,7 +108,7 @@ cd ..
 cd ..
 
 echo
-echo -e "} [\e[32mSuccessfully built third-party utilities\e[0m]."
+echo -e "} [\e[32mSuccessfully built third-party (contrib) utilities\e[0m]."
 
 }
 
