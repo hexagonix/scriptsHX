@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Versão 4.1.3
+# Versão 4.1.4
 
 # $PORTUGUÊS$
 #
@@ -202,13 +202,13 @@ fi
 
 # Script 2
 
-echo -n " > Script for building external utilities (Externos.sh) "
+echo -n " > Script for building external utilities (Contrib.sh) "
 
-if [ -e Externos/Externos.sh ] ; then
+if [ -e Contrib/Contrib.sh ] ; then
 
 echo -en "[\e[32mOk\e[0m]"
 
-chmod +x Externos/Externos.sh 
+chmod +x Contrib/Contrib.sh 
 
 echo -e " [\e[94mExecutable\e[0m]"
 
