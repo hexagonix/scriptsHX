@@ -1282,7 +1282,14 @@ fi
 
 # Montar o cabeçalho do arquivo de log...
 
-echo "Hexagonix® Operating System build and statistics report" >> $REG
+echo "Hexagonix Operating System build and statistics report" >> $REG
+echo "-------------------------------------------------------" >> $REG
+echo >> $REG
+echo "Hexagonix Operating System" >> $REG
+echo "Copyright (C) 2015-2023 Felipe Miguel Nery Lunkes. All rights reserved." >> $REG
+echo >> $REG
+echo "Hexagonix is licenced under BSD-3-Clause and comes with no warranty." >> $REG 
+echo >> $REG
 echo "-------------------------------------------------------" >> $REG
 echo >> $REG
 echo "In this file, you have access to the complete log of the build process of" >> $REG
@@ -1298,14 +1305,14 @@ echo " > Release name: $CODENOME" >> $REG
 echo " > Disk image location: $dirImagem/$imagemFinal" >> $REG
 echo >> $REG
 echo "Information about the current build environment:" >> $REG
-echo -n " > Date and time of this report: " >> $REG
+echo -n " > Date and time of this report (build time): " >> $REG
 date >> $REG
 echo -n " > User currently logged in: " >> $REG
 whoami >> $REG
 echo -n " > Operating system details: " >> $REG
 uname -srmpi >> $REG
 echo -n " > fasm version: " >> $REG
-fasm | grep flat >> $REG
+fasm | grep "flat" >> $REG
 echo -n " > GNU bash version: " >> $REG
 bash --version | grep "GNU bash" >> $REG
 echo -n " > qemu version (only for running a vm): " >> $REG
@@ -1799,7 +1806,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.13.3"
+export VERSAOHX="13.13.4"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
