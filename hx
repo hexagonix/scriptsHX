@@ -748,6 +748,9 @@ infoBuild
 
 avisoCriarInstalador
 
+mv log.log $dirImagem/log.log
+chown $dirImagem/log.log --reference=$dirImagem/README.md
+
 exit
 
 }
@@ -913,6 +916,9 @@ banner
 infoBuild
 
 avisoCriarInstalador
+
+mv log.log $dirImagem/log.log
+chown $dirImagem/log.log --reference=$dirImagem/README.md
 
 exit
 
@@ -1806,7 +1812,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.13.4"
+export VERSAOHX="13.13.4.1"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
