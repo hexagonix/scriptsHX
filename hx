@@ -1309,6 +1309,7 @@ echo " > Hexagonix version: $VERSAO" >> $REG
 echo " > Software revision: $REVISAO" >> $REG
 echo " > Release name: $CODENOME" >> $REG
 echo " > Disk image location: $dirImagem/$imagemFinal" >> $REG
+echo " > Branch (git): $RAMO" >> $REG
 echo >> $REG
 echo "Information about the current build environment:" >> $REG
 echo -n " > Date and time of this report (build time): " >> $REG
@@ -1321,8 +1322,32 @@ echo -n " > fasm version: " >> $REG
 fasm | grep "flat" >> $REG
 echo -n " > GNU bash version: " >> $REG
 bash --version | grep "GNU bash" >> $REG
-echo -n " > qemu version (only for running a vm): " >> $REG
+echo -n " > qemu version: " >> $REG
 qemu-system-i386 --version | grep "QEMU emulator" >> $REG
+
+# Vamos agora verificar a versão de ferramentas opcionais, como o NASM e o vscode
+
+if [ -e /usr/bin/nasm ] ; then
+
+echo -n " > nasm version: " >> $REG
+nasm --version >> $REG
+	
+fi	
+
+if [ -e /usr/bin/VirtualBox ] ; then
+
+echo -n " > VirtualBox version: " >> $REG
+vboxmanage --version >> $REG
+	
+fi	
+
+if [ -e /usr/bin/code ] ; then
+
+echo -n " > vscode version: " >> $REG
+code --version --no-sandbox --user-data-dir /dev/null | head -n 1 >> $REG
+	
+fi	
+
 echo >> $REG
 echo "----------------------------------------------------------------------" >> $REG
 echo >> $REG
@@ -1812,7 +1837,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.13.4.1"
+export VERSAOHX="13.13.4.2"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
