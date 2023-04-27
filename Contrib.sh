@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Versão 1.0
+# Versão 1.1
 
 # $PORTUGUÊS$
 #
@@ -84,7 +84,7 @@
 
 gerarExternos(){
 
-echo -e "\e[1;94mBuilding third-party (contrib) utilities for Hexagonix®...\e[0m {"
+echo -e "\e[1;94mBuilding additional packages for Hexagonix®...\e[0m {"
 echo
 
 cd fasmX/
@@ -95,11 +95,13 @@ cd HEXAGONIX
 for i in *.asm
 do
 
-    echo -en "Generating third-party (contrib) application \e[1;94m$(basename $i .asm)\e[0m..."
+    echo -n " > Generating additional (contrib) application $(basename $i .asm)..." >> ../../../../$REG
+    echo -en "Generating additional (contrib) application \e[1;94m$(basename $i .asm)\e[0m..."
     
     fasm $i ../../../../$DIRETORIO/bin/`basename $i .asm` -d $BANDEIRAS >> /dev/null || echo " [Fail]"
     
     echo -e " [\e[32mOk\e[0m]"
+    echo " [Ok]" >> ../../../../$REG
 
 done
 
@@ -108,11 +110,11 @@ cd ..
 cd ..
 
 echo
-echo -e "} [\e[32mSuccessfully built third-party (contrib) utilities\e[0m]."
+echo -e "} [\e[32mSuccessfully built additional packages\e[0m]."
 
 }
 
-
 export DIRETORIO=$1
+export REG="log.log"
 
 gerarExternos
