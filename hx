@@ -588,12 +588,13 @@ echo >> $REG
 echo "----------------------------------------------------------------------" >> $REG
 echo >> $REG
 
-echo "Building additional (external) packages... {" >> $REG
+echo "Building additional (contrib) packages... {" >> $REG
 echo >> $REG 
 
 if [ -e Contrib/Contrib.sh ] ; then
 
 echo "> There are additional packages for construction." >> $REG
+echo >> $REG
 
 cd Contrib 
 
@@ -610,7 +611,7 @@ echo
 fi 
 
 echo >> $REG
-echo "} Success processing additional packages." >> $REG
+echo "} Success processing additional (contrib) packages." >> $REG
 echo
 echo "> View the 'log.log' log file for more information of the build."
 echo
@@ -797,6 +798,8 @@ banner
 infoBuild
 
 avisoCriarInstalador
+
+finalizarLog
 
 mv log.log $dirImagem/log.log
 chown $dirImagem/log.log --reference=$dirImagem/README.md
@@ -1418,6 +1421,17 @@ echo >> $LOG
 
 }
 
+finalizarLog() 
+{
+
+echo -n "Closing date of this log: " >> $REG 
+date >> $REG
+echo >> $LOG
+echo "----------------------------------------------------------------------" >> $LOG
+echo >> $LOG
+
+}
+
 instalarDependencias()
 {
 
@@ -1887,7 +1901,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.13.5.0"
+export VERSAOHX="13.13.5.1"
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
