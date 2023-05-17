@@ -1373,10 +1373,15 @@ echo -n " > fasm version: " >> $LOG
 fasm | grep "flat" >> $LOG
 echo -n " > GNU bash version: " >> $LOG
 bash --version | grep "GNU bash" >> $LOG
+
+# Vamos agora verificar a versão de ferramentas opcionais, como qemu, NASM e vscode
+
+if [ -e /usr/bin/qemu-system-i386 ] ; then
+
 echo -n " > qemu version: " >> $LOG
 qemu-system-i386 --version | grep "QEMU emulator" >> $LOG
-
-# Vamos agora verificar a versão de ferramentas opcionais, como o NASM e o vscode
+	
+fi	
 
 if [ -e /usr/bin/nasm ] ; then
 
@@ -1911,7 +1916,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.13.5.2"
+export VERSAOHX="13.13.5.3"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
