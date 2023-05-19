@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Versão 4.1.4
+# Versão 4.1.5
 
 # $PORTUGUÊS$
 #
@@ -416,7 +416,7 @@ rm passwd
 fi  
 
 echo -n " > Processing .conf file and creating user database... "
-echo -e $(cat passwd.conf)"@"$CODENOME"|root&ash.app# # Normal user" >> passwd
+echo -e $(cat passwd.conf)" >> passwd
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
