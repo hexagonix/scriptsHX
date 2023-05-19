@@ -416,7 +416,7 @@ rm passwd
 fi  
 
 echo -n " > Processing .conf file and creating user database... "
-echo -e $(cat passwd.conf)" >> passwd
+echo -e $(cat passwd.conf) >> passwd
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
