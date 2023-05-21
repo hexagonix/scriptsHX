@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Versão 4.1.5
+# Versão 4.2.0
 
 # $PORTUGUÊS$
 #
@@ -278,19 +278,36 @@ fi
 
 # Agora vamos instalar as dependências já presentes (sem necessidade de obtenção)
 
+# Vamos testar se podemos ou não instalar o hx em /usr/bin...
+
+if test "`whoami`" != "root" ; then
+
+echo -e " \e[1;31m[!] Unable to install hx to /usr/bin. Root user privileges required.\e[0m"
+echo -e " \e[1;31m[!] Use sudo ./configure.sh to install hx.\e[0m"
+
+fi
+
+if test "`whoami`" == "root" ; then
+
 # Copiar hx
 
 echo -n " > Copying/updating hx (destination: /usr/bin)... "
 
 cp hx /usr/bin 
 
+fi 
+
 if [ -e /usr/bin/hx ] ; then
+
+if test "`whoami`" == "root" ; then
 
 echo -en "[\e[32mOk\e[0m]"
 
 chmod +x /usr/bin/hx
 
 echo -e " [\e[94mExecutable\e[0m]"
+
+fi 
 
 else
 
