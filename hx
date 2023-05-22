@@ -115,6 +115,8 @@ echo -e "\e[1;32m-un <branch>\e[0m - Switch branch to <branch> and update all re
 echo -e "\e[1;32m-m\e[0m - Clone repositories to location and configure build environment"
 echo -e "\e[1;32m-c\e[0m - Clear system tree binary and configuration files"
 echo 
+echo  "See the complete documentation at: https://github.com/hexagonix/Doc"
+echo
 
 }
 
@@ -1899,9 +1901,13 @@ export INCLUDE="$(pwd)/lib/fasm"
 # provocar o não funcionamento ou funcionamento incorreto de diversos componentes. Para
 # sincronizar todos os repositórios com o mesmo ramo, use 'hx -un ramo'.
 
+if [ -e $imagem ] ; then
+
 cd hexagonix 
 export RAMO=$(git branch --show-current)
 cd ..
+
+fi
 
 # Constantes com informações de parâmetros
 
@@ -1916,7 +1922,7 @@ export IDIOMANG=$3
 
 # Versão do hx
 
-export VERSAOHX="13.13.5.3"
+export VERSAOHX="13.13.6.0"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
