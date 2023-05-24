@@ -148,6 +148,8 @@ echo
 
 }
 
+#-------------------------------- Divisão --------------------------------#
+
 # Sessão de configuração para montagem do sistema
 
 prepImagemHexagonix(){
@@ -189,19 +191,6 @@ definirHexagonixTeste()
 # Aqui vamos gerar uma imagem pequena, de 2 Mb, menor e apenas para testes. Essa imagem
 # não deve ser utilizada para o pacote de instalação.
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT"
-export imagemFinal="hexagonix.img"
-export Par="pt"
-
-if [ "$PT2" = "en" ]; then
-
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN"
-export imagemFinal="en.hexagonix.img"
-export Par="en"
-
-fi
-
-export IMG="hexagonix.img"
 export TAMANHOIMAGEM=2097012
 export TAMANHOTEMP=2048	
 
@@ -213,7 +202,6 @@ definirHexagonixOficial()
 # Aqui vamos definir uma imagem de tamanho oficial, que demora mais a ser gerada. Essa imagem é
 # apropriada para o pacote de instalação do Hexagonix®
 
-export IMG="hexagonix.img"
 export TAMANHOIMAGEM=47185920
 export TAMANHOTEMP=92160	
 
@@ -232,6 +220,8 @@ hexagonix) definirHexagonix; exit;;
 esac
 
 }
+
+#-------------------------------- Divisão --------------------------------#
 
 # Sessão de construtores individuais dos componentes do sistema
 
@@ -293,7 +283,6 @@ fasm mbr.asm ../mbr.img >> ../../log.log || erroConstrucao
 echo >> ../../log.log
 
 cd ..
-
 
 }
 
@@ -385,13 +374,6 @@ cd ..
 
 }
 
-kernel()
-{
-
-kernel
-
-}
-
 erroMontagem()
 {
 
@@ -420,6 +402,8 @@ umount $DESTINODISTRO/ >> /dev/null
 exit
 	
 }
+
+#-------------------------------- Divisão --------------------------------#
 
 # Sessão de construção coletiva dos componentes do sistema
 
@@ -457,18 +441,10 @@ esac
 
 }
 
+#-------------------------------- Divisão --------------------------------#
+
 construtorHexagonix()
 {
-
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT"
-export imagemFinal="hexagonix.img"
-
-if [ "$IDIOMA" = "en" ]; then
-
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN"
-export imagemFinal="en.hexagonix.img"
-
-fi
 
 export MSG="Building the Hexagonix®"
 
@@ -634,8 +610,10 @@ exit
 
 }
 
+#-------------------------------- Divisão --------------------------------#
+
 # Sessão de criação de imagem do sistema
-$LOGsistema
+
 imagemHexagonix()
 {
 
@@ -671,7 +649,7 @@ echo >> $LOG
 echo "> Building image that will receive system files..." >> $LOG
 echo >> $LOG
 
-dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMG >> $LOG || erroMontagem
+dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$imagemFinal >> $LOG || erroMontagem
 	
 fi	
 
@@ -751,11 +729,11 @@ echo "> Mounting the final image..." >> $LOG
 
 echo "  * Copying temporary image to final image..." >> $LOG
 
-dd status=none conv=notrunc if=temp.img of=$IMG seek=1 >> $LOG || erroMontagem 
+dd status=none conv=notrunc if=temp.img of=$imagemFinal seek=1 >> $LOG || erroMontagem 
 
 echo "  * Copying MBR and partition table to image..." >> $LOG
 
-dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$IMG >> $LOG || erroMontagem
+dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$imagemFinal >> $LOG || erroMontagem
 
 echo "> Removing temporary files and folders, as well as binaries that are no longer needed..." >> $LOG
 echo >> $LOG
@@ -932,11 +910,11 @@ echo "> Mounting the final image..." >> $LOG
 
 echo "  * Copying temporary image to final image..." >> $LOG
 
-dd status=none conv=notrunc if=temp.img of=$IMG seek=1 >> $LOG || erroMontagem 
+dd status=none conv=notrunc if=temp.img of=$imagemFinal seek=1 >> $LOG || erroMontagem 
 
 echo "  * Copying MBR and partition table to image..." >> $LOG
 
-dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$IMG >> $LOG || erroMontagem
+dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$imagemFinal >> $LOG || erroMontagem
 
 echo "> Removing temporary files and folders, as well as binaries that are no longer needed..." >> $LOG
 echo >> $LOG
@@ -977,6 +955,8 @@ exit
 
 }
 
+#-------------------------------- Divisão --------------------------------#
+
 checarContrib()
 {
 
@@ -991,6 +971,7 @@ fi
 
 }
 
+#-------------------------------- Divisão --------------------------------#
 
 # Sessão de gerenciamento de máquinas virtuais do hx
 
@@ -1145,6 +1126,8 @@ echo -e " > \e[1;31mTry running the virtual machine again\e[0m."
 echo
 	
 }
+
+#-------------------------------- Divisão --------------------------------#
 
 # Sessão de utilidades do hx
 
@@ -1415,7 +1398,7 @@ echo >> $LOG
 avisoCriarInstalador()
 {
 
-echo "> Disk image '$IMG' and VM disk image '$(basename $imagemFinal .img).vdi' generated successfully." >> $LOG
+echo "> Disk image '$imagemFinal' and VM disk image '$(basename $imagemFinal .img).vdi' generated successfully." >> $LOG
 echo >> $LOG
 echo "Use './hx -v hx' to test running the system on the generated image or copy" >> $LOG
 echo "the image to the installer 'Inst' directory to generate an Linux-based install" >> $LOG
@@ -1858,6 +1841,8 @@ exit
 
 } 
 
+#-------------------------------- Divisão --------------------------------#
+
 #;;************************************************************************************
 
 # Ponto de entrada do hx, definição de variáveis e processamento de parâmetros
@@ -1865,6 +1850,16 @@ exit
 #
 # Copyright (C) 2015-2023 Felipe Miguel Nery Lunkes
 # Todos os direitos reservados
+# Constantes com informações de parâmetros
+
+export NOMEHX=$0
+export PT1=$1
+export PT2=$2
+export PT3=$3
+export PT4=$4
+export PT5=$5
+export IDIOMA=$2
+export IDIOMANG=$3
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 
@@ -1888,6 +1883,16 @@ export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT"
 export BANDEIRASHEXAGON="VERBOSE=SIM"
 export BANDEIRASHBOOT="TEMATOM=ANDROMEDA"
 export DESTINODISTRO="Andromeda"
+export imagemFinal="hexagonix.img"
+export Par="pt"
+
+if [ "$IDIOMA" == "en" ]; then
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN"
+export imagemFinal="en.hexagonix.img"
+export Par="en"
+
+fi
 
 # Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
 
@@ -1909,20 +1914,9 @@ cd ..
 
 fi
 
-# Constantes com informações de parâmetros
-
-export NOMEHX=$0
-export PT1=$1
-export PT2=$2
-export PT3=$3
-export PT4=$4
-export PT5=$5
-export IDIOMA=$2
-export IDIOMANG=$3
-
 # Versão do hx
 
-export VERSAOHX="13.13.6.0"
+export VERSAOHX="13.13.7.0"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
