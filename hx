@@ -154,36 +154,47 @@ echo
 
 prepImagemHexagonix(){
 
+export HOST="LINUX"
+
 verificarEstaticos
 
 iniciarLog
 
 definirHexagonixOficial
+
 imagemHexagonix
 
 }
 
 prepImagemHexagonixBSD(){
 
+export HOST="BSD"
+
 verificarEstaticos
 
 iniciarLog
 
 definirHexagonixOficial
-imagemHexagonixSobreBSD
+
+imagemHexagonix
 
 }
 
 prepImagemHexagonixTeste(){
+
+export HOST="LINUX"
 
 verificarEstaticos
 
 iniciarLog
 
 definirHexagonixTeste
+
 imagemHexagonix
 
 }
+
+#-------------------------------- Divisão --------------------------------#
 
 definirHexagonixTeste()
 {
@@ -641,25 +652,22 @@ echo "Build a Hexagonix disk image... {" >> $LOG
 echo >> $LOG
 echo "> Building temporary image for file manipulation..." >> $LOG
 
-dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
+# Agora vamos checar qual o sistema host, para adaptar a lógica de criação de imagem
+# de disco para cada um. Suportados até o momento: Linux e FreeBSD (FreeBSD em desenvolvimento)
 
-if [ ! -e hexagonix.img ] ; then
+if [ "$HOST" == "LINUX" ]; then
 
-echo >> $LOG
-echo "> Building image that will receive system files..." >> $LOG
-echo >> $LOG
+construirImagemLinux
 
-dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$imagemFinal >> $LOG || erroMontagem
-	
-fi	
+fi 
 
-echo "> Copying bootloader (Saturno) to image..." >> $LOG
+if [ "$HOST" == "BSD" ]; then
 
-dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
+construirImagemBSD
 
-echo "> Mounting the image..." >> $LOG
- 
-mkdir -p Sistema && mount -o loop -t vfat temp.img Sistema/ || erroMontagem
+fi 
+
+# Daqui em diante, a lógica é a mesma para todos os sistemas host suportados 
 
 echo "> Copying system files to the image..." >> $LOG
 echo >> $LOG
@@ -725,6 +733,12 @@ echo "> Unmounting the image..." >> $LOG
 
 umount Sistema >> /dev/null || erroMontagem
 
+if [ "$HOST" == "BSD" ]; then
+
+mdconfig -d -u 4
+
+fi 
+
 echo "> Mounting the final image..." >> $LOG
 
 echo "  * Copying temporary image to final image..." >> $LOG
@@ -786,28 +800,39 @@ exit
 
 }
 
-imagemHexagonixSobreBSD()
+#-------------------------------- Divisão --------------------------------#
+
+# Código específico de geração de imagem de disco para o Linux
+
+construirImagemLinux()
 {
 
+dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
 
-if test "`whoami`" != "root" ; then
+if [ ! -e hexagonix.img ] ; then
 
-sureq
+echo >> $LOG
+echo "> Building image that will receive system files..." >> $LOG
+echo >> $LOG
 
-exit
+dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$imagemFinal >> $LOG || erroMontagem
+	
+fi	
 
-fi
+echo "> Copying bootloader (Saturno) to image..." >> $LOG
 
-# Agora os arquivos do sistema serão gerados...
+dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
 
-construtorHexagonix $Par
+echo "> Mounting the image..." >> $LOG
+ 
+mkdir -p Sistema && mount -o loop -t vfat temp.img Sistema/ || erroMontagem
 
-# Agora a imagem do sistema será preparada...
+}
 
-echo -e "\e[1;94mBuilding system image...\e[0m"
-echo
+# Código específico de geração de imagem de disco para o FreeBSD
 
-echo "> Building temporary image for file manipulation..."
+construirImagemBSD()
+{
 
 # Setores reservados = 16
 # Fats = 2
@@ -837,121 +862,6 @@ mdconfig -a -t vnode -f temp.img -o force -u 4
 echo "> Mounting the image..." >> $LOG
  
 mkdir -p Sistema && mount_msdosfs /dev/md4 Sistema/ || erroMontagem
-
-echo "> Copying system files to the image..." >> $LOG
-echo >> $LOG
-
-cp $DESTINODISTRO/*.man Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/*.asm Sistema/ >> $LOG
-cp $DESTINODISTRO/*.s Sistema/ >> $LOG
-cp $DESTINODISTRO/*.cow Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/bin/* Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/hboot Sistema/ >> $LOG || erroMontagem
-
-# A licença deve ser copiada
-
-cp Dist/man/LICENSE Sistema/ >> $LOG || erroMontagem
-
-# Agora, copiar módulos do HBoot
-
-if [ -e $DESTINODISTRO/Spartan.mod ] ; then
-
-cp $DESTINODISTRO/*.mod Sistema/ >> $LOG
-
-fi	
-
-cp $DESTINODISTRO/etc/* Sistema/>> $LOG || erroMontagem
-cp $DESTINODISTRO/*.ocl Sistema/ >> $LOG || erroMontagem
-
-# Caso a imagem deva conter uma cópia dos arquivos do FreeDOS para testes...
-
-if [ -e DOS ] ; then
-
-cp DOS/*.* Sistema/
-
-fi	
-
-# Agora será verificado se alguma fonte deverá ser incluída na imagem
-#
-# Se o arquivo de fonte padrão estiver disponível, usar essa informação como interruptor
-# para ligar a cópia
-
-echo >> $LOG
-echo -n "> Checking if there are graphic fonts to copy..." >> $LOG
-
-if [ -e $DESTINODISTRO/aurora.fnt ] ; then
-
-echo " [Yes]" >> $LOG
-
-cp $DESTINODISTRO/*.fnt Sistema/ || erroMontagem
-	
-fi	
-
-if [ ! -e $DESTINODISTRO/aurora.fnt ] ; then
-
-echo " [No]" >> $LOG
-	
-fi	
-
-checarContrib 
-
-echo >> $LOG
-
-sleep 1.0 || erroMontagem
-
-echo "> Unmounting the image..." >> $LOG
-
-sync 
-
-umount Sistema >> /dev/null || erroMontagem
-mdconfig -d -u 4
-
-echo "> Mounting the final image..." >> $LOG
-
-echo "  * Copying temporary image to final image..." >> $LOG
-
-dd status=none conv=notrunc if=temp.img of=$imagemFinal seek=1 >> $LOG || erroMontagem 
-
-echo "  * Copying MBR and partition table to image..." >> $LOG
-
-dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$imagemFinal >> $LOG || erroMontagem
-
-echo "> Removing temporary files and folders, as well as binaries that are no longer needed..." >> $LOG
-echo >> $LOG
-
-rm -rf Sistema $DESTINODISTRO temp.img >> $LOG
-
-if test $VERBOSE -e 0; then
-
-clear
-
-elif test $VERBOSE -e 1; then
-
-echo 
-
-fi
-
-mv hexagonix.img $dirImagem/$imagemFinal
-
-qemu-img convert -O vdi $dirImagem/$imagemFinal $dirImagem/$(basename $imagemFinal .img).vdi 
-
-# Vamos agora trocar a propriedade da imagem para um usuário comum
-
-chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
-chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
-
-export MSG="Build the Hexagonix"
-
-banner 
-
-infoBuild
-
-avisoCriarInstalador
-
-mv log.log $dirImagem/log.log
-chown $dirImagem/log.log --reference=$dirImagem/README.md
-
-exit
 
 }
 
@@ -1916,7 +1826,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.13.7.0"
+export VERSAOHX="13.14.0.0"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
