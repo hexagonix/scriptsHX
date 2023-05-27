@@ -150,6 +150,49 @@ echo
 
 #-------------------------------- Divisão --------------------------------#
 
+# Sessão de construção coletiva dos componentes do sistema
+
+gerenciarConstrucao()
+{
+
+obterInfoBuild
+
+case $PT2 in
+
+hx) prepImagemHexagonix; exit;;
+hx.teste) prepImagemHexagonixTeste; exit;;
+bsd) prepImagemHexagonixBSD; exit;;
+UNIX) prepImagemHexagonixUNIXSolaris; exit;;
+*) prepImagemHexagonix; exit;; # Assimir hx -i hx
+
+esac
+
+}
+
+gerenciarConstrucaoComponentes()
+{
+
+mkdir -p $DESTINODISTRO
+mkdir -p $DESTINODISTRO/bin
+mkdir -p $DESTINODISTRO/etc
+
+case $PT2 in
+
+hexagon) construirHexagon; exit;;
+HBoot) construirHBoot; exit;;
+saturno) construirSaturno; exit;;
+unixland) construirUtilUnix; exit;;
+andromedaland) construirBaseAndromeda; exit;;
+hexagonix) hexagonix; exit;;
+hx) construirTudo; exit;;
+*) parametrosNecessarios; exit;;
+
+esac
+
+}
+
+#-------------------------------- Divisão --------------------------------#
+
 # Sessão de configuração para montagem do sistema
 
 prepImagemHexagonix(){
@@ -169,6 +212,21 @@ imagemHexagonix
 prepImagemHexagonixBSD(){
 
 export HOST="BSD"
+
+verificarEstaticos
+
+iniciarLog
+
+definirHexagonixOficial
+
+imagemHexagonix
+
+}
+
+prepImagemHexagonixUNIXSolaris()
+{
+
+export HOST="UNIX"
 
 verificarEstaticos
 
@@ -416,43 +474,25 @@ exit
 
 #-------------------------------- Divisão --------------------------------#
 
-# Sessão de construção coletiva dos componentes do sistema
-
-gerenciarConstrucao()
+construirTudo()
 {
 
-obterInfoBuild
+export MSG="Building the Hexagonix®"
 
-case $PT2 in
+clear 
 
-hx) prepImagemHexagonix; exit;;
-hx.teste) prepImagemHexagonixTeste; exit;;
-bsd) prepImagemHexagonixBSD; exit;;
-*) prepImagemHexagonix; exit;; # Assimir hx -i hx
+banner 
 
-esac
+construirSaturno
+construirHBoot
+construirHexagon
+construirUtilUnix
+construirBaseAndromeda
 
-}
-
-gerenciarConstrucaoComponentes()
-{
-
-case $PT2 in
-
-hexagon) construirHexagon; exit;;
-HBoot) construirHBoot; exit;;
-saturno) construirSaturno; exit;;
-unixland) construirUtilUnix; exit;;
-andromedaland) construirBaseAndromeda; exit;;
-hexagonix) hexagonix; exit;;
-
-*) parametrosNecessarios; exit;;
-
-esac
+terminar
+tudopronto
 
 }
-
-#-------------------------------- Divisão --------------------------------#
 
 construtorHexagonix()
 {
@@ -739,6 +779,12 @@ mdconfig -d -u 4
 
 fi 
 
+if [ "$HOST" == "UNIX" ]; then
+
+lofiamd -d /dev/lofi/1
+
+fi 
+
 echo "> Mounting the final image..." >> $LOG
 
 echo "  * Copying temporary image to final image..." >> $LOG
@@ -826,6 +872,35 @@ dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG ||
 echo "> Mounting the image..." >> $LOG
  
 mkdir -p Sistema && mount -o loop -t vfat temp.img Sistema/ || erroMontagem
+
+}
+
+# Código específico de geração de imagem de disco para o Solaris (OpenIndiana, illumos e derivados)
+
+construirImagemUNIXSolaris()
+{
+
+dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
+
+if [ ! -e hexagonix.img ] ; then
+
+echo >> $LOG
+echo "> Building image that will receive system files..." >> $LOG
+echo >> $LOG
+
+dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$imagemFinal >> $LOG || erroMontagem
+	
+fi	
+
+echo "> Copying bootloader (Saturno) to image..." >> $LOG
+
+dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
+
+echo "> Mounting the image..." >> $LOG
+
+lofiadm -a temp.img 
+
+mkdir -p Sistema && mount -F lofs /dev/lofi/1 Sistema/ || erroMontagem
 
 }
 
@@ -1781,26 +1856,30 @@ export sistemaBSD="x86_64"
 export processador="pentium3"
 export memoria=32
 
-# Constantes para as etapas de construção do sistema e criação de imagens
+# Constantes da etapa de construção
 
 export LOG="log.log"
-export imagem="hexagonix/hexagonix.img"
-export dirImagem="hexagonix"
 
-# Agora vamos exportar flags (bandeiras) para as etapas de montagem e/ou compilação
+# Constantes para as etapas de construção do sistema e criação de imagens. Essas são as flags
+# padrão, e o podem ser alteradas por parâmetros para alterar o comportamento da construção
+# ou componentes do Hexagonix
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT"
-export BANDEIRASHEXAGON="VERBOSE=SIM"
-export BANDEIRASHBOOT="TEMATOM=ANDROMEDA"
-export DESTINODISTRO="Andromeda"
-export imagemFinal="hexagonix.img"
-export Par="pt"
+export imagem="hexagonix/hexagonix.img" # Nome da imagem final
+export dirImagem="hexagonix" # Diretório da imagem final
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT" # Flags de construção gerais
+export BANDEIRASHEXAGON="VERBOSE=SIM" # Flags de construção do Hexagon
+export BANDEIRASHBOOT="TEMATOM=ANDROMEDA" # Flags de construção do HBoot
+export DESTINODISTRO="Andromeda" # Localização das imagens executáveis e arquivos estáticos gerados
+export imagemFinal="hexagonix.img" # Nome da imagem final (sem diretório)
+export Par="pt" # Parâmetro de idioma
 
 if [ "$IDIOMA" == "en" ]; then
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN"
-export imagemFinal="en.hexagonix.img"
-export Par="en"
+# Vamos alterar as flags para instruir a construção de versões em inglês (caso existam)
+
+export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN" # Flags de construção gerais
+export imagemFinal="en.hexagonix.img" # Nome da imagem final (sem diretório)
+export Par="en" # Parâmetro de idioma
 
 fi
 
@@ -1818,6 +1897,8 @@ export INCLUDE="$(pwd)/lib/fasm"
 
 if [ -e $imagem ] ; then
 
+# Caso uma imagem exista, vai ser utilizada para avaliar o ramo atual do sistema
+
 cd hexagonix 
 export RAMO=$(git branch --show-current)
 cd ..
@@ -1826,7 +1907,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.14.0.0"
+export VERSAOHX="13.14.1.0"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
