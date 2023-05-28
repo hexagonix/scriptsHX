@@ -307,7 +307,7 @@ echo -en "\e[1;94mBuilding the Hexagon® kernel...\e[0m"
 echo "Building the Hexagon® kernel... {" >> ../log.log
 echo >> ../log.log
 
-fasm kern/Hexagon.asm Hexagon -d $BANDEIRASHEXAGON >> ../log.log || erroConstrucao
+fasm kern/Hexagon.asm Hexagon -d $FLAGS_HEXAGON >> ../log.log || erroConstrucao
 
 cp Hexagon ../$DESTINODISTRO/bin
 
@@ -365,7 +365,7 @@ echo >> ../log.log
 
 cd "Hexagon Boot"
 
-fasm hboot.asm ../hboot -d $BANDEIRASHBOOT >> ../../log.log || erroConstrucao
+fasm hboot.asm ../hboot -d $FLAGS_HBOOT >> ../../log.log || erroConstrucao
 
 cd Mods
 
@@ -379,7 +379,7 @@ do
 	echo >> ../../../log.log
 	echo " > Building HBoot® compatible module $(basename $i .asm).mod..." >> ../../../log.log
 	
-	fasm $i ../../`basename $i .asm`.mod -d $BANDEIRAS >> ../../../log.log 
+	fasm $i ../../`basename $i .asm`.mod -d $FLAGS_COMUM >> ../../../log.log 
 	
 	echo -e " [\e[32mOk\e[0m]"
 
@@ -1297,6 +1297,27 @@ echo
 
 }
 
+verFlags()
+{
+
+clear 
+
+export MSG="Hexagonix build flags"
+
+banner 
+
+echo "Common flags:"
+echo -e " > \e[1;32m$FLAGS_COMUM\e[0m"
+echo "Hexagon flags:"
+echo -e " > \e[1;32m$FLAGS_HEXAGON\e[0m"
+echo "HBoot build flags:"
+echo -e " > \e[1;32m$FLAGS_HBOOT\e[0m"
+echo 
+
+tudopronto
+terminar
+
+}
 
 iniciarLog()
 {
@@ -1866,9 +1887,9 @@ export LOG="log.log"
 
 export imagem="hexagonix/hexagonix.img" # Nome da imagem final
 export dirImagem="hexagonix" # Diretório da imagem final
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT" # Flags de construção gerais
-export BANDEIRASHEXAGON="VERBOSE=SIM" # Flags de construção do Hexagon
-export BANDEIRASHBOOT="TEMATOM=ANDROMEDA" # Flags de construção do HBoot
+export FLAGS_COMUM="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT" # Flags de construção gerais
+export FLAGS_HEXAGON="VERBOSE=SIM" # Flags de construção do Hexagon
+export FLAGS_HBOOT="TEMATOM=ANDROMEDA" # Flags de construção do HBoot
 export DESTINODISTRO="Andromeda" # Localização das imagens executáveis e arquivos estáticos gerados
 export imagemFinal="hexagonix.img" # Nome da imagem final (sem diretório)
 export Par="pt" # Parâmetro de idioma
@@ -1877,7 +1898,7 @@ if [ "$IDIOMA" == "en" ]; then
 
 # Vamos alterar as flags para instruir a construção de versões em inglês (caso existam)
 
-export BANDEIRAS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN" # Flags de construção gerais
+export FLAGS_COMUM="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN" # Flags de construção gerais
 export imagemFinal="en.hexagonix.img" # Nome da imagem final (sem diretório)
 export Par="en" # Parâmetro de idioma
 
@@ -1907,7 +1928,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.14.1.0"
+export VERSAOHX="13.14.2.0"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
@@ -1933,6 +1954,7 @@ case $1 in
 --info) obterInfoBuild; infoBuild; exit;;
 --configure) executarConfigure; exit;;
 --stat) exibirEstatisticas; exit;;
+--flags) verFlags; exit;;
 
 # Função padrão
 
