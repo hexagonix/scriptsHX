@@ -98,7 +98,7 @@ do
     echo -n " > Generating additional (contrib) application $(basename $i .asm)..." >> ../../../../$REG
     echo -en "Generating additional (contrib) application \e[1;94m$(basename $i .asm)\e[0m..."
     
-    fasm $i ../../../../$DIRETORIO/bin/`basename $i .asm` -d $BANDEIRAS >> /dev/null || echo " [Fail]"
+    fasm $i ../../../../$DIRETORIO/bin/`basename $i .asm` -d $FLAGS_COMUM >> /dev/null || echo " [Fail]"
     
     echo -e " [\e[32mOk\e[0m]"
     echo " [Ok]" >> ../../../../$REG
