@@ -928,11 +928,7 @@ newfs_msdos -C 90m -F 16 hexagonix.img
 	
 fi	
 
-# BSD logic
-
 mdconfig -a -t vnode -f temp.img -o force -u 4
-
-# "Normal" logic 
 
 echo "> Mounting the image..." >> $LOG
  
