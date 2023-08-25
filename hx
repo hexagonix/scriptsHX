@@ -1924,7 +1924,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.14.2.0"
+export VERSAOHX="13.14.2.1"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
