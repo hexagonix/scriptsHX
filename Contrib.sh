@@ -68,8 +68,6 @@
 #
 # $HexagonixOS$
 
-# Versão 1.1
-
 # $PORTUGUÊS$
 #
 # Esse script deve ficar na raiz do projeto
@@ -80,11 +78,13 @@
 
 # Este arquivo constrói os utilitários e aplicativos de terceiros
 
+# Versão 1.2
+
 # Primeiro, a versão mais atual do fasm
 
 gerarExternos(){
 
-echo -e "\e[1;94mBuilding additional packages for Hexagonix®...\e[0m {"
+echo -e "\e[1;94mBuilding additional packages for Hexagonix...\e[0m {"
 echo
 
 cd fasmX/
