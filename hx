@@ -128,7 +128,7 @@ export MSG="Copyright"
 
 banner
 
-echo -e "\e[1;94mHX: Hexagonix® build and test tool version $VERSAOHX\e[0m"
+echo -e "\e[1;94mHX: Hexagonix build and test tool version $VERSAOHX\e[0m"
 echo
 echo -e "Developed by \e[1;32mFelipe Miguel Nery Lunkes\e[0m"
 echo 
@@ -163,7 +163,7 @@ hx) prepImagemHexagonix; exit;;
 hx.teste) prepImagemHexagonixTeste; exit;;
 bsd) prepImagemHexagonixBSD; exit;;
 UNIX) prepImagemHexagonixUNIXSolaris; exit;;
-*) prepImagemHexagonix; exit;; # Assimir hx -i hx
+*) prepImagemHexagonix; exit;; # Assumir hx -i hx
 
 esac
 
@@ -302,9 +302,9 @@ construirHexagon(){
 cd Hexagon
 
 echo
-echo -en "\e[1;94mBuilding the Hexagon® kernel...\e[0m"
+echo -en "\e[1;94mBuilding the Hexagon kernel...\e[0m"
 
-echo "Building the Hexagon® kernel... {" >> ../log.log
+echo "Building the Hexagon kernel... {" >> ../log.log
 echo >> ../log.log
 
 fasm kern/Hexagon.asm Hexagon -d $FLAGS_HEXAGON >> ../log.log || erroConstrucao
@@ -316,7 +316,7 @@ rm -r Hexagon
 echo -e " [\e[32mOk\e[0m]"
 
 echo >> ../log.log
-echo "} Hexagon® kernel built successfully." >> ../log.log
+echo "} Hexagon kernel built successfully." >> ../log.log
 echo >> ../log.log
 echo "----------------------------------------------------------------------" >> ../log.log
 echo >> ../log.log
@@ -327,16 +327,16 @@ cd ..
 
 construirSaturno(){
 
-echo -e "\e[1;94mBuilding Hexagon® startup components...\e[0m {"
+echo -e "\e[1;94mBuilding Hexagon startup components...\e[0m {"
 echo
 
-echo "Building Hexagon® startup components... {" >> $LOG
+echo "Building Hexagon startup components... {" >> $LOG
 echo >> $LOG
 
-echo -e "\e[1;94m > Hexagon® bootloader - Saturno® (1st stage)...\e[0m"
+echo -e "\e[1;94m > Hexagon bootloader - Saturno® (1st stage)...\e[0m"
 echo
 
-echo " > Hexagon® bootloader - Saturno (1st stage)..." >> $LOG
+echo " > Hexagon bootloader - Saturno (1st stage)..." >> $LOG
 echo >> $LOG
 
 cd Boot
@@ -374,10 +374,10 @@ if [ -e Spartan.asm ] ; then
 for i in *.asm
 do
 
-	echo -en "Building HBoot® compatible module \e[1;94m$(basename $i .asm).mod\e[0m..."
+	echo -en "Building HBoot compatible module \e[1;94m$(basename $i .asm).mod\e[0m..."
 
 	echo >> ../../../log.log
-	echo " > Building HBoot® compatible module $(basename $i .asm).mod..." >> ../../../log.log
+	echo " > Building HBoot compatible module $(basename $i .asm).mod..." >> ../../../log.log
 	
 	fasm $i ../../`basename $i .asm`.mod -d $FLAGS_COMUM >> ../../../log.log 
 	
@@ -408,7 +408,7 @@ echo
 echo -e "} [\e[32mStartup components built successfully\e[0m]."
 
 echo >> ../log.log
-echo "} Successfully built Hexagon® startup components." >> ../log.log
+echo "} Successfully built Hexagon startup components." >> ../log.log
 echo >> ../log.log
 echo "----------------------------------------------------------------------" >> ../log.log
 echo >> ../log.log
@@ -477,7 +477,7 @@ exit
 construirTudo()
 {
 
-export MSG="Building the Hexagonix®"
+export MSG="Building the Hexagonix"
 
 clear 
 
@@ -497,13 +497,13 @@ tudopronto
 construtorHexagonix()
 {
 
-export MSG="Building the Hexagonix®"
+export MSG="Building the Hexagonix"
 
 clear 
 
 banner 
 
-echo "Building the Hexagonix®..."
+echo "Building the Hexagonix..."
 echo
 
 mkdir -p $DESTINODISTRO
@@ -1014,7 +1014,7 @@ banner
 
 echo -e "\e[1mStarting virtual machine with the following specifications:\e[0m"
 echo
-echo -e "\e[1;31mUsing parameters compatible with BSD systems (FreeBSD as a model)\e[0m"
+echo -e "\e[1;31mUsing parameters compatible with BSD systems (FreeBSD)\e[0m"
 echo
 echo -e "> Image target architecture: \e[1;32m$sistemaBSD\e[0m; \e[1;31mBSD mode!\e[0m"
 echo -e "> Disk image: \e[1;32m$imagem\e[0m"
@@ -1459,7 +1459,7 @@ banner()
 
 echo -e ";;****************************************************************************"
 echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mHexagonix® Operating System\e[0m"
+echo -e ";; ┌┐ ┌┐                              \e[1;94mHexagonix Operating System\e[0m"
 echo -e ";; ││ ││                                                                      "
 echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2015-2023 Felipe Miguel Nery Lunkes\e[0m"
 echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m  "
@@ -1785,7 +1785,7 @@ checarDependenciasClonagem()
 
 clear
 
-export MSG="Build the Hexagonix®"
+export MSG="Build the Hexagonix"
 
 banner 
 
@@ -1924,7 +1924,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.14.2.1"
+export VERSAOHX="13.14.2.2"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
