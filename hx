@@ -100,9 +100,9 @@ echo -e "\e[1;94mMain\e[0m available parameters:"
 echo
 echo -e "\e[1;32m-v\e[0m - Start a virtual machine. The available parameters are\e[1;31m (default hx)*\e[0m:"
 echo -e "\e[1;32m hx\e[0m        - Start Hexagonix virtual machine"
-echo -e "\e[1;32m hx.som\e[0m    - Start Hexagonix virtual machine in sound mode"
+echo -e "\e[1;32m hx.snd\e[0m    - Start Hexagonix virtual machine in sound mode"
 echo -e "\e[1;32m hx.serial\e[0m - Start Hexagonix virtual machine with no serial output"
-echo -e "\e[1;32m bsd-hx\e[0m    - Start BSD host compatible virtual machine"
+echo -e "\e[1;32m hx.bsd\e[0m    - Start BSD host compatible virtual machine"
 echo -e "\e[1;31m * The 'hx' option will be selected if no parameter is passed after '-v'!\e[0m"
 echo -e "\e[1;32m-i\e[0m - Build disk image. Available parameters are\e[1;31m (default hx)*\e[0m:"
 echo -e "\e[1;32m hx\e[0m      - Build disk image with Hexagonix"
@@ -789,11 +789,11 @@ echo "> Mounting the final image..." >> $LOG
 
 echo "  * Copying temporary image to final image..." >> $LOG
 
-dd status=none conv=notrunc if=temp.img of=$imagemFinal seek=1 >> $LOG || erroMontagem 
+dd status=none conv=notrunc if=temp.img of=$IMAGEM_DISCO_FINAL seek=1 >> $LOG || erroMontagem 
 
 echo "  * Copying MBR and partition table to image..." >> $LOG
 
-dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$imagemFinal >> $LOG || erroMontagem
+dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$IMAGEM_DISCO_FINAL >> $LOG || erroMontagem
 
 echo "> Removing temporary files and folders, as well as binaries that are no longer needed..." >> $LOG
 echo >> $LOG
@@ -812,18 +812,18 @@ fi
 
 echo "> Moving files to final location..." >> $LOG
 
-mv hexagonix.img $dirImagem/$imagemFinal
+mv hexagonix.img $DIR_IMAGEM/$IMAGEM_DISCO_FINAL
 
 echo "> Creating .vdi image from raw image..." >> $LOG 
 
-qemu-img convert -O vdi $dirImagem/$imagemFinal $dirImagem/$(basename $imagemFinal .img).vdi 
+qemu-img convert -O vdi $DIR_IMAGEM/$IMAGEM_DISCO_FINAL $DIR_IMAGEM/$(basename $IMAGEM_DISCO_FINAL .img).vdi 
 
 # Vamos agora trocar a propriedade da imagem para um usuário comum
 
 echo "> Adjusting file permissions (needed for git)..." >> $LOG 
 
-chown $dirImagem/$imagemFinal --reference=$dirImagem/README.md
-chown $dirImagem/$(basename $imagemFinal .img).vdi --reference=$dirImagem/README.md
+chown $DIR_IMAGEM/$IMAGEM_DISCO_FINAL --reference=$DIR_IMAGEM/README.md
+chown $DIR_IMAGEM/$(basename $IMAGEM_DISCO_FINAL .img).vdi --reference=$DIR_IMAGEM/README.md
 
 echo >> $LOG 
 echo "} Hexagonix disk images built successfully." >> $LOG 
@@ -839,8 +839,8 @@ avisoCriarInstalador
 
 finalizarLog
 
-mv log.log $dirImagem/log.log
-chown $dirImagem/log.log --reference=$dirImagem/README.md
+mv log.log $DIR_IMAGEM/log.log
+chown $DIR_IMAGEM/log.log --reference=$DIR_IMAGEM/README.md
 
 exit
 
@@ -861,7 +861,7 @@ echo >> $LOG
 echo "> Building image that will receive system files..." >> $LOG
 echo >> $LOG
 
-dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$imagemFinal >> $LOG || erroMontagem
+dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMAGEM_DISCO_FINAL >> $LOG || erroMontagem
 	
 fi	
 
@@ -888,7 +888,7 @@ echo >> $LOG
 echo "> Building image that will receive system files..." >> $LOG
 echo >> $LOG
 
-dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$imagemFinal >> $LOG || erroMontagem
+dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMAGEM_DISCO_FINAL >> $LOG || erroMontagem
 	
 fi	
 
@@ -961,9 +961,9 @@ gerenciarMaquinaVirtual()
 
 case $PT2 in
 
-bsd-hx) mvHexagonixSobreBSD; exit;;
 hx) mvHexagonixKVM; exit;;
-hx.som) mvHexagonixSnd; exit;;
+hx.bsd) mvHexagonixSobreBSD; exit;;
+hx.snd) mvHexagonixSnd; exit;;
 hx.serial) mvHexagonixSerial; exit;;
 *) mvHexagonixKVM; exit;; # Assumir hx -v hx
 
@@ -974,97 +974,48 @@ esac
 mvHexagonixSnd()
 {
 
-if [ -e $imagem ] ; then
+export QEMU_ARGS="-serial file:Serial.txt -hda $CAMINHO_IMAGEM_DISCO -cpu $PROCESSADOR -m $MEMORIA -soundhw $DRV_SOM -k pt-br"
+export NOTA="Using sound device"
 
-clear
-
-export MSG="HX: start virtual machine"
-
-banner 
-
-echo
-echo -e "\e[1mStarting virtual machine with the following specifications:\e[0m"
-echo
-echo -e "> Image target architecture: \e[1;32m$sistema\e[0m"
-echo -e "> Disk image: \e[1;32m$imagem\e[0m"
-echo -e "> Output sound: \e[1;32m$drvsom\e[0m"
-echo -e "> Memory: \e[1;32m$memoria megabytes\e[0m; processor: \e[1;32m$processador\e[0m"
-echo
-
-qemu-system-$sistema -serial file:"Serial.txt" -hda $imagem -cpu $processador -m $memoria -soundhw $drvsom >> /dev/null || erroMV
-
-else
-
-erroMV
-
-fi	
+mvExec
 	
 }	
 
 mvHexagonixSobreBSD()
 {
 
-if [ -e $imagem ] ; then
+export QEMU_ARGS="-cpu $PROCESSADOR -hda $CAMINHO_IMAGEM_DISCO -m $MEMORIA -k pt-br"
+export NOTA="BSD mode"
 
-clear
-
-export MSG="HX: start virtual machine"
-
-banner 
-
-echo -e "\e[1mStarting virtual machine with the following specifications:\e[0m"
-echo
-echo -e "\e[1;31mUsing parameters compatible with BSD systems (FreeBSD)\e[0m"
-echo
-echo -e "> Image target architecture: \e[1;32m$sistemaBSD\e[0m; \e[1;31mBSD mode!\e[0m"
-echo -e "> Disk image: \e[1;32m$imagem\e[0m"
-echo -e "> Output sound: \e[1;32m$drvsom\e[0m"
-echo -e "> Memory: \e[1;32m$memoria megabytes\e[0m; processor: \e[1;32m$processador\e[0m"
-echo
-
-qemu-system-$sistemaBSD -cpu $processador -hda $imagem -m $memoria >> /dev/null || erroMV
-
-else
-
-erroMV
-
-fi	
+mvExec
 
 }	
 
 mvHexagonixKVM()
 {
 
-if [ -e $imagem ] ; then
 
-clear
+export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $CAMINHO_IMAGEM_DISCO -m $MEMORIA -k pt-br"
+export NOTA="Using KVM and serial output to file"
 
-export MSG="HX: start virtual machine"
-
-banner 
-
-echo -e "\e[1mStarting virtual machine with the following specifications:\e[0m"
-echo
-echo -e "> Image target architecture: \e[1;32m$sistema\e[0m; Using KVM!"
-echo -e "> Disk image: \e[1;32m$imagem\e[0m"
-echo -e "> Output sound: \e[1;32m$drvsom\e[0m"
-echo -e "> Memory: \e[1;32m$memoria megabytes\e[0m; processor: \e[1;32mhost\e[0m"
-echo
-
-qemu-system-$sistema --enable-kvm -serial file:"Serial.txt" -cpu host -hda $imagem -m $memoria >> /dev/null || erroMV
-
-else
-
-erroMV
-
-fi	
+mvExec
 
 }	
 
 mvHexagonixSerial()
 {
 
-if [ -e $imagem ] ; then
+export QEMU_ARGS="-serial stdio -hda $CAMINHO_IMAGEM_DISCO -cpu $PROCESSADOR -m $MEMORIA -k pt-br"
+export NOTA="Using serial output to console"
+
+mvExec
+	
+}	
+
+mvExec()
+{
+
+if [ -e $CAMINHO_IMAGEM_DISCO ] ; then
 
 clear
 
@@ -1072,23 +1023,25 @@ export MSG="HX: start virtual machine"
 
 banner 
 
+echo
 echo -e "\e[1mStarting virtual machine with the following specifications:\e[0m"
 echo
-echo -e "> Image target architecture: \e[1;32m$sistema\e[0m"
-echo -e "> Disk image: \e[1;32m$imagem\e[0m"
-echo -e "> Output sound: \e[1;32m$drvsom\e[0m"
-echo -e "> Memory: \e[1;32m$memoria megabytes\e[0m; processor: \e[1;32m$processador\e[0m"
+echo -e "> Image target architecture: \e[1;32m$ARCH_SISTEMA\e[0m"
+echo -e "> Note: \e[1;32m$NOTA\e[0m"
+echo -e "> Disk image: \e[1;32m$CAMINHO_IMAGEM_DISCO\e[0m"
+echo -e "> Output sound: \e[1;32m$DRV_SOM\e[0m"
+echo -e "> Memory: \e[1;32m$MEMORIA megabytes\e[0m; processor: \e[1;32m$PROCESSADOR\e[0m"
 echo
 
-qemu-system-$sistema -serial stdio -hda $imagem -cpu $processador -m $memoria >> /dev/null || erroMV
+qemu-system-$ARCH_SISTEMA $QEMU_ARGS -D /dev/null >> /dev/null || erroMV 
 
-else
+else 
 
 erroMV
 
 fi	
 	
-}	
+}
 
 erroMV()
 {
@@ -1099,9 +1052,9 @@ export MSG="HX: start virtual machine"
 
 banner 
 
-echo -e "Error in request: \e[1;94m disk image '$imagem' not found or failed\e[0m"
-echo -e "\e[0min some given component or parameter."
-echo -e " > \e[1;31mYou CANNOT boot the system without this dependency\e[0m."
+echo -e "Error in request: disk image \e[1;94m'$CAMINHO_IMAGEM_DISCO'\e[0m not found or fail"
+echo -e "\e[0min some virtual machine component or parameter."
+echo -e " > \e[1;31mYou CANNOT boot the system without this error.\e[0m"
 echo -e "Error in request: \e[1;94mproblem while running virtual machine\e[0m."
 echo -e " > \e[1;31mTry running the virtual machine again\e[0m."
 echo
@@ -1167,7 +1120,7 @@ echo -e "Information about the \e[1mcurrent\e[0m construction of the system:"
 echo -e " > Hexagonix version: \e[1;32m$VERSAO\e[0m"
 echo -e " > Software revision: \e[1;32m$REVISAO\e[0m"
 echo -e " > Release name: \e[1;32m$CODENOME\e[0m"
-echo -e " > Disk image location: \e[1;32m$dirImagem/$imagemFinal\e[0m"
+echo -e " > Disk image location: \e[1;32m$DIR_IMAGEM/$IMAGEM_DISCO_FINAL\e[0m"
 echo
 
 }
@@ -1346,7 +1299,7 @@ echo "Information about the current build of Hexagonix:" >> $LOG
 echo " > Hexagonix version: $VERSAO" >> $LOG
 echo " > Software revision: $REVISAO" >> $LOG
 echo " > Release name: $CODENOME" >> $LOG
-echo " > Disk image location: $dirImagem/$imagemFinal" >> $LOG
+echo " > Disk image location: $DIR_IMAGEM/$IMAGEM_DISCO_FINAL" >> $LOG
 echo " > Branch (git): $RAMO" >> $LOG
 echo >> $LOG
 echo "Information about the current build environment:" >> $LOG
@@ -1400,7 +1353,7 @@ echo >> $LOG
 avisoCriarInstalador()
 {
 
-echo "> Disk image '$imagemFinal' and VM disk image '$(basename $imagemFinal .img).vdi' generated successfully." >> $LOG
+echo "> Disk image '$IMAGEM_DISCO_FINAL' and VM disk image '$(basename $IMAGEM_DISCO_FINAL .img).vdi' generated successfully." >> $LOG
 echo >> $LOG
 echo "Use './hx -v hx' to test running the system on the generated image or copy" >> $LOG
 echo "the image to the installer 'Inst' directory to generate an Linux-based install" >> $LOG
@@ -1867,11 +1820,11 @@ export IDIOMANG=$3
 
 # Constantes para execução da máquina virtual (QEMU) 
 
-export drvsom="pcspk"
-export sistema="i386"
-export sistemaBSD="x86_64"
-export processador="pentium3"
-export memoria=32
+export DRV_SOM="pcspk"
+export ARCH_SISTEMA="i386"
+export ARCH_SISTEMA_BSD="x86_64"
+export PROCESSADOR="pentium3"
+export MEMORIA=32
 
 # Constantes da etapa de construção
 
@@ -1881,13 +1834,13 @@ export LOG="log.log"
 # padrão, e o podem ser alteradas por parâmetros para alterar o comportamento da construção
 # ou componentes do Hexagonix
 
-export imagem="hexagonix/hexagonix.img" # Nome da imagem final
-export dirImagem="hexagonix" # Diretório da imagem final
+export CAMINHO_IMAGEM_DISCO="hexagonix/hexagonix.img" # Nome da imagem final
+export DIR_IMAGEM="hexagonix" # Diretório da imagem final
 export FLAGS_COMUM="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT" # Flags de construção gerais
 export FLAGS_HEXAGON="VERBOSE=SIM" # Flags de construção do Hexagon
 export FLAGS_HBOOT="TEMATOM=ANDROMEDA" # Flags de construção do HBoot
 export DESTINODISTRO="Andromeda" # Localização das imagens executáveis e arquivos estáticos gerados
-export imagemFinal="hexagonix.img" # Nome da imagem final (sem diretório)
+export IMAGEM_DISCO_FINAL="hexagonix.img" # Nome da imagem final (sem diretório)
 export Par="pt" # Parâmetro de idioma
 
 if [ "$IDIOMA" == "en" ]; then
@@ -1895,7 +1848,7 @@ if [ "$IDIOMA" == "en" ]; then
 # Vamos alterar as flags para instruir a construção de versões em inglês (caso existam)
 
 export FLAGS_COMUM="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN" # Flags de construção gerais
-export imagemFinal="en.hexagonix.img" # Nome da imagem final (sem diretório)
+export IMAGEM_DISCO_FINAL="en.hexagonix.img" # Nome da imagem final (sem diretório)
 export Par="en" # Parâmetro de idioma
 
 fi
@@ -1912,7 +1865,7 @@ export INCLUDE="$(pwd)/lib/fasm"
 # provocar o não funcionamento ou funcionamento incorreto de diversos componentes. Para
 # sincronizar todos os repositórios com o mesmo ramo, use 'hx -un ramo'.
 
-if [ -e $imagem ] ; then
+if [ -e $CAMINHO_IMAGEM_DISCO ] ; then
 
 # Caso uma imagem exista, vai ser utilizada para avaliar o ramo atual do sistema
 
@@ -1924,7 +1877,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.14.2.2"
+export VERSAOHX="13.15"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
