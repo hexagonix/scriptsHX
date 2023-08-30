@@ -620,7 +620,7 @@ echo >> $LOG
 
 if [ -e Contrib/Contrib.sh ] ; then
 
-echo "> There are additional packages for construction." >> $LOG
+echo "> There are additional packages to build." >> $LOG
 echo >> $LOG
 
 cd Contrib 
@@ -631,8 +631,8 @@ cd ..
 
 else 
 
-echo "> There are no additional packages for construction." >> $LOG
-echo "There are no additional packages for construction."
+echo "> There are no additional packages to build." >> $LOG
+echo "There are no additional packages to build."
 echo 
 
 fi 
@@ -1877,7 +1877,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15"
+export VERSAOHX="13.15.1"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
