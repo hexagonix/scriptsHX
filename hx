@@ -13,9 +13,9 @@
 #                                               aa,    ,88                                         
 #                                                "P8bbdP"       
 #
-#                    Sistema Operacional Hexagonix® - Hexagonix® Operating System
+#                    Sistema Operacional Hexagonix - Hexagonix Operating System
 #
-#                          Copyright © 2015-2023 Felipe Miguel Nery Lunkes
+#                         Copyright (c) 2015-2023 Felipe Miguel Nery Lunkes
 #                        Todos os direitos reservados - All rights reserved.
 #
 #*************************************************************************************************
@@ -269,7 +269,7 @@ definirHexagonixOficial()
 {
 
 # Aqui vamos definir uma imagem de tamanho oficial, que demora mais a ser gerada. Essa imagem é
-# apropriada para o pacote de instalação do Hexagonix®
+# apropriada para o pacote de instalação do Hexagonix
 
 export TAMANHOIMAGEM=47185920
 export TAMANHOTEMP=92160	
@@ -333,7 +333,7 @@ echo
 echo "Building Hexagon startup components... {" >> $LOG
 echo >> $LOG
 
-echo -e "\e[1;94m > Hexagon bootloader - Saturno® (1st stage)...\e[0m"
+echo -e "\e[1;94m > Hexagon bootloader - Saturno (1st stage)...\e[0m"
 echo
 
 echo " > Hexagon bootloader - Saturno (1st stage)..." >> $LOG
@@ -1645,11 +1645,11 @@ clonarRepos()
 
 clear
 
-export MSG="Build the Hexagonix®"
+export MSG="Build the Hexagonix"
 
 banner 
 
-echo "Cloning the repositories needed to build Hexagonix®..."
+echo "Cloning the repositories needed to build Hexagonix..."
 echo 
 
 # Primeiro, vamos criar os diretórios comuns
@@ -1877,7 +1877,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15.1"
+export VERSAOHX="13.15.2"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
