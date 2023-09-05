@@ -1839,7 +1839,7 @@ export DIR_IMAGEM="hexagonix" # Diretório da imagem final
 export FLAGS_COMUM="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT" # Flags de construção gerais
 export FLAGS_HEXAGON="VERBOSE=SIM" # Flags de construção do Hexagon
 export FLAGS_HBOOT="TEMATOM=ANDROMEDA" # Flags de construção do HBoot
-export DESTINODISTRO="Andromeda" # Localização das imagens executáveis e arquivos estáticos gerados
+export DESTINODISTRO="Build" # Localização das imagens executáveis e arquivos estáticos gerados
 export IMAGEM_DISCO_FINAL="hexagonix.img" # Nome da imagem final (sem diretório)
 export Par="pt" # Parâmetro de idioma
 
@@ -1877,7 +1877,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15.2"
+export VERSAOHX="13.15.2.1"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
