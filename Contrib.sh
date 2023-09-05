@@ -78,7 +78,7 @@
 
 # Este arquivo constrói os utilitários e aplicativos de terceiros
 
-# Versão 1.2
+# Versão 1.3
 
 # Primeiro, a versão mais atual do fasm
 
