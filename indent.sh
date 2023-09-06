@@ -88,16 +88,13 @@ otimizarDefinicoes
 otimizarFontes()
 {
 
-echo
 echo -e "> \e[32mSearching and fixing indentation in Hexagonix source and related files...\e[0m"
-echo
 
 find . -name '*.asm' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 find . -name '*.s' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 find . -name '*.cow' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 
 echo -e "> \e[32mSearching and removing extra spaces in Hexagonix source and related files...\e[0m"
-echo
 
 find . -name '*.asm' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 find . -name '*.s' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
@@ -108,15 +105,12 @@ find . -name '*.cow' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$
 otimizarDefinicoes()
 {
 
-echo
 echo -e "> \e[32mSearching and fixing indentation in Hexagonix definition files...\e[0m"
-echo
 
 find . -name '*.conf' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 find . -name '*.def' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 
 echo -e "> \e[32mSearching and removing extra spaces in Hexagonix definition files...\e[0m"
-echo
 
 find . -name '*.conf' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 find . -name '*.def' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
@@ -126,14 +120,11 @@ find . -name '*.def' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$
 otimizarManuais()
 {
 
-echo
 echo -e "> \e[32mSearching and fixing indentation in Hexagonix manuals...\e[0m"
-echo
 
 find . -name '*.man' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 
 echo -e "> \e[32mSearching and removing extra spaces in Hexagonix manuals...\e[0m"
-echo
 
 find . -name '*.man' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 
@@ -142,21 +133,17 @@ find . -name '*.man' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$
 otimizarScripts()
 {
 
-echo
 echo -e "> \e[32mSearching and fixing indentation in Hexagonix scripts and tools...\e[0m"
-echo
 
 find . -name '*.sh' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 find . -name 'hx' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 
 echo -e "> \e[32mSearching and removing extra spaces in Hexagonix scripts and tools...\e[0m"
-echo
 
 find . -name '*.sh' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 find . -name 'hx' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 
 echo -e "> \e[32mTuning executable and script files...\e[0m"
-echo
 
 find . -name '*.sh' ! -type d -exec bash -c 'chmod +x *.sh' {} \;
 find . -name 'hx' ! -type d -exec bash -c 'chmod +x hx' {} \;
@@ -169,33 +156,34 @@ ajuda()
 echo
 echo -e "\e[1;94mMain\e[0m available parameters:"
 echo
-echo -e "\e[1;32m-a\e[0m - Indent and optimize Hexagonix source files, manuals and definition files (same as -smd)."
-echo -e "\e[1;32m-s\e[0m - Indent and optimize Hexagonix scripts and build tools."
+echo -e "\e[1;32m-a\e[0m - Indent and optimize Hexagonix source files, manuals and definition files."
 echo -e "\e[1;32m-f\e[0m - Indent and optimize Hexagonix x86 Assembly source files only."
-echo -e "\e[1;32m-m\e[0m - Indent and optimize Hexagonix manuals."
-echo -e "\e[1;32m-d\e[0m - Indent and optimize Hexagonix definition files."
+echo -e "\e[1;32m-m\e[0m - Indent and optimize Hexagonix manuals only."
+echo -e "\e[1;32m-d\e[0m - Indent and optimize Hexagonix definition files only."
+echo -e "\e[1;32m-s\e[0m - Indent and optimize Hexagonix scripts and build tools only."
 echo -e "\e[1;32m-h\e[0m - Display this help."
 echo
 
 }
 
-export VERSAO_INDENT="2.2"
+export VERSAO_INDENT="2.3"
 
 echo
 echo "hx indentation helper version $VERSAO_INDENT"
 echo
 echo "This tool looks for and fixes indentation and formatting problems in the files"
 echo "that make up the Hexagonix project."
+echo
 
 case $1 in
 
 # Gerenciar os parâmetros iniciados com '-'
 
 -a) otimizarFontesManuaisDefinicoes; exit;;
--s) otimizarScripts; exit;;
 -f) otimizarFontes; exit;;
 -m) otimizarManuais; exit;;
 -d) otimizarDefinicoes; exit;;
+-s) otimizarScripts; exit;;
 -h) ajuda; exit;;
 *) ajuda; exit;;
 
