@@ -78,13 +78,9 @@
 #
 # This script must be in the root of the project
 
-export VERSAO="1.2"
+otimizarFontes()
+{
 
-echo
-echo "hx indentation helper version $VERSAO"
-echo
-echo "This tool looks for and fixes indentation and formatting problems in the files"
-echo "that make up the Hexagonix project."
 echo
 echo -e "> \e[32mSearching and fixing indentation in Hexagonix source and related files...\e[0m"
 echo
@@ -95,8 +91,6 @@ find . -name '*.man' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /t
 find . -name '*.conf' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 find . -name '*.def' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 find . -name '*.cow' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
-find . -name '*.sh' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
-find . -name 'hx' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
 
 echo -e "> \e[32mSearching and removing extra spaces in Hexagonix source and related files...\e[0m"
 echo
@@ -107,10 +101,61 @@ find . -name '*.man' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$
 find . -name '*.conf' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 find . -name '*.def' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 find . -name '*.cow' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
+
+}
+
+otimizarScripts()
+{
+
+echo
+echo -e "> \e[32mSearching and fixing indentation in Hexagonix scripts and tools...\e[0m"
+echo
+
+find . -name '*.sh' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+find . -name 'hx' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+
+echo -e "> \e[32mSearching and removing extra spaces in Hexagonix scripts and tools...\e[0m"
+echo
+
 find . -name '*.sh' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 find . -name 'hx' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 
 echo -e "> \e[32mTuning executable and script files...\e[0m"
 echo
+
 find . -name '*.sh' ! -type d -exec bash -c 'chmod +x *.sh' {} \;
 find . -name 'hx' ! -type d -exec bash -c 'chmod +x hx' {} \;
+
+}
+
+ajuda()
+{
+
+echo
+echo -e "\e[1;94mMain\e[0m available parameters:"
+echo
+echo -e "\e[1;32m-s\e[0m - Indent and optimize Hexagonix source files only."
+echo -e "\e[1;32m-f\e[0m - Indent and optimize Hexagonix scripts and build tools."
+echo -e "\e[1;32m-h\e[0m - Display this help."
+echo
+
+}
+
+export VERSAO="2.0"
+
+echo
+echo "hx indentation helper version $VERSAO"
+echo
+echo "This tool looks for and fixes indentation and formatting problems in the files"
+echo "that make up the Hexagonix project."
+
+case $1 in
+
+# Gerenciar os parâmetros iniciados com '-'
+
+-s) otimizarScripts; exit;;
+-f) otimizarFontes; exit;;
+-h) ajuda; exit;;
+*) ajuda; exit;;
+
+esac
