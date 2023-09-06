@@ -2,16 +2,16 @@
 #
 #*************************************************************************************************
 #
-# 88                                                                                88              
-# 88                                                                                ""              
-# 88                                                                                                
+# 88                                                                                88
+# 88                                                                                ""
+# 88
 # 88,dPPPba,   ,adPPPba, 8b,     ,d8 ,adPPPPba,  ,adPPPb,d8  ,adPPPba,  8b,dPPPba,  88 8b,     ,d8
 # 88P'    "88 a8P     88  `P8, ,8P'  ""     `P8 a8"    `P88 a8"     "8a 88P'   `"88 88  `P8, ,8P'
 # 88       88 8PP"""""""    )888(    ,adPPPPP88 8b       88 8b       d8 88       88 88    )888(
 # 88       88 "8b,   ,aa  ,d8" "8b,  88,    ,88 "8a,   ,d88 "8a,   ,a8" 88       88 88  ,d8" "8b,
 # 88       88  `"Pbbd8"' 8P'     `P8 `"8bbdP"P8  `"PbbdP"P8  `"PbbdP"'  88       88 88 8P'     `P8
-#                                               aa,    ,88                                         
-#                                                "P8bbdP"       
+#                                               aa,    ,88
+#                                                "P8bbdP"
 #
 #                    Sistema Operacional Hexagonix - Hexagonix Operating System
 #
@@ -21,7 +21,7 @@
 #*************************************************************************************************
 #
 # Português:
-# 
+#
 # O Hexagonix e seus componentes são licenciados sob licença BSD-3-Clause. Leia abaixo
 # a licença que governa este arquivo e verifique a licença de cada repositório para
 # obter mais informações sobre seus direitos e obrigações ao utilizar e reutilizar
@@ -40,10 +40,10 @@
 #
 # Copyright (c) 2015-2023, Felipe Miguel Nery Lunkes
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
-# 
+#
 # 1. Redistributions of source code must retain the above copyright notice, this
 #    list of conditions and the following disclaimer.
 #
@@ -54,7 +54,7 @@
 # 3. Neither the name of the copyright holder nor the names of its
 #    contributors may be used to endorse or promote products derived from
 #    this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -73,7 +73,7 @@
 # $PORTUGUÊS$
 #
 # Esse script deve ficar na raiz do projeto
-# 
+#
 # $ENGLISH$
 #
 # This script must be in the root of the project
@@ -98,7 +98,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi  
+fi
 
 # Dependência 2
 
@@ -113,7 +113,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
 
-fi  
+fi
 
 # Dependência 3
 
@@ -128,7 +128,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
 
-fi  
+fi
 
 # Dependência 4
 
@@ -143,7 +143,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi  
+fi
 
 # Dependência 5
 
@@ -158,7 +158,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
 
-fi  
+fi
 
 # Dependência 6
 
@@ -173,7 +173,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
 
-fi  
+fi
 
 terminar
 
@@ -198,7 +198,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi  
+fi
 
 # Script 2
 
@@ -208,7 +208,7 @@ if [ -e Contrib/Contrib.sh ] ; then
 
 echo -en "[\e[32mOk\e[0m]"
 
-chmod +x Contrib/Contrib.sh 
+chmod +x Contrib/Contrib.sh
 
 echo -e " [\e[94mExecutable\e[0m]"
 
@@ -217,7 +217,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi  
+fi
 
 # Script 3
 
@@ -227,7 +227,7 @@ if [ -e Apps/Unix/Unix.sh ] ; then
 
 echo -en "[\e[32mOk\e[0m]"
 
-chmod +x Apps/Unix/Unix.sh 
+chmod +x Apps/Unix/Unix.sh
 
 echo -e " [\e[94mExecutable\e[0m]"
 
@@ -236,7 +236,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi  
+fi
 
 # Script 4
 
@@ -246,7 +246,7 @@ if [ -e Apps/Andromeda/Apps.sh ] ; then
 
 echo -en "[\e[32mOk\e[0m]"
 
-chmod +x Apps/Andromeda/Apps.sh 
+chmod +x Apps/Andromeda/Apps.sh
 
 echo -e " [\e[94mExecutable\e[0m]"
 
@@ -255,7 +255,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi  
+fi
 
 # Script 5
 
@@ -265,7 +265,7 @@ if [ -e Fontes/fontes.sh ] ; then
 
 echo -en "[\e[32mOk\e[0m]"
 
-chmod +x Fontes/fontes.sh 
+chmod +x Fontes/fontes.sh
 
 echo -e " [\e[94mExecutable\e[0m]"
 
@@ -274,7 +274,7 @@ else
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mYou CANNOT start building the system without this dependency\e[0m."
 
-fi  
+fi
 
 # Agora vamos instalar as dependências já presentes (sem necessidade de obtenção)
 
@@ -293,9 +293,9 @@ if test "`whoami`" == "root" ; then
 
 echo -n " > Copying/updating hx (destination: /usr/bin)... "
 
-cp hx /usr/bin 
+cp hx /usr/bin
 
-fi 
+fi
 
 if [ -e /usr/bin/hx ] ; then
 
@@ -307,25 +307,25 @@ chmod +x /usr/bin/hx
 
 echo -e " [\e[94mExecutable\e[0m]"
 
-fi 
+fi
 
 else
 
 echo -e "[\e[31mNot found\e[0m]"
 echo -e "   > \e[1;31mVocê deve usar a cópia local de hx para executar as operações\e[0m."
 
-fi 
+fi
 
-terminar 
+terminar
 
 }
 
-build() 
+build()
 {
 
 echo -e "Configuring system build data..."
 
-# Primeiro, vamos montar a base 
+# Primeiro, vamos montar a base
 
 cd Dist/etc
 
@@ -335,10 +335,10 @@ echo " > Removing previous build and base version information..."
 
 rm base.ocl
 
-fi  
+fi
 
 echo -n " > Processing .conf file and setting configuration file... "
-echo -e $(cat base.conf)$VERSAO"]"$CODENOME'"'$VERSAO"#"$LANCAMENTO"!"$BUILD">" >> base.ocl 
+echo -e $(cat base.conf)$VERSAO"]"$CODENOME'"'$VERSAO"#"$LANCAMENTO"!"$BUILD">" >> base.ocl
 echo -e "[\e[32mOk\e[0m]"
 
 if [ -e hexgnix.unx ] ; then
@@ -347,7 +347,7 @@ echo " > Removing previous Hexagonix build and version database..."
 
 rm hexgnix.unx
 
-fi  
+fi
 
 echo -n " > Processing .conf file and creating UNX-XML... "
 echo -e $(cat hexgnix.conf)"<VERSION> "$VERSAO" </VERSION>" >> hexgnix.unx
@@ -369,7 +369,7 @@ host()
 
 echo -e "Configuring hostname..."
 
-cd Dist/etc 
+cd Dist/etc
 
 if [ -e host.unx ] ; then
 
@@ -377,7 +377,7 @@ echo " > Removing previous host configuration..."
 
 rm host.unx
 
-fi  
+fi
 
 echo -n " > Processing .conf file and creating host configuration... "
 echo $CODENOME$(cat host.conf) >> host.unx
@@ -386,7 +386,7 @@ echo -e "[\e[32mOk\e[0m]"
 cd ..
 cd ..
 
-terminar 
+terminar
 
 }
 
@@ -395,7 +395,7 @@ shrc()
 
 echo -e "Configuring shrc..."
 
-cd Dist/etc 
+cd Dist/etc
 
 if [ -e shrc ] ; then
 
@@ -403,7 +403,7 @@ echo " > Removing previous shrc configuration..."
 
 rm shrc
 
-fi  
+fi
 
 echo -n " > Creating shrc configuration... "
 echo "Welcome to Hexagonix $VERSAO ($LANCAMENTO)"  >> shrc
@@ -413,7 +413,7 @@ echo -e "[\e[32mOk\e[0m]"
 cd ..
 cd ..
 
-terminar 
+terminar
 
 }
 
@@ -422,7 +422,7 @@ usuarios()
 
 echo -e "Configuring users..."
 
-cd Dist/etc 
+cd Dist/etc
 
 if [ -e passwd ] ; then
 
@@ -430,7 +430,7 @@ echo " > Removing previous user database..."
 
 rm passwd
 
-fi  
+fi
 
 echo -n " > Processing .conf file and creating user database... "
 echo -e $(cat passwd.conf) >> passwd
@@ -439,7 +439,7 @@ echo -e "[\e[32mOk\e[0m]"
 cd ..
 cd ..
 
-terminar 
+terminar
 
 }
 
@@ -448,7 +448,7 @@ init()
 
 echo -e "Configuring rc (startup script)..."
 
-cd Dist/etc 
+cd Dist/etc
 
 if [ -e rc ] ; then
 
@@ -456,7 +456,7 @@ echo " > Removing previous rc (startup script)..."
 
 rm rc
 
-fi  
+fi
 
 echo -n " > Processing .conf file and creating rc (startup script)... "
 echo -e $(cat rc.conf) >> rc
@@ -465,7 +465,7 @@ echo -e "[\e[32mOk\e[0m]"
 cd ..
 cd ..
 
-terminar 
+terminar
 
 }
 
@@ -507,11 +507,11 @@ else
 
 echo -e "[\e[94mPreviously removed\e[0m] "
 
-terminar 
+terminar
 
 exit
 
-fi 
+fi
 
 if [ -e /usr/bin/hx ] ; then
 
@@ -523,9 +523,9 @@ echo -en "[\e[32mOk\e[0m]"
 
 echo -e " [\e[94mRemoved\e[0m]"
 
-fi 
+fi
 
-terminar 
+terminar
 
 }
 
