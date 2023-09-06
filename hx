@@ -1135,7 +1135,7 @@ if [ -e Scripts/indent.sh ] ; then
 cp Scripts/indent.sh .
 
 echo
-echo -e "[\e[32mAllowing execution and starting indent.sh (using only sources option)...\e[0m]"
+echo -e "[\e[32mAllowing execution and starting indent.sh (using '-a' parameter)...\e[0m]"
 
 # Primeiro, ter certeza que o arquivo pode ser executado
 
