@@ -1141,7 +1141,7 @@ echo -e "[\e[32mAllowing execution and starting indent.sh (using only souces opt
 
 chmod +x indent.sh
 
-indent.sh -f
+./indent.sh -f
 
 else
 
