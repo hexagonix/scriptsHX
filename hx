@@ -1125,6 +1125,36 @@ echo
 
 }
 
+executarIndent()
+{
+
+clear
+
+if [ -e Scripts/indent.sh ] ; then
+
+echo
+echo -e "[\e[32mAllowing execution and starting indent.sh...\e[0m]"
+
+# Primeiro, ter certeza que o arquivo pode ser executado
+
+chmod +x indent.sh
+
+./indent.sh
+
+else
+
+echo -e "[\e[31mError: indent.sh not found\e[0m]."
+
+fi
+
+terminar
+tudopronto
+
+}
+
+
+}
+
 executarConfigure()
 {
 
@@ -1877,7 +1907,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15.2.1"
+export VERSAOHX="13.15.3.0"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
@@ -1902,6 +1932,7 @@ case $1 in
 --depend) instalarDependencias; exit;;
 --info) obterInfoBuild; infoBuild; exit;;
 --configure) executarConfigure; exit;;
+--indent) executarIndent; exit;;
 --stat) exibirEstatisticas; exit;;
 --flags) verFlags; exit;;
 
