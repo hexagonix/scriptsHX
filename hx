@@ -1133,13 +1133,13 @@ clear
 if [ -e Scripts/indent.sh ] ; then
 
 echo
-echo -e "[\e[32mAllowing execution and starting indent.sh...\e[0m]"
+echo -e "[\e[32mAllowing execution and starting indent.sh (using only souces option)...\e[0m]"
 
 # Primeiro, ter certeza que o arquivo pode ser executado
 
 chmod +x indent.sh
 
-./indent.sh
+Scripts/indent.sh -f
 
 else
 
