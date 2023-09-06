@@ -1152,9 +1152,6 @@ tudopronto
 
 }
 
-
-}
-
 executarConfigure()
 {
 
