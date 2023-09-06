@@ -1141,7 +1141,7 @@ echo -e "[\e[32mAllowing execution and starting indent.sh (using only sources op
 
 chmod +x indent.sh
 
-./indent.sh -f
+./indent.sh -a
 
 rm indent.sh
 
@@ -1908,7 +1908,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15.3.2"
+export VERSAOHX="13.15.3.3"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
