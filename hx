@@ -1132,6 +1132,8 @@ clear
 
 if [ -e Scripts/indent.sh ] ; then
 
+cp Scripts/indent.sh .
+
 echo
 echo -e "[\e[32mAllowing execution and starting indent.sh (using only souces option)...\e[0m]"
 
@@ -1139,13 +1141,15 @@ echo -e "[\e[32mAllowing execution and starting indent.sh (using only souces opt
 
 chmod +x indent.sh
 
-Scripts/indent.sh -f
+indent.sh -f
 
 else
 
 echo -e "[\e[31mError: indent.sh not found\e[0m]."
 
 fi
+
+rm indent.sh
 
 terminar
 tudopronto
@@ -1904,7 +1908,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15.3.0"
+export VERSAOHX="13.15.3.1"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
