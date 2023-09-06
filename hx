@@ -1143,13 +1143,13 @@ chmod +x indent.sh
 
 ./indent.sh -f
 
+rm indent.sh
+
 else
 
 echo -e "[\e[31mError: indent.sh not found\e[0m]."
 
 fi
-
-rm indent.sh
 
 terminar
 tudopronto
@@ -1908,7 +1908,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15.3.1"
+export VERSAOHX="13.15.3.2"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
