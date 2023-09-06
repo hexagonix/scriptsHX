@@ -134,8 +134,8 @@ ajuda()
 echo
 echo -e "\e[1;94mMain\e[0m available parameters:"
 echo
-echo -e "\e[1;32m-s\e[0m - Indent and optimize Hexagonix source files only."
-echo -e "\e[1;32m-f\e[0m - Indent and optimize Hexagonix scripts and build tools."
+echo -e "\e[1;32m-f\e[0m - Indent and optimize Hexagonix source files only."
+echo -e "\e[1;32m-s\e[0m - Indent and optimize Hexagonix scripts and build tools."
 echo -e "\e[1;32m-h\e[0m - Display this help."
 echo
 
