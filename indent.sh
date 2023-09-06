@@ -68,8 +68,6 @@
 #
 # $HexagonixOS$
 
-# Versão 1.0
-
 # $PORTUGUÊS$
 #
 # Esse script deve ficar na raiz do projeto
@@ -141,10 +139,10 @@ echo
 
 }
 
-export VERSAO="2.0"
+export VERSAO_INDENT="2.1"
 
 echo
-echo "hx indentation helper version $VERSAO"
+echo "hx indentation helper version $VERSAO_INDENT"
 echo
 echo "This tool looks for and fixes indentation and formatting problems in the files"
 echo "that make up the Hexagonix project."
