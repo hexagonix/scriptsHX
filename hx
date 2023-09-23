@@ -1093,7 +1093,7 @@ echo -e "   > \e[1;94mUse ./hx with parameters to regenerate these files.\e[0m"
 echo -e "   > For help on possible parameters, use ./hx -h."
 echo -n " > Removing configuration files generated every build..."
 
-rm -rf Dist/etc/*.unx Dist/etc/*.ocl Dist/etc/rc Dist/etc/passwd Dist/etc/shrc
+rm -rf Dist/etc/*.unx Dist/etc/*.ocl Dist/etc/rc Dist/etc/passwd Dist/etc/shrc Dist/etc/host
 
 echo -e " [\e[32mOk\e[0m]"
 echo -e "   > \e[1;94mUse ./configure.sh to regenerate these files.\e[0m"
@@ -1916,7 +1916,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15.4.0"
+export VERSAOHX="13.15.4.1"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
