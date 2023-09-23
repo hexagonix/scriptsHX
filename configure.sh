@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Versão 4.2.0
+# Versão 4.2.1
 
 # $PORTUGUÊS$
 #
@@ -371,16 +371,16 @@ echo -e "Configuring hostname..."
 
 cd Dist/etc
 
-if [ -e host.unx ] ; then
+if [ -e host ] ; then
 
 echo " > Removing previous host configuration..."
 
-rm host.unx
+rm host
 
 fi
 
 echo -n " > Processing .conf file and creating host configuration... "
-echo $CODENOME$(cat host.conf) >> host.unx
+echo $CODENOME$(cat host.conf) >> host
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
