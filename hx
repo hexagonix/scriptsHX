@@ -185,7 +185,7 @@ unixland) construirUtilUnix; exit;;
 andromedaland) construirBaseAndromeda; exit;;
 hexagonix) hexagonix; exit;;
 hx) construirTudo; exit;;
-*) parametrosNecessarios; exit;;
+*) construirTudo; exit;;
 
 esac
 
@@ -1916,7 +1916,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15.4.1"
+export VERSAOHX="13.15.4.2"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
