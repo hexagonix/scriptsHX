@@ -1406,7 +1406,7 @@ echo >> $LOG
 finalizarLog()
 {
 
-echo -n "Finalization date of this log: " >> $LOG
+echo -n "End date/time of this log: " >> $LOG
 date >> $LOG
 echo >> $LOG
 echo "----------------------------------------------------------------------" >> $LOG
@@ -1916,7 +1916,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15.4.2"
+export VERSAOHX="13.15.4.3"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
