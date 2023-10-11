@@ -354,6 +354,7 @@ echo -e $(cat hexgnix.conf)"<VERSION> "$VERSAO" </VERSION>" >> hexgnix.unx
 echo "<CODENAME> $CODENOME </CODENAME>" >> hexgnix.unx
 echo "<UPDATEPACK> $VERSAO </UPDATEPACK>" >> hexgnix.unx
 echo "<BRANCH> $LANCAMENTO </BRANCH>" >> hexgnix.unx
+echo "<BUILD> $BUILD </BUILD>" >> hexgnix.unx
 echo "<BUILDDATE> "$(date)" </BUILDDATE>" >> hexgnix.unx
 echo "</Hexagonix>" >> hexgnix.unx
 echo -e "[\e[32mOk\e[0m]"
