@@ -1334,7 +1334,7 @@ echo "construction, as well as errors found in the process." >> $LOG
 echo >> $LOG
 echo "hx version: $VERSAOHX" >> $LOG
 echo >> $LOG
-echo "Build id: $ID_BUILD" >> $LOG
+echo "Build task id: $ID_BUILD" >> $LOG
 echo >> $LOG
 echo "Information about the current build of Hexagonix:" >> $LOG
 echo " > Hexagonix version: $VERSAO" >> $LOG
@@ -1919,7 +1919,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15.5.0"
+export VERSAOHX="13.15.5.1"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
