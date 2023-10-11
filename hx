@@ -1334,6 +1334,8 @@ echo "construction, as well as errors found in the process." >> $LOG
 echo >> $LOG
 echo "hx version: $VERSAOHX" >> $LOG
 echo >> $LOG
+echo "Build id: $ID_BUILD" >> $LOG
+echo >> $LOG
 echo "Information about the current build of Hexagonix:" >> $LOG
 echo " > Hexagonix version: $VERSAO" >> $LOG
 echo " > Software revision: $REVISAO" >> $LOG
@@ -1433,7 +1435,7 @@ echo
 echo -e "HX will now install the necessary dependencies to run it:"
 echo
 
-apt install fasm nasm cloc qemu qemu-system-i386
+apt install fasm nasm cloc qemu qemu-system-i386 uuid
 
 terminar
 
@@ -1854,6 +1856,7 @@ export PT4=$4
 export PT5=$5
 export IDIOMA=$2
 export IDIOMANG=$3
+export ID_BUILD=$(uuid)
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 
@@ -1916,7 +1919,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15.4.3"
+export VERSAOHX="13.15.5.0"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
