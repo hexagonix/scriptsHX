@@ -1341,7 +1341,17 @@ echo " > Hexagonix version: $VERSAO" >> $LOG
 echo " > Software revision: $REVISAO" >> $LOG
 echo " > Release name: $CODENOME" >> $LOG
 echo " > Disk image location: $DIR_IMAGEM/$IMAGEM_DISCO_FINAL" >> $LOG
-echo " > Branch (git): $RAMO" >> $LOG
+echo " > Main system branch (git): $RAMO" >> $LOG
+echo "   > Andromeda-Apps branch: $RAMO_ANDROMEDA_APPS" >> $LOG
+echo "   > Unix-Apps branch: $RAMO_UNIX_APPS" >> $LOG
+echo "   > HBoot branch: $RAMO_HBOOT" >> $LOG
+echo "   > Saturno branch: $RAMO_SATURNO" >> $LOG
+echo "   > etc branch: $RAMO_ETC" >> $LOG
+echo "   > man branch: $RAMO_MAN" >> $LOG
+echo "   > Fonts branch: $RAMO_FONTES" >> $LOG
+echo "   > Hexagon branch: $RAMO_HEXAGON" >> $LOG
+echo "   > libasm branch: $RAMO_LIBASM" >> $LOG
+echo "   > HX/Scripts branch: $RAMO_HX" >> $LOG
 echo >> $LOG
 echo "Information about the current build environment:" >> $LOG
 echo -n " > Date and time of this report (build time): " >> $LOG
@@ -1909,8 +1919,42 @@ export INCLUDE="$(pwd)/lib/fasm"
 
 if [ -e $CAMINHO_IMAGEM_DISCO ] ; then
 
-# Caso uma imagem exista, vai ser utilizada para avaliar o ramo atual do sistema
+# Vamos salvar cada branch dos componentes do sistema para posterior identificação
 
+# Primeiro, Andromeda-Apps e Unix-Apps
+cd Apps/Andromeda
+export RAMO_ANDROMEDA_APPS=$(git branch --show-current)
+cd ../Unix
+export RAMO_UNIX_APPS=$(git branch --show-current)
+cd ../..
+# Agora, HBoot e Saturno
+cd "Boot/Hexagon Boot"
+export RAMO_HBOOT=$(git branch --show-current)
+cd ../Saturno
+export RAMO_SATURNO=$(git branch --show-current)
+cd ../..
+cd Dist/etc
+export RAMO_ETC=$(git branch --show-current)
+cd ../man
+export RAMO_MAN=$(git branch --show-current)
+cd ../..
+# Agora, Fontes
+cd Fontes
+export RAMO_FONTES=$(git branch --show-current)
+cd ..
+# Agora, Hexagon
+cd Hexagon
+export RAMO_HEXAGON=$(git branch --show-current)
+cd ..
+# Agora, libasm
+cd lib
+export RAMO_LIBASM=$(git branch --show-current)
+cd ..
+# Agora, HX
+cd Scripts
+export RAMO_HX=$(git branch --show-current)
+cd ..
+# Ramo principal de tudo, para onde irão as imagens
 cd hexagonix
 export RAMO=$(git branch --show-current)
 cd ..
@@ -1919,7 +1963,7 @@ fi
 
 # Versão do hx
 
-export VERSAOHX="13.15.5.1"
+export VERSAOHX="13.15.6.0"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
