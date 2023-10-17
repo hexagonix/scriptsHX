@@ -1866,7 +1866,11 @@ export PT4=$4
 export PT5=$5
 export IDIOMA=$2
 export IDIOMANG=$3
-export ID_BUILD=$(uuid)
+export ID_BUILD=$(uuid -m -v 4)
+
+# Versão do hx
+
+export VERSAOHX="13.15.6.1"
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 
@@ -1960,10 +1964,6 @@ export RAMO=$(git branch --show-current)
 cd ..
 
 fi
-
-# Versão do hx
-
-export VERSAOHX="13.15.6.0"
 
 # Realizar a ação determinada pelo parâmetro fornecido
 
