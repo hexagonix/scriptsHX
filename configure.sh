@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Versão 4.2.2
+# Versão 4.3.0
 
 # $PORTUGUÊS$
 #
@@ -567,7 +567,7 @@ export CONFIGURE1=$2
 export CONFIGURE2=$3
 export CONFIGURE3=$4
 export CONFIGURE4=$5
-export BUILD=$(uuid)
+export BUILD=$(uuid -m -v 4)
 export LANCAMENTO=$(cat Dist/etc/release.def)
 export CODENOME=$(cat Dist/etc/codenome.def)
 export VERSAO=$(cat Dist/etc/versao.def)
