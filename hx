@@ -127,7 +127,7 @@ export MSG="Copyright"
 
 banner
 
-echo -e "\e[1;94mHX: Hexagonix build and test tool version $VERSAOHX\e[0m"
+echo -e "\e[1;94mhx: Hexagonix build and test tool version $VERSAOHX\e[0m"
 echo
 echo -e "Developed by \e[1;32mFelipe Miguel Nery Lunkes\e[0m"
 echo
@@ -1028,7 +1028,7 @@ if [ -e $CAMINHO_IMAGEM_DISCO ] ; then
 
 clear
 
-export MSG="HX: start virtual machine"
+export MSG="hx: start virtual machine"
 
 banner
 
@@ -1057,7 +1057,7 @@ erroMV()
 
 clear
 
-export MSG="HX: start virtual machine"
+export MSG="hx: start virtual machine"
 
 banner
 
@@ -1079,7 +1079,7 @@ limpar()
 
 clear
 
-export MSG="HX: clear system tree"
+export MSG="hx: clear system tree"
 
 banner
 
@@ -1278,7 +1278,7 @@ else
 
 echo
 echo -e "[\e[1;31mCloc utility not found.\e[0m]"
-echo -e "\e[1;94mHX cannot report statistics without this dependency.\e[0m"
+echo -e "\e[1;94mhx cannot report statistics without this dependency.\e[0m"
 
 fi
 
@@ -1352,15 +1352,15 @@ echo "   > man branch: $RAMO_MAN" >> $LOG
 echo "   > Fonts branch: $RAMO_FONTES" >> $LOG
 echo "   > Hexagon branch: $RAMO_HEXAGON" >> $LOG
 echo "   > libasm branch: $RAMO_LIBASM" >> $LOG
-echo "   > HX/Scripts branch: $RAMO_HX" >> $LOG
+echo "   > hx/Scripts branch: $RAMO_HX" >> $LOG
 echo " > Server: $SERVIDOR" >> $LOG
 echo >> $LOG
 echo "Information about the current build environment:" >> $LOG
 echo -n " > Date and time of this report (build time): " >> $LOG
 date >> $LOG
-echo -n " > User currently logged in: " >> $LOG
+echo -n " > User logged in: " >> $LOG
 whoami >> $LOG
-echo -n " > Operating system details: " >> $LOG
+echo -n " > Operating system version: " >> $LOG
 uname -srmpi >> $LOG
 echo -n " > fasm version: " >> $LOG
 fasm | grep "flat" >> $LOG
@@ -1444,7 +1444,7 @@ export MSG="Install dependencies"
 banner
 
 echo
-echo -e "HX will now install the necessary dependencies to run it:"
+echo -e "hx will now install the necessary dependencies to run it:"
 echo
 
 apt install fasm nasm cloc qemu qemu-system-i386 uuid
@@ -1541,7 +1541,7 @@ echo -e "   > man branch: \e[1;32m$RAMO_MAN\e[0m"
 echo -e "   > Fonts branch: \e[1;32m$RAMO_FONTES\e[0m"
 echo -e "   > Hexagon branch: \e[1;32m$RAMO_HEXAGON\e[0m"
 echo -e "   > libasm branch: \e[1;32m$RAMO_LIBASM\e[0m"
-echo -e "   > HX/Scripts branch: \e[1;32m$RAMO_HX\e[0m"
+echo -e "   > hx/Scripts branch: \e[1;32m$RAMO_HX\e[0m"
 echo -e " > Server: \e[1;94m$SERVIDOR\e[0m"
 echo
 
@@ -1843,13 +1843,13 @@ sureq()
 
 clear
 
-export MSG="HX: you need to be root"
+export MSG="hx: you need to be root"
 
 banner
 
 echo -e "\e[1;94mYou must be a root user to perform the requested action ;D\e[0m"
 echo
-echo -e "\e[1;32mEnter your password below to change to the root user (root) an run HX again with\e[0m"
+echo -e "\e[1;32mEnter your password below to change to the root user (root) an run hx again with\e[0m"
 echo -e "\e[1;32mgiven parameters.\e[0m"
 echo
 
@@ -1882,7 +1882,7 @@ export ID_BUILD=$(uuid -m -v 4)
 
 # Versão do hx
 
-export VERSAOHX="13.15.7.3"
+export VERSAOHX="13.15.7.4"
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 
@@ -1967,7 +1967,7 @@ cd ..
 cd lib
 export RAMO_LIBASM=$(git branch --show-current)
 cd ..
-# Agora, HX
+# Agora, hx e módulos do hx
 cd Scripts
 export RAMO_HX=$(git branch --show-current)
 cd ..
