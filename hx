@@ -1530,18 +1530,18 @@ export MSG="Repos information"
 echo
 echo "hx version $VERSAOHX"
 echo
-echo " > Currently, you are using this configuration for the repositories:"
-echo "   > Main system branch (git): $RAMO"
-echo "   > Andromeda-Apps branch: $RAMO_ANDROMEDA_APPS"
-echo "   > Unix-Apps branch: $RAMO_UNIX_APPS"
-echo "   > HBoot branch: $RAMO_HBOOT"
-echo "   > Saturno branch: $RAMO_SATURNO"
-echo "   > etc branch: $RAMO_ETC"
-echo "   > man branch: $RAMO_MAN"
-echo "   > Fonts branch: $RAMO_FONTES"
-echo "   > Hexagon branch: $RAMO_HEXAGON"
-echo "   > libasm branch: $RAMO_LIBASM"
-echo "   > HX/Scripts branch: $RAMO_HX"
+echo -e " > Currently, you are using this configuration for the repositories:"
+echo -e "   > Main system branch (git): \e[1;32m$RAMO\e[0m"
+echo -e "   > Andromeda-Apps branch: \e[1;32m$RAMO_ANDROMEDA_APPS\e[0m"
+echo -e "   > Unix-Apps branch: \e[1;32m$RAMO_UNIX_APPS\e[0m"
+echo -e "   > HBoot branch: \e[1;32m$RAMO_HBOOT\e[0m"
+echo -e "   > Saturno branch: \e[1;32m$RAMO_SATURNO\e[0m"
+echo -e "   > etc branch: \e[1;32m$RAMO_ETC\e[0m"
+echo -e "   > man branch: \e[1;32m$RAMO_MAN\e[0m"
+echo -e "   > Fonts branch: \e[1;32m$RAMO_FONTES\e[0m"
+echo -e "   > Hexagon branch: \e[1;32m$RAMO_HEXAGON\e[0m"
+echo -e "   > libasm branch: \e[1;32m$RAMO_LIBASM\e[0m"
+echo -e "   > HX/Scripts branch: \e[1;32m$RAMO_HX\e[0m"
 echo -e " > Server: \e[1;94mhttps://github.com/hexagonix\e[0m"
 echo
 
@@ -1882,7 +1882,7 @@ export ID_BUILD=$(uuid -m -v 4)
 
 # Versão do hx
 
-export VERSAOHX="13.15.7.1"
+export VERSAOHX="13.15.7.2"
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 
