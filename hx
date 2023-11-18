@@ -103,17 +103,16 @@ echo -e "\e[1;32m hx\e[0m        - Start Hexagonix virtual machine"
 echo -e "\e[1;32m hx.snd\e[0m    - Start Hexagonix virtual machine in sound mode"
 echo -e "\e[1;32m hx.serial\e[0m - Start Hexagonix virtual machine with no serial output"
 echo -e "\e[1;32m hx.bsd\e[0m    - Start BSD host compatible virtual machine"
-echo -e "\e[1;31m * The 'hx' option will be selected if no parameter is passed after '-v'!\e[0m"
 echo -e "\e[1;32m-i\e[0m - Build disk image. Available parameters are\e[1;31m (default hx)*\e[0m:"
 echo -e "\e[1;32m hx\e[0m      - Build disk image with Hexagonix"
 echo -e "\e[1;32m hx.test\e[0m - Build test disk image with Hexagonix"
-echo -e "\e[1;31m * The 'hx' option will be selected if no parameter is passed after '-i'!\e[0m"
 echo -e "\e[1;32m-u\e[0m  - Update all repositories with server (current branch)"
 echo -e "\e[1;32m-ui\e[0m - Sync Hexagonix images with the official repository"
 echo -e "\e[1;32m-br\e[0m - Get information about current used branch"
 echo -e "\e[1;32m-un <branch>\e[0m - Switch branch to <branch> and update all repositories"
 echo -e "\e[1;32m-m\e[0m - Clone repositories to location and configure build environment"
 echo -e "\e[1;32m-c\e[0m - Clear system tree binary and configuration files"
+echo -e "\e[1;31m* The 'hx' option will be selected if no parameter is passed after '-v' or '-i'!\e[0m"
 echo
 echo  "See the complete documentation at: https://github.com/hexagonix/Doc"
 echo
@@ -141,7 +140,9 @@ echo
 parametrosNecessarios(){
 
 echo
-echo -e "You must provide at least one \e[1;94mvalid\e[0m parameter to HX."
+echo "hx version $VERSAOHX"
+echo
+echo -e "You must provide at least one \e[1;94mvalid\e[0m parameter."
 echo
 echo -e "\e[1;94mTip: use \e[1;32m./hx -h \e[1;94mor \e[1;32m$NOMEHX -h\e[1;94m to get the available parameters.\e[0m"
 echo
@@ -1881,7 +1882,7 @@ export ID_BUILD=$(uuid -m -v 4)
 
 # Versão do hx
 
-export VERSAOHX="13.15.7.0"
+export VERSAOHX="13.15.7.1"
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 
