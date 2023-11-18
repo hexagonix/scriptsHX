@@ -1352,6 +1352,7 @@ echo "   > Fonts branch: $RAMO_FONTES" >> $LOG
 echo "   > Hexagon branch: $RAMO_HEXAGON" >> $LOG
 echo "   > libasm branch: $RAMO_LIBASM" >> $LOG
 echo "   > HX/Scripts branch: $RAMO_HX" >> $LOG
+echo " > Server: https://github.com/hexagonix" >> $LOG
 echo >> $LOG
 echo "Information about the current build environment:" >> $LOG
 echo -n " > Date and time of this report (build time): " >> $LOG
@@ -1525,11 +1526,21 @@ infoRepo()
 
 export MSG="Repos information"
 
-banner
-
 echo
-echo "Currently, you are using this configuration for the repositories:"
-echo -e " > Branch: \e[1;94m$RAMO\e[0m"
+echo "hx version $VERSAOHX"
+echo
+echo " > Currently, you are using this configuration for the repositories:"
+echo "   > Main system branch (git): $RAMO"
+echo "   > Andromeda-Apps branch: $RAMO_ANDROMEDA_APPS"
+echo "   > Unix-Apps branch: $RAMO_UNIX_APPS"
+echo "   > HBoot branch: $RAMO_HBOOT"
+echo "   > Saturno branch: $RAMO_SATURNO"
+echo "   > etc branch: $RAMO_ETC"
+echo "   > man branch: $RAMO_MAN"
+echo "   > Fonts branch: $RAMO_FONTES"
+echo "   > Hexagon branch: $RAMO_HEXAGON"
+echo "   > libasm branch: $RAMO_LIBASM"
+echo "   > HX/Scripts branch: $RAMO_HX"
 echo -e " > Server: \e[1;94mhttps://github.com/hexagonix\e[0m"
 echo
 
@@ -1870,7 +1881,7 @@ export ID_BUILD=$(uuid -m -v 4)
 
 # Versão do hx
 
-export VERSAOHX="13.15.6.1"
+export VERSAOHX="13.15.7.0"
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 
