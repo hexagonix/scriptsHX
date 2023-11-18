@@ -1353,7 +1353,7 @@ echo "   > Fonts branch: $RAMO_FONTES" >> $LOG
 echo "   > Hexagon branch: $RAMO_HEXAGON" >> $LOG
 echo "   > libasm branch: $RAMO_LIBASM" >> $LOG
 echo "   > HX/Scripts branch: $RAMO_HX" >> $LOG
-echo " > Server: https://github.com/hexagonix" >> $LOG
+echo " > Server: $SERVIDOR" >> $LOG
 echo >> $LOG
 echo "Information about the current build environment:" >> $LOG
 echo -n " > Date and time of this report (build time): " >> $LOG
@@ -1542,7 +1542,7 @@ echo -e "   > Fonts branch: \e[1;32m$RAMO_FONTES\e[0m"
 echo -e "   > Hexagon branch: \e[1;32m$RAMO_HEXAGON\e[0m"
 echo -e "   > libasm branch: \e[1;32m$RAMO_LIBASM\e[0m"
 echo -e "   > HX/Scripts branch: \e[1;32m$RAMO_HX\e[0m"
-echo -e " > Server: \e[1;94mhttps://github.com/hexagonix\e[0m"
+echo -e " > Server: \e[1;94m$SERVIDOR\e[0m"
 echo
 
 terminar
@@ -1882,7 +1882,7 @@ export ID_BUILD=$(uuid -m -v 4)
 
 # Versão do hx
 
-export VERSAOHX="13.15.7.2"
+export VERSAOHX="13.15.7.3"
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 
@@ -1897,6 +1897,7 @@ export MEMORIA=32
 # Constantes da etapa de construção
 
 export LOG="log.log"
+export SERVIDOR="https://github.com/hexagonix"
 
 # Constantes para as etapas de construção do sistema e criação de imagens. Essas são as flags
 # padrão, e o podem ser alteradas por parâmetros para alterar o comportamento da construção
