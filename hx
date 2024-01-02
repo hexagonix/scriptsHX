@@ -15,7 +15,7 @@
 #
 #                    Sistema Operacional Hexagonix - Hexagonix Operating System
 #
-#                         Copyright (c) 2015-2023 Felipe Miguel Nery Lunkes
+#                         Copyright (c) 2015-2024 Felipe Miguel Nery Lunkes
 #                        Todos os direitos reservados - All rights reserved.
 #
 #*************************************************************************************************
@@ -38,7 +38,7 @@
 #
 # BSD 3-Clause License
 #
-# Copyright (c) 2015-2023, Felipe Miguel Nery Lunkes
+# Copyright (c) 2015-2024, Felipe Miguel Nery Lunkes
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -131,7 +131,7 @@ echo -e "\e[1;94mhx: Hexagonix build and test tool version $VERSAOHX\e[0m"
 echo
 echo -e "Developed by \e[1;32mFelipe Miguel Nery Lunkes\e[0m"
 echo
-echo -e "\e[0mCopyright © 2015-2023 Felipe Miguel Nery Lunkes\e[0m"
+echo -e "\e[0mCopyright © 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
 echo -e "\e[0mAll rights reserved.\e[0m"
 echo
 
@@ -1323,7 +1323,7 @@ echo "Hexagonix Operating System build and statistics report" >> $LOG
 echo "-------------------------------------------------------" >> $LOG
 echo >> $LOG
 echo "Hexagonix Operating System" >> $LOG
-echo "Copyright (C) 2015-2023 Felipe Miguel Nery Lunkes. All rights reserved." >> $LOG
+echo "Copyright (C) 2015-2024 Felipe Miguel Nery Lunkes. All rights reserved." >> $LOG
 echo >> $LOG
 echo "Hexagonix is licenced under BSD-3-Clause and comes with no warranty." >> $LOG
 echo >> $LOG
@@ -1467,7 +1467,7 @@ echo -e ";;*********************************************************************
 echo -e ";;                                                                            "
 echo -e ";; ┌┐ ┌┐                              \e[1;94mHexagonix Operating System\e[0m"
 echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2015-2023 Felipe Miguel Nery Lunkes\e[0m"
+echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
 echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m  "
 echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
 echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
@@ -1866,7 +1866,7 @@ exit
 # Ponto de entrada do hx, definição de variáveis e processamento de parâmetros
 #
 #
-# Copyright (C) 2015-2023 Felipe Miguel Nery Lunkes
+# Copyright (C) 2015-2024 Felipe Miguel Nery Lunkes
 # Todos os direitos reservados
 # Constantes com informações de parâmetros
 
