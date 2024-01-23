@@ -983,7 +983,7 @@ esac
 mvHexagonixSnd()
 {
 
-export QEMU_ARGS="-serial file:Serial.txt -hda $CAMINHO_IMAGEM_DISCO -cpu $PROCESSADOR -m $MEMORIA -soundhw $DRV_SOM -k pt-br"
+export QEMU_ARGS="-serial file:Serial.txt -hda $CAMINHO_IMAGEM_DISCO -cpu $PROCESSADOR -m $MEMORIA -audiodev $AUDIODEV -k pt-br"
 export NOTA="Using sound device"
 
 mvExec
@@ -1004,7 +1004,7 @@ mvHexagonixKVM()
 {
 
 
-export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $CAMINHO_IMAGEM_DISCO -m $MEMORIA -k pt-br"
+export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $CAMINHO_IMAGEM_DISCO -m $MEMORIA -audiodev $AUDIODEV -k pt-br"
 export NOTA="Using KVM and serial output to file"
 
 mvExec
@@ -1882,7 +1882,7 @@ export ID_BUILD=$(uuid -m -v 4)
 
 # Versão do hx
 
-export VERSAOHX="13.15.7.4"
+export VERSAOHX="13.15.8.0"
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 
@@ -1893,6 +1893,7 @@ export ARCH_SISTEMA="i386"
 export ARCH_SISTEMA_BSD="x86_64"
 export PROCESSADOR="pentium3"
 export MEMORIA=32
+export AUDIODEV="pa,id=audio0 -machine pcspk-audiodev=audio0"
 
 # Constantes da etapa de construção
 
