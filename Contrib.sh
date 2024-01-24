@@ -78,11 +78,9 @@
 
 # Este arquivo constrói os utilitários e aplicativos de terceiros
 
-# Versão 1.3
+# Version 2.0
 
-# Primeiro, a versão mais atual do fasm
-
-gerarExternos(){
+buildContribPackages(){
 
 echo -e "\e[1;94mBuilding additional packages for Hexagonix...\e[0m {"
 echo
@@ -98,7 +96,7 @@ do
     echo -n " > Generating additional (contrib) application $(basename $i .asm)..." >> ../../../../$REG
     echo -en "Generating additional (contrib) application \e[1;94m$(basename $i .asm)\e[0m..."
 
-    fasm $i ../../../../$DIRETORIO/bin/`basename $i .asm` -d $FLAGS_COMUM >> /dev/null || echo " [Fail]"
+    fasm $i ../../../../$BUILD_DIRECTORY/bin/`basename $i .asm` -d $COMMON_FLAGS >> /dev/null || echo " [Fail]"
 
     echo -e " [\e[32mOk\e[0m]"
     echo " [Ok]" >> ../../../../$REG
@@ -114,7 +112,7 @@ echo -e "} [\e[32mSuccessfully built additional packages\e[0m]."
 
 }
 
-export DIRETORIO=$1
+export BUILD_DIRECTORY=$1
 export REG="log.log"
 
-gerarExternos
+buildContribPackages
