@@ -76,16 +76,16 @@
 #
 # This script must be in the root of the project
 
-otimizarFontesManuaisDefinicoes()
+optimizeFontsManualsAndDefinitions()
 {
 
-otimizarFontes
-otimizarManuais
-otimizarDefinicoes
+optimizeFonts
+optimizeManuals
+optimizeDefinitions
 
 }
 
-otimizarFontes()
+optimizeFonts()
 {
 
 echo -e "> \e[32mSearching and fixing indentation in Hexagonix source and related files...\e[0m"
@@ -102,7 +102,7 @@ find . -name '*.cow' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$
 
 }
 
-otimizarDefinicoes()
+optimizeDefinitions()
 {
 
 echo -e "> \e[32mSearching and fixing indentation in Hexagonix definition files...\e[0m"
@@ -117,7 +117,7 @@ find . -name '*.def' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$
 
 }
 
-otimizarManuais()
+optimizeManuals()
 {
 
 echo -e "> \e[32mSearching and fixing indentation in Hexagonix manuals...\e[0m"
@@ -130,7 +130,7 @@ find . -name '*.man' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$
 
 }
 
-otimizarScripts()
+optimizeScripts()
 {
 
 echo -e "> \e[32mSearching and fixing indentation in Hexagonix scripts and tools...\e[0m"
@@ -150,7 +150,7 @@ find . -name 'hx' ! -type d -exec bash -c 'chmod +x hx' {} \;
 
 }
 
-ajuda()
+indentHelp()
 {
 
 echo
@@ -166,10 +166,10 @@ echo
 
 }
 
-export VERSAO_INDENT="2.3"
+export INDENT_VERSION="3.0"
 
 echo
-echo "hx indentation helper version $VERSAO_INDENT"
+echo "hx indentation helper version $INDENT_VERSION"
 echo
 echo "This tool looks for and fixes indentation and formatting problems in the files"
 echo "that make up the Hexagonix project."
@@ -177,14 +177,14 @@ echo
 
 case $1 in
 
-# Gerenciar os parâmetros iniciados com '-'
+# Manage parameters starting with '-'
 
--a) otimizarFontesManuaisDefinicoes; exit;;
--f) otimizarFontes; exit;;
--m) otimizarManuais; exit;;
--d) otimizarDefinicoes; exit;;
--s) otimizarScripts; exit;;
--h) ajuda; exit;;
-*) ajuda; exit;;
+-a) optimizeFontsManualsAndDefinitions; exit;;
+-f) optimizeFonts; exit;;
+-m) optimizeManuals; exit;;
+-d) optimizeDefinitions; exit;;
+-s) optimizeScripts; exit;;
+-h) indentHelp; exit;;
+*) indentHelp; exit;;
 
 esac
