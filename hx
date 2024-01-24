@@ -93,29 +93,58 @@
 
 exibirAjuda() {
 
+case $PT2 in
+
+-v) exibirAjudaMV; exit;;
+-i) exibirAjudaBuild; exit;;
+
+esac 
+
 echo
 echo -e "hx $VERSAOHX help:"
 echo
 echo -e "\e[1;94mMain\e[0m available parameters:"
 echo
-echo -e "\e[1;32m-v\e[0m - Start a virtual machine. The available parameters are\e[1;31m (default hx)*\e[0m:"
-echo -e "\e[1;32m hx\e[0m        - Start Hexagonix virtual machine"
-echo -e "\e[1;32m hx.snd\e[0m    - Start Hexagonix virtual machine in sound mode"
-echo -e "\e[1;32m hx.serial\e[0m - Start Hexagonix virtual machine with no serial output"
-echo -e "\e[1;32m hx.bsd\e[0m    - Start BSD host compatible virtual machine"
-echo -e "\e[1;32m-i\e[0m - Build disk image. Available parameters are\e[1;31m (default hx)*\e[0m:"
-echo -e "\e[1;32m hx\e[0m      - Build disk image with Hexagonix"
-echo -e "\e[1;32m hx.test\e[0m - Build test disk image with Hexagonix"
+echo -e "\e[1;32m-v\e[0m  - Start a virtual machine. \e[1;32mUse 'hx -h -v' to learn more\e[0m"
+echo -e "\e[1;32m-i\e[0m  - Build disk image. \e[1;32mUse 'hx -h -v' to learn more\e[0m"
 echo -e "\e[1;32m-u\e[0m  - Update all repositories with server (current branch)"
+echo -e "\e[1;32m-un <branch>\e[0m - Switch branch to <branch> and update all repositories"
 echo -e "\e[1;32m-ui\e[0m - Sync Hexagonix images with the official repository"
 echo -e "\e[1;32m-br\e[0m - Get information about current used branch"
-echo -e "\e[1;32m-un <branch>\e[0m - Switch branch to <branch> and update all repositories"
-echo -e "\e[1;32m-m\e[0m - Clone repositories to location and configure build environment"
-echo -e "\e[1;32m-c\e[0m - Clear system tree binary and configuration files"
-echo -e "\e[1;31m* The 'hx' option will be selected if no parameter is passed after '-v' or '-i'!\e[0m"
+echo -e "\e[1;32m-m\e[0m  - Clone repositories to location and configure build environment"
+echo -e "\e[1;32m-c\e[0m  - Clear system tree binary and configuration files"
 echo
 echo  "See the complete documentation at: https://github.com/hexagonix/Doc"
 echo
+
+}
+
+exibirAjudaMV()
+{
+
+echo
+echo "hx $VERSAOHX help topics"
+echo
+echo -e "Start a Hexagonix virtual machine. The available parameters are\e[1;31m (default hx)*\e[0m:"
+echo -e "\e[1;32m hx\e[0m        - Start virtual machine"
+echo -e "\e[1;32m hx.wsnd\e[0m   - Start virtual machine without sound mode"
+echo -e "\e[1;32m hx.serial\e[0m - Start virtual machine with no serial output"
+echo -e "\e[1;32m hx.p3\e[0m     - Start virtual machine with a legacy processor (Pentium III)"
+echo -e "\e[1;32m hx.bsd\e[0m    - Start BSD host compatible virtual machine"
+echo -e "\e[1;31m* The 'hx' option will be selected if no parameter is passed after '-v'!\e[0m"
+
+}
+
+exibirAjudaBuild()
+{
+
+echo
+echo "hx $VERSAOHX help topics"
+echo
+echo -e "Build disk image. The available parameters are\e[1;31m (default hx)*\e[0m:"
+echo -e "\e[1;32m hx\e[0m      - Build disk image with Hexagonix"
+echo -e "\e[1;32m hx.test\e[0m - Build test disk image with Hexagonix"
+echo -e "\e[1;31m* The 'hx' option will be selected if no parameter is passed after '-i'!\e[0m"
 
 }
 
@@ -140,12 +169,9 @@ echo
 parametrosNecessarios(){
 
 echo
-echo "hx version $VERSAOHX"
-echo
 echo -e "You must provide at least one \e[1;94mvalid\e[0m parameter."
-echo
-echo -e "\e[1;94mTip: use \e[1;32m./hx -h \e[1;94mor \e[1;32m$NOMEHX -h\e[1;94m to get the available parameters.\e[0m"
-echo
+
+exibirAjuda
 
 }
 
@@ -972,19 +998,30 @@ case $PT2 in
 
 hx) mvHexagonixKVM; exit;;
 hx.bsd) mvHexagonixSobreBSD; exit;;
-hx.snd) mvHexagonixSnd; exit;;
+hx.wsnd) mvHexagonixWSnd; exit;;
 hx.serial) mvHexagonixSerial; exit;;
+hx.p3) mvHexagonixPentium3; exit;;
 *) mvHexagonixKVM; exit;; # Assumir hx -v hx
 
 esac
 
 }
 
-mvHexagonixSnd()
+mvHexagonixPentium3()
 {
 
-export QEMU_ARGS="-serial file:Serial.txt -hda $CAMINHO_IMAGEM_DISCO -cpu $PROCESSADOR -m $MEMORIA -audiodev $AUDIODEV -k pt-br"
-export NOTA="Using sound device"
+export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu $PROCESSADOR -hda $CAMINHO_IMAGEM_DISCO -m $MEMORIA -audiodev $AUDIODEV -k pt-br"
+export NOTA="Using KVM and legacy processor (Pentium III)"
+
+mvExec
+
+}
+
+mvHexagonixWSnd()
+{
+
+export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $CAMINHO_IMAGEM_DISCO -m $MEMORIA -k pt-br"
+export NOTA="Using without sound device"
 
 mvExec
 
@@ -1882,7 +1919,7 @@ export ID_BUILD=$(uuid -m -v 4)
 
 # Versão do hx
 
-export VERSAOHX="13.15.8.0"
+export VERSAOHX="13.15.9.0"
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 
