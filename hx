@@ -390,7 +390,7 @@ echo
 echo " > Building Hexagon Boot - HBoot (2nd stage)..." >> ../log.log
 echo >> ../log.log
 
-cd "Hexagon Boot"
+cd "HBoot"
 
 fasm hboot.asm ../hboot -d $FLAGS_HBOOT >> ../../log.log || erroConstrucao
 
@@ -1611,7 +1611,7 @@ cd ..
 cd ..
 cd Boot/Saturno && git pull
 cd ..
-cd "Hexagon Boot" && git pull
+cd "HBoot" && git pull
 cd ..
 cd ..
 cd Dist/etc && git pull
@@ -1688,7 +1688,7 @@ cd ..
 cd ..
 cd Boot/Saturno && git switch $PT2 && git pull
 cd ..
-cd "Hexagon Boot" && git switch $PT2 && git pull
+cd "HBoot" && git switch $PT2 && git pull
 cd ..
 cd ..
 cd Dist/etc && git switch $PT2 && git pull
@@ -1768,7 +1768,7 @@ git clone https://github.com/hexagonix/Hexagon Hexagon
 # Vamos clonar o Saturno e o HBoot
 
 git clone https://github.com/hexagonix/Saturno Boot/Saturno
-git clone https://github.com/hexagonix/HBoot "Boot/Hexagon Boot"
+git clone https://github.com/hexagonix/HBoot "Boot/HBoot"
 
 # Vamos agora clonar os respositórios de utilitários
 
@@ -1919,7 +1919,7 @@ export ID_BUILD=$(uuid -m -v 4)
 
 # Versão do hx
 
-export VERSAOHX="13.15.9.0"
+export VERSAOHX="13.15.10.0"
 
 # Variáveis e constantes utilizados na montagem e no QEMU
 
@@ -1983,7 +1983,7 @@ cd ../Unix
 export RAMO_UNIX_APPS=$(git branch --show-current)
 cd ../..
 # Agora, HBoot e Saturno
-cd "Boot/Hexagon Boot"
+cd "Boot/HBoot"
 export RAMO_HBOOT=$(git branch --show-current)
 cd ../Saturno
 export RAMO_SATURNO=$(git branch --show-current)
