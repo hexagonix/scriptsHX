@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Versão 4.3.0
+# Version 5.0.0
 
 # $PORTUGUÊS$
 #
@@ -78,14 +78,14 @@
 #
 # This script must be in the root of the project
 
-checarDependencias()
+verifyDependencies()
 {
 
 echo -e "Checking dependencies needed to build the system..."
 
-# Agora vamos verificar cada dependência do mecanismo de construção
+# Now let's check each build engine dependency
 
-# Dependência 1
+# Dependency 1
 
 echo -n " > flat assembler "
 
@@ -100,7 +100,7 @@ echo -e "   > \e[1;31mYou CANNOT start building the system without this dependen
 
 fi
 
-# Dependência 2
+# Dependency 2
 
 echo -n " > qemu "
 
@@ -115,7 +115,7 @@ echo -e "   > \e[1;94mYou can start building the system without this dependency\
 
 fi
 
-# Dependência 3
+# Dependency 3
 
 echo -n " > nasm "
 
@@ -130,7 +130,7 @@ echo -e "   > \e[1;94mYou can start building the system without this dependency\
 
 fi
 
-# Dependência 4
+# Dependency 4
 
 echo -n " > dd "
 
@@ -145,7 +145,7 @@ echo -e "   > \e[1;31mYou CANNOT start building the system without this dependen
 
 fi
 
-# Dependência 5
+# Dependency 5
 
 echo -n " > chown "
 
@@ -160,7 +160,7 @@ echo -e "   > \e[1;94mYou can start building the system without this dependency\
 
 fi
 
-# Dependência 6
+# Dependency 6
 
 echo -n " > cloc "
 
@@ -175,9 +175,9 @@ echo -e "   > \e[1;94mYou can start building the system without this dependency\
 
 fi
 
-terminar
+finish
 
-# Agora vamos checar se os scripts estão disponíveis e torná-los executáveis
+# Now let's check if the scripts are available and make them executable
 
 echo -e "Checking scripts and utilities needed to build the system..."
 
@@ -276,9 +276,9 @@ echo -e "   > \e[1;31mYou CANNOT start building the system without this dependen
 
 fi
 
-# Agora vamos instalar as dependências já presentes (sem necessidade de obtenção)
+# Now let's install the dependencies already present (no need to obtain)
 
-# Vamos testar se podemos ou não instalar o hx em /usr/bin...
+# Let's test whether or not we can install hx in /usr/bin...
 
 if test "`whoami`" != "root" ; then
 
@@ -289,9 +289,9 @@ fi
 
 if test "`whoami`" == "root" ; then
 
-# Copiar hx
+# Install hx
 
-echo -n " > Copying/updating hx (destination: /usr/bin)... "
+echo -n " > Installing/updating hx (destination: /usr/bin)... "
 
 cp hx /usr/bin
 
@@ -316,7 +316,7 @@ echo -e "   > \e[1;31mVocê deve usar a cópia local de hx para executar as oper
 
 fi
 
-terminar
+finish
 
 }
 
@@ -325,7 +325,7 @@ build()
 
 echo -e "Configuring system build data..."
 
-# Primeiro, vamos montar a base
+# First, let's build the base
 
 cd Dist/etc
 
@@ -338,7 +338,7 @@ rm base.ocl
 fi
 
 echo -n " > Processing .conf file and setting configuration file... "
-echo -e $(cat base.conf)$VERSAO"]"$CODENOME'"'$VERSAO"#"$LANCAMENTO"!"$BUILD">" >> base.ocl
+echo -e $(cat base.conf)$VERSION"]"$CODENOME'"'$VERSION"#"$RELEASE"!"$BUILD">" >> base.ocl
 echo -e "[\e[32mOk\e[0m]"
 
 if [ -e hexgnix.unx ] ; then
@@ -350,10 +350,10 @@ rm hexgnix.unx
 fi
 
 echo -n " > Processing .conf file and creating UNX-XML... "
-echo -e $(cat hexgnix.conf)"<VERSION> "$VERSAO" </VERSION>" >> hexgnix.unx
+echo -e $(cat hexgnix.conf)"<VERSION> "$VERSION" </VERSION>" >> hexgnix.unx
 echo "<CODENAME> $CODENOME </CODENAME>" >> hexgnix.unx
-echo "<UPDATEPACK> $VERSAO </UPDATEPACK>" >> hexgnix.unx
-echo "<BRANCH> $LANCAMENTO </BRANCH>" >> hexgnix.unx
+echo "<UPDATEPACK> $VERSION </UPDATEPACK>" >> hexgnix.unx
+echo "<BRANCH> $RELEASE </BRANCH>" >> hexgnix.unx
 echo "<BUILD> $BUILD </BUILD>" >> hexgnix.unx
 echo "<BUILDDATE> "$(date)" </BUILDDATE>" >> hexgnix.unx
 echo "</Hexagonix>" >> hexgnix.unx
@@ -361,7 +361,7 @@ echo -e "[\e[32mOk\e[0m]"
 cd ..
 cd ..
 
-terminar
+finish
 
 }
 
@@ -387,7 +387,7 @@ echo -e "[\e[32mOk\e[0m]"
 cd ..
 cd ..
 
-terminar
+finish
 
 }
 
@@ -407,18 +407,18 @@ rm shrc
 fi
 
 echo -n " > Creating shrc configuration... "
-echo "Welcome to Hexagonix $VERSAO ($LANCAMENTO)"  >> shrc
+echo "Welcome to Hexagonix $VERSION ($RELEASE)"  >> shrc
 echo "Hexagonix is licenced under BSD-3-Clause and comes with no warranty." >> shrc
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
 cd ..
 
-terminar
+finish
 
 }
 
-usuarios()
+users()
 {
 
 echo -e "Configuring users..."
@@ -440,7 +440,7 @@ echo -e "[\e[32mOk\e[0m]"
 cd ..
 cd ..
 
-terminar
+finish
 
 }
 
@@ -466,18 +466,18 @@ echo -e "[\e[32mOk\e[0m]"
 cd ..
 cd ..
 
-terminar
+finish
 
 }
 
-terminar()
+finish()
 {
 
 echo -e "[\e[32mStep completed successfully\e[0m]"
 
 }
 
-limpar()
+clean()
 {
 
 clear
@@ -508,7 +508,7 @@ else
 
 echo -e "[\e[94mPreviously removed\e[0m] "
 
-terminar
+finish
 
 exit
 
@@ -526,11 +526,11 @@ echo -e " [\e[94mRemoved\e[0m]"
 
 fi
 
-terminar
+finish
 
 }
 
-configurar()
+configureBuild()
 {
 
 clear
@@ -552,9 +552,9 @@ echo
 echo -e "Checking dependencies and configuring system build settings..."
 echo
 
-checarDependencias
+verifyDependencies
 build
-usuarios
+users
 init
 host
 shrc
@@ -568,15 +568,15 @@ export CONFIGURE2=$3
 export CONFIGURE3=$4
 export CONFIGURE4=$5
 export BUILD=$(uuid -m -v 4)
-export LANCAMENTO=$(cat Dist/etc/release.def)
+export RELEASE=$(cat Dist/etc/release.def)
 export CODENOME=$(cat Dist/etc/codenome.def)
-export VERSAO=$(cat Dist/etc/versao.def)
+export VERSION=$(cat Dist/etc/versao.def)
 
 case $1 in
 
 build) build; exit;;
-usuario) usuarios; exit;;
-limpar) limpar; exit;;
-*) configurar; exit;;
+user) users; exit;;
+clean) clean; exit;;
+*) configureBuild; exit;;
 
 esac
