@@ -91,17 +91,17 @@
 
 # Sessão de ajuda e informações sobre o hx
 
-exibirAjuda() {
+showMainHelp() {
 
 case $PT2 in
 
--v) exibirAjudaMV; exit;;
--i) exibirAjudaBuild; exit;;
+-v) showVirtualMachineHelp; exit;;
+-i) showBuildHelp; exit;;
 
 esac 
 
 echo
-echo -e "hx $VERSAOHX help:"
+echo -e "hx $HX_VERSION help:"
 echo
 echo -e "\e[1;94mMain\e[0m available parameters:"
 echo
@@ -119,11 +119,11 @@ echo
 
 }
 
-exibirAjudaMV()
+showVirtualMachineHelp()
 {
 
 echo
-echo "hx $VERSAOHX help topics"
+echo "hx $HX_VERSION help topics"
 echo
 echo -e "Start a Hexagonix virtual machine. The available parameters are\e[1;31m (default hx)*\e[0m:"
 echo -e "\e[1;32m hx\e[0m        - Start virtual machine"
@@ -135,11 +135,11 @@ echo -e "\e[1;31m* The 'hx' option will be selected if no parameter is passed af
 
 }
 
-exibirAjudaBuild()
+showBuildHelp()
 {
 
 echo
-echo "hx $VERSAOHX help topics"
+echo "hx $HX_VERSION help topics"
 echo
 echo -e "Build disk image. The available parameters are\e[1;31m (default hx)*\e[0m:"
 echo -e "\e[1;32m hx\e[0m      - Build disk image with Hexagonix"
@@ -148,7 +148,7 @@ echo -e "\e[1;31m* The 'hx' option will be selected if no parameter is passed af
 
 }
 
-exibirCopyright() {
+showCopyright() {
 
 clear
 
@@ -156,7 +156,7 @@ export MSG="Copyright"
 
 banner
 
-echo -e "\e[1;94mhx: Hexagonix build and test tool version $VERSAOHX\e[0m"
+echo -e "\e[1;94mhx: Hexagonix build and test tool version $HX_VERSION\e[0m"
 echo
 echo -e "Developed by \e[1;32mFelipe Miguel Nery Lunkes\e[0m"
 echo
@@ -166,102 +166,102 @@ echo
 
 }
 
-parametrosNecessarios(){
+parametersRequired(){
 
 echo
 echo -e "You must provide at least one \e[1;94mvalid\e[0m parameter."
 
-exibirAjuda
+showMainHelp
 
 }
 
-#-------------------------------- Divisão --------------------------------#
+#-------------------------------- Division --------------------------------#
 
 # Sessão de construção coletiva dos componentes do sistema
 
-gerenciarConstrucao()
+manageBuild()
 {
 
-obterInfoBuild
+getBuildInformation
 
 case $PT2 in
 
-hx) prepImagemHexagonix; exit;;
+hx) setImageBuildOnLinux; exit;;
 hx.teste) prepImagemHexagonixTeste; exit;;
-bsd) prepImagemHexagonixBSD; exit;;
-UNIX) prepImagemHexagonixUNIXSolaris; exit;;
-*) prepImagemHexagonix; exit;; # Assumir hx -i hx
+bsd) setImageBuildOnBSD; exit;;
+UNIX) setImageBuildOnUNIXSolaris; exit;;
+*) setImageBuildOnLinux; exit;; # Assumir hx -i hx
 
 esac
 
 }
 
-gerenciarConstrucaoComponentes()
+manageComponentConstruction()
 {
 
-mkdir -p $DESTINODISTRO
-mkdir -p $DESTINODISTRO/bin
-mkdir -p $DESTINODISTRO/etc
+mkdir -p $DISTRO_DIRECTORY
+mkdir -p $DISTRO_DIRECTORY/bin
+mkdir -p $DISTRO_DIRECTORY/etc
 
 case $PT2 in
 
-hexagon) construirHexagon; exit;;
-HBoot) construirHBoot; exit;;
-saturno) construirSaturno; exit;;
-unixland) construirUtilUnix; exit;;
-andromedaland) construirBaseAndromeda; exit;;
+hexagon) buildHexagonKernel; exit;;
+HBoot) buildHBoot; exit;;
+saturno) buildSaturnoBootLoader; exit;;
+unixland) buildUnixUtil; exit;;
+andromedaland) buildAndromedaApplications; exit;;
 hexagonix) hexagonix; exit;;
-hx) construirTudo; exit;;
-*) construirTudo; exit;;
+hx) buildAllComponents; exit;;
+*) buildAllComponents; exit;;
 
 esac
 
 }
 
-#-------------------------------- Divisão --------------------------------#
+#-------------------------------- Division --------------------------------#
 
 # Sessão de configuração para montagem do sistema
 
-prepImagemHexagonix(){
+setImageBuildOnLinux(){
 
 export HOST="LINUX"
 
-verificarEstaticos
+verifyStaticFiles
 
-iniciarLog
+startBuildLog
 
-definirHexagonixOficial
+setReleaseBuild
 
-imagemHexagonix
+buildHexagonix
 
 }
 
-prepImagemHexagonixBSD(){
+setImageBuildOnBSD(){
 
 export HOST="BSD"
 
-verificarEstaticos
+verifyStaticFiles
 
-iniciarLog
+startBuildLog
 
-definirHexagonixOficial
+setReleaseBuild
 
-imagemHexagonix
+buildHexagonix
 
 }
 
-prepImagemHexagonixUNIXSolaris()
+setImageBuildOnUNIXSolaris()
 {
 
 export HOST="UNIX"
 
-verificarEstaticos
+verifyStaticFiles
 
-iniciarLog
+startBuildLog
 
-definirHexagonixOficial
+setReleaseBuild
 
-imagemHexagonix
+buildHexagonix
 
 }
 
@@ -269,19 +269,19 @@ prepImagemHexagonixTeste(){
 
 export HOST="LINUX"
 
-verificarEstaticos
+verifyStaticFiles
 
-iniciarLog
+startBuildLog
 
-definirHexagonixTeste
+setTestBuild
 
-imagemHexagonix
+buildHexagonix
 
 }
 
-#-------------------------------- Divisão --------------------------------#
+#-------------------------------- Division --------------------------------#
 
-definirHexagonixTeste()
+setTestBuild()
 {
 
 # Aqui vamos gerar uma imagem pequena, de 2 Mb, menor e apenas para testes. Essa imagem
@@ -292,7 +292,7 @@ export TAMANHOTEMP=2048
 
 }
 
-definirHexagonixOficial()
+setReleaseBuild()
 {
 
 # Aqui vamos definir uma imagem de tamanho oficial, que demora mais a ser gerada. Essa imagem é
@@ -317,14 +317,14 @@ esac
 
 }
 
-#-------------------------------- Divisão --------------------------------#
+#-------------------------------- Division --------------------------------#
 
-# Sessão de construtores individuais dos componentes do sistema
+# Section of individual builders of system components
 
-# Vamos separar aqui as etapas comuns de construção do sistema para reutilizar
-# código e facilitar a busca de erros
+# Here we will separate the common steps for building the system to reuse code
+# and make it easier to find errors
 
-construirHexagon(){
+buildHexagonKernel(){
 
 cd Hexagon
 
@@ -334,9 +334,9 @@ echo -en "\e[1;94mBuilding the Hexagon kernel...\e[0m"
 echo "Building the Hexagon kernel... {" >> ../log.log
 echo >> ../log.log
 
-fasm kern/Hexagon.asm Hexagon -d $FLAGS_HEXAGON >> ../log.log || erroConstrucao
+fasm kern/Hexagon.asm Hexagon -d $FLAGS_HEXAGON >> ../log.log || generalBuildError
 
-cp Hexagon ../$DESTINODISTRO/bin
+cp Hexagon ../$DISTRO_DIRECTORY/bin
 
 rm -r Hexagon
 
@@ -352,7 +352,7 @@ cd ..
 
 }
 
-construirSaturno(){
+buildSaturnoBootLoader(){
 
 echo -e "\e[1;94mBuilding Hexagon startup components...\e[0m {"
 echo
@@ -370,11 +370,11 @@ cd Boot
 
 cd Saturno
 
-fasm saturno.asm ../saturno.img >> ../../log.log || erroConstrucao
+fasm saturno.asm ../saturno.img >> ../../log.log || generalBuildError
 
 echo >> ../../log.log
 
-fasm mbr.asm ../mbr.img >> ../../log.log || erroConstrucao
+fasm mbr.asm ../mbr.img >> ../../log.log || generalBuildError
 
 echo >> ../../log.log
 
@@ -382,7 +382,7 @@ cd ..
 
 }
 
-construirHBoot(){
+buildHBoot(){
 
 echo -e "\e[1;94mBuilding Hexagon Boot - HBoot (2nd stage)...\e[0m"
 echo
@@ -392,7 +392,7 @@ echo >> ../log.log
 
 cd "HBoot"
 
-fasm hboot.asm ../hboot -d $FLAGS_HBOOT >> ../../log.log || erroConstrucao
+fasm hboot.asm ../hboot -d $FLAGS_HBOOT >> ../../log.log || generalBuildError
 
 cd Mods
 
@@ -406,7 +406,7 @@ do
     echo >> ../../../log.log
     echo " > Building HBoot compatible module $(basename $i .asm).mod..." >> ../../../log.log
 
-    fasm $i ../../`basename $i .asm`.mod -d $FLAGS_COMUM >> ../../../log.log
+    fasm $i ../../`basename $i .asm`.mod -d $COMMON_FLAGS >> ../../../log.log
 
     echo -e " [\e[32mOk\e[0m]"
 
@@ -418,12 +418,12 @@ cd ..
 
 cd ..
 
-cp *.img ../$DESTINODISTRO
-cp hboot ../$DESTINODISTRO
+cp *.img ../$DISTRO_DIRECTORY
+cp hboot ../$DISTRO_DIRECTORY
 
 if [ -e Spartan.mod ] ; then
 
-cp *.mod ../$DESTINODISTRO/
+cp *.mod ../$DISTRO_DIRECTORY/
 rm -r *.mod
 
 fi
@@ -444,25 +444,25 @@ cd ..
 
 }
 
-construirUtilUnix(){
+buildUnixUtil(){
 
-# Gerar os aplicativos base Unix
+# Build Unix base applications
 
 cd Apps/Unix
 
-./Unix.sh $DESTINODISTRO
+./Unix.sh $DISTRO_DIRECTORY
 
 cd ..
 
 }
 
-construirBaseAndromeda(){
+buildAndromedaApplications(){
 
-# Gerar os aplicativos Hexagonix-Andromeda
+# Build the Hexagonix-Andromeda applications
 
 cd Andromeda
 
-./Apps.sh $DESTINODISTRO
+./Apps.sh $DISTRO_DIRECTORY
 
 cd ..
 
@@ -470,7 +470,7 @@ cd ..
 
 }
 
-erroMontagem()
+buildError()
 {
 
 if test $VERBOSE -e 0; then
@@ -492,16 +492,16 @@ echo
 echo "Use the system generation script to verify the source of the problem."
 echo
 
-umount $PWD/Sistema >> /dev/null
-umount $DESTINODISTRO/ >> /dev/null
+umount $PWD/SystemBuild >> /dev/null
+umount $DISTRO_DIRECTORY/ >> /dev/null
 
 exit
 
 }
 
-#-------------------------------- Divisão --------------------------------#
+#-------------------------------- Division --------------------------------#
 
-construirTudo()
+buildAllComponents()
 {
 
 export MSG="Building the Hexagonix"
@@ -510,18 +510,18 @@ clear
 
 banner
 
-construirSaturno
-construirHBoot
-construirHexagon
-construirUtilUnix
-construirBaseAndromeda
+buildSaturnoBootLoader
+buildHBoot
+buildHexagonKernel
+buildUnixUtil
+buildAndromedaApplications
 
-terminar
-tudopronto
+finishStep
+allDone
 
 }
 
-construtorHexagonix()
+hexagonixConstructor()
 {
 
 export MSG="Building the Hexagonix"
@@ -533,15 +533,15 @@ banner
 echo "Building the Hexagonix..."
 echo
 
-mkdir -p $DESTINODISTRO
-mkdir -p $DESTINODISTRO/bin
-mkdir -p $DESTINODISTRO/etc
+mkdir -p $DISTRO_DIRECTORY
+mkdir -p $DISTRO_DIRECTORY/bin
+mkdir -p $DISTRO_DIRECTORY/etc
 
-construirSaturno
-construirHBoot
-construirHexagon
-construirUtilUnix
-construirBaseAndromeda
+buildSaturnoBootLoader
+buildHBoot
+buildHexagonKernel
+buildUnixUtil
+buildAndromedaApplications
 
 echo "Configuring and copying Hexagonix static files... {" >> $LOG
 echo >> $LOG
@@ -552,24 +552,24 @@ echo "> Copying static configuration files (generated by configure.sh)..." >> ..
 
 cd etc/
 
-cp rc ../../$DESTINODISTRO/etc
+cp rc ../../$DISTRO_DIRECTORY/etc
 
 echo " > rc successfully copied." >> ../../$LOG
 
-cp passwd ../../$DESTINODISTRO/etc
+cp passwd ../../$DISTRO_DIRECTORY/etc
 
 echo " > passwd successfully copied." >> ../../$LOG
 
-cp host ../../$DESTINODISTRO/etc
+cp host ../../$DISTRO_DIRECTORY/etc
 
 echo " > host configuration file successfully copied." >> ../../$LOG
 
-cp *.unx ../../$DESTINODISTRO/etc
+cp *.unx ../../$DISTRO_DIRECTORY/etc
 
 echo " > *.unx files successfully copied." >> ../../$LOG
 
-cp base.ocl ../../$DESTINODISTRO/hexgnix.ocl
-cp shrc ../../$DESTINODISTRO/etc
+cp base.ocl ../../$DISTRO_DIRECTORY/hexgnix.ocl
+cp shrc ../../$DISTRO_DIRECTORY/etc
 
 echo " > Hexagonix version files successfully copied." >> ../../$LOG
 
@@ -579,7 +579,7 @@ echo "> Copying Hexagonix utility manuals..." >> ../$LOG
 
 cd man
 
-cp *.man ../../$DESTINODISTRO
+cp *.man ../../$DISTRO_DIRECTORY
 
 cd ..
 cd ..
@@ -595,7 +595,7 @@ echo " > There are graphic fonts to be built and copied..." >> ../$LOG
 
 ./fontes.sh
 
-cp *.fnt ../$DESTINODISTRO
+cp *.fnt ../$DISTRO_DIRECTORY
 rm *.fnt
 
 echo
@@ -612,7 +612,7 @@ echo
 
 fi
 
-# Vamos copiar também o arquivo de cabeçalho para poder desenvolver sobre o Hexagonix(R)
+# Let's also copy the header file to be able to develop on Hexagonix
 
 cd ..
 
@@ -622,20 +622,20 @@ echo
 
 cd lib/fasm
 
-cp hexagon.s ../../$DESTINODISTRO
-cp console.s ../../$DESTINODISTRO
-cp macros.s ../../$DESTINODISTRO
+cp hexagon.s ../../$DISTRO_DIRECTORY
+cp console.s ../../$DISTRO_DIRECTORY
+cp macros.s ../../$DISTRO_DIRECTORY
 
 cd Estelar
 
-cp estelar.s ../../../$DESTINODISTRO
+cp estelar.s ../../../$DISTRO_DIRECTORY
 
 cd ..
 cd ..
 
 cd exemplo
 
-cp * ../../$DESTINODISTRO/
+cp * ../../$DISTRO_DIRECTORY/
 
 cd ..
 cd ..
@@ -660,7 +660,7 @@ echo >> $LOG
 
 cd Contrib
 
-./Contrib.sh $DESTINODISTRO
+./Contrib.sh $DISTRO_DIRECTORY
 
 cd ..
 
@@ -680,7 +680,7 @@ echo
 
 }
 
-erroConstrucao(){
+generalBuildError(){
 
 echo "An error occurred while building some system component."
 echo
@@ -689,18 +689,18 @@ echo
 echo "View the log file 'log.log', for more information about the error(s)."
 echo
 
-umount Sistema/ >> /dev/null
-umount $DESTINODISTRO/ >> /dev/null
+umount SystemBuild/ >> /dev/null
+umount $DISTRO_DIRECTORY/ >> /dev/null
 
 exit
 
 }
 
-#-------------------------------- Divisão --------------------------------#
+#-------------------------------- Division --------------------------------#
 
-# Sessão de criação de imagem do sistema
+# System image build section
 
-imagemHexagonix()
+buildHexagonix()
 {
 
 if test "`whoami`" != "root" ; then
@@ -711,11 +711,11 @@ exit
 
 fi
 
-# Agora os arquivos do sistema serão gerados...
+# Now the system files will be generated...
 
-construtorHexagonix $Par
+hexagonixConstructor $LANGUAGE
 
-# Agora a imagem do sistema será preparada...
+# Now the system image will be prepared...
 
 echo -e "\e[1;94mBuilding system image...\e[0m"
 echo
@@ -727,86 +727,86 @@ echo "Build a Hexagonix disk image... {" >> $LOG
 echo >> $LOG
 echo "> Building temporary image for file manipulation..." >> $LOG
 
-# Agora vamos checar qual o sistema host, para adaptar a lógica de criação de imagem
-# de disco para cada um. Suportados até o momento: Linux e FreeBSD (FreeBSD em desenvolvimento)
+# Now let's check which system is the host, to adapt the disk image creation logic for each one.
+# Supported so far: Linux and FreeBSD (FreeBSD in development)
 
 if [ "$HOST" == "LINUX" ]; then
 
-construirImagemLinux
+buildImageOnLinux
 
 fi
 
 if [ "$HOST" == "BSD" ]; then
 
-construirImagemBSD
+buildImageOnBSD
 
 fi
 
-# Daqui em diante, a lógica é a mesma para todos os sistemas host suportados
+# From now on, the logic is the same for all supported host systems
 
 echo "> Copying system files to the image..." >> $LOG
 echo >> $LOG
 
-cp $DESTINODISTRO/*.man Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/*.asm Sistema/ >> $LOG
-cp $DESTINODISTRO/*.s Sistema/ >> $LOG
-cp $DESTINODISTRO/*.cow Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/bin/* Sistema/ >> $LOG || erroMontagem
-cp $DESTINODISTRO/hboot Sistema/ >> $LOG || erroMontagem
+cp $DISTRO_DIRECTORY/*.man SystemBuild/ >> $LOG || buildError
+cp $DISTRO_DIRECTORY/*.asm SystemBuild/ >> $LOG
+cp $DISTRO_DIRECTORY/*.s SystemBuild/ >> $LOG
+cp $DISTRO_DIRECTORY/*.cow SystemBuild/ >> $LOG || buildError
+cp $DISTRO_DIRECTORY/bin/* SystemBuild/ >> $LOG || buildError
+cp $DISTRO_DIRECTORY/hboot SystemBuild/ >> $LOG || buildError
 
-# A licença deve ser copiada
+# License must be copied
 
-cp Dist/man/LICENSE Sistema/ >> $LOG || erroMontagem
+cp Dist/man/LICENSE SystemBuild/ >> $LOG || buildError
 
-# Agora, copiar módulos do HBoot
+# Now copy HBoot modules
 
-if [ -e $DESTINODISTRO/Spartan.mod ] ; then
+if [ -e $DISTRO_DIRECTORY/Spartan.mod ] ; then
 
-cp $DESTINODISTRO/*.mod Sistema/ >> $LOG
+cp $DISTRO_DIRECTORY/*.mod SystemBuild/ >> $LOG
 
 fi
 
-cp $DESTINODISTRO/etc/* Sistema/>> $LOG || erroMontagem
-cp $DESTINODISTRO/*.ocl Sistema/ >> $LOG || erroMontagem
+cp $DISTRO_DIRECTORY/etc/* SystemBuild/>> $LOG || buildError
+cp $DISTRO_DIRECTORY/*.ocl SystemBuild/ >> $LOG || buildError
 
-# Caso a imagem deva conter uma cópia dos arquivos do FreeDOS para testes...
+# If the image should contain a copy of the FreeDOS files for testing...
 
 if [ -e DOS ] ; then
 
-cp DOS/*.* Sistema/
+cp DOS/*.* SystemBuild/
 
 fi
 
-# Agora será verificado se alguma fonte deverá ser incluída na imagem
+# Now it will be checked whether any font should be included in the image
 #
-# Se o arquivo de fonte padrão estiver disponível, usar essa informação como interruptor
-# para ligar a cópia
+# If the default font file is available, use this information as a switch to 
+# turn on the copy
 
 echo -n "> Checking if there are graphic fonts to copy..." >> $LOG
 
-if [ -e $DESTINODISTRO/aurora.fnt ] ; then
+if [ -e $DISTRO_DIRECTORY/aurora.fnt ] ; then
 
 echo " [Yes]" >> $LOG
 
-cp $DESTINODISTRO/*.fnt Sistema/ || erroMontagem
+cp $DISTRO_DIRECTORY/*.fnt SystemBuild/ || buildError
 
 fi
 
-if [ ! -e $DESTINODISTRO/aurora.fnt ] ; then
+if [ ! -e $DISTRO_DIRECTORY/aurora.fnt ] ; then
 
 echo " [No]" >> $LOG
 
 fi
 
-checarContrib
+verifyContribPackages
 
 echo >> $LOG
 
-sleep 1.0 || erroMontagem
+sleep 1.0 || buildError
 
 echo "> Unmounting the image..." >> $LOG
 
-umount Sistema >> /dev/null || erroMontagem
+umount SystemBuild >> /dev/null || buildError
 
 if [ "$HOST" == "BSD" ]; then
 
@@ -824,16 +824,16 @@ echo "> Mounting the final image..." >> $LOG
 
 echo "  * Copying temporary image to final image..." >> $LOG
 
-dd status=none conv=notrunc if=temp.img of=$IMAGEM_DISCO_FINAL seek=1 >> $LOG || erroMontagem
+dd status=none conv=notrunc if=temp.img of=$IMAGE_FILENAME seek=1 >> $LOG || buildError
 
 echo "  * Copying MBR and partition table to image..." >> $LOG
 
-dd status=none conv=notrunc if=$DESTINODISTRO/mbr.img of=$IMAGEM_DISCO_FINAL >> $LOG || erroMontagem
+dd status=none conv=notrunc if=$DISTRO_DIRECTORY/mbr.img of=$IMAGE_FILENAME >> $LOG || buildError
 
 echo "> Removing temporary files and folders, as well as binaries that are no longer needed..." >> $LOG
 echo >> $LOG
 
-rm -rf Sistema $DESTINODISTRO temp.img >> $LOG
+rm -rf SystemBuild $DISTRO_DIRECTORY temp.img >> $LOG
 
 if test $VERBOSE -e 0; then
 
@@ -847,18 +847,18 @@ fi
 
 echo "> Moving files to final location..." >> $LOG
 
-mv hexagonix.img $DIR_IMAGEM/$IMAGEM_DISCO_FINAL
+mv hexagonix.img $IMAGE_PATH/$IMAGE_FILENAME
 
 echo "> Creating .vdi image from raw image..." >> $LOG
 
-qemu-img convert -O vdi $DIR_IMAGEM/$IMAGEM_DISCO_FINAL $DIR_IMAGEM/$(basename $IMAGEM_DISCO_FINAL .img).vdi
+qemu-img convert -O vdi $IMAGE_PATH/$IMAGE_FILENAME $IMAGE_PATH/$(basename $IMAGE_FILENAME .img).vdi
 
-# Vamos agora trocar a propriedade da imagem para um usuário comum
+# Let's now change the image ownership to a regular user
 
 echo "> Adjusting file permissions (needed for git)..." >> $LOG
 
-chown $DIR_IMAGEM/$IMAGEM_DISCO_FINAL --reference=$DIR_IMAGEM/README.md
-chown $DIR_IMAGEM/$(basename $IMAGEM_DISCO_FINAL .img).vdi --reference=$DIR_IMAGEM/README.md
+chown $IMAGE_PATH/$IMAGE_FILENAME --reference=$IMAGE_PATH/README.md
+chown $IMAGE_PATH/$(basename $IMAGE_FILENAME .img).vdi --reference=$IMAGE_PATH/README.md
 
 echo >> $LOG
 echo "} Hexagonix disk images built successfully." >> $LOG
@@ -870,25 +870,25 @@ banner
 
 infoBuild
 
-avisoCriarInstalador
+showCreateInstallerInfo
 
-finalizarLog
+finishBuildLog
 
-mv log.log $DIR_IMAGEM/log.log
-chown $DIR_IMAGEM/log.log --reference=$DIR_IMAGEM/README.md
+mv log.log $IMAGE_PATH/log.log
+chown $IMAGE_PATH/log.log --reference=$IMAGE_PATH/README.md
 
 exit
 
 }
 
-#-------------------------------- Divisão --------------------------------#
+#-------------------------------- Division --------------------------------#
 
-# Código específico de geração de imagem de disco para o Linux
+# Specific disk image generation code for Linux
 
-construirImagemLinux()
+buildImageOnLinux()
 {
 
-dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
+dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || buildError
 
 if [ ! -e hexagonix.img ] ; then
 
@@ -896,26 +896,26 @@ echo >> $LOG
 echo "> Building image that will receive system files..." >> $LOG
 echo >> $LOG
 
-dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMAGEM_DISCO_FINAL >> $LOG || erroMontagem
+dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMAGE_FILENAME >> $LOG || buildError
 
 fi
 
 echo "> Copying bootloader (Saturno) to image..." >> $LOG
 
-dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
+dd status=none conv=notrunc if=$DISTRO_DIRECTORY/saturno.img of=temp.img >> $LOG || buildError
 
 echo "> Mounting the image..." >> $LOG
 
-mkdir -p Sistema && mount -o loop -t vfat temp.img Sistema/ || erroMontagem
+mkdir -p SystemBuild && mount -o loop -t vfat temp.img SystemBuild/ || buildError
 
 }
 
-# Código específico de geração de imagem de disco para o Solaris (OpenIndiana, illumos e derivados)
+# Specific disk image generation code for Solaris (OpenIndiana, illumos and derivatives)
 
-construirImagemUNIXSolaris()
+buildImageOnUNIXSolaris()
 {
 
-dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || erroMontagem
+dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || buildError
 
 if [ ! -e hexagonix.img ] ; then
 
@@ -923,37 +923,37 @@ echo >> $LOG
 echo "> Building image that will receive system files..." >> $LOG
 echo >> $LOG
 
-dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMAGEM_DISCO_FINAL >> $LOG || erroMontagem
+dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMAGE_FILENAME >> $LOG || buildError
 
 fi
 
 echo "> Copying bootloader (Saturno) to image..." >> $LOG
 
-dd status=none conv=notrunc if=$DESTINODISTRO/saturno.img of=temp.img >> $LOG || erroMontagem
+dd status=none conv=notrunc if=$DISTRO_DIRECTORY/saturno.img of=temp.img >> $LOG || buildError
 
 echo "> Mounting the image..." >> $LOG
 
 lofiadm -a temp.img
 
-mkdir -p Sistema && mount -F lofs /dev/lofi/1 Sistema/ || erroMontagem
+mkdir -p SystemBuild && mount -F lofs /dev/lofi/1 SystemBuild/ || buildError
 
 }
 
-# Código específico de geração de imagem de disco para o FreeBSD
+# Specific disk image generation code for FreeBSD
 
-construirImagemBSD()
+buildImageOnBSD()
 {
 
-# Setores reservados = 16
+# Reserved sectors = 16
 # Fats = 2
-# Entradas raiz = 512
-# Setores por fat = 16
-# Setores por trilha = 63
-# Cabeças = 255
-# Setores ocultos = 0
-# Total setores = 92160
+# Root entries = 512
+# Sectors per fat = 16
+# Sectores per track = 63
+# Heads = 255
+# Hidden sectores = 0
+# Total sectors = 92160
 
-newfs_msdos -C 45m -F 16 -B $DESTINODISTRO/saturno.img temp.img
+newfs_msdos -C 45m -F 16 -B $DISTRO_DIRECTORY/saturno.img temp.img
 
 if [ ! -e hexagonix.img ] ; then
 
@@ -967,101 +967,101 @@ mdconfig -a -t vnode -f temp.img -o force -u 4
 
 echo "> Mounting the image..." >> $LOG
 
-mkdir -p Sistema && mount_msdosfs /dev/md4 Sistema/ || erroMontagem
+mkdir -p SystemBuild && mount_msdosfs /dev/md4 SystemBuild/ || buildError
 
 }
 
-#-------------------------------- Divisão --------------------------------#
+#-------------------------------- Division --------------------------------#
 
-checarContrib()
+verifyContribPackages()
 {
 
-# Verificar se existem arquivos complementares a serem adicionados
-# na imagem. Esses arquivos devem estar no diretório contrib.
+# Check if there are additional files to be added to the image.
+# These files must be in the contrib directory.
 
 if [ -e contrib/ ] ; then
 
-cp contrib/* Sistema/
+cp contrib/* SystemBuild/
 
 fi
 
 }
 
-#-------------------------------- Divisão --------------------------------#
+#-------------------------------- Division --------------------------------#
 
-# Sessão de gerenciamento de máquinas virtuais do hx
+# hx virtual machine management section
 
-gerenciarMaquinaVirtual()
+manageVirtualMachines()
 {
 
 case $PT2 in
 
-hx) mvHexagonixKVM; exit;;
-hx.bsd) mvHexagonixSobreBSD; exit;;
-hx.wsnd) mvHexagonixWSnd; exit;;
-hx.serial) mvHexagonixSerial; exit;;
-hx.p3) mvHexagonixPentium3; exit;;
-*) mvHexagonixKVM; exit;; # Assumir hx -v hx
+hx) vmHexagonixWithKVM; exit;;
+hx.bsd) vmHexagonixOnBSDHost; exit;;
+hx.wsnd) vmHexagonixWithoutSnd; exit;;
+hx.serial) vmHexagonixWithoutSerialRedirection; exit;;
+hx.p3) vmHexagonixPentium3; exit;;
+*) vmHexagonixWithKVM; exit;; # Assume hx -v hx
 
 esac
 
 }
 
-mvHexagonixPentium3()
+vmHexagonixPentium3()
 {
 
-export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu $PROCESSADOR -hda $CAMINHO_IMAGEM_DISCO -m $MEMORIA -audiodev $AUDIODEV -k pt-br"
+export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu $PROCESSOR -hda $DISK_IMAGE_PATH -m $MEMORY -audiodev $AUDIODEV -k pt-br"
 export NOTA="Using KVM and legacy processor (Pentium III)"
 
-mvExec
+startVirtualMachine
 
 }
 
-mvHexagonixWSnd()
+vmHexagonixWithoutSnd()
 {
 
-export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $CAMINHO_IMAGEM_DISCO -m $MEMORIA -k pt-br"
+export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $DISK_IMAGE_PATH -m $MEMORY -k pt-br"
 export NOTA="Using without sound device"
 
-mvExec
+startVirtualMachine
 
 }
 
-mvHexagonixSobreBSD()
+vmHexagonixOnBSDHost()
 {
 
-export QEMU_ARGS="-cpu $PROCESSADOR -hda $CAMINHO_IMAGEM_DISCO -m $MEMORIA -k pt-br"
+export QEMU_ARGS="-cpu $PROCESSOR -hda $DISK_IMAGE_PATH -m $MEMORY -k pt-br"
 export NOTA="BSD mode"
 
-mvExec
+startVirtualMachine
 
 }
 
-mvHexagonixKVM()
+vmHexagonixWithKVM()
 {
 
 
-export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $CAMINHO_IMAGEM_DISCO -m $MEMORIA -audiodev $AUDIODEV -k pt-br"
+export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $DISK_IMAGE_PATH -m $MEMORY -audiodev $AUDIODEV -k pt-br"
 export NOTA="Using KVM and serial output to file"
 
-mvExec
+startVirtualMachine
 
 }
 
-mvHexagonixSerial()
+vmHexagonixWithoutSerialRedirection()
 {
 
-export QEMU_ARGS="-serial stdio -hda $CAMINHO_IMAGEM_DISCO -cpu $PROCESSADOR -m $MEMORIA -k pt-br"
+export QEMU_ARGS="-serial stdio -hda $DISK_IMAGE_PATH -cpu $PROCESSOR -m $MEMORY -k pt-br"
 export NOTA="Using serial output to console"
 
-mvExec
+startVirtualMachine
 
 }
 
-mvExec()
+startVirtualMachine()
 {
 
-if [ -e $CAMINHO_IMAGEM_DISCO ] ; then
+if [ -e $DISK_IMAGE_PATH ] ; then
 
 clear
 
@@ -1072,24 +1072,24 @@ banner
 echo
 echo -e "\e[1mStarting virtual machine with the following specifications:\e[0m"
 echo
-echo -e "> Image target architecture: \e[1;32m$ARCH_SISTEMA\e[0m"
+echo -e "> Image target architecture: \e[1;32m$SYSTEM_ARCH\e[0m"
 echo -e "> Note: \e[1;32m$NOTA\e[0m"
-echo -e "> Disk image: \e[1;32m$CAMINHO_IMAGEM_DISCO\e[0m"
-echo -e "> Output sound: \e[1;32m$DRV_SOM\e[0m"
-echo -e "> Memory: \e[1;32m$MEMORIA megabytes\e[0m; processor: \e[1;32m$PROCESSADOR\e[0m"
+echo -e "> Disk image: \e[1;32m$DISK_IMAGE_PATH\e[0m"
+echo -e "> Output sound: \e[1;32m$DRV_SOUND\e[0m"
+echo -e "> Memory: \e[1;32m$MEMORY megabytes\e[0m; processor: \e[1;32m$PROCESSOR\e[0m"
 echo
 
-qemu-system-$ARCH_SISTEMA $QEMU_ARGS -D /dev/null >> /dev/null || erroMV
+qemu-system-$SYSTEM_ARCH $QEMU_ARGS -D /dev/null >> /dev/null || virtualMachineGeneralError
 
 else
 
-erroMV
+virtualMachineGeneralError
 
 fi
 
 }
 
-erroMV()
+virtualMachineGeneralError()
 {
 
 clear
@@ -1098,7 +1098,7 @@ export MSG="hx: start virtual machine"
 
 banner
 
-echo -e "Error in request: disk image \e[1;94m'$CAMINHO_IMAGEM_DISCO'\e[0m not found or fail"
+echo -e "Error in request: disk image \e[1;94m'$DISK_IMAGE_PATH'\e[0m not found or fail"
 echo -e "\e[0min some virtual machine component or parameter."
 echo -e " > \e[1;31mYou CANNOT boot the system without this error.\e[0m"
 echo -e "Error in request: \e[1;94mproblem while running virtual machine\e[0m."
@@ -1107,11 +1107,11 @@ echo
 
 }
 
-#-------------------------------- Divisão --------------------------------#
+#-------------------------------- Division --------------------------------#
 
-# Sessão de utilidades do hx
+# hx utilities section
 
-limpar()
+cleanObjectsInSourceTree()
 {
 
 clear
@@ -1123,7 +1123,7 @@ banner
 echo "Performing system tree cleanup..."
 echo -n " > Cleaning up generated components and system images..."
 
-rm -rf Sistema $DESTINODISTRO Hexagonix temp.img hexagonix.img
+rm -rf SystemBuild $DISTRO_DIRECTORY Hexagonix temp.img hexagonix.img
 rm -rf log.log COM1.txt *.sis *.bin *.app Serial.txt
 
 echo -e " [\e[32mOk\e[0m]"
@@ -1136,16 +1136,16 @@ rm -rf Dist/etc/*.unx Dist/etc/*.ocl Dist/etc/rc Dist/etc/passwd Dist/etc/shrc D
 echo -e " [\e[32mOk\e[0m]"
 echo -e "   > \e[1;94mUse ./configure.sh to regenerate these files.\e[0m"
 
-tudopronto
+allDone
 
 echo
 
 }
 
-obterInfoBuild()
+getBuildInformation()
 {
 
-# Dados de versão do Hexagonix
+# Hexagonix version data
 
 export REVISAO=$(cat Dist/etc/release.def)
 export CODENOME=$(cat Dist/etc/codenome.def)
@@ -1166,12 +1166,12 @@ echo -e "Information about the \e[1mcurrent\e[0m construction of the system:"
 echo -e " > Hexagonix version: \e[1;32m$VERSAO\e[0m"
 echo -e " > Software revision: \e[1;32m$REVISAO\e[0m"
 echo -e " > Release name: \e[1;32m$CODENOME\e[0m"
-echo -e " > Disk image location: \e[1;32m$DIR_IMAGEM/$IMAGEM_DISCO_FINAL\e[0m"
+echo -e " > Disk image location: \e[1;32m$IMAGE_PATH/$IMAGE_FILENAME\e[0m"
 echo
 
 }
 
-executarIndent()
+startIndentModule()
 {
 
 clear
@@ -1183,7 +1183,7 @@ cp Scripts/indent.sh .
 echo
 echo -e "[\e[32mAllowing execution and starting indent.sh (using '-a' parameter)...\e[0m]"
 
-# Primeiro, ter certeza que o arquivo pode ser executado
+# First, make sure the file can be executed
 
 chmod +x indent.sh
 
@@ -1197,12 +1197,12 @@ echo -e "[\e[31mError: indent.sh not found\e[0m]."
 
 fi
 
-terminar
-tudopronto
+finishStep
+allDone
 
 }
 
-executarConfigure()
+startConfigureModule()
 {
 
 clear
@@ -1212,7 +1212,7 @@ if [ -e configure.sh ] ; then
 echo
 echo -e "[\e[32mAllowing execution and starting configure.sh...\e[0m]"
 
-# Primeiro, ter certeza que o arquivo pode ser executado
+# First, make sure the file can be executed
 
 chmod +x configure.sh
 
@@ -1225,30 +1225,30 @@ echo -e " > \e[1;31mYou CANNOT start building the system without this dependency
 
 fi
 
-terminar
-tudopronto
+finishStep
+allDone
 
 }
 
-terminar()
+finishStep()
 {
 
 echo -e "[\e[32mStep completed successfully\e[0m]"
 
 }
 
-tudopronto()
+allDone()
 {
 
 echo -e "[\e[32mAll ready!\e[0m]"
 
 }
 
-verificarEstaticos()
+verifyStaticFiles()
 {
 
-# Vamos verificar se antes os arquivos estáticos essenciais já foram gerados.
-# Se não, vamos gerá-los
+# Let's check if the essential static files have already been generated before.
+# If not, we will generate them
 
 if [ -e Dist/etc/base.ocl ] ; then
 
@@ -1276,7 +1276,7 @@ fi
 
 }
 
-exibirEstatisticas(){
+displayStatistics(){
 
 clear
 
@@ -1296,7 +1296,7 @@ do
 
     cloc $i
 
-    terminar
+    finishStep
 
 done
 
@@ -1307,9 +1307,9 @@ done
 
     cloc $(pwd)
 
-    terminar
+    finishStep
 
-tudopronto
+allDone
 
 else
 
@@ -1323,7 +1323,7 @@ echo
 
 }
 
-verFlags()
+showBuildFlags()
 {
 
 clear
@@ -1333,19 +1333,19 @@ export MSG="Hexagonix build flags"
 banner
 
 echo "Common flags:"
-echo -e " > \e[1;32m$FLAGS_COMUM\e[0m"
+echo -e " > \e[1;32m$COMMON_FLAGS\e[0m"
 echo "Hexagon flags:"
 echo -e " > \e[1;32m$FLAGS_HEXAGON\e[0m"
 echo "HBoot build flags:"
 echo -e " > \e[1;32m$FLAGS_HBOOT\e[0m"
 echo
 
-tudopronto
-terminar
+allDone
+finishStep
 
 }
 
-iniciarLog()
+startBuildLog()
 {
 
 if [ -e $LOG ] ; then
@@ -1354,7 +1354,7 @@ rm -r $LOG
 
 fi
 
-# Montar o cabeçalho do arquivo de log...
+# Create the log file header
 
 echo "Hexagonix Operating System build and statistics report" >> $LOG
 echo "-------------------------------------------------------" >> $LOG
@@ -1370,27 +1370,27 @@ echo "In this file, you have access to the complete log of the build process of"
 echo "Hexagonix components. You can also use it to identify the environment used in" >> $LOG
 echo "construction, as well as errors found in the process." >> $LOG
 echo >> $LOG
-echo "hx version: $VERSAOHX" >> $LOG
+echo "hx version: $HX_VERSION" >> $LOG
 echo >> $LOG
-echo "Build task id: $ID_BUILD" >> $LOG
+echo "Build task id: $BUILD_ID" >> $LOG
 echo >> $LOG
 echo "Information about the current build of Hexagonix:" >> $LOG
 echo " > Hexagonix version: $VERSAO" >> $LOG
 echo " > Software revision: $REVISAO" >> $LOG
 echo " > Release name: $CODENOME" >> $LOG
-echo " > Disk image location: $DIR_IMAGEM/$IMAGEM_DISCO_FINAL" >> $LOG
-echo " > Main system branch (git): $RAMO" >> $LOG
-echo "   > Andromeda-Apps branch: $RAMO_ANDROMEDA_APPS" >> $LOG
-echo "   > Unix-Apps branch: $RAMO_UNIX_APPS" >> $LOG
-echo "   > HBoot branch: $RAMO_HBOOT" >> $LOG
-echo "   > Saturno branch: $RAMO_SATURNO" >> $LOG
-echo "   > etc branch: $RAMO_ETC" >> $LOG
-echo "   > man branch: $RAMO_MAN" >> $LOG
-echo "   > Fonts branch: $RAMO_FONTES" >> $LOG
-echo "   > Hexagon branch: $RAMO_HEXAGON" >> $LOG
-echo "   > libasm branch: $RAMO_LIBASM" >> $LOG
-echo "   > hx/Scripts branch: $RAMO_HX" >> $LOG
-echo " > Server: $SERVIDOR" >> $LOG
+echo " > Disk image location: $IMAGE_PATH/$IMAGE_FILENAME" >> $LOG
+echo " > Main system branch (git): $MAIN_BRANCH" >> $LOG
+echo "   > Andromeda-Apps branch: $ANDROMEDA_APPS_BRANCH" >> $LOG
+echo "   > Unix-Apps branch: $UNIX_APPS_BRANCH" >> $LOG
+echo "   > HBoot branch: $HBOOT_BRANCH" >> $LOG
+echo "   > Saturno branch: $SATURNO_BRANCH" >> $LOG
+echo "   > etc branch: $ETC_BRANCH" >> $LOG
+echo "   > man branch: $MAN_BRANCH" >> $LOG
+echo "   > Fonts branch: $FONT_BRANCH" >> $LOG
+echo "   > Hexagon branch: $HEXAGON_BRANCH" >> $LOG
+echo "   > libasm branch: $LIBASM_BRANCH" >> $LOG
+echo "   > hx/Scripts branch: $HX_BRANCH" >> $LOG
+echo " > Server: $SERVER" >> $LOG
 echo >> $LOG
 echo "Information about the current build environment:" >> $LOG
 echo -n " > Date and time of this report (build time): " >> $LOG
@@ -1404,7 +1404,7 @@ fasm | grep "flat" >> $LOG
 echo -n " > GNU bash version: " >> $LOG
 bash --version | grep "GNU bash" >> $LOG
 
-# Vamos agora verificar a versão de ferramentas opcionais, como qemu, NASM e vscode
+# Let's now check the version of optional tools such as qemu, NASM and vscode
 
 if [ -e /usr/bin/qemu-system-i386 ] ; then
 
@@ -1440,10 +1440,10 @@ echo >> $LOG
 
 }
 
-avisoCriarInstalador()
+showCreateInstallerInfo()
 {
 
-echo "> Disk image '$IMAGEM_DISCO_FINAL' and VM disk image '$(basename $IMAGEM_DISCO_FINAL .img).vdi' generated successfully." >> $LOG
+echo "> Disk image '$IMAGE_FILENAME' and VM disk image '$(basename $IMAGE_FILENAME .img).vdi' generated successfully." >> $LOG
 echo >> $LOG
 echo "Use './hx -v hx' to test running the system on the generated image or copy" >> $LOG
 echo "the image to the installer 'Inst' directory to generate an Linux-based install" >> $LOG
@@ -1454,7 +1454,7 @@ echo >> $LOG
 
 }
 
-finalizarLog()
+finishBuildLog()
 {
 
 echo -n "End date/time of this log: " >> $LOG
@@ -1465,7 +1465,7 @@ echo >> $LOG
 
 }
 
-instalarDependencias()
+installBuildDependencies()
 {
 
 if test "`whoami`" != "root" ; then
@@ -1486,12 +1486,12 @@ echo
 
 apt install fasm nasm cloc qemu qemu-system-i386 uuid
 
-terminar
+finishStep
 
 echo
 echo -e "\e[1mReady! Now run \e[32m./configure.sh\e[0;1m to configure the dependencies."
 
-tudopronto
+allDone
 
 echo
 
@@ -1516,7 +1516,7 @@ echo
 
 }
 
-atualizarImagens()
+updateDiskImages()
 {
 
 export MSG="Update images"
@@ -1534,17 +1534,17 @@ read OPCAO
 
 case $OPCAO in
 
-y) atualizarAutorizado; exit;;
-Y) atualizarAutorizado; exit;;
-n) finalizar; exit;;
-N) finalizar; exit;;
-*) finalizar; exit;;
+y) updateAuthorized; exit;;
+Y) updateAuthorized; exit;;
+n) finish; exit;;
+N) finish; exit;;
+*) finish; exit;;
 
 esac
 
 }
 
-atualizarAutorizado()
+updateAuthorized()
 {
 
 cd hexagonix
@@ -1554,8 +1554,8 @@ rm -rf hexagonix.img hexagonix.vdi
 wget https://github.com/hexagonix/hexagonix/blob/main/hexagonix.img
 wget https://github.com/hexagonix/hexagonix/blob/main/hexagonix.vdi
 
-terminar
-tudopronto
+finishStep
+allDone
 
 }
 
@@ -1565,29 +1565,29 @@ infoRepo()
 export MSG="Repos information"
 
 echo
-echo "hx version $VERSAOHX"
+echo "hx version $HX_VERSION"
 echo
 echo -e " > Currently, you are using this configuration for the repositories:"
-echo -e "   > Main system branch (git): \e[1;32m$RAMO\e[0m"
-echo -e "   > Andromeda-Apps branch: \e[1;32m$RAMO_ANDROMEDA_APPS\e[0m"
-echo -e "   > Unix-Apps branch: \e[1;32m$RAMO_UNIX_APPS\e[0m"
-echo -e "   > HBoot branch: \e[1;32m$RAMO_HBOOT\e[0m"
-echo -e "   > Saturno branch: \e[1;32m$RAMO_SATURNO\e[0m"
-echo -e "   > etc branch: \e[1;32m$RAMO_ETC\e[0m"
-echo -e "   > man branch: \e[1;32m$RAMO_MAN\e[0m"
-echo -e "   > Fonts branch: \e[1;32m$RAMO_FONTES\e[0m"
-echo -e "   > Hexagon branch: \e[1;32m$RAMO_HEXAGON\e[0m"
-echo -e "   > libasm branch: \e[1;32m$RAMO_LIBASM\e[0m"
-echo -e "   > hx/Scripts branch: \e[1;32m$RAMO_HX\e[0m"
-echo -e " > Server: \e[1;94m$SERVIDOR\e[0m"
+echo -e "   > Main system branch (git): \e[1;32m$MAIN_BRANCH\e[0m"
+echo -e "   > Andromeda-Apps branch: \e[1;32m$ANDROMEDA_APPS_BRANCH\e[0m"
+echo -e "   > Unix-Apps branch: \e[1;32m$UNIX_APPS_BRANCH\e[0m"
+echo -e "   > HBoot branch: \e[1;32m$HBOOT_BRANCH\e[0m"
+echo -e "   > Saturno branch: \e[1;32m$SATURNO_BRANCH\e[0m"
+echo -e "   > etc branch: \e[1;32m$ETC_BRANCH\e[0m"
+echo -e "   > man branch: \e[1;32m$MAN_BRANCH\e[0m"
+echo -e "   > Fonts branch: \e[1;32m$FONT_BRANCH\e[0m"
+echo -e "   > Hexagon branch: \e[1;32m$HEXAGON_BRANCH\e[0m"
+echo -e "   > libasm branch: \e[1;32m$LIBASM_BRANCH\e[0m"
+echo -e "   > hx/Scripts branch: \e[1;32m$HX_BRANCH\e[0m"
+echo -e " > Server: \e[1;94m$SERVER\e[0m"
 echo
 
-terminar
-tudopronto
+finishStep
+allDone
 
 }
 
-atualizarRepos()
+updateRepositories()
 {
 
 export MSG="Update repos"
@@ -1598,7 +1598,7 @@ echo "You are about to update all repositories with the server, keeping current"
 echo "branch. To change branch and update, use hx -un <branch>."
 echo
 echo "Update info:"
-echo -e " > Branch: \e[1;94m$RAMO\e[0m"
+echo -e " > Branch: \e[1;94m$MAIN_BRANCH\e[0m"
 echo -e " > Server: \e[1;94mhttps://github.com/hexagonix\e[0m"
 echo
 echo -e "> \e[1;32mUpdating repositories...\e[0m"
@@ -1647,7 +1647,7 @@ chmod +x configure.sh hx Contrib/Contrib.sh
 
 if [ -e autohx.py ] ; then
 
-# O autohx está presente e deve ser atualizado
+# autohx is present and must be updated
 
 cd autohx && git pull
 
@@ -1659,12 +1659,12 @@ chmod +x autohx.py
 
 fi
 
-terminar
-tudopronto
+finishStep
+allDone
 
 }
 
-trocarRamoAtualizar()
+switchBranchAndUpdateRepositories()
 {
 
 export MSG="Update branch and repositories"
@@ -1723,7 +1723,7 @@ chmod +x configure.sh hx Contrib/Contrib.sh
 
 if [ -e autohx.py ] ; then
 
-# O autohx está presente e deve ser atualizado
+# autohx is present and must be updated
 
 cd autohx && git pull
 
@@ -1735,12 +1735,12 @@ chmod +x autohx.py
 
 fi
 
-terminar
-tudopronto
+finishStep
+allDone
 
 }
 
-clonarRepos()
+cloneRepositories()
 {
 
 clear
@@ -1752,7 +1752,7 @@ banner
 echo "Cloning the repositories needed to build Hexagonix..."
 echo
 
-# Primeiro, vamos criar os diretórios comuns
+# First, let's create the common directories
 
 cd Hexagonix
 
@@ -1761,54 +1761,54 @@ mkdir -p Boot/
 mkdir -p Contrib/
 mkdir -p Dist/
 
-# Vamos clonar o Hexagon
+# Let's clone Hexagon
 
 git clone https://github.com/hexagonix/Hexagon Hexagon
 
-# Vamos clonar o Saturno e o HBoot
+# Let's clone Saturno and HBoot
 
 git clone https://github.com/hexagonix/Saturno Boot/Saturno
 git clone https://github.com/hexagonix/HBoot "Boot/HBoot"
 
-# Vamos agora clonar os respositórios de utilitários
+# Let's now clone the utility repositories
 
 git clone https://github.com/hexagonix/Unix-Apps Apps/Unix
 git clone https://github.com/hexagonix/Andromeda-Apps Apps/Andromeda
 
-# Vamos clonar as bibliotecas
+# Let's clone the libraries
 
 git clone https://github.com/hexagonix/lib lib
 
-# Agora vamos clocar arquivos estáticos e manuais
+# Now let's upload static and manual files
 
 git clone https://github.com/hexagonix/man Dist/man
 git clone https://github.com/hexagonix/etc Dist/etc
 
-# Vamos clonar as fontes gráficas
+# Let's clone the graphic fonts
 
 git clone https://github.com/hexagonix/xfnt Fontes
 
-# Agora, fasmX
+# Now fasmX
 
 git clone https://github.com/hexagonix/fasmX Contrib/fasmX
 
-# Agora o repositório de imagens
+# Now the image repository
 
 git clone https://github.com/hexagonix/hexagonix hexagonix
 
-# Agora, a documentação
+# Now the documentation
 
 git clone https://github.com/hexagonix/Doc
 
-# Por último, os scripts de geração do sistema
+# Lastly, the system generation scripts
 
 git clone https://github.com/hexagonix/scriptsHX Scripts
 
-# Agora, o utilitário autohx
+# Now the autohx utility
 
 git clone https://github.com/felipenlunkes/hexagonix-autobuild autohx
 
-# Agora vamos colocar as coisas no lugar
+# Now let's put things in place
 
 cd Scripts
 
@@ -1833,7 +1833,7 @@ exit
 
 }
 
-checarDependenciasClonagem()
+checkCloneDependencies()
 {
 
 clear
@@ -1845,9 +1845,9 @@ banner
 echo -e "Checking required dependencies to clone the repositories..."
 echo
 
-# Agora vamos verificar cada dependência do mecanismo de construção
+# Now let's check each build engine dependency
 
-# Dependência 1
+# Dependency 1
 
 echo -n " > git "
 
@@ -1864,11 +1864,11 @@ exit
 
 fi
 
-clonarRepos
+cloneRepositories
 
 }
 
-finalizar()
+finish()
 {
 
 exit
@@ -1896,155 +1896,155 @@ exit
 
 }
 
-#-------------------------------- Divisão --------------------------------#
+#-------------------------------- Division --------------------------------#
 
 #;;************************************************************************************
 
-# Ponto de entrada do hx, definição de variáveis e processamento de parâmetros
+# Hx entry point, variable definition and parameter processing
 #
 #
 # Copyright (C) 2015-2024 Felipe Miguel Nery Lunkes
-# Todos os direitos reservados
-# Constantes com informações de parâmetros
+# All rights reserved
+# Constants with parameter parsing
 
-export NOMEHX=$0
 export PT1=$1
 export PT2=$2
 export PT3=$3
 export PT4=$4
 export PT5=$5
-export IDIOMA=$2
-export IDIOMANG=$3
-export ID_BUILD=$(uuid -m -v 4)
+export LANGUAGE_PARAMETER=$2
+export LANGUAGE_PARAMETER_N=$3
+export BUILD_ID=$(uuid -m -v 4)
 
-# Versão do hx
+# hx info
 
-export VERSAOHX="13.15.10.0"
+export HX_NAME=$0
+export HX_VERSION="13.15.11.0"
 
-# Variáveis e constantes utilizados na montagem e no QEMU
+# Variables and constants used in build and QEMU
 
-# Constantes para execução da máquina virtual (QEMU)
+# Constants for virtual machine execution (QEMU)
 
-export DRV_SOM="pcspk"
-export ARCH_SISTEMA="i386"
-export ARCH_SISTEMA_BSD="x86_64"
-export PROCESSADOR="pentium3"
-export MEMORIA=32
+export DRV_SOUND="pcspk"
+export SYSTEM_ARCH="i386"
+export BSD_SYSTEM_ARCH="x86_64"
+export PROCESSOR="pentium3"
+export MEMORY=32
 export AUDIODEV="pa,id=audio0 -machine pcspk-audiodev=audio0"
 
-# Constantes da etapa de construção
+# Build step constants
 
 export LOG="log.log"
-export SERVIDOR="https://github.com/hexagonix"
+export SERVER="https://github.com/hexagonix"
 
-# Constantes para as etapas de construção do sistema e criação de imagens. Essas são as flags
-# padrão, e o podem ser alteradas por parâmetros para alterar o comportamento da construção
-# ou componentes do Hexagonix
+# Constants for the system construction and image creation steps.
+# These are the default flags, and can be changed by parameters to
+# change the behavior of the Hexagonix build or components
 
-export CAMINHO_IMAGEM_DISCO="hexagonix/hexagonix.img" # Nome da imagem final
-export DIR_IMAGEM="hexagonix" # Diretório da imagem final
-export FLAGS_COMUM="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT" # Flags de construção gerais
-export FLAGS_HEXAGON="VERBOSE=SIM" # Flags de construção do Hexagon
-export FLAGS_HBOOT="TEMATOM=ANDROMEDA" # Flags de construção do HBoot
-export DESTINODISTRO="Build" # Localização das imagens executáveis e arquivos estáticos gerados
-export IMAGEM_DISCO_FINAL="hexagonix.img" # Nome da imagem final (sem diretório)
-export Par="pt" # Parâmetro de idioma
+export DISK_IMAGE_PATH="hexagonix/hexagonix.img" # Image filename with relative path
+export IMAGE_PATH="hexagonix" # Image path
+export COMMON_FLAGS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT" # General build flags
+export FLAGS_HEXAGON="VERBOSE=SIM" # Hexagon build flags
+export FLAGS_HBOOT="TEMATOM=ANDROMEDA" # HBoot build flags
+export DISTRO_DIRECTORY="Build" # Location of executable images and generated static files
+export IMAGE_FILENAME="hexagonix.img" # Final image name (without directory)
+export LANGUAGE="pt" # Language parameter
 
-if [ "$IDIOMA" == "en" ]; then
+if [ "$LANGUAGE_PARAMETER" == "en" ]; then
 
 # Vamos alterar as flags para instruir a construção de versões em inglês (caso existam)
 
-export FLAGS_COMUM="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN" # Flags de construção gerais
-export IMAGEM_DISCO_FINAL="en.hexagonix.img" # Nome da imagem final (sem diretório)
-export Par="en" # Parâmetro de idioma
+export COMMON_FLAGS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN" # General build flags
+export IMAGE_FILENAME="en.hexagonix.img" # Final image name (without directory)
+export LANGUAGE="en" # Language parameter
 
 fi
 
-# Agora, vamos definir onde estão os cabeçalhos e bibliotecas da libasm (necessárias para o fasm)
+# Now, let's define where the libasm headers and libraries (necessary for fasm) are
 
 export INCLUDE="$(pwd)/lib/fasm"
 
-# Obter informações do ramo utilizado para a construção do sistema
+# Get information from the branch used to build the system
 #
-# Aviso! A informação é obtida do repositório github.com/hexagonix/hexagonix, apenas. Não é
-# recomendável construir o sistema usando ramos diferentes, mas utilizar todos os componentes
-# vindos de um mesmo ramo, como CURRENT (main) ou RELEASE. A mistura entre os ramos pode
-# provocar o não funcionamento ou funcionamento incorreto de diversos componentes. Para
-# sincronizar todos os repositórios com o mesmo ramo, use 'hx -un ramo'.
+# Notice! The information is obtained from the github.com/hexagonix/hexagonix repository only.
+# It is not recommended to build the system using different branches, but to use all components coming from the same branch,
+# such as CURRENT (main) or RELEASE.
+# Mixing between the branches can cause various components to not work or work incorrectly.
+# To sync all repositories with the same branch, use 'hx -un branch'.
 
-if [ -e $CAMINHO_IMAGEM_DISCO ] ; then
+if [ -e $DISK_IMAGE_PATH ] ; then
 
-# Vamos salvar cada branch dos componentes do sistema para posterior identificação
+# Let's save each branch of the system components for later identification
 
-# Primeiro, Andromeda-Apps e Unix-Apps
+# First, Andromeda-Apps and Unix-Apps
 cd Apps/Andromeda
-export RAMO_ANDROMEDA_APPS=$(git branch --show-current)
+export ANDROMEDA_APPS_BRANCH=$(git branch --show-current)
 cd ../Unix
-export RAMO_UNIX_APPS=$(git branch --show-current)
+export UNIX_APPS_BRANCH=$(git branch --show-current)
 cd ../..
-# Agora, HBoot e Saturno
+# Now HBoot and Saturno
 cd "Boot/HBoot"
-export RAMO_HBOOT=$(git branch --show-current)
+export HBOOT_BRANCH=$(git branch --show-current)
 cd ../Saturno
-export RAMO_SATURNO=$(git branch --show-current)
+export SATURNO_BRANCH=$(git branch --show-current)
 cd ../..
 cd Dist/etc
-export RAMO_ETC=$(git branch --show-current)
+export ETC_BRANCH=$(git branch --show-current)
 cd ../man
-export RAMO_MAN=$(git branch --show-current)
+export MAN_BRANCH=$(git branch --show-current)
 cd ../..
-# Agora, Fontes
+# Now fonts
 cd Fontes
-export RAMO_FONTES=$(git branch --show-current)
+export FONT_BRANCH=$(git branch --show-current)
 cd ..
-# Agora, Hexagon
+# Now Hexagon
 cd Hexagon
-export RAMO_HEXAGON=$(git branch --show-current)
+export HEXAGON_BRANCH=$(git branch --show-current)
 cd ..
-# Agora, libasm
+# Now libasm
 cd lib
-export RAMO_LIBASM=$(git branch --show-current)
+export LIBASM_BRANCH=$(git branch --show-current)
 cd ..
-# Agora, hx e módulos do hx
+# Now hx and hx modules
 cd Scripts
-export RAMO_HX=$(git branch --show-current)
+export HX_BRANCH=$(git branch --show-current)
 cd ..
-# Ramo principal de tudo, para onde irão as imagens
+# Main branch of everything, where the images will go
 cd hexagonix
-export RAMO=$(git branch --show-current)
+export MAIN_BRANCH=$(git branch --show-current)
 cd ..
 
 fi
 
-# Realizar a ação determinada pelo parâmetro fornecido
+# Perform the action determined by the given parameter
 
 case $1 in
 
-# Gerenciar os parâmetros iniciados com '-'
+# Manage parameters starting with '-'
 
--v) gerenciarMaquinaVirtual; exit;;
--i) gerenciarConstrucao; exit;;
--h) exibirAjuda; exit;;
--b) gerenciarConstrucaoComponentes; exit;;
+-v) manageVirtualMachines; exit;;
+-i) manageBuild; exit;;
+-h) showMainHelp; exit;;
+-b) manageComponentConstruction; exit;;
 -br) infoRepo; exit;;
--u) atualizarRepos; exit;;
--ui) atualizarImagens; exit;;
--un) trocarRamoAtualizar; exit;;
--m) checarDependenciasClonagem; exit;;
--c) limpar; exit;;
+-u) updateRepositories; exit;;
+-ui) updateDiskImages; exit;;
+-un) switchBranchAndUpdateRepositories; exit;;
+-m) checkCloneDependencies; exit;;
+-c) cleanObjectsInSourceTree; exit;;
 
-# Gerenciar os parâmetros iniciados com '--'
+# Manage parameters starting with '--'
 
---ver) exibirCopyright; exit;;
---depend) instalarDependencias; exit;;
---info) obterInfoBuild; infoBuild; exit;;
---configure) executarConfigure; exit;;
---indent) executarIndent; exit;;
---stat) exibirEstatisticas; exit;;
---flags) verFlags; exit;;
+--ver) showCopyright; exit;;
+--depend) installBuildDependencies; exit;;
+--info) getBuildInformation; infoBuild; exit;;
+--configure) startConfigureModule; exit;;
+--indent) startIndentModule; exit;;
+--stat) displayStatistics; exit;;
+--flags) showBuildFlags; exit;;
 
-# Função padrão
+# Default function
 
-*) parametrosNecessarios; exit;;
+*) parametersRequired; exit;;
 
 esac
