@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Version 5.0.0
+# Version 5.1.0
 
 # $PORTUGUÊS$
 #
@@ -259,13 +259,13 @@ fi
 
 # Script 5
 
-echo -n " > Hexagonix font build script (fontes.sh) "
+echo -n " > Hexagonix font build script (fonts.sh) "
 
-if [ -e Fontes/fontes.sh ] ; then
+if [ -e Fontes/fonts.sh ] ; then
 
 echo -en "[\e[32mOk\e[0m]"
 
-chmod +x Fontes/fontes.sh
+chmod +x Fontes/fonts.sh
 
 echo -e " [\e[94mExecutable\e[0m]"
 
