@@ -570,7 +570,7 @@ cp *.man ../../$DISTRO_DIRECTORY
 cd ..
 cd ..
 
-cd Fontes/
+cd Fonts/
 
 echo "> Checking for additional fonts to build..." >> ../$LOG
 
@@ -1610,7 +1610,7 @@ cd ..
 cd Contrib/fasmX && git pull
 cd ..
 cd ..
-cd Fontes && git pull
+cd Fonts && git pull
 cd ..
 cd Hexagon && git pull
 cd ..
@@ -1687,7 +1687,7 @@ cd ..
 cd Contrib/fasmX && git switch $PT2 && git pull
 cd ..
 cd ..
-cd Fontes && git switch $PT2 && git pull
+cd Fonts && git switch $PT2 && git pull
 cd ..
 cd Hexagon && git switch $PT2 && git pull
 cd ..
@@ -1772,7 +1772,7 @@ git clone https://github.com/hexagonix/etc Dist/etc
 
 # Let's clone the graphic fonts
 
-git clone https://github.com/hexagonix/xfnt Fontes
+git clone https://github.com/hexagonix/xfnt Fonts
 
 # Now fasmX
 
@@ -1903,7 +1903,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.15.14.0"
+export HX_VERSION="13.15.15.0"
 
 # Variables and constants used in build and QEMU
 
@@ -1969,7 +1969,7 @@ cd ../man
 export MAN_BRANCH=$(git branch --show-current)
 cd ../..
 # Now fonts
-cd Fontes
+cd Fonts
 export FONT_BRANCH=$(git branch --show-current)
 cd ..
 # Now Hexagon
