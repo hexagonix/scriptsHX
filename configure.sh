@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Version 5.2.2
+# Version 5.2.3
 
 # $PORTUGUÊS$
 #
@@ -183,7 +183,7 @@ echo -e "Checking scripts and utilities needed to build the system..."
 
 # Module 1
 
-echo -n " > System build and run Module (hx) "
+echo -n " > System build and run utility (hx) "
 
 if [ -e hx ] ; then
 
