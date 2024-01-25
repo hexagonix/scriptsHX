@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Version 5.2.0
+# Version 5.2.1
 
 # $PORTUGUÊS$
 #
@@ -221,7 +221,7 @@ fi
 
 # Script 3
 
-echo -n " > Unix utilities build script (Unix.sh) "
+echo -n " > Unix utilities build module (Unix.sh) "
 
 if [ -e Apps/Unix/Unix.sh ] ; then
 
@@ -240,7 +240,7 @@ fi
 
 # Script 4
 
-echo -n " > Andromeda-Hexagonix application build script (Apps.sh) "
+echo -n " > Andromeda-Hexagonix application build module (Apps.sh) "
 
 if [ -e Apps/Andromeda/Apps.sh ] ; then
 
@@ -259,7 +259,7 @@ fi
 
 # Script 5
 
-echo -n " > Hexagonix font build script (fonts.sh) "
+echo -n " > Hexagonix font build module (fonts.sh) "
 
 if [ -e Fonts/fonts.sh ] ; then
 
