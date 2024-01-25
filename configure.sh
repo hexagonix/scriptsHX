@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Version 5.2.1
+# Version 5.2.2
 
 # $PORTUGUÊS$
 #
@@ -181,9 +181,9 @@ finish
 
 echo -e "Checking scripts and utilities needed to build the system..."
 
-# Script 1
+# Module 1
 
-echo -n " > System build and run script (hx) "
+echo -n " > System build and run Module (hx) "
 
 if [ -e hx ] ; then
 
@@ -200,9 +200,9 @@ echo -e "   > \e[1;31mYou CANNOT start building the system without this dependen
 
 fi
 
-# Script 2
+# Module 2
 
-echo -n " > Script for building external utilities (Contrib.sh) "
+echo -n " > Module for building external utilities (Contrib.sh) "
 
 if [ -e Contrib/Contrib.sh ] ; then
 
@@ -219,7 +219,7 @@ echo -e "   > \e[1;31mYou CANNOT start building the system without this dependen
 
 fi
 
-# Script 3
+# Module 3
 
 echo -n " > Unix utilities build module (Unix.sh) "
 
@@ -238,7 +238,7 @@ echo -e "   > \e[1;31mYou CANNOT start building the system without this dependen
 
 fi
 
-# Script 4
+# Module 4
 
 echo -n " > Andromeda-Hexagonix application build module (Apps.sh) "
 
@@ -257,7 +257,7 @@ echo -e "   > \e[1;31mYou CANNOT start building the system without this dependen
 
 fi
 
-# Script 5
+# Module 5
 
 echo -n " > Hexagonix font build module (fonts.sh) "
 
