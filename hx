@@ -89,7 +89,7 @@
 # However, it is already supported for running virtual machines. The full support to
 # FreeBSD is on the way.
 
-# Sessão de ajuda e informações sobre o hx
+# Help section and information about hx
 
 showMainHelp() {
 
@@ -177,7 +177,7 @@ showMainHelp
 
 #-------------------------------- Division --------------------------------#
 
-# Sessão de construção coletiva dos componentes do sistema
+# Collective build section of system components
 
 manageBuild()
 {
@@ -220,7 +220,7 @@ esac
 
 #-------------------------------- Division --------------------------------#
 
-# Sessão de configuração para montagem do sistema
+# Configuration section for build the system
 
 setImageBuildOnLinux(){
 
@@ -284,36 +284,22 @@ buildHexagonix
 setTestBuild()
 {
 
-# Aqui vamos gerar uma imagem pequena, de 2 Mb, menor e apenas para testes. Essa imagem
-# não deve ser utilizada para o pacote de instalação.
+# Here we will generate a small image, 2 Mb, smaller and just for testing.
+# This image should not be used for the installation package.
 
-export TAMANHOIMAGEM=2097012
-export TAMANHOTEMP=2048
+export DISK_IMAGE_SIZE=2097012
+export TEMP_IMAGE_SIZE=2048
 
 }
 
 setReleaseBuild()
 {
 
-# Aqui vamos definir uma imagem de tamanho oficial, que demora mais a ser gerada. Essa imagem é
-# apropriada para o pacote de instalação do Hexagonix
+# Here we will define an official size image, which takes longer to generate.
+# This image is appropriate for the Hexagonix installation package
 
-export TAMANHOIMAGEM=47185920
-export TAMANHOTEMP=92160
-
-}
-
-definirVerbose()
-{
-
-# Aqui vamos definir se mensagens de erro deverão aparecer no processo de montagem
-
-case $PT2 in
-
-hexagonix) definirHexagonix; exit;;
-*) definirHexagonix; exit;;
-
-esac
+export DISK_IMAGE_SIZE=47185920
+export TEMP_IMAGE_SIZE=92160
 
 }
 
@@ -713,7 +699,7 @@ fi
 
 # Now the system files will be generated...
 
-hexagonixConstructor $LANGUAGE
+hexagonixConstructor
 
 # Now the system image will be prepared...
 
@@ -888,7 +874,7 @@ exit
 buildImageOnLinux()
 {
 
-dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || buildError
+dd status=none bs=512 count=$TEMP_IMAGE_SIZE if=/dev/zero of=temp.img >> $LOG || buildError
 
 if [ ! -e hexagonix.img ] ; then
 
@@ -896,7 +882,7 @@ echo >> $LOG
 echo "> Building image that will receive system files..." >> $LOG
 echo >> $LOG
 
-dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMAGE_FILENAME >> $LOG || buildError
+dd status=none bs=$DISK_IMAGE_SIZE count=1 if=/dev/zero of=$IMAGE_FILENAME >> $LOG || buildError
 
 fi
 
@@ -915,7 +901,7 @@ mkdir -p SystemBuild && mount -o loop -t vfat temp.img SystemBuild/ || buildErro
 buildImageOnUNIXSolaris()
 {
 
-dd status=none bs=512 count=$TAMANHOTEMP if=/dev/zero of=temp.img >> $LOG || buildError
+dd status=none bs=512 count=$TEMP_IMAGE_SIZE if=/dev/zero of=temp.img >> $LOG || buildError
 
 if [ ! -e hexagonix.img ] ; then
 
@@ -923,7 +909,7 @@ echo >> $LOG
 echo "> Building image that will receive system files..." >> $LOG
 echo >> $LOG
 
-dd status=none bs=$TAMANHOIMAGEM count=1 if=/dev/zero of=$IMAGE_FILENAME >> $LOG || buildError
+dd status=none bs=$DISK_IMAGE_SIZE count=1 if=/dev/zero of=$IMAGE_FILENAME >> $LOG || buildError
 
 fi
 
@@ -1162,7 +1148,7 @@ export MSG="System information"
 
 banner
 
-echo -e "Information about the \e[1mcurrent\e[0m construction of the system:"
+echo -e "Information about the \e[1mcurrent\e[0m build of the system:"
 echo -e " > Hexagonix version: \e[1;32m$VERSAO\e[0m"
 echo -e " > Software revision: \e[1;32m$REVISAO\e[0m"
 echo -e " > Release name: \e[1;32m$CODENOME\e[0m"
@@ -1368,7 +1354,7 @@ echo "-------------------------------------------------------" >> $LOG
 echo >> $LOG
 echo "In this file, you have access to the complete log of the build process of" >> $LOG
 echo "Hexagonix components. You can also use it to identify the environment used in" >> $LOG
-echo "construction, as well as errors found in the process." >> $LOG
+echo "build, as well as errors found in the process." >> $LOG
 echo >> $LOG
 echo "hx version: $HX_VERSION" >> $LOG
 echo >> $LOG
@@ -1912,14 +1898,12 @@ export PT2=$2
 export PT3=$3
 export PT4=$4
 export PT5=$5
-export LANGUAGE_PARAMETER=$2
-export LANGUAGE_PARAMETER_N=$3
-export BUILD_ID=$(uuid -m -v 4)
+export PT6=$6
 
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.15.11.0"
+export HX_VERSION="13.15.12.0"
 
 # Variables and constants used in build and QEMU
 
@@ -1936,29 +1920,19 @@ export AUDIODEV="pa,id=audio0 -machine pcspk-audiodev=audio0"
 
 export LOG="log.log"
 export SERVER="https://github.com/hexagonix"
+export BUILD_ID=$(uuid -m -v 4)
 
-# Constants for the system construction and image creation steps.
+# Constants for the system build and image creation steps.
 # These are the default flags, and can be changed by parameters to
 # change the behavior of the Hexagonix build or components
 
 export DISK_IMAGE_PATH="hexagonix/hexagonix.img" # Image filename with relative path
 export IMAGE_PATH="hexagonix" # Image path
-export COMMON_FLAGS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=PT" # General build flags
+export COMMON_FLAGS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM" # General build flags
 export FLAGS_HEXAGON="VERBOSE=SIM" # Hexagon build flags
 export FLAGS_HBOOT="TEMATOM=ANDROMEDA" # HBoot build flags
 export DISTRO_DIRECTORY="Build" # Location of executable images and generated static files
 export IMAGE_FILENAME="hexagonix.img" # Final image name (without directory)
-export LANGUAGE="pt" # Language parameter
-
-if [ "$LANGUAGE_PARAMETER" == "en" ]; then
-
-# Vamos alterar as flags para instruir a construção de versões em inglês (caso existam)
-
-export COMMON_FLAGS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM -d IDIOMA=EN" # General build flags
-export IMAGE_FILENAME="en.hexagonix.img" # Final image name (without directory)
-export LANGUAGE="en" # Language parameter
-
-fi
 
 # Now, let's define where the libasm headers and libraries (necessary for fasm) are
 
@@ -1967,8 +1941,8 @@ export INCLUDE="$(pwd)/lib/fasm"
 # Get information from the branch used to build the system
 #
 # Notice! The information is obtained from the github.com/hexagonix/hexagonix repository only.
-# It is not recommended to build the system using different branches, but to use all components coming from the same branch,
-# such as CURRENT (main) or RELEASE.
+# It is not recommended to build the system using different branches, but to use all components
+# coming from the same branch, such as CURRENT (main) or RELEASE.
 # Mixing between the branches can cause various components to not work or work incorrectly.
 # To sync all repositories with the same branch, use 'hx -un branch'.
 
