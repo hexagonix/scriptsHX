@@ -579,7 +579,7 @@ if [ -e aurora.asm ] ; then
 echo -e "There are graphic fonts to be built and copied... [\e[32mOk\e[0m]"
 echo " > There are graphic fonts to be built and copied..." >> ../$LOG
 
-./fontes.sh
+./fonts.sh
 
 cp *.fnt ../$DISTRO_DIRECTORY
 rm *.fnt
@@ -1903,7 +1903,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.15.13.0"
+export HX_VERSION="13.15.14.0"
 
 # Variables and constants used in build and QEMU
 
