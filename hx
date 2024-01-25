@@ -478,7 +478,7 @@ echo
 echo "Use the system generation script to verify the source of the problem."
 echo
 
-umount $PWD/SystemBuild >> /dev/null
+umount $PWD/$MOUNT_POINT_DIRECTORY >> /dev/null
 umount $DISTRO_DIRECTORY/ >> /dev/null
 
 exit
@@ -675,7 +675,7 @@ echo
 echo "View the log file 'log.log', for more information about the error(s)."
 echo
 
-umount SystemBuild/ >> /dev/null
+umount $MOUNT_POINT_DIRECTORY/ >> /dev/null
 umount $DISTRO_DIRECTORY/ >> /dev/null
 
 exit
@@ -733,33 +733,33 @@ fi
 echo "> Copying system files to the image..." >> $LOG
 echo >> $LOG
 
-cp $DISTRO_DIRECTORY/*.man SystemBuild/ >> $LOG || buildError
-cp $DISTRO_DIRECTORY/*.asm SystemBuild/ >> $LOG
-cp $DISTRO_DIRECTORY/*.s SystemBuild/ >> $LOG
-cp $DISTRO_DIRECTORY/*.cow SystemBuild/ >> $LOG || buildError
-cp $DISTRO_DIRECTORY/bin/* SystemBuild/ >> $LOG || buildError
-cp $DISTRO_DIRECTORY/hboot SystemBuild/ >> $LOG || buildError
+cp $DISTRO_DIRECTORY/*.man $MOUNT_POINT_DIRECTORY/ >> $LOG || buildError
+cp $DISTRO_DIRECTORY/*.asm $MOUNT_POINT_DIRECTORY/ >> $LOG
+cp $DISTRO_DIRECTORY/*.s $MOUNT_POINT_DIRECTORY/ >> $LOG
+cp $DISTRO_DIRECTORY/*.cow $MOUNT_POINT_DIRECTORY/ >> $LOG || buildError
+cp $DISTRO_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY/ >> $LOG || buildError
+cp $DISTRO_DIRECTORY/hboot $MOUNT_POINT_DIRECTORY/ >> $LOG || buildError
 
 # License must be copied
 
-cp Dist/man/LICENSE SystemBuild/ >> $LOG || buildError
+cp Dist/man/LICENSE $MOUNT_POINT_DIRECTORY/ >> $LOG || buildError
 
 # Now copy HBoot modules
 
 if [ -e $DISTRO_DIRECTORY/Spartan.mod ] ; then
 
-cp $DISTRO_DIRECTORY/*.mod SystemBuild/ >> $LOG
+cp $DISTRO_DIRECTORY/*.mod $MOUNT_POINT_DIRECTORY/ >> $LOG
 
 fi
 
-cp $DISTRO_DIRECTORY/etc/* SystemBuild/>> $LOG || buildError
-cp $DISTRO_DIRECTORY/*.ocl SystemBuild/ >> $LOG || buildError
+cp $DISTRO_DIRECTORY/etc/* $MOUNT_POINT_DIRECTORY/>> $LOG || buildError
+cp $DISTRO_DIRECTORY/*.ocl $MOUNT_POINT_DIRECTORY/ >> $LOG || buildError
 
 # If the image should contain a copy of the FreeDOS files for testing...
 
 if [ -e DOS ] ; then
 
-cp DOS/*.* SystemBuild/
+cp DOS/*.* $MOUNT_POINT_DIRECTORY/
 
 fi
 
@@ -774,7 +774,7 @@ if [ -e $DISTRO_DIRECTORY/aurora.fnt ] ; then
 
 echo " [Yes]" >> $LOG
 
-cp $DISTRO_DIRECTORY/*.fnt SystemBuild/ || buildError
+cp $DISTRO_DIRECTORY/*.fnt $MOUNT_POINT_DIRECTORY/ || buildError
 
 fi
 
@@ -792,7 +792,7 @@ sleep 1.0 || buildError
 
 echo "> Unmounting the image..." >> $LOG
 
-umount SystemBuild >> /dev/null || buildError
+umount $MOUNT_POINT_DIRECTORY >> /dev/null || buildError
 
 if [ "$HOST" == "BSD" ]; then
 
@@ -819,7 +819,7 @@ dd status=none conv=notrunc if=$DISTRO_DIRECTORY/mbr.img of=$IMAGE_FILENAME >> $
 echo "> Removing temporary files and folders, as well as binaries that are no longer needed..." >> $LOG
 echo >> $LOG
 
-rm -rf SystemBuild $DISTRO_DIRECTORY temp.img >> $LOG
+rm -rf $MOUNT_POINT_DIRECTORY $DISTRO_DIRECTORY temp.img >> $LOG
 
 if test $VERBOSE -e 0; then
 
@@ -892,7 +892,7 @@ dd status=none conv=notrunc if=$DISTRO_DIRECTORY/saturno.img of=temp.img >> $LOG
 
 echo "> Mounting the image..." >> $LOG
 
-mkdir -p SystemBuild && mount -o loop -t vfat temp.img SystemBuild/ || buildError
+mkdir -p $MOUNT_POINT_DIRECTORY && mount -o loop -t vfat temp.img $MOUNT_POINT_DIRECTORY/ || buildError
 
 }
 
@@ -921,7 +921,7 @@ echo "> Mounting the image..." >> $LOG
 
 lofiadm -a temp.img
 
-mkdir -p SystemBuild && mount -F lofs /dev/lofi/1 SystemBuild/ || buildError
+mkdir -p $MOUNT_POINT_DIRECTORY && mount -F lofs /dev/lofi/1 $MOUNT_POINT_DIRECTORY/ || buildError
 
 }
 
@@ -953,7 +953,7 @@ mdconfig -a -t vnode -f temp.img -o force -u 4
 
 echo "> Mounting the image..." >> $LOG
 
-mkdir -p SystemBuild && mount_msdosfs /dev/md4 SystemBuild/ || buildError
+mkdir -p $MOUNT_POINT_DIRECTORY && mount_msdosfs /dev/md4 $MOUNT_POINT_DIRECTORY/ || buildError
 
 }
 
@@ -967,7 +967,7 @@ verifyContribPackages()
 
 if [ -e contrib/ ] ; then
 
-cp contrib/* SystemBuild/
+cp contrib/* $MOUNT_POINT_DIRECTORY/
 
 fi
 
@@ -1109,7 +1109,7 @@ banner
 echo "Performing system tree cleanup..."
 echo -n " > Cleaning up generated components and system images..."
 
-rm -rf SystemBuild $DISTRO_DIRECTORY Hexagonix temp.img hexagonix.img
+rm -rf $MOUNT_POINT_DIRECTORY $DISTRO_DIRECTORY Hexagonix temp.img hexagonix.img
 rm -rf log.log COM1.txt *.sis *.bin *.app Serial.txt
 
 echo -e " [\e[32mOk\e[0m]"
@@ -1903,7 +1903,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.15.12.0"
+export HX_VERSION="13.15.13.0"
 
 # Variables and constants used in build and QEMU
 
@@ -1933,6 +1933,7 @@ export FLAGS_HEXAGON="VERBOSE=SIM" # Hexagon build flags
 export FLAGS_HBOOT="TEMATOM=ANDROMEDA" # HBoot build flags
 export DISTRO_DIRECTORY="Build" # Location of executable images and generated static files
 export IMAGE_FILENAME="hexagonix.img" # Final image name (without directory)
+export MOUNT_POINT_DIRECTORY="SystemBuild" # Disk image mount point for copying Hexagonix files
 
 # Now, let's define where the libasm headers and libraries (necessary for fasm) are
 
