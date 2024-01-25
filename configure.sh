@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Version 5.2.3
+# Version 5.2.4
 
 # $PORTUGUÊS$
 #
@@ -179,7 +179,7 @@ finish
 
 # Now let's check if the scripts are available and make them executable
 
-echo -e "Checking scripts and utilities needed to build the system..."
+echo -e "Checking utilities and modules needed to build the system..."
 
 # Module 1
 
