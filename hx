@@ -1421,6 +1421,12 @@ code --version --no-sandbox --user-data-dir /dev/null | head -n 1 >> $LOG
 fi
 
 echo >> $LOG
+echo " > Build flags:" >> $LOG
+echo "   > HBoot build flags: $FLAGS_HBOOT" >> $LOG
+echo "   > Hexagon build flags: $FLAGS_HEXAGON" >> $LOG
+echo "   > Common userland build flags: $COMMON_FLAGS" >> $LOG
+
+echo >> $LOG
 echo "----------------------------------------------------------------------" >> $LOG
 echo >> $LOG
 
@@ -1903,7 +1909,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.15.15.0"
+export HX_VERSION="13.16.0"
 
 # Variables and constants used in build and QEMU
 
@@ -1928,9 +1934,9 @@ export BUILD_ID=$(uuid -m -v 4)
 
 export DISK_IMAGE_PATH="hexagonix/hexagonix.img" # Image filename with relative path
 export IMAGE_PATH="hexagonix" # Image path
-export COMMON_FLAGS="UNIX=SIM -d TIPOLOGIN=Hexagonix -d VERBOSE=SIM" # General build flags
-export FLAGS_HEXAGON="VERBOSE=SIM" # Hexagon build flags
-export FLAGS_HBOOT="TEMATOM=ANDROMEDA" # HBoot build flags
+export COMMON_FLAGS="UNIX=YES -d LOGIN_STYLE=Hexagonix -d VERBOSE=YES" # General build flags
+export FLAGS_HEXAGON="VERBOSE=YES" # Hexagon build flags
+export FLAGS_HBOOT="SOUND_THEME=Hexagonix" # HBoot build flags
 export DISTRO_DIRECTORY="Build" # Location of executable images and generated static files
 export IMAGE_FILENAME="hexagonix.img" # Final image name (without directory)
 export MOUNT_POINT_DIRECTORY="SystemBuild" # Disk image mount point for copying Hexagonix files
