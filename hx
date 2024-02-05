@@ -1909,7 +1909,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.16.0"
+export HX_VERSION="13.16.1"
 
 # Variables and constants used in build and QEMU
 
@@ -1934,7 +1934,7 @@ export BUILD_ID=$(uuid -m -v 4)
 
 export DISK_IMAGE_PATH="hexagonix/hexagonix.img" # Image filename with relative path
 export IMAGE_PATH="hexagonix" # Image path
-export COMMON_FLAGS="UNIX=YES -d LOGIN_STYLE=Hexagonix -d VERBOSE=YES" # General build flags
+export COMMON_FLAGS="VERBOSE=YES -d LOGIN_STYLE=Hexagonix" # General build flags
 export FLAGS_HEXAGON="VERBOSE=YES" # Hexagon build flags
 export FLAGS_HBOOT="SOUND_THEME=Hexagonix" # HBoot build flags
 export DISTRO_DIRECTORY="Build" # Location of executable images and generated static files
