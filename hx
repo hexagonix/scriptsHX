@@ -320,7 +320,7 @@ echo -en "\e[1;94mBuilding the Hexagon kernel...\e[0m"
 echo "Building the Hexagon kernel... {" >> ../log.log
 echo >> ../log.log
 
-fasm kern/Hexagon.asm Hexagon -d $FLAGS_HEXAGON >> ../log.log || generalBuildError
+fasm kern/Hexagon.asm Hexagon -d $HEXAGON_FLAGS >> ../log.log || generalBuildError
 
 cp Hexagon ../$DISTRO_DIRECTORY/bin
 
@@ -378,7 +378,7 @@ echo >> ../log.log
 
 cd "HBoot"
 
-fasm hboot.asm ../hboot -d $FLAGS_HBOOT >> ../../log.log || generalBuildError
+fasm hboot.asm ../hboot -d $HBOOT_FLAGS >> ../../log.log || generalBuildError
 
 cd Mods
 
@@ -1321,9 +1321,9 @@ banner
 echo "Common flags:"
 echo -e " > \e[1;32m$COMMON_FLAGS\e[0m"
 echo "Hexagon flags:"
-echo -e " > \e[1;32m$FLAGS_HEXAGON\e[0m"
+echo -e " > \e[1;32m$HEXAGON_FLAGS\e[0m"
 echo "HBoot build flags:"
-echo -e " > \e[1;32m$FLAGS_HBOOT\e[0m"
+echo -e " > \e[1;32m$HBOOT_FLAGS\e[0m"
 echo
 
 allDone
@@ -1422,8 +1422,8 @@ fi
 
 echo >> $LOG
 echo " > Build flags:" >> $LOG
-echo "   > HBoot build flags: $FLAGS_HBOOT" >> $LOG
-echo "   > Hexagon build flags: $FLAGS_HEXAGON" >> $LOG
+echo "   > HBoot build flags: $HBOOT_FLAGS" >> $LOG
+echo "   > Hexagon build flags: $HEXAGON_FLAGS" >> $LOG
 echo "   > Common userland build flags: $COMMON_FLAGS" >> $LOG
 
 echo >> $LOG
@@ -1909,7 +1909,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.16.1"
+export HX_VERSION="13.16.2"
 
 # Variables and constants used in build and QEMU
 
@@ -1935,8 +1935,8 @@ export BUILD_ID=$(uuid -m -v 4)
 export DISK_IMAGE_PATH="hexagonix/hexagonix.img" # Image filename with relative path
 export IMAGE_PATH="hexagonix" # Image path
 export COMMON_FLAGS="VERBOSE=YES -d LOGIN_STYLE=Hexagonix" # General build flags
-export FLAGS_HEXAGON="VERBOSE=YES" # Hexagon build flags
-export FLAGS_HBOOT="SOUND_THEME=Hexagonix" # HBoot build flags
+export HEXAGON_FLAGS="VERBOSE=YES" # Hexagon build flags
+export HBOOT_FLAGS="SOUND_THEME=Hexagonix" # HBoot build flags
 export DISTRO_DIRECTORY="Build" # Location of executable images and generated static files
 export IMAGE_FILENAME="hexagonix.img" # Final image name (without directory)
 export MOUNT_POINT_DIRECTORY="SystemBuild" # Disk image mount point for copying Hexagonix files
