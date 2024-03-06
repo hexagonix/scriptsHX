@@ -106,7 +106,7 @@ echo
 echo -e "\e[1;94mMain\e[0m available parameters:"
 echo
 echo -e "\e[1;32m-v\e[0m  - Start a virtual machine. \e[1;32mUse 'hx -h -v' to learn more\e[0m"
-echo -e "\e[1;32m-i\e[0m  - Build disk image. \e[1;32mUse 'hx -h -v' to learn more\e[0m"
+echo -e "\e[1;32m-i\e[0m  - Build disk image. \e[1;32mUse 'hx -h -i' to learn more\e[0m"
 echo -e "\e[1;32m-u\e[0m  - Update all repositories with server (current branch)"
 echo -e "\e[1;32m-un <branch>\e[0m - Switch branch to <branch> and update all repositories"
 echo -e "\e[1;32m-ui\e[0m - Sync Hexagonix images with the official repository"
@@ -148,20 +148,13 @@ echo -e "\e[1;31m* The 'hx' option will be selected if no parameter is passed af
 
 }
 
-showCopyright() {
+showVersion() {
 
-clear
 
-export MSG="Copyright"
-
-banner
-
-echo -e "\e[1;94mhx: Hexagonix build and test tool version $HX_VERSION\e[0m"
+echo -e "hx: Hexagonix build utility version $HX_VERSION"
 echo
-echo -e "Developed by \e[1;32mFelipe Miguel Nery Lunkes\e[0m"
-echo
-echo -e "\e[0mCopyright © 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
-echo -e "\e[0mAll rights reserved.\e[0m"
+echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
+echo -e "hx is licenced under BSD-3-Clause and comes with no warranty."
 echo
 
 }
@@ -1909,7 +1902,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.16.2"
+export HX_VERSION="13.17.0"
 
 # Variables and constants used in build and QEMU
 
@@ -2016,7 +2009,7 @@ case $1 in
 
 # Manage parameters starting with '--'
 
---ver) showCopyright; exit;;
+--version) showVersion; exit;;
 --depend) installBuildDependencies; exit;;
 --info) getBuildInformation; infoBuild; exit;;
 --configure) startConfigureModule; exit;;
