@@ -1339,7 +1339,7 @@ echo "Hexagonix Operating System build and statistics report" >> $LOG
 echo "-------------------------------------------------------" >> $LOG
 echo >> $LOG
 echo "Hexagonix Operating System" >> $LOG
-echo "Copyright (C) 2015-2024 Felipe Miguel Nery Lunkes. All rights reserved." >> $LOG
+echo "Copyright (c) 2015-2024 Felipe Miguel Nery Lunkes. All rights reserved." >> $LOG
 echo >> $LOG
 echo "Hexagonix is licenced under BSD-3-Clause and comes with no warranty." >> $LOG
 echo >> $LOG
@@ -1485,18 +1485,18 @@ echo
 banner()
 {
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mHexagonix Operating System\e[0m"
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m  "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                       \e[1;32m$MSG\e[0m"
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
+echo -e "******************************************************************************"
+echo
+echo -e " ┌┐ ┌┐                              \e[1;94mHexagonix Operating System\e[0m"
+echo -e " ││ ││"
+echo -e " │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
+echo -e " │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m"
+echo -e " ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐"
+echo -e " └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘"
+echo -e "              ┌─┘│                       \e[1;32m$MSG\e[0m"
+echo -e "              └──┘"
+echo
+echo -e "******************************************************************************"
 echo
 
 }
@@ -1888,7 +1888,7 @@ exit
 # Hx entry point, variable definition and parameter processing
 #
 #
-# Copyright (C) 2015-2024 Felipe Miguel Nery Lunkes
+# Copyright (c) 2015-2024 Felipe Miguel Nery Lunkes
 # All rights reserved
 # Constants with parameter parsing
 
@@ -1902,7 +1902,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.17.1"
+export HX_VERSION="13.17.2"
 
 # Variables and constants used in build and QEMU
 
