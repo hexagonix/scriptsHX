@@ -1338,7 +1338,8 @@ echo "Hexagonix Operating System build and statistics report" >> $LOG
 echo "-------------------------------------------------------" >> $LOG
 echo >> $LOG
 echo "Hexagonix Operating System" >> $LOG
-echo "Copyright (c) 2015-2024 Felipe Miguel Nery Lunkes. All rights reserved." >> $LOG
+echo "Copyright (c) 2015-2024 Felipe Miguel Nery Lunkes" >> $LOG
+echo "All rights reserved." >> $LOG
 echo >> $LOG
 echo "Hexagonix is licenced under BSD-3-Clause and comes with no warranty." >> $LOG
 echo >> $LOG
@@ -1901,7 +1902,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.17.4"
+export HX_VERSION="13.17.5"
 
 # Variables and constants used in build and QEMU
 
