@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Version 5.2.4
+# Version 5.3.0
 
 # $PORTUGUÊS$
 #
@@ -480,22 +480,8 @@ echo -e "[\e[32mStep completed successfully\e[0m]"
 clean()
 {
 
-clear
+banner
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mHexagonix Operating System\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                   \e[1;32mConfigure build environment\e[0m        "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
 echo -e "Removing dependencies installed on your computer..."
 echo
 echo -n " > Removing hx from /usr/bin... "
@@ -533,22 +519,8 @@ finish
 configureBuild()
 {
 
-clear
+banner
 
-echo -e ";;****************************************************************************"
-echo -e ";;                                                                            "
-echo -e ";;                                                                            "
-echo -e ";; ┌┐ ┌┐                              \e[1;94mHexagonix Operating System\e[0m          "
-echo -e ";; ││ ││                                                                      "
-echo -e ";; │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright © 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
-echo -e ";; │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m             "
-echo -e ";; ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐                                                "
-echo -e ";; └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘                                                "
-echo -e ";;              ┌─┘│                   \e[1;32mConfigure build environment\e[0m        "
-echo -e ";;              └──┘                                                          "
-echo -e ";;                                                                            "
-echo -e ";;****************************************************************************"
-echo
 echo -e "Checking dependencies and configuring system build settings..."
 echo
 
@@ -560,6 +532,27 @@ host
 shrc
 
 echo -e "[\e[32mAll ready!\e[0m]"
+
+}
+
+banner() 
+{
+
+clear
+
+echo -e "******************************************************************************"
+echo
+echo -e " ┌┐ ┌┐                              \e[1;94mHexagonix Operating System\e[0m"
+echo -e " ││ ││"
+echo -e " │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
+echo -e " │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m"
+echo -e " ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐"
+echo -e " └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘"
+echo -e "              ┌─┘│                   \e[1;32mConfigure build environment\e[0m"
+echo -e "              └──┘"
+echo
+echo -e "******************************************************************************"
+echo
 
 }
 
