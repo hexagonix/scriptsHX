@@ -1048,7 +1048,6 @@ export MSG="hx: start virtual machine"
 
 banner
 
-echo
 echo -e "\e[1mStarting virtual machine with the following specifications:\e[0m"
 echo
 echo -e "> Image target architecture: \e[1;32m$SYSTEM_ARCH\e[0m"
