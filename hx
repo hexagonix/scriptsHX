@@ -1901,7 +1901,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.17.2"
+export HX_VERSION="13.17.3"
 
 # Variables and constants used in build and QEMU
 
