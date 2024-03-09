@@ -1486,7 +1486,7 @@ banner()
 
 echo -e "******************************************************************************"
 echo
-echo -e " ┌┐ ┌┐                              \e[1;94mHexagonix Operating System\e[0m"
+echo -e " ┌┐ ┌┐                                \e[1;94mHexagonix Operating System\e[0m"
 echo -e " ││ ││"
 echo -e " │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
 echo -e " │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m"
@@ -1901,7 +1901,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.17.3"
+export HX_VERSION="13.17.4"
 
 # Variables and constants used in build and QEMU
 
