@@ -68,7 +68,7 @@
 #
 # $HexagonixOS$
 
-# Version 5.3.0
+# Version 5.3.1
 
 # $PORTUGUÊS$
 #
@@ -542,7 +542,7 @@ clear
 
 echo -e "******************************************************************************"
 echo
-echo -e " ┌┐ ┌┐                              \e[1;94mHexagonix Operating System\e[0m"
+echo -e " ┌┐ ┌┐                                \e[1;94mHexagonix Operating System\e[0m"
 echo -e " ││ ││"
 echo -e " │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
 echo -e " │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m"
