@@ -155,7 +155,6 @@ echo -e "hx: Hexagonix build utility, version $HX_VERSION"
 echo
 echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
 echo -e "hx is licenced under BSD-3-Clause and comes with no warranty."
-echo
 
 }
 
@@ -1902,7 +1901,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.18.1"
+export HX_VERSION="13.18.2"
 
 # Variables and constants used in build and QEMU
 
