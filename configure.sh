@@ -68,8 +68,6 @@
 #
 # $HexagonixOS$
 
-# Version 5.3.1
-
 # $PORTUGUÊS$
 #
 # Esse script deve ficar na raiz do projeto
@@ -556,20 +554,30 @@ echo
 
 }
 
-export CONFIGURE1=$2
-export CONFIGURE2=$3
-export CONFIGURE3=$4
-export CONFIGURE4=$5
-export BUILD=$(uuid -m -v 4)
-export RELEASE=$(cat Dist/etc/release.def)
-export CODENOME=$(cat Dist/etc/codenome.def)
-export VERSION=$(cat Dist/etc/versao.def)
+showVersion()
+{
+echo "hx build configuration module, version $CONFIGURE_VERSION"
+echo
+echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
+echo -e "hx is licenced under BSD-3-Clause and comes with no warranty."
+}
+
+CONFIGURE_VERSION="5.4.0"
+CONFIGURE1=$2
+CONFIGURE2=$3
+CONFIGURE3=$4
+CONFIGURE4=$5
+BUILD=$(uuid -m -v 4) 
+RELEASE=$(cat Dist/etc/release.def)
+CODENOME=$(cat Dist/etc/codename.def)
+VERSION=$(cat Dist/etc/version.def)
 
 case $1 in
 
 build) build; exit;;
 user) users; exit;;
 clean) clean; exit;;
+--version) showVersion; exit;;
 *) configureBuild; exit;;
 
 esac
