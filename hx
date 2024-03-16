@@ -1126,8 +1126,8 @@ getBuildInformation()
 # Hexagonix version data
 
 export REVISAO=$(cat Dist/etc/release.def)
-export CODENOME=$(cat Dist/etc/codenome.def)
-export VERSAO=$(cat Dist/etc/versao.def)
+export CODENOME=$(cat Dist/etc/codename.def)
+export VERSAO=$(cat Dist/etc/version.def)
 
 }
 
@@ -1902,7 +1902,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.17.5"
+export HX_VERSION="13.18.0"
 
 # Variables and constants used in build and QEMU
 
