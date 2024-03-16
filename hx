@@ -151,7 +151,7 @@ echo -e "\e[1;31m* The 'hx' option will be selected if no parameter is passed af
 showVersion() {
 
 
-echo -e "hx: Hexagonix build utility version $HX_VERSION"
+echo -e "hx: Hexagonix build utility, version $HX_VERSION"
 echo
 echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
 echo -e "hx is licenced under BSD-3-Clause and comes with no warranty."
@@ -1902,7 +1902,7 @@ export PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.18.0"
+export HX_VERSION="13.18.1"
 
 # Variables and constants used in build and QEMU
 
