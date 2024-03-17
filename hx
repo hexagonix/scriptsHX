@@ -988,7 +988,7 @@ esac
 vmHexagonixPentium3()
 {
 
-QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu $PROCESSOR -hda $DISK_IMAGE_PATH -m $MEMORY -audiodev $AUDIODEV -k pt-br"
+QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu $PROCESSOR -hda $DISK_IMAGE_PATH -m $MEMORY -audiodev $AUDIO_DEVICE -k pt-br"
 NOTA="Using KVM and legacy processor (Pentium III)"
 
 startVirtualMachine
@@ -1018,7 +1018,7 @@ startVirtualMachine
 vmHexagonixWithKVM()
 {
 
-QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $DISK_IMAGE_PATH -m $MEMORY -audiodev $AUDIODEV -k pt-br"
+QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $DISK_IMAGE_PATH -m $MEMORY -audiodev $AUDIO_DEVICE -k pt-br"
 NOTA="Using KVM and serial output to file"
 
 startVirtualMachine
@@ -1308,12 +1308,14 @@ MSG="Hexagonix build flags"
 
 banner
 
-echo "Common flags:"
-echo -e " > \e[1;32m$COMMON_FLAGS\e[0m"
-echo "Hexagon flags:"
-echo -e " > \e[1;32m$HEXAGON_FLAGS\e[0m"
 echo "HBoot build flags:"
-echo -e " > \e[1;32m$HBOOT_FLAGS\e[0m"
+echo -e " > \e[1;32m$CONDENSED_HBOOT_FLAGS\e[0m"
+echo "Hexagon build flags:"
+echo -e " > \e[1;32m$CONDENSED_HEXAGON_FLAGS\e[0m"
+echo "Common userland build flags:"
+echo -e " > \e[1;32m$CONDENSED_COMMON_FLAGS\e[0m"
+
+
 echo
 
 allDone
@@ -1367,7 +1369,7 @@ echo "   > Fonts branch: $FONT_BRANCH" >> $LOG
 echo "   > Hexagon branch: $HEXAGON_BRANCH" >> $LOG
 echo "   > libasm branch: $LIBASM_BRANCH" >> $LOG
 echo "   > hx/Scripts branch: $HX_BRANCH" >> $LOG
-echo " > Server: $SERVER" >> $LOG
+echo " > Remote host: $REMOTE" >> $LOG
 echo >> $LOG
 echo "Information about the current build environment:" >> $LOG
 echo -n " > Date and time of this report (build time): " >> $LOG
@@ -1413,9 +1415,9 @@ fi
 
 echo >> $LOG
 echo " > Build flags:" >> $LOG
-echo "   > HBoot build flags: $HBOOT_FLAGS" >> $LOG
-echo "   > Hexagon build flags: $HEXAGON_FLAGS" >> $LOG
-echo "   > Common userland build flags: $COMMON_FLAGS" >> $LOG
+echo "   > HBoot build flags: $CONDENSED_HBOOT_FLAGS" >> $LOG
+echo "   > Hexagon build flags: $CONDENSED_HEXAGON_FLAGS" >> $LOG
+echo "   > Common userland build flags: $CONDENSED_COMMON_FLAGS" >> $LOG
 
 echo >> $LOG
 echo "----------------------------------------------------------------------" >> $LOG
@@ -1562,7 +1564,7 @@ echo -e "   > Fonts branch: \e[1;32m$FONT_BRANCH\e[0m"
 echo -e "   > Hexagon branch: \e[1;32m$HEXAGON_BRANCH\e[0m"
 echo -e "   > libasm branch: \e[1;32m$LIBASM_BRANCH\e[0m"
 echo -e "   > hx/Scripts branch: \e[1;32m$HX_BRANCH\e[0m"
-echo -e " > Server: \e[1;94m$SERVER\e[0m"
+echo -e " > Remote host: \e[1;94m$REMOTE\e[0m"
 echo
 
 finishStep
@@ -1582,7 +1584,7 @@ echo "branch. To change branch and update, use hx -un <branch>."
 echo
 echo "Update info:"
 echo -e " > Branch: \e[1;94m$MAIN_BRANCH\e[0m"
-echo -e " > Server: \e[1;94mhttps://github.com/hexagonix\e[0m"
+echo -e " > Remote host: \e[1;94mhttps://github.com/hexagonix\e[0m"
 echo
 echo -e "> \e[1;32mUpdating repositories...\e[0m"
 echo
@@ -1659,7 +1661,7 @@ echo "after switching to the given branch."
 echo
 echo "Update info:"
 echo -e " > Branch: \e[1;94m$PT2\e[0m"
-echo -e " > Server: \e[1;94mhttps://github.com/hexagonix\e[0m"
+echo -e " > Remote host: \e[1;94m$REMOTE\e[0m"
 echo
 echo -e "> \e[1;32mUpdating repositories...\e[0m"
 echo
@@ -1900,7 +1902,7 @@ PT6=$6
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.18.3"
+export HX_VERSION="13.19.0"
 
 # Variables and constants used in build and QEMU
 
@@ -1911,12 +1913,12 @@ SYSTEM_ARCH="i386"
 BSD_SYSTEM_ARCH="x86_64"
 PROCESSOR="pentium3"
 MEMORY=32
-AUDIODEV="pa,id=audio0 -machine pcspk-audiodev=audio0"
+AUDIO_DEVICE="pa,id=audio0 -machine pcspk-audiodev=audio0"
 
 # Build step constants
 
 LOG="log.log"
-SERVER="https://github.com/hexagonix"
+REMOTE="https://github.com/hexagonix"
 BUILD_ID=$(uuid -m -v 4)
 
 # Constants for the system build and image creation steps.
@@ -1931,6 +1933,12 @@ export HBOOT_FLAGS="SOUND_THEME=Hexagonix" # HBoot build flags
 export DISTRO_DIRECTORY="Build" # Location of executable images and generated static files
 export IMAGE_FILENAME="hexagonix.img" # Final image name (without directory)
 export MOUNT_POINT_DIRECTORY="SystemBuild" # Disk image mount point for copying Hexagonix files
+
+# Convert from command line to assembler for readable flags by removing parameters such as '-d'
+
+CONDENSED_HBOOT_FLAGS=$(tr ' ' '\n' <<< "$HBOOT_FLAGS" | grep -vf <(tr ' ' '\n' <<< "-d") | paste -sd ' ')
+CONDENSED_HEXAGON_FLAGS=$(tr ' ' '\n' <<< "$HEXAGON_FLAGS" | grep -vf <(tr ' ' '\n' <<< "-d") | paste -sd ' ')
+CONDENSED_COMMON_FLAGS=$(tr ' ' '\n' <<< "$COMMON_FLAGS" | grep -vf <(tr ' ' '\n' <<< "-d") | paste -sd ' ')
 
 # Now, let's define where the libasm headers and libraries (necessary for fasm) are
 
