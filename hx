@@ -1900,6 +1900,7 @@ PT5=$5
 PT6=$6
 
 # hx info
+# These variables MUST be exported. They must be accessible to child shell instances
 
 export HX_NAME=$0
 export HX_VERSION="13.19.0"
@@ -1922,8 +1923,9 @@ REMOTE="https://github.com/hexagonix"
 BUILD_ID=$(uuid -m -v 4)
 
 # Constants for the system build and image creation steps.
-# These are the default flags, and can be changed by parameters to
-# change the behavior of the Hexagonix build or components
+# These are the default flags, and can be changed by parameters to change the behavior of
+# the Hexagonix build or components.
+# These variables MUST be exported. They must be accessible to child shell instances
 
 export DISK_IMAGE_PATH="hexagonix/hexagonix.img" # Image filename with relative path
 export IMAGE_PATH="hexagonix" # Image path
@@ -1941,6 +1943,7 @@ CONDENSED_HEXAGON_FLAGS=$(tr ' ' '\n' <<< "$HEXAGON_FLAGS" | grep -vf <(tr ' ' '
 CONDENSED_COMMON_FLAGS=$(tr ' ' '\n' <<< "$COMMON_FLAGS" | grep -vf <(tr ' ' '\n' <<< "-d") | paste -sd ' ')
 
 # Now, let's define where the libasm headers and libraries (necessary for fasm) are
+# The variable MUST be exported. It needs to be accessible to child shell instances
 
 export INCLUDE="$(pwd)/lib/fasm"
 
