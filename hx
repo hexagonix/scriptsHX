@@ -216,7 +216,7 @@ esac
 
 setImageBuildOnLinux(){
 
-export HOST="LINUX"
+HOST="LINUX"
 
 verifyStaticFiles
 
@@ -230,7 +230,7 @@ buildHexagonix
 
 setImageBuildOnBSD(){
 
-export HOST="BSD"
+HOST="BSD"
 
 verifyStaticFiles
 
@@ -245,7 +245,7 @@ buildHexagonix
 setImageBuildOnUNIXSolaris()
 {
 
-export HOST="UNIX"
+HOST="UNIX"
 
 verifyStaticFiles
 
@@ -259,7 +259,7 @@ buildHexagonix
 
 prepImagemHexagonixTeste(){
 
-export HOST="LINUX"
+HOST="LINUX"
 
 verifyStaticFiles
 
@@ -279,8 +279,8 @@ setTestBuild()
 # Here we will generate a small image, 2 Mb, smaller and just for testing.
 # This image should not be used for the installation package.
 
-export DISK_IMAGE_SIZE=2097012
-export TEMP_IMAGE_SIZE=2048
+DISK_IMAGE_SIZE=2097012
+TEMP_IMAGE_SIZE=2048
 
 }
 
@@ -290,8 +290,8 @@ setReleaseBuild()
 # Here we will define an official size image, which takes longer to generate.
 # This image is appropriate for the Hexagonix installation package
 
-export DISK_IMAGE_SIZE=47185920
-export TEMP_IMAGE_SIZE=92160
+DISK_IMAGE_SIZE=47185920
+TEMP_IMAGE_SIZE=92160
 
 }
 
@@ -461,7 +461,7 @@ echo
 
 fi
 
-export MSG="System build error"
+MSG="System build error"
 
 banner
 echo
@@ -482,7 +482,7 @@ exit
 buildAllComponents()
 {
 
-export MSG="Building the Hexagonix"
+MSG="Building the Hexagonix"
 
 clear
 
@@ -502,7 +502,7 @@ allDone
 hexagonixConstructor()
 {
 
-export MSG="Building the Hexagonix"
+MSG="Building the Hexagonix"
 
 clear
 
@@ -842,7 +842,7 @@ echo >> $LOG
 echo "} Hexagonix disk images built successfully." >> $LOG
 echo >> $LOG
 
-export MSG="Build the Hexagonix"
+MSG="Build the Hexagonix"
 
 banner
 
@@ -988,8 +988,8 @@ esac
 vmHexagonixPentium3()
 {
 
-export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu $PROCESSOR -hda $DISK_IMAGE_PATH -m $MEMORY -audiodev $AUDIODEV -k pt-br"
-export NOTA="Using KVM and legacy processor (Pentium III)"
+QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu $PROCESSOR -hda $DISK_IMAGE_PATH -m $MEMORY -audiodev $AUDIODEV -k pt-br"
+NOTA="Using KVM and legacy processor (Pentium III)"
 
 startVirtualMachine
 
@@ -998,8 +998,8 @@ startVirtualMachine
 vmHexagonixWithoutSnd()
 {
 
-export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $DISK_IMAGE_PATH -m $MEMORY -k pt-br"
-export NOTA="Using without sound device"
+QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $DISK_IMAGE_PATH -m $MEMORY -k pt-br"
+NOTA="Using without sound device"
 
 startVirtualMachine
 
@@ -1008,8 +1008,8 @@ startVirtualMachine
 vmHexagonixOnBSDHost()
 {
 
-export QEMU_ARGS="-cpu $PROCESSOR -hda $DISK_IMAGE_PATH -m $MEMORY -k pt-br"
-export NOTA="BSD mode"
+QEMU_ARGS="-cpu $PROCESSOR -hda $DISK_IMAGE_PATH -m $MEMORY -k pt-br"
+NOTA="BSD mode"
 
 startVirtualMachine
 
@@ -1018,9 +1018,8 @@ startVirtualMachine
 vmHexagonixWithKVM()
 {
 
-
-export QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $DISK_IMAGE_PATH -m $MEMORY -audiodev $AUDIODEV -k pt-br"
-export NOTA="Using KVM and serial output to file"
+QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $DISK_IMAGE_PATH -m $MEMORY -audiodev $AUDIODEV -k pt-br"
+NOTA="Using KVM and serial output to file"
 
 startVirtualMachine
 
@@ -1029,8 +1028,8 @@ startVirtualMachine
 vmHexagonixWithoutSerialRedirection()
 {
 
-export QEMU_ARGS="-serial stdio -hda $DISK_IMAGE_PATH -cpu $PROCESSOR -m $MEMORY -k pt-br"
-export NOTA="Using serial output to console"
+QEMU_ARGS="-serial stdio -hda $DISK_IMAGE_PATH -cpu $PROCESSOR -m $MEMORY -k pt-br"
+NOTA="Using serial output to console"
 
 startVirtualMachine
 
@@ -1043,7 +1042,7 @@ if [ -e $DISK_IMAGE_PATH ] ; then
 
 clear
 
-export MSG="hx: start virtual machine"
+MSG="hx: start virtual machine"
 
 banner
 
@@ -1071,7 +1070,7 @@ virtualMachineGeneralError()
 
 clear
 
-export MSG="hx: start virtual machine"
+MSG="hx: start virtual machine"
 
 banner
 
@@ -1093,7 +1092,7 @@ cleanObjectsInSourceTree()
 
 clear
 
-export MSG="hx: clear system tree"
+MSG="hx: clear system tree"
 
 banner
 
@@ -1124,9 +1123,9 @@ getBuildInformation()
 
 # Hexagonix version data
 
-export REVISAO=$(cat Dist/etc/release.def)
-export CODENOME=$(cat Dist/etc/codename.def)
-export VERSAO=$(cat Dist/etc/version.def)
+HEXAGONIX_REVISION=$(cat Dist/etc/release.def)
+HEXAGONIX_CODENAME=$(cat Dist/etc/codename.def)
+HEXAGONIX_VERSION=$(cat Dist/etc/version.def)
 
 }
 
@@ -1135,14 +1134,14 @@ infoBuild()
 
 clear
 
-export MSG="System information"
+MSG="System information"
 
 banner
 
 echo -e "Information about the \e[1mcurrent\e[0m build of the system:"
-echo -e " > Hexagonix version: \e[1;32m$VERSAO\e[0m"
-echo -e " > Software revision: \e[1;32m$REVISAO\e[0m"
-echo -e " > Release name: \e[1;32m$CODENOME\e[0m"
+echo -e " > Hexagonix version: \e[1;32m$HEXAGONIX_VERSION\e[0m"
+echo -e " > Software revision: \e[1;32m$HEXAGONIX_REVISION\e[0m"
+echo -e " > Release name: \e[1;32m$HEXAGONIX_CODENAME\e[0m"
 echo -e " > Disk image location: \e[1;32m$IMAGE_PATH/$IMAGE_FILENAME\e[0m"
 echo
 
@@ -1235,7 +1234,7 @@ else
 
 clear
 
-export MSG="Building the Hexagonix"
+MSG="Building the Hexagonix"
 
 banner
 
@@ -1257,7 +1256,7 @@ displayStatistics(){
 
 clear
 
-export MSG="Statistics"
+MSG="Statistics"
 
 banner
 
@@ -1305,7 +1304,7 @@ showBuildFlags()
 
 clear
 
-export MSG="Hexagonix build flags"
+MSG="Hexagonix build flags"
 
 banner
 
@@ -1353,9 +1352,9 @@ echo >> $LOG
 echo "Build task id: $BUILD_ID" >> $LOG
 echo >> $LOG
 echo "Information about the current build of Hexagonix:" >> $LOG
-echo " > Hexagonix version: $VERSAO" >> $LOG
-echo " > Software revision: $REVISAO" >> $LOG
-echo " > Release name: $CODENOME" >> $LOG
+echo " > Hexagonix version: $HEXAGONIX_VERSION" >> $LOG
+echo " > Software revision: $HEXAGONIX_REVISION" >> $LOG
+echo " > Release name: $HEXAGONIX_CODENAME" >> $LOG
 echo " > Disk image location: $IMAGE_PATH/$IMAGE_FILENAME" >> $LOG
 echo " > Main system branch (git): $MAIN_BRANCH" >> $LOG
 echo "   > Andromeda-Apps branch: $ANDROMEDA_APPS_BRANCH" >> $LOG
@@ -1460,7 +1459,7 @@ exit
 
 fi
 
-export MSG="Install dependencies"
+MSG="Install dependencies"
 
 banner
 
@@ -1503,7 +1502,7 @@ echo
 updateDiskImages()
 {
 
-export MSG="Update images"
+MSG="Update images"
 
 banner
 
@@ -1546,7 +1545,7 @@ allDone
 infoRepo()
 {
 
-export MSG="Repos information"
+MSG="Repos information"
 
 echo
 echo "hx version $HX_VERSION"
@@ -1574,7 +1573,7 @@ allDone
 updateRepositories()
 {
 
-export MSG="Update repos"
+MSG="Update repos"
 
 banner
 
@@ -1651,7 +1650,7 @@ allDone
 switchBranchAndUpdateRepositories()
 {
 
-export MSG="Update branch and repositories"
+MSG="Update branch and repositories"
 
 banner
 
@@ -1729,7 +1728,7 @@ cloneRepositories()
 
 clear
 
-export MSG="Build the Hexagonix"
+MSG="Build the Hexagonix"
 
 banner
 
@@ -1822,7 +1821,7 @@ checkCloneDependencies()
 
 clear
 
-export MSG="Build the Hexagonix"
+MSG="Build the Hexagonix"
 
 banner
 
@@ -1864,7 +1863,7 @@ sureq()
 
 clear
 
-export MSG="hx: you need to be root"
+MSG="hx: you need to be root"
 
 banner
 
@@ -1891,34 +1890,34 @@ exit
 # All rights reserved
 # Constants with parameter parsing
 
-export PT1=$1
-export PT2=$2
-export PT3=$3
-export PT4=$4
-export PT5=$5
-export PT6=$6
+PT1=$1
+PT2=$2
+PT3=$3
+PT4=$4
+PT5=$5
+PT6=$6
 
 # hx info
 
 export HX_NAME=$0
-export HX_VERSION="13.18.2"
+export HX_VERSION="13.18.3"
 
 # Variables and constants used in build and QEMU
 
 # Constants for virtual machine execution (QEMU)
 
-export DRV_SOUND="pcspk"
-export SYSTEM_ARCH="i386"
-export BSD_SYSTEM_ARCH="x86_64"
-export PROCESSOR="pentium3"
-export MEMORY=32
-export AUDIODEV="pa,id=audio0 -machine pcspk-audiodev=audio0"
+DRV_SOUND="pcspk"
+SYSTEM_ARCH="i386"
+BSD_SYSTEM_ARCH="x86_64"
+PROCESSOR="pentium3"
+MEMORY=32
+AUDIODEV="pa,id=audio0 -machine pcspk-audiodev=audio0"
 
 # Build step constants
 
-export LOG="log.log"
-export SERVER="https://github.com/hexagonix"
-export BUILD_ID=$(uuid -m -v 4)
+LOG="log.log"
+SERVER="https://github.com/hexagonix"
+BUILD_ID=$(uuid -m -v 4)
 
 # Constants for the system build and image creation steps.
 # These are the default flags, and can be changed by parameters to
@@ -1951,40 +1950,40 @@ if [ -e $DISK_IMAGE_PATH ] ; then
 
 # First, Andromeda-Apps and Unix-Apps
 cd Apps/Andromeda
-export ANDROMEDA_APPS_BRANCH=$(git branch --show-current)
+ANDROMEDA_APPS_BRANCH=$(git branch --show-current)
 cd ../Unix
-export UNIX_APPS_BRANCH=$(git branch --show-current)
+UNIX_APPS_BRANCH=$(git branch --show-current)
 cd ../..
 # Now HBoot and Saturno
 cd "Boot/HBoot"
-export HBOOT_BRANCH=$(git branch --show-current)
+HBOOT_BRANCH=$(git branch --show-current)
 cd ../Saturno
-export SATURNO_BRANCH=$(git branch --show-current)
+SATURNO_BRANCH=$(git branch --show-current)
 cd ../..
 cd Dist/etc
-export ETC_BRANCH=$(git branch --show-current)
+ETC_BRANCH=$(git branch --show-current)
 cd ../man
-export MAN_BRANCH=$(git branch --show-current)
+MAN_BRANCH=$(git branch --show-current)
 cd ../..
 # Now fonts
 cd Fonts
-export FONT_BRANCH=$(git branch --show-current)
+FONT_BRANCH=$(git branch --show-current)
 cd ..
 # Now Hexagon
 cd Hexagon
-export HEXAGON_BRANCH=$(git branch --show-current)
+HEXAGON_BRANCH=$(git branch --show-current)
 cd ..
 # Now libasm
 cd lib
-export LIBASM_BRANCH=$(git branch --show-current)
+LIBASM_BRANCH=$(git branch --show-current)
 cd ..
 # Now hx and hx modules
 cd Scripts
-export HX_BRANCH=$(git branch --show-current)
+HX_BRANCH=$(git branch --show-current)
 cd ..
 # Main branch of everything, where the images will go
 cd hexagonix
-export MAIN_BRANCH=$(git branch --show-current)
+MAIN_BRANCH=$(git branch --show-current)
 cd ..
 
 fi
