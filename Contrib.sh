@@ -78,8 +78,6 @@
 
 # Este arquivo constrói os utilitários e aplicativos de terceiros
 
-# Version 2.0
-
 buildContribPackages(){
 
 echo -e "\e[1;94mBuilding additional packages for Hexagonix...\e[0m {"
@@ -111,6 +109,8 @@ echo
 echo -e "} [\e[32mSuccessfully built additional packages\e[0m]."
 
 }
+
+export CONTRIB_VERSION="2.1.0"
 
 export BUILD_DIRECTORY=$1
 export REG="log.log"
