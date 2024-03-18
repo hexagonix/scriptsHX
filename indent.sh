@@ -166,7 +166,15 @@ echo
 
 }
 
-export INDENT_VERSION="3.0"
+showVersion()
+{
+echo "hx build module for source indentation, version $INDENT_VERSION"
+echo
+echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
+echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
+}
+
+export INDENT_VERSION="4.0.0"
 
 echo
 echo "hx indentation helper version $INDENT_VERSION"
@@ -185,6 +193,7 @@ case $1 in
 -d) optimizeDefinitions; exit;;
 -s) optimizeScripts; exit;;
 -h) indentHelp; exit;;
+--version) showVersion; exit;;
 *) indentHelp; exit;;
 
 esac
