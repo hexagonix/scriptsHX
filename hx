@@ -154,7 +154,7 @@ showVersion() {
 echo -e "hx: Hexagonix build utility, version $HX_VERSION"
 echo
 echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
-echo -e "hx is licenced under BSD-3-Clause and comes with no warranty."
+echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
 
 }
 
@@ -1903,7 +1903,7 @@ PT6=$6
 # These variables MUST be exported. They must be accessible to child shell instances
 
 export HX_NAME=$0
-export HX_VERSION="13.19.0"
+export HX_VERSION="13.19.1"
 
 # Variables and constants used in build and QEMU
 
