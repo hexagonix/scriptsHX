@@ -559,10 +559,10 @@ showVersion()
 echo "hx build configuration module, version $CONFIGURE_VERSION"
 echo
 echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
-echo -e "hx is licenced under BSD-3-Clause and comes with no warranty."
+echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
 }
 
-export CONFIGURE_VERSION="5.4.1"
+export CONFIGURE_VERSION="5.4.2"
 
 CONFIGURE1=$2
 CONFIGURE2=$3
