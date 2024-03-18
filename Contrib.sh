@@ -110,9 +110,22 @@ echo -e "} [\e[32mSuccessfully built additional packages\e[0m]."
 
 }
 
+showVersion()
+{
+echo "hx build module for contrib packages, version $CONTRIB_VERSION"
+echo
+echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
+echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
+}
+
 export CONTRIB_VERSION="2.1.0"
 
 export BUILD_DIRECTORY=$1
 export REG="log.log"
 
-buildContribPackages
+case $1 in
+
+--version) showVersion; exit;;
+*) buildContribPackages; exit;;
+
+esac
