@@ -562,7 +562,8 @@ echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
 echo -e "hx is licenced under BSD-3-Clause and comes with no warranty."
 }
 
-CONFIGURE_VERSION="5.4.0"
+export CONFIGURE_VERSION="5.4.1"
+
 CONFIGURE1=$2
 CONFIGURE2=$3
 CONFIGURE3=$4
