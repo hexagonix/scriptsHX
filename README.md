@@ -58,7 +58,7 @@ O `HX` é a ferramenta responsável por unificar toda a construção do Hexagoni
 
 <div align="justify">
 
-* Externos.sh: deve estar no diretório `Externos`, na raiz da árvore do Hexagonix. Todos os repositórios com códigos de terceiros devem ser clonados no interior do diretório `Externos`. `Externos.sh`é responsável por construir e/ou manipular os códigos de terceiros, como aplicativos e bibliotecas.
+* Contrib.sh: deve estar no diretório `Contrib`, na raiz da árvore do Hexagonix. Todos os repositórios com códigos de terceiros devem ser clonados no interior do diretório `Contrib`. `Contrib.sh`é responsável por construir e/ou manipular os códigos de terceiros, como aplicativos e bibliotecas.
 * configure.sh: Deve estar no diretório raiz da árvore de construção. Ele é responsável por criar arquivos estáticos necessários à construção do Hexagonix. Sua execução pode ser iniciada pelo `HX`, caso os arquivos estáticos necessários não sejam localizados.
 
 </div>
@@ -105,7 +105,7 @@ This repository contains tools to build Hexagonix and the system disk images, in
 
 <div align="justify">
 
-* Externos.sh: must be in the `Externos` directory, at the root of the Hexagonix tree. All repositories with third party code must be cloned inside the `Externos` directory. `Externos.sh` is responsible for building and/or manipulating third-party code, such as applications and libraries.
+* Contrib.sh: must be in the `Contrib` directory, at the root of the Hexagonix tree. All repositories with third party code must be cloned inside the `Contrib` directory. `Contrib.sh` is responsible for building and/or manipulating third-party code, such as applications and libraries.
 * configure.sh: Must be in the root directory of the build tree. He is responsible for creating static files needed to build Hexagonix. Its execution can be started by `HX`, in case the necessary static files are not found.
 
 </div>
@@ -140,9 +140,3 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 </div>
 
 </details>
-
-<!--
-
-Versão deste arquivo: 1.0
-
--->
