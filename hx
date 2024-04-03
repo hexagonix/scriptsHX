@@ -188,7 +188,7 @@ esac
 
 }
 
-manageComponentConstruction()
+manageComponentBuild()
 {
 
 mkdir -p $DISTRO_DIRECTORY
@@ -499,7 +499,7 @@ allDone
 
 }
 
-hexagonixConstructor()
+hexagonixBuilder()
 {
 
 MSG="Building the Hexagonix"
@@ -691,7 +691,7 @@ fi
 
 # Now the system files will be generated...
 
-hexagonixConstructor
+hexagonixBuilder
 
 # Now the system image will be prepared...
 
@@ -1903,7 +1903,7 @@ PT6=$6
 # These variables MUST be exported. They must be accessible to child shell instances
 
 export HX_NAME=$0
-export HX_VERSION="13.19.1"
+export HX_VERSION="13.19.2"
 
 # Variables and constants used in build and QEMU
 
@@ -2008,7 +2008,7 @@ case $1 in
 -v) manageVirtualMachines; exit;;
 -i) manageBuild; exit;;
 -h) showMainHelp; exit;;
--b) manageComponentConstruction; exit;;
+-b) manageComponentBuild; exit;;
 -br) infoRepo; exit;;
 -u) updateRepositories; exit;;
 -ui) updateDiskImages; exit;;
