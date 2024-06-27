@@ -78,7 +78,18 @@
 
 # Este arquivo constrói os utilitários e aplicativos de terceiros
 
-buildContribPackages(){
+function main() {
+
+case $1 in
+
+--version) showVersion; exit;;
+*) buildContribPackages; exit;;
+
+esac
+
+}
+
+function buildContribPackages() {
 
 echo -e "\e[1;94mBuilding additional packages for Hexagonix...\e[0m {"
 echo
@@ -110,19 +121,15 @@ echo -e "} [\e[32mSuccessfully built additional packages\e[0m]."
 
 }
 
-showVersion()
-{
+function showVersion() {
+
 echo "hx build module for contrib packages, version $CONTRIB_VERSION"
 echo
 echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
 echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
+
 }
 
-export CONTRIB_VERSION="3.0.0"
+export CONTRIB_VERSION="3.0.1"
 
-case $1 in
-
---version) showVersion; exit;;
-*) buildContribPackages; exit;;
-
-esac
+main $1
