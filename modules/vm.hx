@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# hx virtual machine management section
-
 vmHexagonixPentium3()
 {
 
