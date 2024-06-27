@@ -68,8 +68,7 @@
 #
 # $HexagonixOS$
 
-function infoBuild()
-{
+function infoBuild() {
 
 clear
 
