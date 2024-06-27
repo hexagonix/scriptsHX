@@ -5,7 +5,7 @@ diskBuilder()
 
 startBuildLog
 
-echo -e "Starting Hexagonix builder mod version $MOD_VERSION...\n" >> $LOG
+echo -e "Starting Hexagonix disk builder mod version $MOD_VER...\n" >> $LOG
 
 if test "`whoami`" != "root" ; then
 
