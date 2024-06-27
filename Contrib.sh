@@ -91,13 +91,13 @@ cd HEXAGONIX
 for i in *.asm
 do
 
-    echo -n " > Generating additional (contrib) application $(basename $i .asm)..." >> ../../../../$REG
+    echo -n " > Generating additional (contrib) application $(basename $i .asm)..." >> $LOG
     echo -en "Generating additional (contrib) application \e[1;94m$(basename $i .asm)\e[0m..."
 
-    fasm $i ../../../../$BUILD_DIRECTORY/bin/`basename $i .asm` -d $COMMON_FLAGS >> /dev/null || echo " [Fail]"
+    fasm $i $BUILD_DIRECTORY/bin/`basename $i .asm` -d $COMMON_FLAGS >> /dev/null || echo " [Fail]"
 
     echo -e " [\e[32mOk\e[0m]"
-    echo " [Ok]" >> ../../../../$REG
+    echo " [Ok]" >> $LOG
 
 done
 
@@ -118,10 +118,7 @@ echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
 echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
 }
 
-export CONTRIB_VERSION="2.1.0"
-
-export BUILD_DIRECTORY=$1
-export REG="log.log"
+export CONTRIB_VERSION="3.0.0"
 
 case $1 in
 
