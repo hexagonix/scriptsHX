@@ -76,105 +76,7 @@
 #
 # This script must be in the root of the project
 
-optimizeFontsManualsAndDefinitions()
-{
-
-optimizeFonts
-optimizeManuals
-optimizeDefinitions
-
-}
-
-optimizeFonts()
-{
-
-echo -e "> \e[32mSearching and fixing indentation in Hexagonix source and related files...\e[0m"
-
-find . -name '*.asm' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
-find . -name '*.s' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
-find . -name '*.cow' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
-
-echo -e "> \e[32mSearching and removing extra spaces in Hexagonix source and related files...\e[0m"
-
-find . -name '*.asm' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
-find . -name '*.s' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
-find . -name '*.cow' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
-
-}
-
-optimizeDefinitions()
-{
-
-echo -e "> \e[32mSearching and fixing indentation in Hexagonix definition files...\e[0m"
-
-find . -name '*.conf' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
-find . -name '*.def' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
-
-echo -e "> \e[32mSearching and removing extra spaces in Hexagonix definition files...\e[0m"
-
-find . -name '*.conf' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
-find . -name '*.def' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
-
-}
-
-optimizeManuals()
-{
-
-echo -e "> \e[32mSearching and fixing indentation in Hexagonix manuals...\e[0m"
-
-find . -name '*.man' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
-
-echo -e "> \e[32mSearching and removing extra spaces in Hexagonix manuals...\e[0m"
-
-find . -name '*.man' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
-
-}
-
-optimizeScripts()
-{
-
-echo -e "> \e[32mSearching and fixing indentation in Hexagonix scripts and tools...\e[0m"
-
-find . -name '*.sh' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
-find . -name 'hx' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
-
-echo -e "> \e[32mSearching and removing extra spaces in Hexagonix scripts and tools...\e[0m"
-
-find . -name '*.sh' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
-find . -name 'hx' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
-
-echo -e "> \e[32mTuning executable and script files...\e[0m"
-
-find . -name '*.sh' ! -type d -exec bash -c 'chmod +x *.sh' {} \;
-find . -name 'hx' ! -type d -exec bash -c 'chmod +x hx' {} \;
-
-}
-
-indentHelp()
-{
-
-echo
-echo -e "\e[1;94mMain\e[0m available parameters:"
-echo
-echo -e "\e[1;32m-a\e[0m - Indent and optimize Hexagonix source files, manuals and definition files."
-echo -e "\e[1;32m-f\e[0m - Indent and optimize Hexagonix x86 Assembly source files only."
-echo -e "\e[1;32m-m\e[0m - Indent and optimize Hexagonix manuals only."
-echo -e "\e[1;32m-d\e[0m - Indent and optimize Hexagonix definition files only."
-echo -e "\e[1;32m-s\e[0m - Indent and optimize Hexagonix scripts and build tools only."
-echo -e "\e[1;32m-h\e[0m - Display this help."
-echo
-
-}
-
-showVersion()
-{
-echo "hx build module for source indentation, version $INDENT_VERSION"
-echo
-echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
-echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
-}
-
-export INDENT_VERSION="4.0.0"
+function main() {
 
 echo
 echo "hx indentation helper version $INDENT_VERSION"
@@ -197,3 +99,102 @@ case $1 in
 *) indentHelp; exit;;
 
 esac
+
+}
+
+function optimizeFontsManualsAndDefinitions() {
+
+optimizeFonts
+optimizeManuals
+optimizeDefinitions
+
+}
+
+function optimizeFonts() {
+
+echo -e "> \e[32mSearching and fixing indentation in Hexagonix source and related files...\e[0m"
+
+find . -name '*.asm' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+find . -name '*.s' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+find . -name '*.cow' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+
+echo -e "> \e[32mSearching and removing extra spaces in Hexagonix source and related files...\e[0m"
+
+find . -name '*.asm' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
+find . -name '*.s' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
+find . -name '*.cow' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
+
+}
+
+function optimizeDefinitions() {
+
+echo -e "> \e[32mSearching and fixing indentation in Hexagonix definition files...\e[0m"
+
+find . -name '*.conf' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+find . -name '*.def' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+
+echo -e "> \e[32mSearching and removing extra spaces in Hexagonix definition files...\e[0m"
+
+find . -name '*.conf' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
+find . -name '*.def' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
+
+}
+
+function optimizeManuals() {
+
+echo -e "> \e[32mSearching and fixing indentation in Hexagonix manuals...\e[0m"
+
+find . -name '*.man' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+
+echo -e "> \e[32mSearching and removing extra spaces in Hexagonix manuals...\e[0m"
+
+find . -name '*.man' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
+
+}
+
+function optimizeScripts() {
+
+echo -e "> \e[32mSearching and fixing indentation in Hexagonix scripts and tools...\e[0m"
+
+find . -name '*.sh' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+find . -name 'hx' ! -type d -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' {} \;
+
+echo -e "> \e[32mSearching and removing extra spaces in Hexagonix scripts and tools...\e[0m"
+
+find . -name '*.sh' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
+find . -name 'hx' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
+
+echo -e "> \e[32mTuning executable and script files...\e[0m"
+
+find . -name '*.sh' ! -type d -exec bash -c 'chmod +x *.sh' {} \;
+find . -name 'hx' ! -type d -exec bash -c 'chmod +x hx' {} \;
+
+}
+
+function indentHelp() {
+
+echo
+echo -e "\e[1;94mMain\e[0m available parameters:"
+echo
+echo -e "\e[1;32m-a\e[0m - Indent and optimize Hexagonix source files, manuals and definition files."
+echo -e "\e[1;32m-f\e[0m - Indent and optimize Hexagonix x86 Assembly source files only."
+echo -e "\e[1;32m-m\e[0m - Indent and optimize Hexagonix manuals only."
+echo -e "\e[1;32m-d\e[0m - Indent and optimize Hexagonix definition files only."
+echo -e "\e[1;32m-s\e[0m - Indent and optimize Hexagonix scripts and build tools only."
+echo -e "\e[1;32m-h\e[0m - Display this help."
+echo
+
+}
+
+function showVersion() 
+{
+echo "hx build module for source indentation, version $INDENT_VERSION"
+echo
+echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
+echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
+
+}
+
+export INDENT_VERSION="4.0.1"
+
+main $1
