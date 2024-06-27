@@ -73,7 +73,6 @@ function main() {
 case $1 in
 
 infoBuild) infoBuild; exit;;
-getBuildInformation) getBuildInformation; exit;;
 
 esac 
 
@@ -96,22 +95,12 @@ echo
 
 }
 
-function getBuildInformation() {
-
-# Hexagonix version data
-
-export HEXAGONIX_REVISION=$(cat Dist/etc/release.def)
-export HEXAGONIX_CODENAME=$(cat Dist/etc/codename.def)
-export HEXAGONIX_VERSION=$(cat Dist/etc/version.def)
-
-}
-
 # Imports
 
 . $MOD_DIR/macros.hx
 
 # Constants
 
-MOD_VER="0.2"
+MOD_VER="0.3"
 
 main $1
