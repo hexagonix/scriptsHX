@@ -234,7 +234,7 @@ function getBuildInformation() {
 
 # Hexagonix version data
 
-export HEXAGONIX_REVISION=$(cat Dist/etc/release.def)
+export HEXAGONIX_RELEASE_CHANNEL=$(cat Dist/etc/release.def)
 export HEXAGONIX_CODENAME=$(cat Dist/etc/codename.def)
 export HEXAGONIX_VERSION=$(cat Dist/etc/version.def)
 
@@ -1080,7 +1080,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="14.0.0-ALPHA4"
+export HX_VERSION="14.0.0-ALPHA5"
 
 # Modules directory
 
