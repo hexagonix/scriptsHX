@@ -76,8 +76,21 @@
 #
 # This script must be in the root of the project
 
-verifyDependencies()
-{
+function main() {
+
+case $1 in
+
+build) build; exit;;
+user) users; exit;;
+clean) clean; exit;;
+--version) showVersion; exit;;
+*) configureBuild; exit;;
+
+esac
+
+}
+
+function verifyDependencies() {
 
 echo -e "Checking dependencies needed to build the system..."
 
@@ -318,8 +331,7 @@ finish
 
 }
 
-build()
-{
+function build() {
 
 echo -e "Configuring system build data..."
 
@@ -363,8 +375,7 @@ finish
 
 }
 
-host()
-{
+function host() {
 
 echo -e "Configuring hostname..."
 
@@ -389,8 +400,7 @@ finish
 
 }
 
-shrc()
-{
+function shrc() {
 
 echo -e "Configuring shrc..."
 
@@ -416,8 +426,7 @@ finish
 
 }
 
-users()
-{
+function users() {
 
 echo -e "Configuring users..."
 
@@ -442,8 +451,7 @@ finish
 
 }
 
-init()
-{
+function init() {
 
 echo -e "Configuring rc (startup script)..."
 
@@ -468,15 +476,13 @@ finish
 
 }
 
-finish()
-{
+function finish() {
 
 echo -e "[\e[32mStep completed successfully\e[0m]"
 
 }
 
-clean()
-{
+function clean() {
 
 banner
 
@@ -514,8 +520,7 @@ finish
 
 }
 
-configureBuild()
-{
+function configureBuild() {
 
 banner
 
@@ -533,8 +538,7 @@ echo -e "[\e[32mAll ready!\e[0m]"
 
 }
 
-banner() 
-{
+function banner() {
 
 clear
 
@@ -554,15 +558,16 @@ echo
 
 }
 
-showVersion()
-{
+function showVersion() {
+
 echo "hx build configuration module, version $CONFIGURE_VERSION"
 echo
 echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
 echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
+
 }
 
-export CONFIGURE_VERSION="5.4.2"
+export CONFIGURE_VERSION="5.4.3"
 
 CONFIGURE1=$2
 CONFIGURE2=$3
@@ -573,12 +578,4 @@ RELEASE=$(cat Dist/etc/release.def)
 CODENOME=$(cat Dist/etc/codename.def)
 VERSION=$(cat Dist/etc/version.def)
 
-case $1 in
-
-build) build; exit;;
-user) users; exit;;
-clean) clean; exit;;
---version) showVersion; exit;;
-*) configureBuild; exit;;
-
-esac
+main $1
