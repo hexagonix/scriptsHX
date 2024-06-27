@@ -76,13 +76,13 @@ diskBuilder
 
 function diskBuilder() {
 
-startBuildLog
+callHXMod logUtils startBuildLog
 
 echo -e "Starting Hexagonix disk builder mod version $MOD_VER...\n" >> $LOG
 
 if test "`whoami`" != "root" ; then
 
-sureq
+callHXMod common suRequired
 
 exit
 
@@ -119,16 +119,16 @@ fi
 
 echo -e "> Copying system files to the image...\n" >> $LOG
 
-cp $BUILD_DIRECTORY/*.man $MOUNT_POINT_DIRECTORY >> $LOG || buildError
+cp $BUILD_DIRECTORY/*.man $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 cp $BUILD_DIRECTORY/*.asm $MOUNT_POINT_DIRECTORY >> $LOG
 cp $BUILD_DIRECTORY/*.s $MOUNT_POINT_DIRECTORY >> $LOG
-cp $BUILD_DIRECTORY/*.cow $MOUNT_POINT_DIRECTORY >> $LOG || buildError
-cp $BUILD_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY >> $LOG || buildError
-cp $BUILD_DIRECTORY/hboot $MOUNT_POINT_DIRECTORY >> $LOG || buildError
+cp $BUILD_DIRECTORY/*.cow $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/hboot $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 
 # License must be copied
 
-cp Dist/man/LICENSE $MOUNT_POINT_DIRECTORY >> $LOG || buildError
+cp Dist/man/LICENSE $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 
 # Now copy HBoot modules
 
@@ -138,8 +138,8 @@ cp $BUILD_DIRECTORY/*.mod $MOUNT_POINT_DIRECTORY/ >> $LOG
 
 fi
 
-cp $BUILD_DIRECTORY/etc/* $MOUNT_POINT_DIRECTORY >> $LOG || buildError
-cp $BUILD_DIRECTORY/*.ocl $MOUNT_POINT_DIRECTORY >> $LOG || buildError
+cp $BUILD_DIRECTORY/etc/* $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/*.ocl $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 
 # If the image should contain a copy of the FreeDOS files for testing...
 
@@ -160,7 +160,7 @@ if [ -e $BUILD_DIRECTORY/aurora.fnt ] ; then
 
 echo -e " [Yes]\n" >> $LOG
 
-cp $BUILD_DIRECTORY/*.fnt $MOUNT_POINT_DIRECTORY/ || buildError
+cp $BUILD_DIRECTORY/*.fnt $MOUNT_POINT_DIRECTORY/ || callHXMod common buildError
 
 fi
 
@@ -172,11 +172,11 @@ fi
 
 callHXMod contribChecker
 
-sleep 1.0 || buildError
+sleep 1.0 || callHXMod common buildError
 
 echo "> Unmounting the image..." >> $LOG
 
-umount $MOUNT_POINT_DIRECTORY >> /dev/null || buildError
+umount $MOUNT_POINT_DIRECTORY >> /dev/null || callHXMod common buildError
 
 if [ "$HOST" == "BSD" ]; then
 
@@ -194,11 +194,11 @@ echo "> Mounting the final image..." >> $LOG
 
 echo "  * Copying temporary image to final image..." >> $LOG
 
-dd status=none conv=notrunc if=temp.img of=$IMAGE_FILENAME seek=1 >> $LOG || buildError
+dd status=none conv=notrunc if=temp.img of=$IMAGE_FILENAME seek=1 >> $LOG || callHXMod common buildError
 
 echo "  * Copying MBR and partition table to image..." >> $LOG
 
-dd status=none conv=notrunc if=$BUILD_DIRECTORY/mbr.img of=$IMAGE_FILENAME >> $LOG || buildError
+dd status=none conv=notrunc if=$BUILD_DIRECTORY/mbr.img of=$IMAGE_FILENAME >> $LOG || callHXMod common buildError
 
 echo -e "> Removing temporary files and folders, as well as binaries that are no longer needed...\n" >> $LOG
 
@@ -233,13 +233,10 @@ echo -e "\n} Hexagonix disk images built successfully.\n" >> $LOG
 
 MSG="Build the Hexagonix"
 
-banner
-
-infoBuild
-
-showCreateInstallerInfo
-
-finishBuildLog
+callHXMod common banner
+callHXMod buildInfo infoBuild
+callHXMod logUtils showCreateInstallerInfo
+callHXMod logUtils finishBuildLog
 
 mv log.log $IMAGE_PATH/log.log
 chown $IMAGE_PATH/log.log --reference=$IMAGE_PATH/README.md
@@ -250,13 +247,11 @@ exit
 
 # Imports
 
-. $MOD_DIR/common.hx
-. $MOD_DIR/logUtils.hx
-. $MOD_DIR/buildInfo.hx
+. $MOD_DIR/macros.hx
 
 # Constants
 
-MOD_VER="0.1"
+MOD_VER="0.2"
 
 main $1
 

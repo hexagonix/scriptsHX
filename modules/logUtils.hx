@@ -68,8 +68,19 @@
 #
 # $HexagonixOS$
 
-startBuildLog()
-{
+function main() {
+
+case $1 in
+
+startBuildLog) startBuildLog; exit;;
+showCreateInstallerInfo) showCreateInstallerInfo; exit;;
+finishBuildLog) finishBuildLog; exit;;
+
+esac 
+
+}
+
+function startBuildLog() {
 
 if [ -e $LOG ] ; then
 
@@ -158,8 +169,7 @@ echo -e "\n---------------------------------------------------------------------
 
 }
 
-showCreateInstallerInfo()
-{
+function showCreateInstallerInfo() {
 
 echo "> Disk image '$IMAGE_FILENAME' and VM disk image '$(basename $IMAGE_FILENAME .img).vdi' generated successfully." >> $LOG
 echo -e "\nUse './hx -v hx' to test running the system on the generated image or copy" >> $LOG
@@ -169,8 +179,7 @@ echo -e "\n---------------------------------------------------------------------
 
 }
 
-finishBuildLog()
-{
+function finishBuildLog() {
 
 echo -n "End date/time of this log: " >> $LOG
 date >> $LOG
@@ -178,4 +187,8 @@ echo -e "\n---------------------------------------------------------------------
 
 }
 
-MOD_VER="0.1"
+# Constants
+
+MOD_VER="0.2"
+
+main $1

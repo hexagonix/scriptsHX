@@ -68,6 +68,21 @@
 #
 # $HexagonixOS$
 
+function main() {
+
+case $1 in 
+
+generalBuildError) generalBuildError; exit;;
+buildError) buildError; exit;;
+banner) banner; exit;;
+finishStep) finishStep; exit;;
+allDone) allDone; exit;;
+suRequired) suRequired; exit;;
+
+esac 
+
+}
+
 function generalBuildError() {
 
 echo -e "An error occurred while building some system component.\n"
@@ -106,19 +121,6 @@ exit
 
 }
 
-function callHXMod() {
-
-$MOD_DIR/$1.hx $2
-enforceRootDirectory
-
-}
-
-function enforceRootDirectory() {
-
-cd $ROOT_DIR
-
-}
-
 function banner() {
 
 echo -e "******************************************************************************"
@@ -149,7 +151,7 @@ echo -e "[\e[32mAll ready!\e[0m]"
 
 }
 
-function sureq() {
+function suRequired() {
 
 clear
 
@@ -165,4 +167,6 @@ exit
 
 # Constants
 
-MOD_VER="0.1"
+MOD_VER="0.2"
+
+main $1

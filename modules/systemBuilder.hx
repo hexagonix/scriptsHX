@@ -82,7 +82,7 @@ MSG="Building the Hexagonix"
 
 clear
 
-banner
+callHXMod common banner
 
 echo "Building the Hexagonix..."
 echo
@@ -198,10 +198,10 @@ callHXMod contribBuilder
 
 # Imports
 
-. $MOD_DIR/common.hx 
+. $MOD_DIR/macros.hx 
 
 # Constants
 
-MOD_VER="0.1"
+MOD_VER="0.2"
 
 main $1

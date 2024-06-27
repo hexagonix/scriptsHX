@@ -137,7 +137,7 @@ clear
 
 MSG="hx: start virtual machine"
 
-banner
+callHXMod common banner
 
 echo -e "\e[1mStarting virtual machine with the following specifications:\e[0m"
 echo
@@ -164,7 +164,7 @@ clear
 
 MSG="hx: start virtual machine"
 
-banner
+callHXMod common banner
 
 echo -e "Error in request: disk image \e[1;94m'$DISK_IMAGE_PATH'\e[0m not found or fail"
 echo -e "\e[0min some virtual machine component or parameter."
@@ -177,11 +177,11 @@ echo
 
 # Imports
 
-. $MOD_DIR/common.hx
+. $MOD_DIR/macros.hx
 
 # Constants
 
-MOD_VER="0.1"
+MOD_VER="0.2"
 
 # Constants for virtual machine execution (QEMU)
 

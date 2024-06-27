@@ -78,32 +78,32 @@ function buildImageOnLinux() {
 
 echo -e "Starting Hexagonix on Linux builder mod version $MOD_VER...\n" >> $LOG
 
-dd status=none bs=512 count=$TEMP_IMAGE_SIZE if=/dev/zero of=temp.img >> $LOG || buildError
+dd status=none bs=512 count=$TEMP_IMAGE_SIZE if=/dev/zero of=temp.img >> $LOG || callHXMod commons buildError
 
 if [ ! -e hexagonix.img ] ; then
 
 echo -e "> Building image that will receive system files...\n" >> $LOG
 
-dd status=none bs=$DISK_IMAGE_SIZE count=1 if=/dev/zero of=$IMAGE_FILENAME >> $LOG || buildError
+dd status=none bs=$DISK_IMAGE_SIZE count=1 if=/dev/zero of=$IMAGE_FILENAME >> $LOG || callHXMod commons buildError
 
 fi
 
 echo "> Copying bootloader (Saturno) to image..." >> $LOG
 
-dd status=none conv=notrunc if=$BUILD_DIRECTORY/saturno.img of=temp.img >> $LOG || buildError
+dd status=none conv=notrunc if=$BUILD_DIRECTORY/saturno.img of=temp.img >> $LOG || callHXMod commons buildError
 
 echo "> Mounting the image..." >> $LOG
 
-mkdir -p $MOUNT_POINT_DIRECTORY && mount -o loop -t vfat temp.img $MOUNT_POINT_DIRECTORY/ || buildError
+mkdir -p $MOUNT_POINT_DIRECTORY && mount -o loop -t vfat temp.img $MOUNT_POINT_DIRECTORY/ || callHXMod commons buildError
 
 }
 
 # Imports
 
-. $MOD_DIR/common.hx
+. $MOD_DIR/macros.hx
 
 # Constants
 
-MOD_VER="0.1"
+MOD_VER="0.2"
 
 main $1

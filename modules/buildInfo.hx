@@ -68,13 +68,24 @@
 #
 # $HexagonixOS$
 
+function main() {
+
+case $1 in
+
+infoBuild) infoBuild; exit;;
+getBuildInformation) getBuildInformation; exit;;
+
+esac 
+
+}
+
 function infoBuild() {
 
 clear
 
 MSG="System information"
 
-banner
+callHXMod common banner
 
 echo -e "Information about the \e[1mcurrent\e[0m build of the system:"
 echo -e " > Hexagonix version: \e[1;32m$HEXAGONIX_VERSION\e[0m"
@@ -95,6 +106,12 @@ export HEXAGONIX_VERSION=$(cat Dist/etc/version.def)
 
 }
 
+# Imports
+
+. $MOD_DIR/macros.hx
+
 # Constants
 
-MOD_VER="0.1"
+MOD_VER="0.2"
+
+main $1

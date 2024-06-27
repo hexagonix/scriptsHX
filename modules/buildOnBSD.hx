@@ -101,16 +101,16 @@ mdconfig -a -t vnode -f temp.img -o force -u 4
 
 echo "> Mounting the image..." >> $LOG
 
-mkdir -p $MOUNT_POINT_DIRECTORY && mount_msdosfs /dev/md4 $MOUNT_POINT_DIRECTORY/ || buildError
+mkdir -p $MOUNT_POINT_DIRECTORY && mount_msdosfs /dev/md4 $MOUNT_POINT_DIRECTORY/ || callHXMod commons buildError
 
 }
 
 # Imports
 
-. $MOD_DIR/common.hx
+. $MOD_DIR/macros.hx
 
 # Constants
 
-MOD_VER="0.1"
+MOD_VER="0.2"
 
 main $1

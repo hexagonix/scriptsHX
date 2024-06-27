@@ -89,12 +89,8 @@ fi
 
 }
 
-# Imports
-
-. $MOD_DIR/common.hx
-
 # Constants
 
-MOD_VER="0.1"
+MOD_VER="0.2"
 
 main $1

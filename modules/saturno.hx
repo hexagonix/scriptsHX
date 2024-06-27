@@ -90,11 +90,11 @@ cd Boot
 
 cd Saturno
 
-fasm saturno.asm saturno.img >> $LOG || generalBuildError
+fasm saturno.asm saturno.img >> $LOG || callHXMod common generalBuildError
 
 echo >> $LOG
 
-fasm mbr.asm mbr.img >> $LOG || generalBuildError
+fasm mbr.asm mbr.img >> $LOG || callHXMod common generalBuildError
 
 mv *.img $BUILD_DIRECTORY
 
@@ -107,10 +107,10 @@ echo -e "----------------------------------------------------------------------\
 
 # Imports
 
-. $MOD_DIR/common.hx
+. $MOD_DIR/macros.hx
 
 # Constants
 
-MOD_VER="0.1"
+MOD_VER="0.2"
 
 main $1

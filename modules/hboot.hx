@@ -89,7 +89,7 @@ echo -e " > Building Hexagon Boot - HBoot (2nd stage)...\n" >> $LOG
 cd "Boot"
 cd "HBoot"
 
-fasm hboot.asm ../hboot -d $HBOOT_FLAGS >> $LOG || generalBuildError
+fasm hboot.asm ../hboot -d $HBOOT_FLAGS >> $LOG || callHXMod common generalBuildError
 
 cd Mods
 
@@ -131,10 +131,10 @@ echo -e "----------------------------------------------------------------------\
 
 # Imports
 
-. $MOD_DIR/common.hx
+. $MOD_DIR/macros.hx
 
-# Constans
+# Constants
 
-MOD_VERSION="0.1"
+MOD_VERSION="0.2"
 
 main $1
