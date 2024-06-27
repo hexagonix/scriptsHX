@@ -120,7 +120,7 @@ hx.snd) vmHexagonixWithKVM; exit;;
 hx.bsd) vmHexagonixOnBSDHost; exit;;
 hx.serial) vmHexagonixWithoutSerialRedirection; exit;;
 hx.p3) vmHexagonixPentium3; exit;;
-*) vmHexagonixWithKVM; exit;; # Assume hx -v hx
+*) vmHexagonixWithoutSnd; exit;; # Assume hx -v hx
 
 esac
 
