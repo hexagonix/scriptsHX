@@ -3,7 +3,7 @@
 buildAndromedaApplications()
 {
 
-echo -e "Starting Hexagonix-Andromeda environment builder mod version $MOD_VERSION...\n" >> $LOG
+echo -e "Starting Hexagonix-Andromeda environment builder mod version $MOD_VER...\n" >> $LOG
 
 # Build the Hexagonix-Andromeda applications
 

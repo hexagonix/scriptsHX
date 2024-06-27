@@ -3,7 +3,7 @@
 buildUnixUtil()
 {
 
-echo -e "Starting Unix environment builder mod version $MOD_VERSION...\n" >> $LOG
+echo -e "Starting Unix environment builder mod version $MOD_VER...\n" >> $LOG
 
 # Build Unix base applications
 

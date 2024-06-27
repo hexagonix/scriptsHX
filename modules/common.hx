@@ -87,4 +87,20 @@ echo -e "[\e[32mAll ready!\e[0m]"
 
 }
 
+sureq()
+{
+
+clear
+
+MSG="hx: you need to be root"
+
+banner
+
+echo -e "\e[1;94mYou must be a root user to perform the requested action ;D\e[0m\n"
+
+exit
+
+}
+
+
 MOD_VER="0.1"

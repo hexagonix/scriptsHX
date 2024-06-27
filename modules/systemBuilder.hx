@@ -3,7 +3,7 @@
 systemBuilder()
 {
 
-echo -e "Starting Hexagonix system builder mod version $MOD_VERSION...\n" >> $LOG
+echo -e "Starting Hexagonix system builder mod version $MOD_VER...\n" >> $LOG
 
 MSG="Building the Hexagonix"
 
