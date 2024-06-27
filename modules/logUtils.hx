@@ -154,7 +154,6 @@ echo -e "\n > Build flags:" >> $LOG
 echo "   > HBoot build flags: $CONDENSED_HBOOT_FLAGS" >> $LOG
 echo "   > Hexagon build flags: $CONDENSED_HEXAGON_FLAGS" >> $LOG
 echo "   > Common userland build flags: $CONDENSED_COMMON_FLAGS" >> $LOG
-
 echo -e "\n----------------------------------------------------------------------\n" >> $LOG
 
 }

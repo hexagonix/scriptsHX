@@ -94,11 +94,10 @@ callHXMod systemBuilder
 
 # Now the system image will be prepared...
 
-echo -e "\e[1;94mBuilding system image...\e[0m"
-echo
+echo -e "\e[1;94mBuilding system image...\e[0m\n"
 
 echo -e "\n----------------------------------------------------------------------\n" >> $LOG
-echo -e "\nBuild a Hexagonix disk image... {" >> $LOG
+echo -e "Build a Hexagonix disk image... {" >> $LOG
 echo -e "\n> Building temporary image for file manipulation...\n" >> $LOG
 
 # Now let's check which system is the host, to adapt the disk image creation logic for each one.
@@ -201,8 +200,7 @@ echo "  * Copying MBR and partition table to image..." >> $LOG
 
 dd status=none conv=notrunc if=$BUILD_DIRECTORY/mbr.img of=$IMAGE_FILENAME >> $LOG || buildError
 
-echo "> Removing temporary files and folders, as well as binaries that are no longer needed..." >> $LOG
-echo >> $LOG
+echo -e "> Removing temporary files and folders, as well as binaries that are no longer needed...\n" >> $LOG
 
 rm -rf $MOUNT_POINT_DIRECTORY $BUILD_DIRECTORY temp.img >> $LOG
 

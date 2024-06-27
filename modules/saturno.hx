@@ -100,8 +100,6 @@ mv *.img $BUILD_DIRECTORY
 
 echo -e "} [\e[32mSaturno/MBR built successfully\e[0m]."
 
-echo >> $LOG
-
 echo -e "\n} Saturno/MBR built successfully.\n" >> $LOG
 echo -e "----------------------------------------------------------------------\n" >> $LOG
 

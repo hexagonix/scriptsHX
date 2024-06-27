@@ -151,11 +151,8 @@ echo -e " > There are graphic fonts to be built and copied..." >> $LOG
 cp *.fnt $BUILD_DIRECTORY
 rm *.fnt
 
-echo
-echo -n "Fonts copied"
-echo -e " [\e[32mOk\e[0m]"
+echo -ne "\nFonts copied [\e[32mOk\e[0m]\n"
 echo " > Fonts copied." >> $LOG
-echo
 
 else
 echo -e "\nThere are no graphic fonts to build and copy... [\e[32mOk\e[0m]\n"
@@ -168,8 +165,7 @@ fi
 cd ..
 
 echo "> Copying core development libraries..." >> $LOG
-echo "Copying core development libraries..."
-echo
+echo -ne "\nCopying core development libraries..."
 
 cd lib/fasm
 
@@ -191,9 +187,7 @@ cp * $BUILD_DIRECTORY
 cd ..
 cd ..
 
-echo -n "Libraries copied"
-echo -e " [\e[32mOk\e[0m]"
-echo
+echo -e " [\e[32mOk\e[0m]\n"
 
 echo -e "\n} Success configuring and copying Hexagonix configuration files.\n" >> $LOG
 echo -e "----------------------------------------------------------------------\n" >> $LOG

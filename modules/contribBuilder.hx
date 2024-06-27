@@ -93,14 +93,12 @@ cd ..
 else
 
 echo "> There are no additional packages to build." >> $LOG
-echo "There are no additional packages to build."
-echo
+echo -e "There are no additional packages to build.\n"
 
 fi
 
 echo -e "\n} Success processing additional (contrib) packages." >> $LOG
-echo -e "\n> View the 'log.log' log file for more information of the build."
-echo
+echo -e "\n> View the 'log.log' log file for more information of the build.\n"
 
 }
 
