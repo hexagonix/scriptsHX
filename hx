@@ -126,8 +126,8 @@ echo
 echo "hx $HX_VERSION help topics: running Hexagonix with virtual machone (qemu)"
 echo
 echo -e "Start a Hexagonix virtual machine. The available parameters are\e[1;31m (default hx)*\e[0m:"
-echo -e "\e[1;32m hx\e[0m        - Start virtual machine"
-echo -e "\e[1;32m hx.wsnd\e[0m   - Start virtual machine without sound mode"
+echo -e "\e[1;32m hx\e[0m        - Start virtual machine without sound"
+echo -e "\e[1;32m hx.snd\e[0m    - Start virtual machine with sound"
 echo -e "\e[1;32m hx.serial\e[0m - Start virtual machine with no serial output"
 echo -e "\e[1;32m hx.p3\e[0m     - Start virtual machine with a legacy processor (Pentium III)"
 echo -e "\e[1;32m hx.bsd\e[0m    - Start BSD host compatible virtual machine"
