@@ -328,16 +328,7 @@ callHXMod diskBuilder
 manageVirtualMachines()
 {
 
-case $PT2 in
-
-hx) callHXMod vm $PT2; exit;;
-hx.bsd) callHXMod vm $PT2; exit;;
-hx.wsnd) callHXMod vm $PT2; exit;;
-hx.serial) callHXMod vm $PT2; exit;;
-hx.p3) callHXMod vm $PT2; exit;;
-*) callHXMod vm $PT2; exit;; # Assume hx -v hx
-
-esac
+callHXMod vm $PT2;
 
 }
 
