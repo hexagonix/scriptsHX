@@ -89,9 +89,148 @@
 # However, it is already supported for running virtual machines. The full support to
 # FreeBSD is on the way.
 
+function main() {
+
+# Let's configure the environment and start argument parsing
+
+setupEnvironment
+
+# Allow execution of any hx module
+
+chmod +x $MOD_DIR/*.hx
+
+# Perform the action determined by the given parameter
+
+case $1 in
+
+# Manage parameters starting with '-'
+
+-v) manageVirtualMachines; exit;;
+-i) manageBuild; exit;;
+-h) showMainHelp; exit;;
+-b) manageComponentBuild; exit;;
+-br) infoRepo; exit;;
+-u) updateRepositories; exit;;
+-ui) updateDiskImages; exit;;
+-un) switchBranchAndUpdateRepositories; exit;;
+-m) checkCloneDependencies; exit;;
+-c) cleanObjectsInSourceTree; exit;;
+
+# Manage parameters starting with '--'
+
+--version) showVersion; exit;;
+--depend) installBuildDependencies; exit;;
+--info) getBuildInformation; infoBuild; exit;;
+--configure) startConfigureModule; exit;;
+--indent) startIndentModule; exit;;
+--stat) displayStatistics; exit;;
+--flags) showBuildFlags; exit;;
+
+# Default function
+
+*) parametersRequired; exit;;
+
+esac
+
+}
+
+function setupEnvironment() {
+
+# Let's configure environment and export constants
+
+# Build step constants
+
+export REMOTE="https://github.com/hexagonix"
+export BUILD_ID=$(uuid -m -v 4)
+export LOG="$(pwd)/log.log"
+
+# Global configuration
+
+# Constants for the system build and image creation steps.
+# These are the default flags, and can be changed by parameters to change the behavior of
+# the Hexagonix build or components.
+# These variables MUST be exported. They must be accessible to child shell instances
+
+export DISK_IMAGE_PATH="hexagonix/hexagonix.img" # Image filename with relative path
+export IMAGE_PATH="hexagonix" # Image path
+export COMMON_FLAGS="VERBOSE=YES -d LOGIN_STYLE=Hexagonix" # General build flags
+export HEXAGON_FLAGS="VERBOSE=YES" # Hexagon build flags
+export HBOOT_FLAGS="SOUND_THEME=Hexagonix" # HBoot build flags
+export BUILD_DIRECTORY="$(pwd)/Build" # Location of executable images and generated static files
+export IMAGE_FILENAME="hexagonix.img" # Final image name (without directory)
+export MOUNT_POINT_DIRECTORY="$(pwd)/SystemBuild" # Disk image mount point for copying Hexagonix files
+export ROOT_DIR="$(pwd)"
+
+# Convert from command line to assembler for readable flags by removing parameters such as '-d'
+
+export CONDENSED_HBOOT_FLAGS=$(tr ' ' '\n' <<< "$HBOOT_FLAGS" | grep -vf <(tr ' ' '\n' <<< "-d") | paste -sd ' ')
+export CONDENSED_HEXAGON_FLAGS=$(tr ' ' '\n' <<< "$HEXAGON_FLAGS" | grep -vf <(tr ' ' '\n' <<< "-d") | paste -sd ' ')
+export CONDENSED_COMMON_FLAGS=$(tr ' ' '\n' <<< "$COMMON_FLAGS" | grep -vf <(tr ' ' '\n' <<< "-d") | paste -sd ' ')
+
+# Now, let's define where the libasm headers and libraries (necessary for fasm) are
+# The variable MUST be exported. It needs to be accessible to child shell instances
+
+export INCLUDE="$(pwd)/lib/fasm"
+
+# Get information from the branch used to build the system
+#
+# Notice! The information is obtained from the github.com/hexagonix/hexagonix repository only.
+# It is not recommended to build the system using different branches, but to use all components
+# coming from the same branch, such as CURRENT (main) or RELEASE.
+# Mixing between the branches can cause various components to not work or work incorrectly.
+# To sync all repositories with the same branch, use 'hx -un branch'.
+
+if [ -e $DISK_IMAGE_PATH ] ; then
+
+# Let's save each branch of the system components for later identification
+
+# First, Andromeda-Apps and Unix-Apps
+cd Apps/Andromeda
+export ANDROMEDA_APPS_BRANCH=$(git branch --show-current)
+cd ../Unix
+export UNIX_APPS_BRANCH=$(git branch --show-current)
+cd ../..
+# Now HBoot and Saturno
+cd "Boot/HBoot"
+export HBOOT_BRANCH=$(git branch --show-current)
+cd ../Saturno
+export SATURNO_BRANCH=$(git branch --show-current)
+cd ../..
+cd Dist/etc
+export ETC_BRANCH=$(git branch --show-current)
+cd ../man
+export MAN_BRANCH=$(git branch --show-current)
+cd ../..
+# Now fonts
+cd Fonts
+export FONT_BRANCH=$(git branch --show-current)
+cd ..
+# Now Hexagon
+cd Hexagon
+export HEXAGON_BRANCH=$(git branch --show-current)
+cd ..
+# Now libasm
+cd lib
+export LIBASM_BRANCH=$(git branch --show-current)
+cd ..
+# Now hx and hx modules
+cd Scripts
+export HX_BRANCH=$(git branch --show-current)
+cd ..
+# Main branch of everything, where the images will go
+cd hexagonix
+export MAIN_BRANCH=$(git branch --show-current)
+cd ..
+
+fi
+
+}
+
+#-------------------------------- Division --------------------------------#
+
 # Help section and information about hx
 
-showMainHelp() {
+function showMainHelp() {
 
 case $PT2 in
 
@@ -119,8 +258,7 @@ echo
 
 }
 
-showVirtualMachineHelp()
-{
+function showVirtualMachineHelp() {
 
 echo
 echo "hx $HX_VERSION help topics: running Hexagonix with virtual machone (qemu)"
@@ -135,8 +273,7 @@ echo -e "\e[1;31m* The 'hx' option will be selected if no parameter is passed af
 
 }
 
-showBuildHelp()
-{
+function showBuildHelp() {
 
 echo
 echo "hx $HX_VERSION help topics: building system disk"
@@ -148,7 +285,7 @@ echo -e "\e[1;31m* The 'hx' option will be selected if no parameter is passed af
 
 }
 
-showVersion() {
+function showVersion() {
 
 echo -e "hx: Hexagonix build utility, version $HX_VERSION"
 echo
@@ -157,7 +294,7 @@ echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no war
 
 }
 
-parametersRequired(){
+function parametersRequired() {
 
 echo
 echo -e "You must provide at least one \e[1;94mvalid\e[0m parameter."
@@ -170,8 +307,7 @@ showMainHelp
 
 # Collective build section of system components
 
-manageBuild()
-{
+function manageBuild() {
 
 getBuildInformation
 
@@ -187,8 +323,7 @@ esac
 
 }
 
-manageComponentBuild()
-{
+function manageComponentBuild() {
 
 mkdir -p $BUILD_DIRECTORY
 mkdir -p $BUILD_DIRECTORY/bin
@@ -213,7 +348,7 @@ esac
 
 # Configuration section for build the system
 
-setImageBuildOnLinux(){
+function setImageBuildOnLinux() {
 
 export HOST="LINUX"
 
@@ -225,7 +360,7 @@ buildHexagonix
 
 }
 
-setImageBuildOnBSD(){
+function setImageBuildOnBSD() {
 
 export HOST="BSD"
 
@@ -237,8 +372,7 @@ buildHexagonix
 
 }
 
-setImageBuildOnUNIXSolaris()
-{
+function setImageBuildOnUNIXSolaris() {
 
 export HOST="UNIX"
 
@@ -250,7 +384,7 @@ buildHexagonix
 
 }
 
-setTestImageBuildOnLinux(){
+function setTestImageBuildOnLinux() {
 
 export HOST="LINUX"
 
@@ -264,8 +398,7 @@ buildHexagonix
 
 #-------------------------------- Division --------------------------------#
 
-setTestBuild()
-{
+function setTestBuild() {
 
 # Here we will generate a small image, 2 Mb, smaller and just for testing.
 # This image should not be used for the installation package.
@@ -277,8 +410,7 @@ export TEMP_IMAGE_SIZE=2048
 
 }
 
-setReleaseBuild()
-{
+function setReleaseBuild() {
 
 # Here we will define an official size image, which takes longer to generate.
 # This image is appropriate for the Hexagonix installation package and official releases.
@@ -290,8 +422,7 @@ export TEMP_IMAGE_SIZE=92160
 
 #-------------------------------- Division --------------------------------#
 
-buildAllComponents()
-{
+function buildAllComponents() {
 
 MSG="Building the Hexagonix"
 
@@ -314,8 +445,7 @@ allDone
 
 # System image build section
 
-buildHexagonix()
-{
+function buildHexagonix() {
 
 callHXMod diskBuilder
 
@@ -325,8 +455,7 @@ callHXMod diskBuilder
 
 # hx virtual machine management section
 
-manageVirtualMachines()
-{
+function manageVirtualMachines() {
 
 callHXMod vm $PT2;
 
@@ -336,8 +465,7 @@ callHXMod vm $PT2;
 
 # hx utilities section
 
-cleanObjectsInSourceTree()
-{
+function cleanObjectsInSourceTree() {
 
 clear
 
@@ -367,8 +495,7 @@ echo
 
 }
 
-startIndentModule()
-{
+function startIndentModule() {
 
 clear
 
@@ -398,8 +525,7 @@ allDone
 
 }
 
-startConfigureModule()
-{
+function startConfigureModule() {
 
 clear
 
@@ -426,8 +552,7 @@ allDone
 
 }
 
-checkStaticFiles()
-{
+function checkStaticFiles() {
 
 # Let's check if the essential static files have already been generated before.
 # If not, we will generate them
@@ -458,8 +583,7 @@ fi
 
 }
 
-displayStatistics()
-{
+function displayStatistics() {
 
 clear
 
@@ -506,8 +630,7 @@ echo
 
 }
 
-showBuildFlags()
-{
+function showBuildFlags() {
 
 clear
 
@@ -529,8 +652,7 @@ finishStep
 
 }
 
-installBuildDependencies()
-{
+function installBuildDependencies() {
 
 if test "`whoami`" != "root" ; then
 
@@ -561,8 +683,7 @@ echo
 
 }
 
-updateDiskImages()
-{
+function updateDiskImages() {
 
 MSG="Update images"
 
@@ -589,8 +710,7 @@ esac
 
 }
 
-updateAuthorized()
-{
+function updateAuthorized() {
 
 cd hexagonix
 
@@ -604,8 +724,7 @@ allDone
 
 }
 
-infoRepo()
-{
+function infoRepo() {
 
 MSG="Repos information"
 
@@ -632,8 +751,7 @@ allDone
 
 }
 
-updateRepositories()
-{
+function updateRepositories() {
 
 MSG="Update repos"
 
@@ -709,8 +827,7 @@ allDone
 
 }
 
-switchBranchAndUpdateRepositories()
-{
+function switchBranchAndUpdateRepositories() {
 
 MSG="Update branch and repositories"
 
@@ -785,8 +902,7 @@ allDone
 
 }
 
-cloneRepositories()
-{
+function cloneRepositories() {
 
 clear
 
@@ -878,8 +994,7 @@ exit
 
 }
 
-checkCloneDependencies()
-{
+function checkCloneDependencies() {
 
 clear
 
@@ -913,15 +1028,13 @@ cloneRepositories
 
 }
 
-finish()
-{
+function finish() {
 
 exit
 
 }
 
-tryWithSudo()
-{
+function tryWithSudo() {
 
 clear
 
@@ -948,7 +1061,26 @@ exit
 #
 # Copyright (c) 2015-2024 Felipe Miguel Nery Lunkes
 # All rights reserved
-# Constants with parameter parsing
+
+# hx info
+# These variables MUST be exported. They must be accessible to child shell instances
+
+
+export HX_NAME=$0
+export HX_VERSION="14.0.0-ALPHA2"
+
+# Modules directory
+
+export MOD_DIR="$(pwd)/Scripts/modules"
+
+# Imports
+
+# Essential modules
+
+. $MOD_DIR/buildInfo.hx
+. $MOD_DIR/common.hx
+
+# Export arguments
 
 PT1=$1
 PT2=$2
@@ -957,137 +1089,4 @@ PT4=$4
 PT5=$5
 PT6=$6
 
-# hx info
-# These variables MUST be exported. They must be accessible to child shell instances
-
-export HX_NAME=$0
-export HX_VERSION="14.0.0-ALPHA1"
-
-# Build step constants
-
-export REMOTE="https://github.com/hexagonix"
-export BUILD_ID=$(uuid -m -v 4)
-export LOG="$(pwd)/log.log"
-
-# Global configuration
-
-# Constants for the system build and image creation steps.
-# These are the default flags, and can be changed by parameters to change the behavior of
-# the Hexagonix build or components.
-# These variables MUST be exported. They must be accessible to child shell instances
-
-export DISK_IMAGE_PATH="hexagonix/hexagonix.img" # Image filename with relative path
-export IMAGE_PATH="hexagonix" # Image path
-export COMMON_FLAGS="VERBOSE=YES -d LOGIN_STYLE=Hexagonix" # General build flags
-export HEXAGON_FLAGS="VERBOSE=YES" # Hexagon build flags
-export HBOOT_FLAGS="SOUND_THEME=Hexagonix" # HBoot build flags
-export BUILD_DIRECTORY="$(pwd)/Build" # Location of executable images and generated static files
-export IMAGE_FILENAME="hexagonix.img" # Final image name (without directory)
-export MOUNT_POINT_DIRECTORY="$(pwd)/SystemBuild" # Disk image mount point for copying Hexagonix files
-export MOD_DIR="$(pwd)/Scripts/modules"
-export ROOT_DIR="$(pwd)"
-
-# Convert from command line to assembler for readable flags by removing parameters such as '-d'
-
-export CONDENSED_HBOOT_FLAGS=$(tr ' ' '\n' <<< "$HBOOT_FLAGS" | grep -vf <(tr ' ' '\n' <<< "-d") | paste -sd ' ')
-export CONDENSED_HEXAGON_FLAGS=$(tr ' ' '\n' <<< "$HEXAGON_FLAGS" | grep -vf <(tr ' ' '\n' <<< "-d") | paste -sd ' ')
-export CONDENSED_COMMON_FLAGS=$(tr ' ' '\n' <<< "$COMMON_FLAGS" | grep -vf <(tr ' ' '\n' <<< "-d") | paste -sd ' ')
-
-# Now, let's define where the libasm headers and libraries (necessary for fasm) are
-# The variable MUST be exported. It needs to be accessible to child shell instances
-
-export INCLUDE="$(pwd)/lib/fasm"
-
-# Get information from the branch used to build the system
-#
-# Notice! The information is obtained from the github.com/hexagonix/hexagonix repository only.
-# It is not recommended to build the system using different branches, but to use all components
-# coming from the same branch, such as CURRENT (main) or RELEASE.
-# Mixing between the branches can cause various components to not work or work incorrectly.
-# To sync all repositories with the same branch, use 'hx -un branch'.
-
-if [ -e $DISK_IMAGE_PATH ] ; then
-
-# Let's save each branch of the system components for later identification
-
-# First, Andromeda-Apps and Unix-Apps
-cd Apps/Andromeda
-export ANDROMEDA_APPS_BRANCH=$(git branch --show-current)
-cd ../Unix
-export UNIX_APPS_BRANCH=$(git branch --show-current)
-cd ../..
-# Now HBoot and Saturno
-cd "Boot/HBoot"
-export HBOOT_BRANCH=$(git branch --show-current)
-cd ../Saturno
-export SATURNO_BRANCH=$(git branch --show-current)
-cd ../..
-cd Dist/etc
-export ETC_BRANCH=$(git branch --show-current)
-cd ../man
-export MAN_BRANCH=$(git branch --show-current)
-cd ../..
-# Now fonts
-cd Fonts
-export FONT_BRANCH=$(git branch --show-current)
-cd ..
-# Now Hexagon
-cd Hexagon
-export HEXAGON_BRANCH=$(git branch --show-current)
-cd ..
-# Now libasm
-cd lib
-export LIBASM_BRANCH=$(git branch --show-current)
-cd ..
-# Now hx and hx modules
-cd Scripts
-export HX_BRANCH=$(git branch --show-current)
-cd ..
-# Main branch of everything, where the images will go
-cd hexagonix
-export MAIN_BRANCH=$(git branch --show-current)
-cd ..
-
-fi
-
-# Allow execution of any hx module
-
-chmod +x $MOD_DIR/*.hx
-
-# Essential modules
-
-. $MOD_DIR/buildInfo.hx
-. $MOD_DIR/common.hx
-
-# Perform the action determined by the given parameter
-
-case $1 in
-
-# Manage parameters starting with '-'
-
--v) manageVirtualMachines; exit;;
--i) manageBuild; exit;;
--h) showMainHelp; exit;;
--b) manageComponentBuild; exit;;
--br) infoRepo; exit;;
--u) updateRepositories; exit;;
--ui) updateDiskImages; exit;;
--un) switchBranchAndUpdateRepositories; exit;;
--m) checkCloneDependencies; exit;;
--c) cleanObjectsInSourceTree; exit;;
-
-# Manage parameters starting with '--'
-
---version) showVersion; exit;;
---depend) installBuildDependencies; exit;;
---info) getBuildInformation; infoBuild; exit;;
---configure) startConfigureModule; exit;;
---indent) startIndentModule; exit;;
---stat) displayStatistics; exit;;
---flags) showBuildFlags; exit;;
-
-# Default function
-
-*) parametersRequired; exit;;
-
-esac
+main $1
