@@ -115,9 +115,9 @@ AUDIO_DEVICE="pa,id=audio0 -machine pcspk-audiodev=audio0"
 
 case $1 in
 
-hx) vmHexagonixWithKVM; exit;;
+hx) vmHexagonixWithoutSnd; exit;;
+hx.snd) vmHexagonixWithKVM; exit;;
 hx.bsd) vmHexagonixOnBSDHost; exit;;
-hx.wsnd) vmHexagonixWithoutSnd; exit;;
 hx.serial) vmHexagonixWithoutSerialRedirection; exit;;
 hx.p3) vmHexagonixPentium3; exit;;
 *) vmHexagonixWithKVM; exit;; # Assume hx -v hx
