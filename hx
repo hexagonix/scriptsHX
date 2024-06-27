@@ -172,6 +172,10 @@ export CONDENSED_COMMON_FLAGS=$(tr ' ' '\n' <<< "$COMMON_FLAGS" | grep -vf <(tr 
 
 export INCLUDE="$(pwd)/lib/fasm"
 
+# Get information about the system build
+
+getBuildInformation
+
 # Get information from the branch used to build the system
 #
 # Notice! The information is obtained from the github.com/hexagonix/hexagonix repository only.
@@ -223,6 +227,16 @@ export MAIN_BRANCH=$(git branch --show-current)
 cd ..
 
 fi
+
+}
+
+function getBuildInformation() {
+
+# Hexagonix version data
+
+export HEXAGONIX_REVISION=$(cat Dist/etc/release.def)
+export HEXAGONIX_CODENAME=$(cat Dist/etc/codename.def)
+export HEXAGONIX_VERSION=$(cat Dist/etc/version.def)
 
 }
 
@@ -1066,7 +1080,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="14.0.0-ALPHA3"
+export HX_VERSION="14.0.0-ALPHA4"
 
 # Modules directory
 
