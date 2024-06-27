@@ -309,7 +309,7 @@ showMainHelp
 
 function manageBuild() {
 
-getBuildInformation
+callHXMod buildInfo getBuildInformation
 
 case $PT2 in
 
@@ -428,7 +428,7 @@ MSG="Building the Hexagonix"
 
 clear
 
-banner
+callHXMod common banner
 
 callHXMod saturno
 callHXMod hboot
@@ -436,8 +436,8 @@ callHXMod hexagon
 callHXMod unix
 callHXMod andromeda
 
-finishStep
-allDone
+callHXMod common finishStep
+callHXMod common allDone
 
 }
 
@@ -471,7 +471,7 @@ clear
 
 MSG="hx: clear system tree"
 
-banner
+callHXMod common banner
 
 echo "Performing system tree cleanup..."
 echo -n " > Cleaning up generated components and system images..."
@@ -489,7 +489,7 @@ rm -rf Dist/etc/*.unx Dist/etc/*.ocl Dist/etc/rc Dist/etc/passwd Dist/etc/shrc D
 echo -e " [\e[32mOk\e[0m]"
 echo -e "   > \e[1;94mUse ./configure.sh to regenerate these files.\e[0m"
 
-allDone
+callHXMod common allDone
 
 echo
 
@@ -520,8 +520,8 @@ echo -e "[\e[31mError: indent.sh not found\e[0m]."
 
 fi
 
-finishStep
-allDone
+callHXMod common finishStep
+callHXMod common allDone
 
 }
 
@@ -547,8 +547,8 @@ echo -e " > \e[1;31mYou CANNOT start building the system without this dependency
 
 fi
 
-finishStep
-allDone
+callHXMod common finishStep
+callHXMod common allDone
 
 }
 
@@ -567,7 +567,7 @@ clear
 
 MSG="Building the Hexagonix"
 
-banner
+callHXMod common banner
 
 echo "The static files needed to build the system were not found."
 echo "Build could not be started. To do so, hx will run ./configure.sh"
@@ -589,7 +589,7 @@ clear
 
 MSG="Statistics"
 
-banner
+callHXMod common banner
 
 if [ -e /usr/bin/cloc ] ; then
 
@@ -614,9 +614,8 @@ done
 
     cloc $(pwd)
 
-    finishStep
-
-allDone
+callHXMod common finishStep
+callHXMod common allDone
 
 else
 
@@ -636,7 +635,7 @@ clear
 
 MSG="Hexagonix build flags"
 
-banner
+callHXMod common banner
 
 echo "HBoot build flags:"
 echo -e " > \e[1;32m$CONDENSED_HBOOT_FLAGS\e[0m"
@@ -647,8 +646,8 @@ echo -e " > \e[1;32m$CONDENSED_COMMON_FLAGS\e[0m"
 
 echo
 
-allDone
-finishStep
+callHXMod common allDone
+callHXMod common finishStep
 
 }
 
@@ -664,7 +663,7 @@ fi
 
 MSG="Install dependencies"
 
-banner
+callHXMod common banner
 
 echo
 echo -e "hx will now install the necessary dependencies to run it:"
@@ -672,12 +671,12 @@ echo
 
 apt install fasm nasm cloc qemu qemu-system-i386 uuid
 
-finishStep
+callHXMod common finishStep
 
 echo
 echo -e "\e[1mReady! Now run \e[32m./configure.sh\e[0;1m to configure the dependencies."
 
-allDone
+callHXMod common allDone
 
 echo
 
@@ -687,7 +686,7 @@ function updateDiskImages() {
 
 MSG="Update images"
 
-banner
+callHXMod common banner
 
 echo "You are about to update the Hexagonix disk images by synchronizing them"
 echo "with those available in the image repository, in the main (stable) branch."
@@ -719,8 +718,8 @@ rm -rf hexagonix.img hexagonix.vdi
 wget https://github.com/hexagonix/hexagonix/blob/main/hexagonix.img
 wget https://github.com/hexagonix/hexagonix/blob/main/hexagonix.vdi
 
-finishStep
-allDone
+callHXMod common finishStep
+callHXMod common allDone
 
 }
 
@@ -746,8 +745,8 @@ echo -e "   > hx/Scripts branch: \e[1;32m$HX_BRANCH\e[0m"
 echo -e " > Remote host: \e[1;94m$REMOTE\e[0m"
 echo
 
-finishStep
-allDone
+callHXMod common finishStep
+callHXMod common allDone
 
 }
 
@@ -755,7 +754,7 @@ function updateRepositories() {
 
 MSG="Update repos"
 
-banner
+callHXMod common banner
 
 echo "You are about to update all repositories with the server, keeping current"
 echo "branch. To change branch and update, use hx -un <branch>."
@@ -822,8 +821,8 @@ chmod +x autohx.py
 
 fi
 
-finishStep
-allDone
+callHXMod common finishStep
+callHXMod common allDone
 
 }
 
@@ -831,7 +830,7 @@ function switchBranchAndUpdateRepositories() {
 
 MSG="Update branch and repositories"
 
-banner
+callHXMod common banner
 
 echo "You are about to update all system repositories with the server,"
 echo "after switching to the given branch."
@@ -897,8 +896,8 @@ chmod +x autohx.py
 
 fi
 
-finishStep
-allDone
+callHXMod common finishStep
+callHXMod common allDone
 
 }
 
@@ -908,7 +907,7 @@ clear
 
 MSG="Build the Hexagonix"
 
-banner
+callHXMod common banner
 
 echo "Cloning the repositories needed to build Hexagonix..."
 echo
@@ -1000,7 +999,7 @@ clear
 
 MSG="Build the Hexagonix"
 
-banner
+callHXMod common banner
 
 echo -e "Checking required dependencies to clone the repositories..."
 echo
@@ -1040,7 +1039,7 @@ clear
 
 MSG="hx: you need to be root"
 
-banner
+callHXMod common banner
 
 echo -e "\e[1;94mYou must be a root user to perform the requested action ;D\e[0m"
 echo
@@ -1067,7 +1066,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="14.0.0-ALPHA2"
+export HX_VERSION="14.0.0-ALPHA3"
 
 # Modules directory
 
@@ -1075,10 +1074,9 @@ export MOD_DIR="$(pwd)/Scripts/modules"
 
 # Imports
 
-# Essential modules
+# Essential modules (macro to call other compatible modules)
 
-. $MOD_DIR/buildInfo.hx
-. $MOD_DIR/common.hx
+. $MOD_DIR/macros.hx
 
 # Export arguments
 
