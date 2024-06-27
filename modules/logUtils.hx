@@ -101,7 +101,7 @@ echo -e "\nIn this file, you have access to the complete log of the build proces
 echo "Hexagonix components. You can also use it to identify the environment used in" >> $LOG
 echo "build, as well as errors found in the process." >> $LOG
 echo -e "\nhx version: $HX_VERSION" >> $LOG
-echo -e "\nBuild task id: $BUILD_ID" >> $LOG
+echo -e "\nBuild id: $BUILD_ID" >> $LOG
 echo -e "\nInformation about the current build of Hexagonix:" >> $LOG
 echo " > Hexagonix version: $HEXAGONIX_VERSION" >> $LOG
 echo " > Software revision: $HEXAGONIX_REVISION" >> $LOG
@@ -189,6 +189,6 @@ echo -e "\n---------------------------------------------------------------------
 
 # Constants
 
-MOD_VER="0.2"
+MOD_VER="0.3"
 
 main $1
