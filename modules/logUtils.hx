@@ -104,8 +104,8 @@ echo -e "\nhx version: $HX_VERSION" >> $LOG
 echo -e "\nBuild id: $BUILD_ID" >> $LOG
 echo -e "\nInformation about the current build of Hexagonix:" >> $LOG
 echo " > Hexagonix version: $HEXAGONIX_VERSION" >> $LOG
-echo " > Software revision: $HEXAGONIX_REVISION" >> $LOG
 echo " > Release name: $HEXAGONIX_CODENAME" >> $LOG
+echo " > Release channel: $HEXAGONIX_RELEASE_CHANNEL" >> $LOG
 echo " > Disk image location: $IMAGE_PATH/$IMAGE_FILENAME" >> $LOG
 echo " > Main system branch (git): $MAIN_BRANCH" >> $LOG
 echo "   > Andromeda-Apps branch: $ANDROMEDA_APPS_BRANCH" >> $LOG
@@ -189,6 +189,6 @@ echo -e "\n---------------------------------------------------------------------
 
 # Constants
 
-MOD_VER="0.3"
+MOD_VER="0.4"
 
 main $1

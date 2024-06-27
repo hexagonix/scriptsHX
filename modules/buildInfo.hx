@@ -88,7 +88,7 @@ callHXMod common banner
 
 echo -e "Information about the \e[1mcurrent\e[0m build of the system:"
 echo -e " > Hexagonix version: \e[1;32m$HEXAGONIX_VERSION\e[0m"
-echo -e " > Software revision: \e[1;32m$HEXAGONIX_REVISION\e[0m"
+echo -e " > Software revision: \e[1;32m$HEXAGONIX_RELEASE_CHANNEL\e[0m"
 echo -e " > Release name: \e[1;32m$HEXAGONIX_CODENAME\e[0m"
 echo -e " > Disk image location: \e[1;32m$IMAGE_PATH/$IMAGE_FILENAME\e[0m"
 echo
@@ -101,6 +101,6 @@ echo
 
 # Constants
 
-MOD_VER="0.3"
+MOD_VER="0.4"
 
 main $1
