@@ -16,6 +16,7 @@ vmHexagonixWithoutSnd()
 {
 
 QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $DISK_IMAGE_PATH -m $MEMORY -k pt-br"
+DRV_SOUND="none"
 NOTA="Using without sound device"
 
 startVirtualMachine
