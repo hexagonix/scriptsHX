@@ -543,7 +543,7 @@ installBuildDependencies()
 
 if test "`whoami`" != "root" ; then
 
-sureq
+tryWithSudo
 
 exit
 
@@ -929,7 +929,7 @@ exit
 
 }
 
-sureq()
+tryWithSudo()
 {
 
 clear
