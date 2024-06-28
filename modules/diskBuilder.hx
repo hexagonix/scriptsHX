@@ -231,7 +231,7 @@ chown $IMAGE_PATH/$(basename $IMAGE_FILENAME .img).vdi --reference=$IMAGE_PATH/R
 
 echo -e "\n} Hexagonix disk images built successfully.\n" >> $LOG
 
-MSG="Build the Hexagonix"
+export MSG="Build the Hexagonix"
 
 callHXMod common banner
 callHXMod buildInfo infoBuild
@@ -251,7 +251,7 @@ exit
 
 # Constants
 
-MOD_VER="0.2"
+MOD_VER="0.3"
 
 main $1
 
