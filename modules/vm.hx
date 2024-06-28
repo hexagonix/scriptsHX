@@ -135,7 +135,7 @@ if [ -e $DISK_IMAGE_PATH ] ; then
 
 clear
 
-MSG="hx: start virtual machine"
+export MSG="hx: start virtual machine"
 
 callHXMod common banner
 
@@ -162,7 +162,7 @@ function virtualMachineGeneralError() {
 
 clear
 
-MSG="hx: start virtual machine"
+export MSG="hx: start virtual machine"
 
 callHXMod common banner
 
@@ -181,7 +181,7 @@ echo
 
 # Constants
 
-MOD_VER="0.2"
+MOD_VER="0.3"
 
 # Constants for virtual machine execution (QEMU)
 
