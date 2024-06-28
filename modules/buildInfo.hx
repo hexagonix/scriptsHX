@@ -82,7 +82,7 @@ function infoBuild() {
 
 clear
 
-MSG="System information"
+export MSG="System information"
 
 callHXMod common banner
 
@@ -101,6 +101,6 @@ echo
 
 # Constants
 
-MOD_VER="0.5"
+MOD_VER="0.6"
 
 main $1
