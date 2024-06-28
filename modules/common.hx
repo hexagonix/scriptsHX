@@ -108,7 +108,7 @@ echo
 
 fi
 
-MSG="System build error"
+export MSG="System build error"
 
 banner
 echo -e "\n\e[1;31mSomething went wrong while mounting the image:(\e[0m\n"
@@ -155,7 +155,7 @@ function suRequired() {
 
 clear
 
-MSG="hx: you need to be root"
+export MSG="hx: you need to be root"
 
 banner
 
@@ -167,6 +167,6 @@ exit
 
 # Constants
 
-MOD_VER="0.2"
+MOD_VER="0.3"
 
 main $1
