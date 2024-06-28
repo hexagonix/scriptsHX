@@ -78,7 +78,7 @@ function systemBuilder() {
 
 echo -e "Starting Hexagonix system builder mod version $MOD_VER...\n" >> $LOG
 
-MSG="Building the Hexagonix"
+export MSG="Building the Hexagonix"
 
 clear
 
@@ -202,6 +202,6 @@ callHXMod contribBuilder
 
 # Constants
 
-MOD_VER="0.2"
+MOD_VER="0.3"
 
 main $1
