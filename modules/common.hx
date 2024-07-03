@@ -78,6 +78,7 @@ banner) banner; exit;;
 finishStep) finishStep; exit;;
 allDone) allDone; exit;;
 suRequired) suRequired; exit;;
+testForRootUser) testForRootUser; exit;;
 
 esac 
 
@@ -148,6 +149,18 @@ echo -e "[\e[32mStep completed successfully\e[0m]"
 function allDone() {
 
 echo -e "[\e[32mAll ready!\e[0m]"
+
+}
+
+function testForRootUser() {
+
+if test "`whoami`" != "root" ; then
+
+suRequired
+
+exit
+
+fi
 
 }
 
