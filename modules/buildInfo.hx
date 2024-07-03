@@ -95,12 +95,34 @@ echo
 
 }
 
+function showBuildFlags() {
+
+clear
+
+MSG="Hexagonix build flags"
+
+callHXMod common banner
+
+echo "HBoot build flags:"
+echo -e " > \e[1;32m$CONDENSED_HBOOT_FLAGS\e[0m"
+echo "Hexagon build flags:"
+echo -e " > \e[1;32m$CONDENSED_HEXAGON_FLAGS\e[0m"
+echo "Common userland build flags:"
+echo -e " > \e[1;32m$CONDENSED_COMMON_FLAGS\e[0m"
+
+echo
+
+callHXMod common allDone
+callHXMod common finishStep
+
+}
+
 # Imports
 
 . $MOD_DIR/macros.hx
 
 # Constants
 
-MOD_VER="0.6"
+MOD_VER="0.7"
 
 main $1
