@@ -113,18 +113,18 @@ case $1 in
 -u) callHXMod git updateRepositories; exit;;
 -ui) callHXMod git updateDiskImages; exit;;
 -un) callHXMod git switchBranchAndUpdateRepositories; exit;;
--m) checkCloneDependencies; exit;;
+-m) callHXMod depend checkCloneDependencies; exit;;
 -c) cleanObjectsInSourceTree; exit;;
 
 # Manage parameters starting with '--'
 
 --version) showVersion; exit;;
---depend) installBuildDependencies; exit;;
---info) getBuildInformation; infoBuild; exit;;
+--depend) callHXMod depend installBuildDependencies; exit;;
+--info) callHXMod buildInfo infoBuild; exit;;
 --configure) startConfigureModule; exit;;
 --indent) startIndentModule; exit;;
---stat) displayStatistics; exit;;
---flags) showBuildFlags; exit;;
+--stat) callHXMod stat displayStatistics; exit;;
+--flags) callHXMod buildInfo showBuildFlags; exit;;
 
 # Default function
 
@@ -322,8 +322,6 @@ showMainHelp
 # Collective build section of system components
 
 function manageBuild() {
-
-callHXMod buildInfo getBuildInformation
 
 case $PT2 in
 
@@ -589,144 +587,11 @@ echo "to set up the build and generate the necessary files."
 echo
 echo "Press <ENTER> to continue or CTRL-C to cancel..."
 
-read resposta
+read answer
 
 ./configure.sh
 
 fi
-
-}
-
-function displayStatistics() {
-
-clear
-
-MSG="Statistics"
-
-callHXMod common banner
-
-if [ -e /usr/bin/cloc ] ; then
-
-for i in */
-do
-
-    echo
-    echo -en "\e[1;94mStats of the directory $i:\e[0m"
-    echo
-    echo
-
-    cloc $i
-
-    finishStep
-
-done
-
-    echo
-    echo -en "\e[1;94mSystem global statistics:\e[0m"
-    echo
-    echo
-
-    cloc $(pwd)
-
-callHXMod common finishStep
-callHXMod common allDone
-
-else
-
-echo
-echo -e "[\e[1;31mCloc utility not found.\e[0m]"
-echo -e "\e[1;94mhx cannot report statistics without this dependency.\e[0m"
-
-fi
-
-echo
-
-}
-
-function showBuildFlags() {
-
-clear
-
-MSG="Hexagonix build flags"
-
-callHXMod common banner
-
-echo "HBoot build flags:"
-echo -e " > \e[1;32m$CONDENSED_HBOOT_FLAGS\e[0m"
-echo "Hexagon build flags:"
-echo -e " > \e[1;32m$CONDENSED_HEXAGON_FLAGS\e[0m"
-echo "Common userland build flags:"
-echo -e " > \e[1;32m$CONDENSED_COMMON_FLAGS\e[0m"
-
-echo
-
-callHXMod common allDone
-callHXMod common finishStep
-
-}
-
-function installBuildDependencies() {
-
-if test "`whoami`" != "root" ; then
-
-tryWithSudo
-
-exit
-
-fi
-
-MSG="Install dependencies"
-
-callHXMod common banner
-
-echo
-echo -e "hx will now install the necessary dependencies to run it:"
-echo
-
-apt install fasm nasm cloc qemu qemu-system-i386 uuid
-
-callHXMod common finishStep
-
-echo
-echo -e "\e[1mReady! Now run \e[32m./configure.sh\e[0;1m to configure the dependencies."
-
-callHXMod common allDone
-
-echo
-
-}
-
-function checkCloneDependencies() {
-
-clear
-
-MSG="Build the Hexagonix"
-
-callHXMod common banner
-
-echo -e "Checking required dependencies to clone the repositories..."
-echo
-
-# Now let's check each build engine dependency
-
-# Dependency 1
-
-echo -n " > git "
-
-if [ -e /usr/bin/git ] ; then
-
-echo -e "[\e[32mOk\e[0m]"
-
-else
-
-echo -e "[\e[31mNot found\e[0m]"
-echo -e "   > \e[1;31mYou CANNOT start without this dependency\e[0m."
-
-exit
-
-fi
-
-cloneRepositories
 
 }
 
@@ -769,7 +634,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="14.0.0-ALPHA6"
+export HX_VERSION="14.0.0-ALPHA7"
 
 # Modules directory
 
