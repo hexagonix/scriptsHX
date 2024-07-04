@@ -84,11 +84,9 @@ echo -en "\n\e[1;94mBuilding the Hexagon kernel...\e[0m"
 
 echo -e "Building the Hexagon kernel... {\n" >> $LOG
 
-fasm kern/Hexagon.asm Hexagon -d $HEXAGON_FLAGS >> $LOG || callHXMod common generalBuildError
+fasm kern/Hexagon.asm hexagon -d $HEXAGON_FLAGS >> $LOG || callHXMod common generalBuildError
 
-cp Hexagon $BUILD_DIRECTORY/bin
-
-rm -r Hexagon
+mv hexagon $BUILD_DIRECTORY/bin
 
 echo -e " [\e[32mOk\e[0m]"
 
@@ -103,6 +101,6 @@ echo -e "----------------------------------------------------------------------\
 
 # Constants
 
-MOD_VERSION="0.2"
+MOD_VERSION="0.3"
 
 main $1
