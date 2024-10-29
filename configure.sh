@@ -348,7 +348,7 @@ rm base.ocl
 fi
 
 echo -n " > Processing .conf file and setting configuration file... "
-echo -e $(cat base.conf)$VERSION"]"$CODENOME'"'$VERSION"#"$RELEASE"!"$BUILD">" >> base.ocl
+echo -e $(cat base.conf)$VERSION"]"$CODENAME'"'$UPDATEPACK"#"$RELEASE"!"$BUILD">" >> base.ocl
 echo -e "[\e[32mOk\e[0m]"
 
 if [ -e hexgnix.unx ] ; then
@@ -360,13 +360,13 @@ rm hexgnix.unx
 fi
 
 echo -n " > Processing .conf file and creating UNX-XML... "
-echo -e $(cat hexgnix.conf)"<VERSION> "$VERSION" </VERSION>" >> hexgnix.unx
-echo "<CODENAME> $CODENOME </CODENAME>" >> hexgnix.unx
-echo "<UPDATEPACK> $VERSION </UPDATEPACK>" >> hexgnix.unx
-echo "<BRANCH> $RELEASE </BRANCH>" >> hexgnix.unx
-echo "<BUILD> $BUILD </BUILD>" >> hexgnix.unx
-echo "<BUILDDATE> "$(date)" </BUILDDATE>" >> hexgnix.unx
-echo "</Hexagonix>" >> hexgnix.unx
+echo -e $(cat hexgnix.conf)"  <version>"$VERSION"</version>" >> hexgnix.unx
+echo "  <codename>$CODENAME</codename>" >> hexgnix.unx
+echo "  <updatepack>$UPDATEPACK</updatepack>" >> hexgnix.unx
+echo "  <branch>$RELEASE</branch>" >> hexgnix.unx
+echo "  <build>$BUILD</build>" >> hexgnix.unx
+echo "  <builddate>"$(date)"</builddate>" >> hexgnix.unx
+echo "</hexagonix>" >> hexgnix.unx
 echo -e "[\e[32mOk\e[0m]"
 cd ..
 cd ..
@@ -390,7 +390,7 @@ rm host
 fi
 
 echo -n " > Processing .conf file and creating host configuration... "
-echo $CODENOME$(cat host.conf) >> host
+echo $CODENAME$(cat host.conf) >> host
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
@@ -567,15 +567,16 @@ echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no war
 
 }
 
-export CONFIGURE_VERSION="5.4.3"
+export CONFIGURE_VERSION="6.0.0"
 
 CONFIGURE1=$2
 CONFIGURE2=$3
 CONFIGURE3=$4
 CONFIGURE4=$5
-BUILD=$(uuid -m -v 4) 
-RELEASE=$(cat Dist/etc/release.def)
-CODENOME=$(cat Dist/etc/codename.def)
+BUILD=$(uuid -m -v 4)
 VERSION=$(cat Dist/etc/version.def)
+CODENAME=$(cat Dist/etc/codename.def)
+RELEASE=$(cat Dist/etc/release.def)
+UPDATEPACK=$(cat Dist/etc/update.def)
 
 main $1
