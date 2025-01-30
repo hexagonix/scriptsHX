@@ -15,7 +15,7 @@
 #
 #                    Sistema Operacional Hexagonix - Hexagonix Operating System
 #
-#                         Copyright (c) 2015-2024 Felipe Miguel Nery Lunkes
+#                         Copyright (c) 2015-2025 Felipe Miguel Nery Lunkes
 #                        Todos os direitos reservados - All rights reserved.
 #
 #*************************************************************************************************
@@ -38,7 +38,7 @@
 #
 # BSD 3-Clause License
 #
-# Copyright (c) 2015-2024, Felipe Miguel Nery Lunkes
+# Copyright (c) 2015-2025, Felipe Miguel Nery Lunkes
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -546,7 +546,7 @@ echo -e "***********************************************************************
 echo
 echo -e " ┌┐ ┌┐                                \e[1;94mHexagonix Operating System\e[0m"
 echo -e " ││ ││"
-echo -e " │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
+echo -e " │└─┘├──┬┐┌┬──┬──┬──┬─┐┌┬┐┌┐ \e[1;94mCopyright (c) 2015-2025 Felipe Miguel Nery Lunkes\e[0m"
 echo -e " │┌─┐││─┼┼┼┤┌┐│┌┐│┌┐│┌┐┼┼┼┼┘             \e[1;94mAll rights reserved.\e[0m"
 echo -e " ││ │││─┼┼┼┤┌┐│└┘│└┘││││├┼┼┐"
 echo -e " └┘ └┴──┴┘└┴┘└┴─┐├──┴┘└┴┴┘└┘"
@@ -562,7 +562,7 @@ function showVersion() {
 
 echo "hx build configuration module, version $CONFIGURE_VERSION"
 echo
-echo -e "\e[0mCopyright (c) 2015-2024 Felipe Miguel Nery Lunkes\e[0m"
+echo -e "\e[0mCopyright (c) 2015-2025 Felipe Miguel Nery Lunkes\e[0m"
 echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
 
 }

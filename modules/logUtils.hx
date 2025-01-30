@@ -15,7 +15,7 @@
 #
 #                    Sistema Operacional Hexagonix - Hexagonix Operating System
 #
-#                         Copyright (c) 2015-2024 Felipe Miguel Nery Lunkes
+#                         Copyright (c) 2015-2025 Felipe Miguel Nery Lunkes
 #                        Todos os direitos reservados - All rights reserved.
 #
 #*************************************************************************************************
@@ -38,7 +38,7 @@
 #
 # BSD 3-Clause License
 #
-# Copyright (c) 2015-2024, Felipe Miguel Nery Lunkes
+# Copyright (c) 2015-2025, Felipe Miguel Nery Lunkes
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -93,7 +93,7 @@ fi
 echo -e "Hexagonix Operating System build and statistics report" >> $LOG
 echo "-------------------------------------------------------" >> $LOG
 echo -e "\nHexagonix Operating System" >> $LOG
-echo "Copyright (c) 2015-2024 Felipe Miguel Nery Lunkes" >> $LOG
+echo "Copyright (c) 2015-2025 Felipe Miguel Nery Lunkes" >> $LOG
 echo "All rights reserved." >> $LOG
 echo -e "\nHexagonix is licenced under BSD-3-Clause and comes with no warranty.\n" >> $LOG
 echo "-------------------------------------------------------" >> $LOG
