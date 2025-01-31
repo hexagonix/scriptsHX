@@ -634,7 +634,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="14.0.0-ALPHA7"
+export HX_VERSION="14.0.0-RELEASE"
 
 # Modules directory
 
