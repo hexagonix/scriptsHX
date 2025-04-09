@@ -275,7 +275,7 @@ echo
 function showVirtualMachineHelp() {
 
 echo
-echo "hx $HX_VERSION help topics: running Hexagonix with virtual machone (qemu)"
+echo "hx $HX_VERSION help topics: running Hexagonix with virtual machine (qemu)"
 echo
 echo -e "Start a Hexagonix virtual machine. The available parameters are\e[1;31m (default hx)*\e[0m:"
 echo -e "\e[1;32m hx\e[0m        - Start virtual machine without sound"
@@ -634,7 +634,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="14.0.0-RELEASE"
+export HX_VERSION="14.0.1-RELEASE"
 
 # Modules directory
 
