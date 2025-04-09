@@ -213,7 +213,7 @@ fi
 
 # Module 2
 
-echo -n " > Module for building external utilities (Contrib.sh) "
+echo -n " > External utilities build module (Contrib.sh) "
 
 if [ -e Contrib/Contrib.sh ] ; then
 
@@ -347,7 +347,7 @@ rm base.ocl
 
 fi
 
-echo -n " > Processing .conf file and setting configuration file... "
+echo -n " > Processing .conf file and creating system information file... "
 echo -e $(cat base.conf)$VERSION"]"$CODENAME'"'$UPDATEPACK"#"$RELEASE"!"$BUILD">" >> base.ocl
 echo -e "[\e[32mOk\e[0m]"
 
@@ -567,7 +567,7 @@ echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no war
 
 }
 
-export CONFIGURE_VERSION="6.0.0"
+export CONFIGURE_VERSION="6.1.0"
 
 CONFIGURE1=$2
 CONFIGURE2=$3
