@@ -277,7 +277,7 @@ function showVirtualMachineHelp() {
 echo
 echo "hx $HX_VERSION help topics: running Hexagonix with virtual machine (qemu)"
 echo
-echo -e "Start a Hexagonix virtual machine. The available parameters are\e[1;31m (default hx)*\e[0m:"
+echo -e "Start a Hexagonix virtual machine. The available parameters are\e[1;31m (default: hx)*\e[0m:"
 echo -e "\e[1;32m hx\e[0m        - Start virtual machine without sound"
 echo -e "\e[1;32m hx.snd\e[0m    - Start virtual machine with sound"
 echo -e "\e[1;32m hx.serial\e[0m - Start virtual machine with no serial output"
@@ -292,10 +292,14 @@ function showBuildHelp() {
 echo
 echo "hx $HX_VERSION help topics: building system disk"
 echo
-echo -e "Build disk image. The available parameters are\e[1;31m (default hx)*\e[0m:"
-echo -e "\e[1;32m hx\e[0m      - Build disk image with Hexagonix"
-echo -e "\e[1;32m hx.test\e[0m - Build test disk image with Hexagonix"
-echo -e "\e[1;31m* The 'hx' option will be selected if no parameter is passed after '-i'!\e[0m"
+echo -e "Build disk image. The available parameters are\e[1;31m (default: dev)*\e[0m:"
+echo -e "\e[1;32m dev\e[0m     - Build disk image with Hexagonix for development tests"
+echo -e "\e[1;32m release\e[0m - Build disk image with Hexagonix for release build"
+echo -e "\e[1;32m test\e[0m    - Build test disk image with Hexagonix with minimum image size"
+echo -e "\e[1;32m bsd\e[0m     - Build test disk image under FreeBSD (under development)"
+echo -e "\e[1;32m UNIX\e[0m    - Build test disk image under Solaris (under development)"
+
+echo -e "\e[1;31m* The 'dev' option will be selected if no parameter is passed after '-i'!\e[0m"
 
 }
 
@@ -325,11 +329,12 @@ function manageBuild() {
 
 case $PT2 in
 
-hx) setImageBuildOnLinux; exit;;
-hx.test) setTestImageBuildOnLinux; exit;;
+dev) setImageBuildOnLinux; exit;;
+release) setImageBuildOnLinuxForRelease; exit;;
+test) setTestImageBuildOnLinux; exit;;
 bsd) setImageBuildOnBSD; exit;;
 UNIX) setImageBuildOnUNIXSolaris; exit;;
-*) setImageBuildOnLinux; exit;; # Assume hx -i hx
+*) setImageBuildOnLinux; exit;; # Assume hx -i dev
 
 esac
 
@@ -363,6 +368,20 @@ esac
 function setImageBuildOnLinux() {
 
 export HOST="LINUX"
+export BUILD_RELEASE_IMAGE=false
+
+checkStaticFiles
+
+setReleaseBuild
+
+buildHexagonix
+
+}
+
+function setImageBuildOnLinuxForRelease() {
+
+export HOST="LINUX"
+export BUILD_RELEASE_IMAGE=true
 
 checkStaticFiles
 
@@ -375,6 +394,7 @@ buildHexagonix
 function setImageBuildOnBSD() {
 
 export HOST="BSD"
+export BUILD_RELEASE_IMAGE=false
 
 checkStaticFiles
 
@@ -387,6 +407,7 @@ buildHexagonix
 function setImageBuildOnUNIXSolaris() {
 
 export HOST="UNIX"
+export BUILD_RELEASE_IMAGE=false
 
 checkStaticFiles
 
@@ -399,6 +420,7 @@ buildHexagonix
 function setTestImageBuildOnLinux() {
 
 export HOST="LINUX"
+export BUILD_RELEASE_IMAGE=false
 
 checkStaticFiles
 
@@ -417,7 +439,7 @@ function setTestBuild() {
 # This image should be not compatible with virtual machines running with 2 virtual
 # disk attached (system limitation).
 
-export ISK_IMAGE_SIZE=2097012
+export DISK_IMAGE_SIZE=2097012
 export TEMP_IMAGE_SIZE=2048
 
 }
@@ -627,7 +649,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="15.0.0-CURRENT"
+export HX_VERSION="15.1.0"
 
 # Modules directory
 
