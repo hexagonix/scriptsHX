@@ -436,7 +436,7 @@ export TEMP_IMAGE_SIZE=92160
 
 function buildAllComponents() {
 
-MSG="Building the Hexagonix"
+export MSG="Building the Hexagonix"
 
 clear
 
@@ -481,7 +481,7 @@ function cleanObjectsInSourceTree() {
 
 clear
 
-MSG="hx: clear system tree"
+export MSG="hx: clear system tree"
 
 callHXMod common banner
 
@@ -566,32 +566,25 @@ callHXMod common allDone
 
 function checkStaticFiles() {
 
-# Let's check if the essential static files have already been generated before.
-# If not, we will generate them
-
-if [ -e Dist/etc/base.ocl ] ; then
-
-echo "Static files present."
-
-else
-
 clear
 
-MSG="Building the Hexagonix"
+export MSG="Configuring system build"
 
 callHXMod common banner
 
-echo "The static files needed to build the system were not found."
-echo "Build could not be started. To do so, hx will run ./configure.sh"
-echo "to set up the build and generate the necessary files."
+echo "Now, static system configuration files must be generated for each build."
+echo
+echo "This ensures independent build codes and prevents outdated configuration files"
+echo "in successive system builds."
+echo
+echo "With this new policy, you cannot proceed without generating the static files"
+echo "specific to this build."
 echo
 echo "Press <ENTER> to continue or CTRL-C to cancel..."
 
 read answer
 
 ./configure.sh
-
-fi
 
 }
 
@@ -605,7 +598,7 @@ function tryWithSudo() {
 
 clear
 
-MSG="hx: you need to be root"
+export MSG="hx: you need to be root"
 
 callHXMod common banner
 
@@ -634,7 +627,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="14.0.1-RELEASE"
+export HX_VERSION="15.0.0-CURRENT"
 
 # Modules directory
 
