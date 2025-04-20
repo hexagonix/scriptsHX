@@ -126,6 +126,17 @@ cp $BUILD_DIRECTORY/*.cow $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common bui
 cp $BUILD_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 cp $BUILD_DIRECTORY/hboot $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 
+# When not building image for release, some components should not be present,
+# like OOBE (out of box experience), making testing easier
+
+if [ "$BUILD_RELEASE_IMAGE" = false ]; then
+
+# Remove release required components for test build
+
+rm $MOUNT_POINT_DIRECTORY/oobe
+
+fi 
+
 # License must be copied
 
 cp Dist/man/LICENSE $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
@@ -251,6 +262,6 @@ exit
 
 # Constants
 
-MOD_VER="0.3"
+MOD_VER="0.4"
 
 main $1
