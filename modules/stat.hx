@@ -82,7 +82,7 @@ function displayStatistics() {
 
 clear
 
-MSG="Statistics"
+export MSG="System statistics"
 
 callHXMod common banner
 
@@ -130,6 +130,6 @@ echo
 
 # Constants
 
-MOD_VER="0.1"
+MOD_VER="0.2"
 
 main $1

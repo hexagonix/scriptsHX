@@ -83,7 +83,7 @@ function installBuildDependencies() {
 
 callHXMod common testForRootUser
 
-MSG="Install dependencies"
+export MSG="Install dependencies"
 
 callHXMod common banner
 
@@ -144,6 +144,6 @@ callHXMod git cloneRepositories
 
 # Constants
 
-MOD_VER="0.1"
+MOD_VER="0.2"
 
 main $1

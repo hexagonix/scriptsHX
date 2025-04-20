@@ -86,7 +86,7 @@ function cloneRepositories() {
 
 clear
 
-export MSG="Build the Hexagonix"
+export MSG="Clone system repositories"
 
 callHXMod common banner
 
@@ -176,7 +176,7 @@ exit
 
 function updateDiskImages() {
 
-export MSG="Update images"
+export MSG="Update system images"
 
 callHXMod common banner
 
@@ -244,7 +244,7 @@ callHXMod common allDone
 
 function updateRepositories() {
 
-export MSG="Update repos"
+export MSG="Update repositories"
 
 callHXMod common banner
 
@@ -399,6 +399,6 @@ callHXMod common allDone
 
 # Constants
 
-MOD_VER="0.1"
+MOD_VER="0.2"
 
 main $1
