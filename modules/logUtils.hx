@@ -88,6 +88,18 @@ rm -r $LOG
 
 fi
 
+if [ "$BUILD_RELEASE_IMAGE" = true ]; then
+
+BUILD_TYPE="Release build"
+OOBE=true
+
+else
+
+BUILD_TYPE="Development build"
+OOBE=false
+
+fi 
+
 # Create the log file header
 
 echo -e "Hexagonix Operating System build and statistics report" >> $LOG
@@ -103,9 +115,11 @@ echo "build, as well as errors found in the process." >> $LOG
 echo -e "\nhx version: $HX_VERSION" >> $LOG
 echo -e "\nBuild id: $BUILD_ID" >> $LOG
 echo -e "\nInformation about the current build of Hexagonix:" >> $LOG
+echo " > Build type: $BUILD_TYPE" >> $LOG
 echo " > Hexagonix version: $HEXAGONIX_VERSION" >> $LOG
 echo " > Release name: $HEXAGONIX_CODENAME" >> $LOG
 echo " > Release channel: $HEXAGONIX_RELEASE_CHANNEL" >> $LOG
+echo " > Out of box experience (OOBE) present (not included in development builds): $OOBE" >> $LOG
 echo " > Disk image location: $IMAGE_PATH/$IMAGE_FILENAME" >> $LOG
 echo " > Main system branch (git): $MAIN_BRANCH" >> $LOG
 echo "   > Andromeda-Apps branch: $ANDROMEDA_APPS_BRANCH" >> $LOG
@@ -189,6 +203,6 @@ echo -e "\n---------------------------------------------------------------------
 
 # Constants
 
-MOD_VER="0.4"
+MOD_VER="0.5"
 
 main $1
