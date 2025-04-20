@@ -118,12 +118,13 @@ case $1 in
 
 # Manage parameters starting with '--'
 
+--help) showMainHelp; exit;;
 --version) showVersion; exit;;
 --depend) callHXMod depend installBuildDependencies; exit;;
 --info) callHXMod buildInfo infoBuild; exit;;
 --configure) startConfigureModule; exit;;
 --indent) startIndentModule; exit;;
---stat) callHXMod stat displayStatistics; exit;;
+--stats) callHXMod stat displayStatistics; exit;;
 --flags) callHXMod buildInfo showBuildFlags; exit;;
 
 # Default function
@@ -649,7 +650,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="15.1.0"
+export HX_VERSION="15.2.0"
 
 # Modules directory
 
