@@ -595,18 +595,6 @@ export MSG="Configuring system build"
 
 callHXMod common banner
 
-echo "Now, static system configuration files must be generated for each build."
-echo
-echo "This ensures independent build codes and prevents outdated configuration files"
-echo "in successive system builds."
-echo
-echo "With this new policy, you cannot proceed without generating the static files"
-echo "specific to this build."
-echo
-echo "Press <ENTER> to continue or CTRL-C to cancel..."
-
-read answer
-
 ./configure.sh
 
 }
@@ -650,7 +638,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="15.2.0"
+export HX_VERSION="15.3.0"
 
 # Modules directory
 
