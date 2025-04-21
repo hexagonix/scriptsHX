@@ -134,7 +134,17 @@ if [ "$BUILD_RELEASE_IMAGE" = false ]; then
 # Remove release required components for test build
 
 mkdir $MOUNT_POINT_DIRECTORY/bin
+mkdir $MOUNT_POINT_DIRECTORY/bin/test
+mkdir $MOUNT_POINT_DIRECTORY/bin/test/test2
+mkdir $MOUNT_POINT_DIRECTORY/bin/test/test2/test3
 cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/ls
+cp $MOUNT_POINT_DIRECTORY/clear  $MOUNT_POINT_DIRECTORY/bin/clear
+cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/test/ls
+cp $MOUNT_POINT_DIRECTORY/clear  $MOUNT_POINT_DIRECTORY/bin/test/clear
+cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/test/test2/ls
+cp $MOUNT_POINT_DIRECTORY/clear  $MOUNT_POINT_DIRECTORY/bin/test/test2/clear
+cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/test/test2/test3/ls
+cp $MOUNT_POINT_DIRECTORY/clear  $MOUNT_POINT_DIRECTORY/bin/test/test2/test3/clear
 cp $MOUNT_POINT_DIRECTORY/dossh $MOUNT_POINT_DIRECTORY/bin/dossh
 cp $MOUNT_POINT_DIRECTORY/oobe $MOUNT_POINT_DIRECTORY/bin/oobe
 rm $MOUNT_POINT_DIRECTORY/oobe
@@ -266,6 +276,6 @@ exit
 
 # Constants
 
-MOD_VER="0.5"
+MOD_VER="0.6"
 
 main $1
