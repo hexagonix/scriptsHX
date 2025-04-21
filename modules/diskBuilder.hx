@@ -133,9 +133,13 @@ if [ "$BUILD_RELEASE_IMAGE" = false ]; then
 
 # Remove release required components for test build
 
+mkdir $MOUNT_POINT_DIRECTORY/bin
+cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/ls
+cp $MOUNT_POINT_DIRECTORY/dossh $MOUNT_POINT_DIRECTORY/bin/dossh
+cp $MOUNT_POINT_DIRECTORY/oobe $MOUNT_POINT_DIRECTORY/bin/oobe
 rm $MOUNT_POINT_DIRECTORY/oobe
 
-fi 
+fi
 
 # License must be copied
 
@@ -262,6 +266,6 @@ exit
 
 # Constants
 
-MOD_VER="0.4"
+MOD_VER="0.5"
 
 main $1
