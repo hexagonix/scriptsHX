@@ -83,10 +83,55 @@ case $1 in
 build) build; exit;;
 user) users; exit;;
 clean) clean; exit;;
+-h) showMainHelp; exit;;
+--install) installDependencies; exit;;
 --version) showVersion; exit;;
 *) configureBuild; exit;;
 
 esac
+
+}
+
+function showMainHelp() {
+
+case $PT2 in
+
+-v) showVirtualMachineHelp; exit;;
+-i) showBuildHelp; exit;;
+
+esac 
+
+echo
+echo -e "hx configure $CONFIGURE_VERSION help:"
+echo
+echo -e "\e[1;94mMain\e[0m available parameters:"
+echo
+echo -e "\e[1;32mbuild\e[0m     - Configure and create static files needed fot build the system"
+echo -e "\e[1;32muser\e[0m      - Build user database from configuration files"
+echo -e "\e[1;32mclean\e[0m     - Clean the system tree (static and object files)"
+echo -e "\e[1;32m--version\e[0m - Show hx configure version"
+echo -e "\e[1;32m--install\e[0m - Install the dependencies needed to build and run Hexagonix locally"
+echo -e "\e[1;32m-h\e[0m        - Show main help"
+echo
+echo  "See the complete documentation at: https://github.com/hexagonix/Doc"
+echo
+
+}
+
+function installDependencies() {
+
+banner
+
+echo "The configure will install all the dependencies needed to build and"
+echo "run Hexagonix locally. We must be root to do that."
+echo 
+echo "Press <ENTER> to continue or CTRL-C to exit without install dependencies."
+
+read continue
+
+sudo apt install $BUILD_DEPENDENCIES
+
+finish
 
 }
 
@@ -197,7 +242,8 @@ echo -e "[\e[32mOk\e[0m]"
 else
 
 echo -e "[\e[31mNot found\e[0m]"
-echo -e "   > \e[1;94mYou can start building the system without this dependency. \e[1;31mThe build may fail\e[0m."
+echo -e "   > \e[1;94mYou can start building the system without this dependency\e[0m."
+echo -e "   > \e[1;31mWarning: The build may fail\e[0m."
 
 fi
 
@@ -347,6 +393,8 @@ finish
 }
 
 function build() {
+
+BUILD=$(uuid -m -v 4)
 
 echo -e "Configuring system build data..."
 
@@ -582,13 +630,13 @@ echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no war
 
 }
 
-export CONFIGURE_VERSION="6.2.0"
+export CONFIGURE_VERSION="6.3.0"
 
 CONFIGURE1=$2
 CONFIGURE2=$3
 CONFIGURE3=$4
 CONFIGURE4=$5
-BUILD=$(uuid -m -v 4)
+BUILD_DEPENDENCIES="fasm nasm cloc qemu-system-x86 uuid"
 VERSION=$(cat Dist/etc/version.def)
 CODENAME=$(cat Dist/etc/codename.def)
 RELEASE=$(cat Dist/etc/release.def)
