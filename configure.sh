@@ -186,6 +186,21 @@ echo -e "   > \e[1;94mYou can start building the system without this dependency\
 
 fi
 
+# Dependency 7
+
+echo -n " > uuid "
+
+if [ -e /usr/bin/uuid ] ; then
+
+echo -e "[\e[32mOk\e[0m]"
+
+else
+
+echo -e "[\e[31mNot found\e[0m]"
+echo -e "   > \e[1;94mYou can start building the system without this dependency. \e[1;31mThe build may fail\e[0m."
+
+fi
+
 finish
 
 # Now let's check if the scripts are available and make them executable
@@ -567,7 +582,7 @@ echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no war
 
 }
 
-export CONFIGURE_VERSION="6.1.0"
+export CONFIGURE_VERSION="6.2.0"
 
 CONFIGURE1=$2
 CONFIGURE2=$3
