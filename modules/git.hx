@@ -193,9 +193,9 @@ case $OPCAO in
 
 y) updateAuthorized; exit;;
 Y) updateAuthorized; exit;;
-n) finish; exit;;
-N) finish; exit;;
-*) finish; exit;;
+n) exit;;
+N) exit;;
+*) exit;;
 
 esac
 
@@ -399,6 +399,6 @@ callHXMod common allDone
 
 # Constants
 
-MOD_VER="0.2"
+MOD_VER="0.3"
 
 main $1
