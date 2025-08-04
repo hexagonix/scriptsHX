@@ -330,8 +330,8 @@ function manageBuild() {
 
 case $PT2 in
 
-dev) setImageBuildOnLinux; exit;;
-release) setImageBuildOnLinuxForRelease; exit;;
+dev) setDevelopmentImageBuild; exit;;
+release) setReleaseImageBuild; exit;;
 test) setTestImageBuildOnLinux; exit;;
 bsd) setImageBuildOnBSD; exit;;
 UNIX) setImageBuildOnUNIXSolaris; exit;;
@@ -369,7 +369,6 @@ esac
 function setImageBuildOnLinux() {
 
 export HOST="LINUX"
-export BUILD_RELEASE_IMAGE=false
 
 checkStaticFiles
 
@@ -379,16 +378,20 @@ buildHexagonix
 
 }
 
-function setImageBuildOnLinuxForRelease() {
+function setDevelopmentImageBuild() {
 
-export HOST="LINUX"
+export BUILD_RELEASE_IMAGE=false
+
+setImageBuildOnLinux
+
+}
+
+
+function setReleaseImageBuild() {
+
 export BUILD_RELEASE_IMAGE=true
 
-checkStaticFiles
-
-setReleaseBuild
-
-buildHexagonix
+setImageBuildOnLinux
 
 }
 
@@ -638,7 +641,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="15.3.0"
+export HX_VERSION="15.3.1"
 
 # Modules directory
 
