@@ -335,7 +335,7 @@ release) setReleaseImageBuild; exit;;
 test) setTestImageBuildOnLinux; exit;;
 bsd) setImageBuildOnBSD; exit;;
 UNIX) setImageBuildOnUNIXSolaris; exit;;
-*) setImageBuildOnLinux; exit;; # Assume hx -i dev
+*) setDevelopmentImageBuild; exit;; # Assume hx -i dev
 
 esac
 
@@ -641,7 +641,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="15.3.1"
+export HX_VERSION="15.3.2"
 
 # Modules directory
 
