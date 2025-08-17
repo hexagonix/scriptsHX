@@ -82,7 +82,7 @@ case $1 in
 
 build) build; exit;;
 user) users; exit;;
-clean) clean; exit;;
+uninstall) uninstall; exit;;
 -h) showMainHelp; exit;;
 --install) installDependencies; exit;;
 --version) showVersion; exit;;
@@ -108,7 +108,7 @@ echo -e "\e[1;94mMain\e[0m available parameters:"
 echo
 echo -e "\e[1;32mbuild\e[0m     - Configure and create static files needed fot build the system"
 echo -e "\e[1;32muser\e[0m      - Build user database from configuration files"
-echo -e "\e[1;32mclean\e[0m     - Clean the system tree (static and object files)"
+echo -e "\e[1;32muninstall\e[0m - Uninstall hx dependencies in your computer"
 echo -e "\e[1;32m--version\e[0m - Show hx configure version"
 echo -e "\e[1;32m--install\e[0m - Install the dependencies needed to build and run Hexagonix locally"
 echo -e "\e[1;32m-h\e[0m        - Show main help"
@@ -406,7 +406,7 @@ if [ -e base.ocl ] ; then
 
 echo " > Removing previous build and base version information..."
 
-rm base.ocl
+sudo rm base.ocl
 
 fi
 
@@ -418,7 +418,7 @@ if [ -e hexgnix.unx ] ; then
 
 echo " > Removing previous Hexagonix build and version database..."
 
-rm hexgnix.unx
+sudo rm hexgnix.unx
 
 fi
 
@@ -448,7 +448,7 @@ if [ -e host ] ; then
 
 echo " > Removing previous host configuration..."
 
-rm host
+sudo rm host
 
 fi
 
@@ -473,7 +473,7 @@ if [ -e shrc ] ; then
 
 echo " > Removing previous shrc configuration..."
 
-rm shrc
+sudo rm shrc
 
 fi
 
@@ -499,7 +499,7 @@ if [ -e passwd ] ; then
 
 echo " > Removing previous user database..."
 
-rm passwd
+sudo rm passwd
 
 fi
 
@@ -524,7 +524,7 @@ if [ -e rc ] ; then
 
 echo " > Removing previous rc (startup script)..."
 
-rm rc
+sudo rm rc
 
 fi
 
@@ -545,7 +545,7 @@ echo -e "[\e[32mStep completed successfully\e[0m]"
 
 }
 
-function clean() {
+function uninstall() {
 
 banner
 
@@ -555,7 +555,7 @@ echo -n " > Removing hx from /usr/bin... "
 
 if [ -e /usr/bin/hx ] ; then
 
-rm -rf /usr/bin/hx
+sudo rm -rf /usr/bin/hx
 
 else
 
@@ -630,7 +630,7 @@ echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no war
 
 }
 
-export CONFIGURE_VERSION="6.3.0"
+export CONFIGURE_VERSION="6.4.0"
 
 CONFIGURE1=$2
 CONFIGURE2=$3
