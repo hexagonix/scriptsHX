@@ -423,11 +423,11 @@ sudo rm hexgnix.unx
 fi
 
 echo -n " > Processing .conf file and creating UNX-XML... "
-echo -e $(cat hexgnix.conf)'  "version": "'$VERSION'"' >> hexgnix.unx
-echo '  "codename": "'$CODENAME'"' >> hexgnix.unx
-echo '  "updatePack": "'$UPDATEPACK'"' >> hexgnix.unx
-echo '  "branch": "'$RELEASE'"' >> hexgnix.unx
-echo '  "build": "'$BUILD'"' >> hexgnix.unx
+echo -e $(cat hexgnix.conf)'  "version": "'$VERSION'",' >> hexgnix.unx
+echo '  "codename": "'$CODENAME'",' >> hexgnix.unx
+echo '  "updatePack": "'$UPDATEPACK'",' >> hexgnix.unx
+echo '  "branch": "'$RELEASE'",' >> hexgnix.unx
+echo '  "buildId": "'$BUILD'",' >> hexgnix.unx
 echo '  "buildDate": "'$(date)'"' >> hexgnix.unx
 echo "}" >> hexgnix.unx
 echo -e "[\e[32mOk\e[0m]"
@@ -630,7 +630,7 @@ echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no war
 
 }
 
-export CONFIGURE_VERSION="6.5.0"
+export CONFIGURE_VERSION="6.6.0"
 
 CONFIGURE1=$2
 CONFIGURE2=$3
