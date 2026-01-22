@@ -22,6 +22,7 @@
 
 <details title="Português" align='left'>
 <summary align='left'><strong>:brazil: Português</strong></summary>
+<br>
 
 ### Ferramentas para construção do Hexagonix
 
@@ -32,8 +33,8 @@ Este repositório contém ferramentas para construir o Hexagonix e as imagens de
 </div>
 
 <details title="HX" align='left'>
-<br>
 <summary align='center'>HX</summary>
+<br>
 
 <p align="center">
 <img width="150px" height="150px" src="https://github.com/hexagonix/Doc/blob/main/Img/HX.png">
@@ -53,8 +54,8 @@ O `HX` é a ferramenta responsável por unificar toda a construção do Hexagoni
 </details>
 
 <details title="Outras ferramentas" align='left'>
-<br>
 <summary align='center'>Outras ferramentas</summary>
+<br>
 
 <div align="justify">
 
@@ -69,6 +70,7 @@ O `HX` é a ferramenta responsável por unificar toda a construção do Hexagoni
 
 <details title="English" align='left'>
 <summary align='left'><strong>:uk: English</strong></summary>
+<br>
 
 ### Tools for building Hexagonix
 
@@ -79,8 +81,8 @@ This repository contains tools to build Hexagonix and the system disk images, in
 </div>
 
 <details title="HX" align='left'>
-<br>
 <summary align='center'>HX</summary>
+<br>
 
 <p align="center">
 <img width="150px" height="150px" src="https://github.com/hexagonix/Doc/blob/main/Img/HX.png">
@@ -100,8 +102,8 @@ This repository contains tools to build Hexagonix and the system disk images, in
 </details>
 
 <details title="Other Tools" align='left'>
-<br>
 <summary align='center'>Other tools</summary>
+<br>
 
 <div align="justify">
 
@@ -115,8 +117,8 @@ This repository contains tools to build Hexagonix and the system disk images, in
 </details>
 
 <details title="Scripts License" align='left'>
-<br>
 <summary align='left'>Licença dos scripts/Scripts License</summary>
+<br>
 
 <div align="justify">
 
