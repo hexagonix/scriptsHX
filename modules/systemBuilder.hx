@@ -109,9 +109,9 @@ cp rc $BUILD_DIRECTORY/etc
 
 echo " > rc successfully copied." >> $LOG
 
-cp passwd $BUILD_DIRECTORY/etc
+cp shadow $BUILD_DIRECTORY/etc
 
-echo " > passwd successfully copied." >> $LOG
+echo " > shadow successfully copied." >> $LOG
 
 cp host $BUILD_DIRECTORY/etc
 
@@ -202,6 +202,6 @@ callHXMod contribBuilder
 
 # Constants
 
-MOD_VER="0.3"
+MOD_VER="0.4"
 
 main $1
