@@ -15,7 +15,7 @@
 #
 #                    Sistema Operacional Hexagonix - Hexagonix Operating System
 #
-#                         Copyright (c) 2015-2025 Felipe Miguel Nery Lunkes
+#                         Copyright (c) 2015-2026 Felipe Miguel Nery Lunkes
 #                        Todos os direitos reservados - All rights reserved.
 #
 #*************************************************************************************************
@@ -38,7 +38,7 @@
 #
 # BSD 3-Clause License
 #
-# Copyright (c) 2015-2025, Felipe Miguel Nery Lunkes
+# Copyright (c) 2015-2026, Felipe Miguel Nery Lunkes
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -308,7 +308,7 @@ function showVersion() {
 
 echo -e "hx: Hexagonix build utility, version $HX_VERSION"
 echo
-echo -e "\e[0mCopyright (c) 2015-2025 Felipe Miguel Nery Lunkes\e[0m"
+echo -e "\e[0mCopyright (c) 2015-2026 Felipe Miguel Nery Lunkes\e[0m"
 echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
 
 }
@@ -633,7 +633,7 @@ exit
 # Hx entry point, variable definition and parameter processing
 #
 #
-# Copyright (c) 2015-2025 Felipe Miguel Nery Lunkes
+# Copyright (c) 2015-2026 Felipe Miguel Nery Lunkes
 # All rights reserved
 
 # hx info
