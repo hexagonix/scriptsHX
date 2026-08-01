@@ -181,7 +181,7 @@ echo
 
 # Constants
 
-MOD_VER="0.3"
+MOD_VER="0.4"
 
 # Constants for virtual machine execution (QEMU)
 
@@ -189,7 +189,7 @@ DRV_SOUND="pcspk"
 SYSTEM_ARCH="i386"
 BSD_SYSTEM_ARCH="x86_64"
 PROCESSOR="pentium3"
-MEMORY=32
+MEMORY=64
 AUDIO_DEVICE="pa,id=audio0 -machine pcspk-audiodev=audio0"
 
 main $1
