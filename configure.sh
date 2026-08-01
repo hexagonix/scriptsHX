@@ -489,22 +489,73 @@ finish
 
 }
 
+# DJB2 hash, matching Hexagon.LibASM.PasswdHash.hash (lib/fasm/passwdHash.s)
+# byte for byte: hash = 5381, then hash = hash*33 + c for each character,
+# masked to 32 bits, formatted as 8 lowercase hex digits. Not cryptographic,
+# the same tradeoff the kernel-side implementation documents, the point is
+# that shadow.conf's plaintext passwords never reach the built disk image,
+# not that the hash resists a determined attacker
+
+function djb2Hash() {
+
+local text="$1"
+local hash=5381
+local i c
+
+for (( i=0; i<${#text}; i++ )); do
+
+c=$(printf '%d' "'${text:$i:1}")
+hash=$(( (hash * 33 + c) & 0xFFFFFFFF ))
+
+done
+
+printf '%08x' "$hash"
+
+}
+
 function users() {
 
 echo -e "Configuring users..."
 
 cd Dist/etc
 
-if [ -e passwd ] ; then
+if [ -e shadow ] ; then
 
 echo " > Removing previous user database..."
 
-sudo rm passwd
+sudo rm shadow
 
 fi
 
 echo -n " > Processing .conf file and creating user database... "
-echo -e $(cat passwd.conf) >> passwd
+
+# shadow.conf is username:password:code:shell:theme, one real line per
+# account, plaintext, never shipped itself. Each line's password field
+# gets hashed here before it's written to the shadow file that actually
+# ends up on the built disk image
+
+while IFS= read -r configLine || [ -n "$configLine" ]; do
+
+case "$configLine" in
+
+""|"#"*)
+continue
+;;
+
+esac
+
+configUser=$(echo "$configLine" | cut -d: -f1)
+configPassword=$(echo "$configLine" | cut -d: -f2)
+configCode=$(echo "$configLine" | cut -d: -f3)
+configShell=$(echo "$configLine" | cut -d: -f4)
+configTheme=$(echo "$configLine" | cut -d: -f5)
+
+configHash=$(djb2Hash "$configPassword")
+
+echo "${configUser}:${configHash}:${configCode}:${configShell}:${configTheme}" >> shadow
+
+done < shadow.conf
+
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
@@ -630,7 +681,7 @@ echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no war
 
 }
 
-export CONFIGURE_VERSION="6.6.0"
+export CONFIGURE_VERSION="6.7.0"
 
 CONFIGURE1=$2
 CONFIGURE2=$3
