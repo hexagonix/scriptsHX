@@ -522,7 +522,7 @@ echo -e "   > \e[1;94mUse ./hx with parameters to regenerate these files.\e[0m"
 echo -e "   > For help on possible parameters, use ./hx -h."
 echo -n " > Removing configuration files generated every build..."
 
-rm -rf Dist/etc/*.unx Dist/etc/*.ocl Dist/etc/rc Dist/etc/passwd Dist/etc/shrc Dist/etc/host
+rm -rf Dist/etc/*.unx Dist/etc/*.ocl Dist/etc/rc Dist/etc/shadow Dist/etc/shrc Dist/etc/host
 
 echo -e " [\e[32mOk\e[0m]"
 echo -e "   > \e[1;94mUse ./configure.sh to regenerate these files.\e[0m"
@@ -641,7 +641,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="15.3.2"
+export HX_VERSION="15.4.0"
 
 # Modules directory
 
