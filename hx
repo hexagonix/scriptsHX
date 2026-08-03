@@ -112,7 +112,7 @@ case $1 in
 -br) callHXMod git infoRepo; exit;;
 -u) callHXMod git updateRepositories; exit;;
 -ui) callHXMod git updateDiskImages; exit;;
--un) callHXMod git switchBranchAndUpdateRepositories; exit;;
+-un) callHXMod git switchBranchAndUpdateRepositories $PT2; exit;;
 -m) callHXMod depend checkCloneDependencies; exit;;
 -c) cleanObjectsInSourceTree; exit;;
 
@@ -641,7 +641,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="15.3.2"
+export HX_VERSION="15.3.3"
 
 # Modules directory
 
