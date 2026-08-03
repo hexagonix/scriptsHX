@@ -15,7 +15,7 @@
 #
 #                    Sistema Operacional Hexagonix - Hexagonix Operating System
 #
-#                         Copyright (c) 2015-2025 Felipe Miguel Nery Lunkes
+#                         Copyright (c) 2015-2026 Felipe Miguel Nery Lunkes
 #                        Todos os direitos reservados - All rights reserved.
 #
 #*************************************************************************************************
@@ -38,7 +38,7 @@
 #
 # BSD 3-Clause License
 #
-# Copyright (c) 2015-2025, Felipe Miguel Nery Lunkes
+# Copyright (c) 2015-2026, Felipe Miguel Nery Lunkes
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -109,9 +109,9 @@ cp rc $BUILD_DIRECTORY/etc
 
 echo " > rc successfully copied." >> $LOG
 
-cp passwd $BUILD_DIRECTORY/etc
+cp shadow $BUILD_DIRECTORY/etc
 
-echo " > passwd successfully copied." >> $LOG
+echo " > shadow successfully copied." >> $LOG
 
 cp host $BUILD_DIRECTORY/etc
 
@@ -202,6 +202,6 @@ callHXMod contribBuilder
 
 # Constants
 
-MOD_VER="0.3"
+MOD_VER="0.4"
 
 main $1
