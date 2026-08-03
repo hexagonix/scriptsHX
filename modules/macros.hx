@@ -70,7 +70,7 @@
 
 function callHXMod() {
 
-$MOD_DIR/$1.hx $2
+$MOD_DIR/$1.hx $2 $3
 enforceRootDirectory
 
 }
@@ -81,4 +81,4 @@ cd $ROOT_DIR
 
 }
 
-MOD_VER="0.1"
+MOD_VER="0.2"
