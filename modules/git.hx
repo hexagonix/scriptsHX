@@ -328,41 +328,41 @@ echo "You are about to update all system repositories with the server,"
 echo "after switching to the given branch."
 echo
 echo "Update info:"
-echo -e " > Branch: \e[1;94m$PT2\e[0m"
+echo -e " > Branch: \e[1;94m$BRANCH\e[0m"
 echo -e " > Remote host: \e[1;94m$REMOTE\e[0m"
 echo
 echo -e "> \e[1;32mUpdating repositories...\e[0m"
 echo
 
-cd Apps/Unix && git switch $PT2 && git pull
+cd Apps/Unix && git switch $BRANCH && git pull
 cd ..
-cd Andromeda && git switch $PT2 && git pull
-cd ..
-cd ..
-cd Boot/Saturno && git switch $PT2 && git pull
-cd ..
-cd "HBoot" && git switch $PT2 && git pull
+cd Andromeda && git switch $BRANCH && git pull
 cd ..
 cd ..
-cd Dist/etc && git switch $PT2 && git pull
+cd Boot/Saturno && git switch $BRANCH && git pull
 cd ..
-cd man && git switch $PT2 && git pull
-cd ..
-cd ..
-cd Doc && git switch $PT2 && git pull
-cd ..
-cd Contrib/fasmX && git switch $PT2 && git pull
+cd "HBoot" && git switch $BRANCH && git pull
 cd ..
 cd ..
-cd Fonts && git switch $PT2 && git pull
+cd Dist/etc && git switch $BRANCH && git pull
 cd ..
-cd Hexagon && git switch $PT2 && git pull
+cd man && git switch $BRANCH && git pull
 cd ..
-cd hexagonix && git switch $PT2 && git pull
 cd ..
-cd lib && git switch $PT2 && git pull
+cd Doc && git switch $BRANCH && git pull
 cd ..
-cd Scripts && git switch $PT2 && git pull
+cd Contrib/fasmX && git switch $BRANCH && git pull
+cd ..
+cd ..
+cd Fonts && git switch $BRANCH && git pull
+cd ..
+cd Hexagon && git switch $BRANCH && git pull
+cd ..
+cd hexagonix && git switch $BRANCH && git pull
+cd ..
+cd lib && git switch $BRANCH && git pull
+cd ..
+cd Scripts && git switch $BRANCH && git pull
 
 echo
 echo -e "> \e[1;32mUpdating building scripts and utilities...\e[0m"
@@ -399,6 +399,8 @@ callHXMod common allDone
 
 # Constants
 
-MOD_VER="0.3"
+MOD_VER="0.4"
+
+BRANCH=$2
 
 main $1
