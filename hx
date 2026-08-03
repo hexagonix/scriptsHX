@@ -15,7 +15,7 @@
 #
 #                    Sistema Operacional Hexagonix - Hexagonix Operating System
 #
-#                         Copyright (c) 2015-2025 Felipe Miguel Nery Lunkes
+#                         Copyright (c) 2015-2026 Felipe Miguel Nery Lunkes
 #                        Todos os direitos reservados - All rights reserved.
 #
 #*************************************************************************************************
@@ -38,7 +38,7 @@
 #
 # BSD 3-Clause License
 #
-# Copyright (c) 2015-2025, Felipe Miguel Nery Lunkes
+# Copyright (c) 2015-2026, Felipe Miguel Nery Lunkes
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -308,7 +308,7 @@ function showVersion() {
 
 echo -e "hx: Hexagonix build utility, version $HX_VERSION"
 echo
-echo -e "\e[0mCopyright (c) 2015-2025 Felipe Miguel Nery Lunkes\e[0m"
+echo -e "\e[0mCopyright (c) 2015-2026 Felipe Miguel Nery Lunkes\e[0m"
 echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
 
 }
@@ -522,7 +522,7 @@ echo -e "   > \e[1;94mUse ./hx with parameters to regenerate these files.\e[0m"
 echo -e "   > For help on possible parameters, use ./hx -h."
 echo -n " > Removing configuration files generated every build..."
 
-rm -rf Dist/etc/*.unx Dist/etc/*.ocl Dist/etc/rc Dist/etc/passwd Dist/etc/shrc Dist/etc/host
+rm -rf Dist/etc/*.unx Dist/etc/*.ocl Dist/etc/rc Dist/etc/shadow Dist/etc/shrc Dist/etc/host
 
 echo -e " [\e[32mOk\e[0m]"
 echo -e "   > \e[1;94mUse ./configure.sh to regenerate these files.\e[0m"
@@ -633,7 +633,7 @@ exit
 # Hx entry point, variable definition and parameter processing
 #
 #
-# Copyright (c) 2015-2025 Felipe Miguel Nery Lunkes
+# Copyright (c) 2015-2026 Felipe Miguel Nery Lunkes
 # All rights reserved
 
 # hx info
@@ -641,7 +641,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="15.3.2"
+export HX_VERSION="15.4.0"
 
 # Modules directory
 
