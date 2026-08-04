@@ -82,9 +82,9 @@ echo -e "\n\e[1;94mBuilding Hexagon startup components (step 2/2)...\e[0m {\n"
 
 echo -e "Building Hexagon startup components (step 2/2)... {\n" >> $LOG
 
-echo -e "\e[1;94mBuilding Hexagon Boot - HBoot (2nd stage)...\e[0m\n"
+echo -e "\e[1;94mBuilding HBoot (2nd stage)...\e[0m\n"
 
-echo -e " > Building Hexagon Boot - HBoot (2nd stage)...\n" >> $LOG
+echo -e " > Building HBoot (2nd stage)...\n" >> $LOG
 
 cd "Boot"
 cd "HBoot"
@@ -135,6 +135,6 @@ echo -e "----------------------------------------------------------------------\
 
 # Constants
 
-MOD_VERSION="0.2"
+MOD_VERSION="0.3"
 
 main $1
