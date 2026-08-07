@@ -163,7 +163,8 @@ cp $BUILD_DIRECTORY/*.mod $MOUNT_POINT_DIRECTORY/ >> $LOG
 
 fi
 
-cp $BUILD_DIRECTORY/etc/* $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
+mkdir $MOUNT_POINT_DIRECTORY/etc
+cp $BUILD_DIRECTORY/etc/* $MOUNT_POINT_DIRECTORY/etc >> $LOG || callHXMod common buildError
 cp $BUILD_DIRECTORY/*.ocl $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 
 # If the image should contain a copy of the FreeDOS files for testing...
