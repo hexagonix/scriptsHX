@@ -119,20 +119,19 @@ fi
 
 echo -e "> Copying system files to the image...\n" >> $LOG
 
+mkdir -p $MOUNT_POINT_DIRECTORY/home
 mkdir -p $MOUNT_POINT_DIRECTORY/usr/man
+mkdir -p $MOUNT_POINT_DIRECTORY/usr/fonts
+mkdir -p $MOUNT_POINT_DIRECTORY/lib/asm
+
 cp $BUILD_DIRECTORY/*.man $MOUNT_POINT_DIRECTORY/usr/man >> $LOG || callHXMod common buildError
 cp $BUILD_DIRECTORY/*.asm $MOUNT_POINT_DIRECTORY >> $LOG
-cp $BUILD_DIRECTORY/*.s $MOUNT_POINT_DIRECTORY >> $LOG
+cp $BUILD_DIRECTORY/*.s $MOUNT_POINT_DIRECTORY/lib/asm >> $LOG
 cp $BUILD_DIRECTORY/*.cow $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
-cp $BUILD_DIRECTORY/shell.sh $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/shell.sh $MOUNT_POINT_DIRECTORY/home >> $LOG || callHXMod common buildError
 
 # Everything under $BUILD_DIRECTORY/boot (the kernel, HBoot, and any HBoot
-# modules) belongs at the root, loose. HBoot looks the kernel up with a raw
-# FAT16 root-directory short-name scan (Boot/HBoot/Lib/libHexagon.asm),
-# real-mode code that runs before Hexagon (and its directory hierarchy)
-# exists at all. saturno.img/mbr.img are deliberately built straight into
-# $BUILD_DIRECTORY instead, never $BUILD_DIRECTORY/boot, since they're
-# written directly to raw disk sectors below rather than copied as files
+# modules) belongs at the / directory
 
 cp $BUILD_DIRECTORY/boot/* $MOUNT_POINT_DIRECTORY/ >> $LOG || callHXMod common buildError
 
@@ -141,7 +140,7 @@ cp $BUILD_DIRECTORY/boot/* $MOUNT_POINT_DIRECTORY/ >> $LOG || callHXMod common b
 # sync by hand as applications come and go. /sbin then carries off just
 # init (the kernel looks for it at /sbin/init directly), login and
 # everything only login itself needs (logind), and whatever manages the
-# running system (shutdown, ps, top); everything else stays in /bin
+# running system (shutdown, ps, top). Everything else stays in /bin
 
 mkdir $MOUNT_POINT_DIRECTORY/bin
 cp $BUILD_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY/bin/ >> $LOG || callHXMod common buildError
@@ -186,7 +185,7 @@ if [ -e $BUILD_DIRECTORY/aurora.fnt ] ; then
 
 echo -e " [Yes]\n" >> $LOG
 
-cp $BUILD_DIRECTORY/*.fnt $MOUNT_POINT_DIRECTORY/ || callHXMod common buildError
+cp $BUILD_DIRECTORY/*.fnt $MOUNT_POINT_DIRECTORY/usr/fonts || callHXMod common buildError
 
 fi
 
@@ -277,6 +276,6 @@ exit
 
 # Constants
 
-MOD_VER="0.9"
+MOD_VER="0.10"
 
 main $1
