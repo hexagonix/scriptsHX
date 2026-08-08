@@ -113,11 +113,13 @@ fi
 cd ..
 cd ..
 
-mv hboot $BUILD_DIRECTORY
+mkdir -p $BUILD_DIRECTORY/boot
+
+mv hboot $BUILD_DIRECTORY/boot
 
 if [ -e Spartan.mod ] ; then
 
-mv *.mod $BUILD_DIRECTORY/
+mv *.mod $BUILD_DIRECTORY/boot/
 
 fi
 
@@ -135,6 +137,6 @@ echo -e "----------------------------------------------------------------------\
 
 # Constants
 
-MOD_VERSION="0.3"
+MOD_VERSION="0.4"
 
 main $1

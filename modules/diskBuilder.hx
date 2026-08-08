@@ -123,49 +123,42 @@ cp $BUILD_DIRECTORY/*.man $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common bui
 cp $BUILD_DIRECTORY/*.asm $MOUNT_POINT_DIRECTORY >> $LOG
 cp $BUILD_DIRECTORY/*.s $MOUNT_POINT_DIRECTORY >> $LOG
 cp $BUILD_DIRECTORY/*.cow $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
-cp $BUILD_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
-cp $BUILD_DIRECTORY/hboot $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/shell.sh $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 
-# When not building image for release, some components should not be present,
-# like OOBE (out of box experience), making testing easier
+# Everything under $BUILD_DIRECTORY/boot (the kernel, HBoot, and any HBoot
+# modules) belongs at the root, loose. HBoot looks the kernel up with a raw
+# FAT16 root-directory short-name scan (Boot/HBoot/Lib/libHexagon.asm),
+# real-mode code that runs before Hexagon (and its directory hierarchy)
+# exists at all. saturno.img/mbr.img are deliberately built straight into
+# $BUILD_DIRECTORY instead, never $BUILD_DIRECTORY/boot, since they're
+# written directly to raw disk sectors below rather than copied as files
 
-if [ "$BUILD_RELEASE_IMAGE" = false ]; then
+cp $BUILD_DIRECTORY/boot/* $MOUNT_POINT_DIRECTORY/ >> $LOG || callHXMod common buildError
 
-# Remove release required components for test build
+# Every built application, Unix, Andromeda, and Contrib packages like
+# fasmX alike, lands in $BUILD_DIRECTORY/bin, so this is a plain copy with
+# nothing to keep in sync by hand as applications come and go. /sbin then
+# carries off just init (the kernel looks for it at /sbin/init directly),
+# login and everything only login itself needs (logind), and whatever
+# manages the running system (shutdown, ps, top); everything else stays in
+# /bin
 
 mkdir $MOUNT_POINT_DIRECTORY/bin
-mkdir $MOUNT_POINT_DIRECTORY/bin/test
-mkdir $MOUNT_POINT_DIRECTORY/bin/test/test2
-mkdir $MOUNT_POINT_DIRECTORY/bin/test/test2/test3
-cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/ls
-cp $MOUNT_POINT_DIRECTORY/clear  $MOUNT_POINT_DIRECTORY/bin/clear
-cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/test/ls
-cp $MOUNT_POINT_DIRECTORY/clear  $MOUNT_POINT_DIRECTORY/bin/test/clear
-cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/test/test2/ls
-cp $MOUNT_POINT_DIRECTORY/clear  $MOUNT_POINT_DIRECTORY/bin/test/test2/clear
-cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/test/test2/test3/ls
-cp $MOUNT_POINT_DIRECTORY/clear  $MOUNT_POINT_DIRECTORY/bin/test/test2/test3/clear
-cp $MOUNT_POINT_DIRECTORY/dossh $MOUNT_POINT_DIRECTORY/bin/dossh
-cp $MOUNT_POINT_DIRECTORY/oobe $MOUNT_POINT_DIRECTORY/bin/oobe
-rm $MOUNT_POINT_DIRECTORY/oobe
+cp $BUILD_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY/bin/ >> $LOG || callHXMod common buildError
 
-fi
+mkdir $MOUNT_POINT_DIRECTORY/sbin
+
+for f in init login logind shutdown ps top ; do
+mv $MOUNT_POINT_DIRECTORY/bin/$f $MOUNT_POINT_DIRECTORY/sbin/$f >> $LOG || callHXMod common buildError
+done
 
 # License must be copied
 
 cp Dist/man/LICENSE $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 
-# Now copy HBoot modules
-
-if [ -e $BUILD_DIRECTORY/Spartan.mod ] ; then
-
-cp $BUILD_DIRECTORY/*.mod $MOUNT_POINT_DIRECTORY/ >> $LOG
-
-fi
-
 mkdir $MOUNT_POINT_DIRECTORY/etc
 cp $BUILD_DIRECTORY/etc/* $MOUNT_POINT_DIRECTORY/etc >> $LOG || callHXMod common buildError
-cp $BUILD_DIRECTORY/*.ocl $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/*.ocl $MOUNT_POINT_DIRECTORY/etc >> $LOG || callHXMod common buildError
 
 # If the image should contain a copy of the FreeDOS files for testing...
 
@@ -277,6 +270,6 @@ exit
 
 # Constants
 
-MOD_VER="0.6"
+MOD_VER="0.7"
 
 main $1

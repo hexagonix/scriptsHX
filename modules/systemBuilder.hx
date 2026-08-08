@@ -123,6 +123,9 @@ echo " > *.unx files successfully copied." >> $LOG
 
 cp base.ocl $BUILD_DIRECTORY/hexgnix.ocl
 cp shrc $BUILD_DIRECTORY/etc
+cp shell.sh $BUILD_DIRECTORY
+
+echo " > shell.sh successfully copied." >> $LOG
 
 echo " > Hexagonix version files successfully copied." >> $LOG
 
@@ -202,6 +205,6 @@ callHXMod contribBuilder
 
 # Constants
 
-MOD_VER="0.4"
+MOD_VER="0.5"
 
 main $1
