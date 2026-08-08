@@ -119,7 +119,8 @@ fi
 
 echo -e "> Copying system files to the image...\n" >> $LOG
 
-cp $BUILD_DIRECTORY/*.man $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
+mkdir -p $MOUNT_POINT_DIRECTORY/usr/man
+cp $BUILD_DIRECTORY/*.man $MOUNT_POINT_DIRECTORY/usr/man >> $LOG || callHXMod common buildError
 cp $BUILD_DIRECTORY/*.asm $MOUNT_POINT_DIRECTORY >> $LOG
 cp $BUILD_DIRECTORY/*.s $MOUNT_POINT_DIRECTORY >> $LOG
 cp $BUILD_DIRECTORY/*.cow $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
@@ -270,6 +271,6 @@ exit
 
 # Constants
 
-MOD_VER="0.7"
+MOD_VER="0.8"
 
 main $1
