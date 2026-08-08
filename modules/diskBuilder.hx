@@ -248,6 +248,18 @@ echo "> Creating .vdi image from raw image..." >> $LOG
 
 qemu-img convert -O vdi $IMAGE_PATH/$IMAGE_FILENAME $IMAGE_PATH/$(basename $IMAGE_FILENAME .img).vdi
 
+# qemu-img stamps a new random UUID into the .vdi on every conversion, which breaks
+# VirtualBox VMs that already have this disk registered under a fixed UUID. If VBoxManage
+# is installed, restamp the UUID fixing a UUID to allow updating the disk in VirtualBox VM.
+
+if command -v VBoxManage > /dev/null 2>&1; then
+
+echo "> VBoxManage found, restamping .vdi UUID to match the local VirtualBox VM..." >> $LOG
+
+VBoxManage internalcommands sethduuid $IMAGE_PATH/$(basename $IMAGE_FILENAME .img).vdi {de3feea5-c804-4134-99db-4f5c9f8d15e2} >> $LOG
+
+fi
+
 # Let's now change the image ownership to a regular user
 
 echo "> Adjusting file permissions (needed for git)..." >> $LOG
@@ -277,6 +289,6 @@ exit
 
 # Constants
 
-MOD_VER="0.12"
+MOD_VER="0.13"
 
 main $1
