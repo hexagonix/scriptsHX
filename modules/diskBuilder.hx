@@ -125,11 +125,11 @@ mkdir -p $MOUNT_POINT_DIRECTORY/usr/share/cowsay
 mkdir -p $MOUNT_POINT_DIRECTORY/usr/share/man
 mkdir -p $MOUNT_POINT_DIRECTORY/lib/asm
 
-cp $BUILD_DIRECTORY/*.man $MOUNT_POINT_DIRECTORY/usr/share/man >> $LOG || callHXMod common buildError
-cp $BUILD_DIRECTORY/*.asm $MOUNT_POINT_DIRECTORY >> $LOG
-cp $BUILD_DIRECTORY/*.s $MOUNT_POINT_DIRECTORY/lib/asm >> $LOG
-cp $BUILD_DIRECTORY/*.cow $MOUNT_POINT_DIRECTORY/usr/share/cowsay >> $LOG || callHXMod common buildError
 cp $BUILD_DIRECTORY/shell.sh $MOUNT_POINT_DIRECTORY/home >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/*.cow $MOUNT_POINT_DIRECTORY/usr/share/cowsay >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/*.man $MOUNT_POINT_DIRECTORY/usr/share/man >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/*.s $MOUNT_POINT_DIRECTORY/lib/asm >> $LOG
+cp $BUILD_DIRECTORY/*.asm $MOUNT_POINT_DIRECTORY >> $LOG
 
 # Everything under $BUILD_DIRECTORY/boot (the kernel, HBoot, and any HBoot
 # modules) belongs at the / directory
@@ -277,6 +277,6 @@ exit
 
 # Constants
 
-MOD_VER="0.11"
+MOD_VER="0.12"
 
 main $1
