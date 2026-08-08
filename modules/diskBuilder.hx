@@ -136,13 +136,12 @@ cp $BUILD_DIRECTORY/shell.sh $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common 
 
 cp $BUILD_DIRECTORY/boot/* $MOUNT_POINT_DIRECTORY/ >> $LOG || callHXMod common buildError
 
-# Every built application, Unix, Andromeda, and Contrib packages like
-# fasmX alike, lands in $BUILD_DIRECTORY/bin, so this is a plain copy with
-# nothing to keep in sync by hand as applications come and go. /sbin then
-# carries off just init (the kernel looks for it at /sbin/init directly),
-# login and everything only login itself needs (logind), and whatever
-# manages the running system (shutdown, ps, top); everything else stays in
-# /bin
+# Every built application, Unix and Andromeda alike, lands in
+# $BUILD_DIRECTORY/bin, so this is a plain copy with nothing to keep in
+# sync by hand as applications come and go. /sbin then carries off just
+# init (the kernel looks for it at /sbin/init directly), login and
+# everything only login itself needs (logind), and whatever manages the
+# running system (shutdown, ps, top); everything else stays in /bin
 
 mkdir $MOUNT_POINT_DIRECTORY/bin
 cp $BUILD_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY/bin/ >> $LOG || callHXMod common buildError
@@ -152,6 +151,13 @@ mkdir $MOUNT_POINT_DIRECTORY/sbin
 for f in init login logind shutdown ps top ; do
 mv $MOUNT_POINT_DIRECTORY/bin/$f $MOUNT_POINT_DIRECTORY/sbin/$f >> $LOG || callHXMod common buildError
 done
+
+# Contrib packages, like fasmX, are third party and built separately from
+# the rest of the system, so they get their own place instead of mixing
+# into /bin with everything Hexagonix itself ships
+
+mkdir -p $MOUNT_POINT_DIRECTORY/usr/contrib
+cp $BUILD_DIRECTORY/contrib/* $MOUNT_POINT_DIRECTORY/usr/contrib/ >> $LOG || callHXMod common buildError
 
 # License must be copied
 
@@ -271,6 +277,6 @@ exit
 
 # Constants
 
-MOD_VER="0.8"
+MOD_VER="0.9"
 
 main $1
