@@ -119,7 +119,12 @@ fi
 
 echo -e "> Copying system files to the image...\n" >> $LOG
 
+mkdir -p $MOUNT_POINT_DIRECTORY/bin
+mkdir -p $MOUNT_POINT_DIRECTORY/sbin
+mkdir -p $MOUNT_POINT_DIRECTORY/etc
 mkdir -p $MOUNT_POINT_DIRECTORY/home
+mkdir -p $MOUNT_POINT_DIRECTORY/usr/bin
+mkdir -p $MOUNT_POINT_DIRECTORY/usr/contrib
 mkdir -p $MOUNT_POINT_DIRECTORY/usr/fonts
 mkdir -p $MOUNT_POINT_DIRECTORY/usr/share/cowsay
 mkdir -p $MOUNT_POINT_DIRECTORY/usr/share/man
@@ -136,17 +141,15 @@ cp $BUILD_DIRECTORY/*.asm $MOUNT_POINT_DIRECTORY >> $LOG
 
 cp $BUILD_DIRECTORY/boot/* $MOUNT_POINT_DIRECTORY/ >> $LOG || callHXMod common buildError
 
-# Every built application, Unix and Andromeda alike, lands in
-# $BUILD_DIRECTORY/bin, so this is a plain copy with nothing to keep in
-# sync by hand as applications come and go. /sbin then carries off just
-# init (the kernel looks for it at /sbin/init directly), login and
-# everything only login itself needs (logind), and whatever manages the
+cp $BUILD_DIRECTORY/usr/bin/* $MOUNT_POINT_DIRECTORY/usr/bin/ >> $LOG || callHXMod common buildError
+
+# Every Unix application lands in $BUILD_DIRECTORY/bin, so this is a plain 
+# copy with nothing to keep in sync by hand as applications come and go. 
+# /sbin then carries off just init (the kernel looks for it at /sbin/init directly),
+# login and everything only login itself needs (logind), and whatever manages the
 # running system (shutdown, ps, top). Everything else stays in /bin
 
-mkdir $MOUNT_POINT_DIRECTORY/bin
 cp $BUILD_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY/bin/ >> $LOG || callHXMod common buildError
-
-mkdir $MOUNT_POINT_DIRECTORY/sbin
 
 for f in init login logind shutdown ps top ; do
 mv $MOUNT_POINT_DIRECTORY/bin/$f $MOUNT_POINT_DIRECTORY/sbin/$f >> $LOG || callHXMod common buildError
@@ -156,14 +159,12 @@ done
 # the rest of the system, so they get their own place instead of mixing
 # into /bin with everything Hexagonix itself ships
 
-mkdir -p $MOUNT_POINT_DIRECTORY/usr/contrib
 cp $BUILD_DIRECTORY/contrib/* $MOUNT_POINT_DIRECTORY/usr/contrib/ >> $LOG || callHXMod common buildError
 
 # License must be copied
 
 cp Dist/man/LICENSE $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 
-mkdir $MOUNT_POINT_DIRECTORY/etc
 cp $BUILD_DIRECTORY/etc/* $MOUNT_POINT_DIRECTORY/etc >> $LOG || callHXMod common buildError
 cp $BUILD_DIRECTORY/*.ocl $MOUNT_POINT_DIRECTORY/etc >> $LOG || callHXMod common buildError
 
@@ -289,6 +290,6 @@ exit
 
 # Constants
 
-MOD_VER="0.13"
+MOD_VER="0.14"
 
 main $1
