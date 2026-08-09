@@ -88,8 +88,9 @@ echo "Building the Hexagonix..."
 echo
 
 mkdir -p $BUILD_DIRECTORY
-mkdir -p $BUILD_DIRECTORY/bin
 mkdir -p $BUILD_DIRECTORY/etc
+mkdir -p $BUILD_DIRECTORY/bin
+mkdir -p $BUILD_DIRECTORY/usr/bin
 
 callHXMod saturno
 callHXMod hboot
@@ -205,6 +206,6 @@ callHXMod contribBuilder
 
 # Constants
 
-MOD_VER="0.5"
+MOD_VER="0.6"
 
 main $1
