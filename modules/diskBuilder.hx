@@ -151,7 +151,7 @@ cp $BUILD_DIRECTORY/usr/bin/* $MOUNT_POINT_DIRECTORY/usr/bin/ >> $LOG || callHXM
 
 cp $BUILD_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY/bin/ >> $LOG || callHXMod common buildError
 
-for f in init login logind shutdown ps top ; do
+for f in init login logind shutdown ps top passwd adduser deluser ; do
 mv $MOUNT_POINT_DIRECTORY/bin/$f $MOUNT_POINT_DIRECTORY/sbin/$f >> $LOG || callHXMod common buildError
 done
 
@@ -290,6 +290,6 @@ exit
 
 # Constants
 
-MOD_VER="0.14"
+MOD_VER="0.15"
 
 main $1
