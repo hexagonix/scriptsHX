@@ -59,7 +59,7 @@ O `HX` é a ferramenta responsável por unificar toda a construção do Hexagoni
 | `--version`| Exibe informações de versão e copyright|
 | `--depend`| Instala as dependências de construção (sistemas Debian, Ubuntu e derivados, apenas)|
 | `--info`| Exibe informações do Hexagonix, como versão, revisão, ramo de desenvolvimento, etc|
-| `--indent`| Inicializa o `indent.sh`, que formata e otimiza os códigos-fonte, manuais e arquivos de definição do Hexagonix|
+| `--format`| Inicializa o `formatter.sh`, que formata e otimiza os códigos-fonte, manuais e arquivos de definição do Hexagonix|
 | `--configure`| Executa o `configure.sh` para gerar os arquivos estáticos necessários para a construção|
 | `--stats`| Exibe informações estatísticas sobre o Hexagonix (necessário cloc instalado)|
 | `--flags`| Exibe as flags de build atualmente configuradas para o HBoot, o Hexagon e os utilitários userland|
@@ -115,7 +115,7 @@ Para a construção do Hexagonix, o `hx` procura e executa uma série de módulo
 <div align="justify">
 
 * `configure.sh`: deve estar no diretório raiz da árvore de construção. É responsável por checar dependências e gerar os arquivos estáticos necessários à construção do Hexagonix, como a base de usuários `/shadow` (com as senhas em `Dist/etc/shadow.conf` já hasheadas) e as informações de build. Sua execução pode ser iniciada diretamente ou pelo `HX`, através de `hx --configure`.
-* `indent.sh`: deve estar no diretório raiz da árvore de construção. Formata e otimiza fontes gráficas, manuais e arquivos de definição do Hexagonix. Pode ser iniciado pelo `HX`, através de `hx --indent`.
+* `formatter.sh`: deve estar no diretório raiz da árvore de construção. Formata e otimiza fontes gráficas, manuais e arquivos de definição do Hexagonix. Pode ser iniciado pelo `HX`, através de `hx --format`.
 * `Contrib.sh`: deve estar no diretório raiz da árvore de construção. É responsável por construir e/ou manipular pacotes de terceiros, como o fasmX, cujos repositórios devem estar clonados no interior do diretório `Contrib`.
 
 </div>
@@ -163,7 +163,7 @@ This repository contains tools to build Hexagonix and the system disk images, in
 | `--version`| Displays version and copyright information|
 | `--depend`| Installs build dependencies (Debian, Ubuntu and derivative systems only)|
 | `--info`| Displays Hexagonix information such as version, revision, development branch, etc|
-| `--indent`| Starts `indent.sh`, which formats and optimizes Hexagonix source code, manuals and definition files|
+| `--format`| Starts `formatter.sh`, which formats and optimizes Hexagonix source code, manuals and definition files|
 | `--configure`| Runs `configure.sh` to generate the static files needed for the build|
 | `--stats`| Displays statistical information about Hexagonix (cloc installed required)|
 | `--flags`| Displays the build flags currently configured for HBoot, Hexagon and the userland utilities|
@@ -219,7 +219,7 @@ To build Hexagonix, `hx` looks for and executes a series of modules, located in 
 <div align="justify">
 
 * `configure.sh`: must be in the root directory of the build tree. It is responsible for checking dependencies and generating the static files needed to build Hexagonix, such as the `/shadow` user database (with the passwords in `Dist/etc/shadow.conf` already hashed) and build information. It can be run directly or through `HX`, via `hx --configure`.
-* `indent.sh`: must be in the root directory of the build tree. Formats and optimizes Hexagonix graphic fonts, manuals and definition files. Can be started by `HX`, via `hx --indent`.
+* `formatter.sh`: must be in the root directory of the build tree. Formats and optimizes Hexagonix graphic fonts, manuals and definition files. Can be started by `HX`, via `hx --format`.
 * `Contrib.sh`: must be in the root directory of the build tree. It is responsible for building and/or manipulating third-party packages, such as fasmX, whose repositories must be cloned inside the `Contrib` directory.
 
 </div>
