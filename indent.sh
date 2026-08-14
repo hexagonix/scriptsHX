@@ -124,6 +124,12 @@ find . -name '*.asm' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$
 find . -name '*.s' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 find . -name '*.cow' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 
+echo -e "> \e[32mSearching and squeezing repeated blank lines in Hexagonix source and related files...\e[0m"
+
+find . -name '*.asm' ! -type d -exec bash -c 'sed -i "/^$/{N;/^\n$/D}" "$0"' {} \;
+find . -name '*.s' ! -type d -exec bash -c 'sed -i "/^$/{N;/^\n$/D}" "$0"' {} \;
+find . -name '*.cow' ! -type d -exec bash -c 'sed -i "/^$/{N;/^\n$/D}" "$0"' {} \;
+
 }
 
 function optimizeDefinitions() {
