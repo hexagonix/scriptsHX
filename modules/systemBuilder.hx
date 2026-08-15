@@ -88,8 +88,9 @@ echo "Building the Hexagonix..."
 echo
 
 mkdir -p $BUILD_DIRECTORY
-mkdir -p $BUILD_DIRECTORY/bin
 mkdir -p $BUILD_DIRECTORY/etc
+mkdir -p $BUILD_DIRECTORY/bin
+mkdir -p $BUILD_DIRECTORY/usr/bin
 
 callHXMod saturno
 callHXMod hboot
@@ -123,6 +124,9 @@ echo " > *.unx files successfully copied." >> $LOG
 
 cp base.ocl $BUILD_DIRECTORY/hexgnix.ocl
 cp shrc $BUILD_DIRECTORY/etc
+cp shell.sh $BUILD_DIRECTORY
+
+echo " > shell.sh successfully copied." >> $LOG
 
 echo " > Hexagonix version files successfully copied." >> $LOG
 
@@ -202,6 +206,6 @@ callHXMod contribBuilder
 
 # Constants
 
-MOD_VER="0.4"
+MOD_VER="0.6"
 
 main $1

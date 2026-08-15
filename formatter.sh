@@ -79,7 +79,7 @@
 function main() {
 
 echo
-echo "hx indentation helper version $INDENT_VERSION"
+echo "hx formatting helper version $FORMATTER_VERSION"
 echo
 echo "This tool looks for and fixes indentation and formatting problems in the files"
 echo "that make up the Hexagonix project."
@@ -94,9 +94,9 @@ case $1 in
 -m) optimizeManuals; exit;;
 -d) optimizeDefinitions; exit;;
 -s) optimizeScripts; exit;;
--h) indentHelp; exit;;
+-h) formatterHelp; exit;;
 --version) showVersion; exit;;
-*) indentHelp; exit;;
+*) formatterHelp; exit;;
 
 esac
 
@@ -123,6 +123,12 @@ echo -e "> \e[32mSearching and removing extra spaces in Hexagonix source and rel
 find . -name '*.asm' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 find . -name '*.s' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
 find . -name '*.cow' ! -type d -exec bash -c 'sed -i "s/[[:blank:]]\{1,\}$//" "$0"' {} \;
+
+echo -e "> \e[32mSearching and squeezing repeated blank lines in Hexagonix source and related files...\e[0m"
+
+find . -name '*.asm' ! -type d -exec bash -c 'sed -i "/^$/{N;/^\n$/D}" "$0"' {} \;
+find . -name '*.s' ! -type d -exec bash -c 'sed -i "/^$/{N;/^\n$/D}" "$0"' {} \;
+find . -name '*.cow' ! -type d -exec bash -c 'sed -i "/^$/{N;/^\n$/D}" "$0"' {} \;
 
 }
 
@@ -171,30 +177,30 @@ find . -name 'hx' ! -type d -exec bash -c 'chmod +x hx' {} \;
 
 }
 
-function indentHelp() {
+function formatterHelp() {
 
 echo
 echo -e "\e[1;94mMain\e[0m available parameters:"
 echo
-echo -e "\e[1;32m-a\e[0m - Indent and optimize Hexagonix source files, manuals and definition files."
-echo -e "\e[1;32m-f\e[0m - Indent and optimize Hexagonix x86 Assembly source files only."
-echo -e "\e[1;32m-m\e[0m - Indent and optimize Hexagonix manuals only."
-echo -e "\e[1;32m-d\e[0m - Indent and optimize Hexagonix definition files only."
-echo -e "\e[1;32m-s\e[0m - Indent and optimize Hexagonix scripts and build tools only."
+echo -e "\e[1;32m-a\e[0m - Format and optimize Hexagonix source files, manuals and definition files."
+echo -e "\e[1;32m-f\e[0m - Format and optimize Hexagonix x86 Assembly source files only."
+echo -e "\e[1;32m-m\e[0m - Format and optimize Hexagonix manuals only."
+echo -e "\e[1;32m-d\e[0m - Format and optimize Hexagonix definition files only."
+echo -e "\e[1;32m-s\e[0m - Format and optimize Hexagonix scripts and build tools only."
 echo -e "\e[1;32m-h\e[0m - Display this help."
 echo
 
 }
 
-function showVersion() 
+function showVersion()
 {
-echo "hx build module for source indentation, version $INDENT_VERSION"
+echo "hx build module for source formatting, version $FORMATTER_VERSION"
 echo
 echo -e "\e[0mCopyright (c) 2015-2026 Felipe Miguel Nery Lunkes\e[0m"
 echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no warranty."
 
 }
 
-export INDENT_VERSION="4.0.1"
+export FORMATTER_VERSION="1.0.0"
 
 main $1

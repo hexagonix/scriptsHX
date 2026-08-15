@@ -119,52 +119,54 @@ fi
 
 echo -e "> Copying system files to the image...\n" >> $LOG
 
-cp $BUILD_DIRECTORY/*.man $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
+mkdir -p $MOUNT_POINT_DIRECTORY/bin
+mkdir -p $MOUNT_POINT_DIRECTORY/sbin
+mkdir -p $MOUNT_POINT_DIRECTORY/etc
+mkdir -p $MOUNT_POINT_DIRECTORY/home
+mkdir -p $MOUNT_POINT_DIRECTORY/usr/bin
+mkdir -p $MOUNT_POINT_DIRECTORY/usr/contrib
+mkdir -p $MOUNT_POINT_DIRECTORY/usr/fonts
+mkdir -p $MOUNT_POINT_DIRECTORY/usr/share/cowsay
+mkdir -p $MOUNT_POINT_DIRECTORY/usr/share/man
+mkdir -p $MOUNT_POINT_DIRECTORY/lib/asm
+
+cp $BUILD_DIRECTORY/shell.sh $MOUNT_POINT_DIRECTORY/home >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/*.cow $MOUNT_POINT_DIRECTORY/usr/share/cowsay >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/*.man $MOUNT_POINT_DIRECTORY/usr/share/man >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/*.s $MOUNT_POINT_DIRECTORY/lib/asm >> $LOG
 cp $BUILD_DIRECTORY/*.asm $MOUNT_POINT_DIRECTORY >> $LOG
-cp $BUILD_DIRECTORY/*.s $MOUNT_POINT_DIRECTORY >> $LOG
-cp $BUILD_DIRECTORY/*.cow $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
-cp $BUILD_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
-cp $BUILD_DIRECTORY/hboot $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 
-# When not building image for release, some components should not be present,
-# like OOBE (out of box experience), making testing easier
+# Everything under $BUILD_DIRECTORY/boot (the kernel, HBoot, and any HBoot
+# modules) belongs at the / directory
 
-if [ "$BUILD_RELEASE_IMAGE" = false ]; then
+cp $BUILD_DIRECTORY/boot/* $MOUNT_POINT_DIRECTORY/ >> $LOG || callHXMod common buildError
 
-# Remove release required components for test build
+cp $BUILD_DIRECTORY/usr/bin/* $MOUNT_POINT_DIRECTORY/usr/bin/ >> $LOG || callHXMod common buildError
 
-mkdir $MOUNT_POINT_DIRECTORY/bin
-mkdir $MOUNT_POINT_DIRECTORY/bin/test
-mkdir $MOUNT_POINT_DIRECTORY/bin/test/test2
-mkdir $MOUNT_POINT_DIRECTORY/bin/test/test2/test3
-cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/ls
-cp $MOUNT_POINT_DIRECTORY/clear  $MOUNT_POINT_DIRECTORY/bin/clear
-cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/test/ls
-cp $MOUNT_POINT_DIRECTORY/clear  $MOUNT_POINT_DIRECTORY/bin/test/clear
-cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/test/test2/ls
-cp $MOUNT_POINT_DIRECTORY/clear  $MOUNT_POINT_DIRECTORY/bin/test/test2/clear
-cp $MOUNT_POINT_DIRECTORY/ls  $MOUNT_POINT_DIRECTORY/bin/test/test2/test3/ls
-cp $MOUNT_POINT_DIRECTORY/clear  $MOUNT_POINT_DIRECTORY/bin/test/test2/test3/clear
-cp $MOUNT_POINT_DIRECTORY/dossh $MOUNT_POINT_DIRECTORY/bin/dossh
-cp $MOUNT_POINT_DIRECTORY/oobe $MOUNT_POINT_DIRECTORY/bin/oobe
-rm $MOUNT_POINT_DIRECTORY/oobe
+# Every Unix application lands in $BUILD_DIRECTORY/bin, so this is a plain 
+# copy with nothing to keep in sync by hand as applications come and go. 
+# /sbin then carries off just init (the kernel looks for it at /sbin/init directly),
+# login and everything only login itself needs (logind), and whatever manages the
+# running system (shutdown, ps, top). Everything else stays in /bin
 
-fi
+cp $BUILD_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY/bin/ >> $LOG || callHXMod common buildError
+
+for f in init login logind shutdown ps top passwd adduser deluser ; do
+mv $MOUNT_POINT_DIRECTORY/bin/$f $MOUNT_POINT_DIRECTORY/sbin/$f >> $LOG || callHXMod common buildError
+done
+
+# Contrib packages, like fasmX, are third party and built separately from
+# the rest of the system, so they get their own place instead of mixing
+# into /bin with everything Hexagonix itself ships
+
+cp $BUILD_DIRECTORY/contrib/* $MOUNT_POINT_DIRECTORY/usr/contrib/ >> $LOG || callHXMod common buildError
 
 # License must be copied
 
 cp Dist/man/LICENSE $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 
-# Now copy HBoot modules
-
-if [ -e $BUILD_DIRECTORY/Spartan.mod ] ; then
-
-cp $BUILD_DIRECTORY/*.mod $MOUNT_POINT_DIRECTORY/ >> $LOG
-
-fi
-
-cp $BUILD_DIRECTORY/etc/* $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
-cp $BUILD_DIRECTORY/*.ocl $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/etc/* $MOUNT_POINT_DIRECTORY/etc >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/*.ocl $MOUNT_POINT_DIRECTORY/etc >> $LOG || callHXMod common buildError
 
 # If the image should contain a copy of the FreeDOS files for testing...
 
@@ -185,7 +187,7 @@ if [ -e $BUILD_DIRECTORY/aurora.fnt ] ; then
 
 echo -e " [Yes]\n" >> $LOG
 
-cp $BUILD_DIRECTORY/*.fnt $MOUNT_POINT_DIRECTORY/ || callHXMod common buildError
+cp $BUILD_DIRECTORY/*.fnt $MOUNT_POINT_DIRECTORY/usr/fonts || callHXMod common buildError
 
 fi
 
@@ -247,6 +249,18 @@ echo "> Creating .vdi image from raw image..." >> $LOG
 
 qemu-img convert -O vdi $IMAGE_PATH/$IMAGE_FILENAME $IMAGE_PATH/$(basename $IMAGE_FILENAME .img).vdi
 
+# qemu-img stamps a new random UUID into the .vdi on every conversion, which breaks
+# VirtualBox VMs that already have this disk registered under a fixed UUID. If VBoxManage
+# is installed, restamp the UUID fixing a UUID to allow updating the disk in VirtualBox VM.
+
+if command -v VBoxManage > /dev/null 2>&1; then
+
+echo "> VBoxManage found, restamping .vdi UUID to match the local VirtualBox VM..." >> $LOG
+
+VBoxManage internalcommands sethduuid $IMAGE_PATH/$(basename $IMAGE_FILENAME .img).vdi {de3feea5-c804-4134-99db-4f5c9f8d15e2} >> $LOG
+
+fi
+
 # Let's now change the image ownership to a regular user
 
 echo "> Adjusting file permissions (needed for git)..." >> $LOG
@@ -276,6 +290,6 @@ exit
 
 # Constants
 
-MOD_VER="0.6"
+MOD_VER="0.15"
 
 main $1

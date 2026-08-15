@@ -123,7 +123,7 @@ case $1 in
 --depend) callHXMod depend installBuildDependencies; exit;;
 --info) callHXMod buildInfo infoBuild; exit;;
 --configure) startConfigureModule; exit;;
---indent) startIndentModule; exit;;
+--format) startFormatterModule; exit;;
 --stats) callHXMod stat displayStatistics; exit;;
 --flags) callHXMod buildInfo showBuildFlags; exit;;
 
@@ -533,28 +533,28 @@ echo
 
 }
 
-function startIndentModule() {
+function startFormatterModule() {
 
 clear
 
-if [ -e Scripts/indent.sh ] ; then
+if [ -e Scripts/formatter.sh ] ; then
 
-cp Scripts/indent.sh .
+cp Scripts/formatter.sh .
 
 echo
-echo -e "[\e[32mAllowing execution and starting indent.sh (using '-a' parameter)...\e[0m]"
+echo -e "[\e[32mAllowing execution and starting formatter.sh (using '-a' parameter)...\e[0m]"
 
 # First, make sure the file can be executed
 
-chmod +x indent.sh
+chmod +x formatter.sh
 
-./indent.sh -a
+./formatter.sh -a
 
-rm indent.sh
+rm formatter.sh
 
 else
 
-echo -e "[\e[31mError: indent.sh not found\e[0m]."
+echo -e "[\e[31mError: formatter.sh not found\e[0m]."
 
 fi
 
@@ -641,7 +641,7 @@ exit
 
 
 export HX_NAME=$0
-export HX_VERSION="15.4.1"
+export HX_VERSION="15.5.0"
 
 # Modules directory
 

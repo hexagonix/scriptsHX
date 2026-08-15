@@ -94,6 +94,8 @@ function buildContribPackages() {
 echo -e "\e[1;94mBuilding additional packages for Hexagonix...\e[0m {"
 echo
 
+mkdir -p $BUILD_DIRECTORY/contrib
+
 cd fasmX/
 
 cd SOURCE
@@ -105,7 +107,7 @@ do
     echo -n " > Generating additional (contrib) application $(basename $i .asm)..." >> $LOG
     echo -en "Generating additional (contrib) application \e[1;94m$(basename $i .asm)\e[0m..."
 
-    fasm $i $BUILD_DIRECTORY/bin/`basename $i .asm` -d $COMMON_FLAGS >> /dev/null || echo " [Fail]"
+    fasm $i $BUILD_DIRECTORY/contrib/`basename $i .asm` -d $COMMON_FLAGS >> /dev/null || echo " [Fail]"
 
     echo -e " [\e[32mOk\e[0m]"
     echo " [Ok]" >> $LOG
@@ -130,6 +132,6 @@ echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no war
 
 }
 
-export CONTRIB_VERSION="3.0.1"
+export CONTRIB_VERSION="3.0.2"
 
 main $1
