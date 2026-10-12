@@ -123,6 +123,7 @@ mkdir -p $MOUNT_POINT_DIRECTORY/bin
 mkdir -p $MOUNT_POINT_DIRECTORY/sbin
 mkdir -p $MOUNT_POINT_DIRECTORY/etc
 mkdir -p $MOUNT_POINT_DIRECTORY/home
+mkdir -p $MOUNT_POINT_DIRECTORY/dev
 mkdir -p $MOUNT_POINT_DIRECTORY/usr/bin
 mkdir -p $MOUNT_POINT_DIRECTORY/usr/contrib
 mkdir -p $MOUNT_POINT_DIRECTORY/usr/fonts
@@ -136,22 +137,32 @@ cp $BUILD_DIRECTORY/*.man $MOUNT_POINT_DIRECTORY/usr/share/man >> $LOG || callHX
 cp $BUILD_DIRECTORY/*.s $MOUNT_POINT_DIRECTORY/lib/asm >> $LOG
 cp $BUILD_DIRECTORY/*.asm $MOUNT_POINT_DIRECTORY >> $LOG
 
-# Everything under $BUILD_DIRECTORY/boot (the kernel, HBoot, and any HBoot
-# modules) belongs at the / directory
+# HBoot itself belongs at the / directory, which is all Saturno can search.
+# The kernel is searched for at /boot, per HBoot.Modules.Hexagon.Files.imageHexagon,
+# and HBoot modules are kept alongside it, since a module is asked for by path
 
-cp $BUILD_DIRECTORY/boot/* $MOUNT_POINT_DIRECTORY/ >> $LOG || callHXMod common buildError
+mkdir -p $MOUNT_POINT_DIRECTORY/boot
+cp $BUILD_DIRECTORY/boot/hexagon $MOUNT_POINT_DIRECTORY/boot/ >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/boot/boot.cfg $MOUNT_POINT_DIRECTORY/boot/ >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/boot/hboot $MOUNT_POINT_DIRECTORY/ >> $LOG || callHXMod common buildError
+
+if ls $BUILD_DIRECTORY/boot/*.mod >> $LOG 2>&1 ; then
+cp $BUILD_DIRECTORY/boot/*.mod $MOUNT_POINT_DIRECTORY/boot/ >> $LOG || callHXMod common buildError
+fi
 
 cp $BUILD_DIRECTORY/usr/bin/* $MOUNT_POINT_DIRECTORY/usr/bin/ >> $LOG || callHXMod common buildError
 
-# Every Unix application lands in $BUILD_DIRECTORY/bin, so this is a plain 
-# copy with nothing to keep in sync by hand as applications come and go. 
+# Every Unix application lands in $BUILD_DIRECTORY/bin, so this is a plain
+# copy with nothing to keep in sync by hand as applications come and go.
 # /sbin then carries off just init (the kernel looks for it at /sbin/init directly),
-# login and everything only login itself needs (logind), and whatever manages the
-# running system (shutdown, ps, top). Everything else stays in /bin
+# login and everything only login itself needs (logind), getty (run from
+# /etc/rc, claims a VT and runs login on it), whatever manages the
+# running system (shutdown, ps, top), and protect (run from /etc/rc, before any
+# login exists). Everything else stays in /bin
 
 cp $BUILD_DIRECTORY/bin/* $MOUNT_POINT_DIRECTORY/bin/ >> $LOG || callHXMod common buildError
 
-for f in init login logind shutdown ps top passwd adduser deluser ; do
+for f in init login logind getty shutdown ps top passwd adduser deluser protect sudo su ; do
 mv $MOUNT_POINT_DIRECTORY/bin/$f $MOUNT_POINT_DIRECTORY/sbin/$f >> $LOG || callHXMod common buildError
 done
 
@@ -166,7 +177,7 @@ cp $BUILD_DIRECTORY/contrib/* $MOUNT_POINT_DIRECTORY/usr/contrib/ >> $LOG || cal
 cp Dist/man/LICENSE $MOUNT_POINT_DIRECTORY >> $LOG || callHXMod common buildError
 
 cp $BUILD_DIRECTORY/etc/* $MOUNT_POINT_DIRECTORY/etc >> $LOG || callHXMod common buildError
-cp $BUILD_DIRECTORY/*.ocl $MOUNT_POINT_DIRECTORY/etc >> $LOG || callHXMod common buildError
+cp $BUILD_DIRECTORY/hexgnix.cfg $MOUNT_POINT_DIRECTORY/etc >> $LOG || callHXMod common buildError
 
 # If the image should contain a copy of the FreeDOS files for testing...
 

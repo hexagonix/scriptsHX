@@ -402,34 +402,22 @@ echo -e "Configuring system build data..."
 
 cd Dist/etc
 
-if [ -e base.ocl ] ; then
+if [ -e hexgnix.cfg ] ; then
 
 echo " > Removing previous build and base version information..."
 
-sudo rm base.ocl
+sudo rm hexgnix.cfg
 
 fi
 
 echo -n " > Processing .conf file and creating system information file... "
-echo -e $(cat base.conf)$VERSION"]"$CODENAME'"'$UPDATEPACK"#"$RELEASE"!"$BUILD">" >> base.ocl
-echo -e "[\e[32mOk\e[0m]"
-
-if [ -e hexgnix.unx ] ; then
-
-echo " > Removing previous Hexagonix build and version database..."
-
-sudo rm hexgnix.unx
-
-fi
-
-echo -n " > Processing .conf file and creating UNX-XML... "
-echo -e $(cat hexgnix.conf)'  "version": "'$VERSION'",' >> hexgnix.unx
-echo '  "codename": "'$CODENAME'",' >> hexgnix.unx
-echo '  "updatePack": "'$UPDATEPACK'",' >> hexgnix.unx
-echo '  "branch": "'$RELEASE'",' >> hexgnix.unx
-echo '  "buildId": "'$BUILD'",' >> hexgnix.unx
-echo '  "buildDate": "'$(date)'"' >> hexgnix.unx
-echo "}" >> hexgnix.unx
+echo -e $(cat base.conf) >> hexgnix.cfg
+echo "version=$VERSION" >> hexgnix.cfg
+echo "codename=$CODENAME" >> hexgnix.cfg
+echo "updatePack=$UPDATEPACK" >> hexgnix.cfg
+echo "branch=$RELEASE" >> hexgnix.cfg
+echo "buildId=$BUILD" >> hexgnix.cfg
+echo "buildDate=$(date)" >> hexgnix.cfg
 echo -e "[\e[32mOk\e[0m]"
 cd ..
 cd ..
@@ -438,22 +426,22 @@ finish
 
 }
 
-function host() {
+function hostname() {
 
 echo -e "Configuring hostname..."
 
 cd Dist/etc
 
-if [ -e host ] ; then
+if [ -e hostname ] ; then
 
 echo " > Removing previous host configuration..."
 
-sudo rm host
+sudo rm hostname
 
 fi
 
-echo -n " > Processing .conf file and creating host configuration... "
-echo $CODENAME$(cat host.conf) >> host
+echo -n " > Processing .conf file and creating hostname configuration... "
+echo $CODENAME$(cat hostname.conf) >> hostname
 echo -e "[\e[32mOk\e[0m]"
 
 cd ..
@@ -478,7 +466,7 @@ sudo rm shrc
 fi
 
 echo -n " > Creating shrc configuration... "
-echo "Welcome to Hexagonix $VERSION ($RELEASE)"  >> shrc
+echo "Welcome to Hexagonix $VERSION"  >> shrc
 echo "Hexagonix is licenced under BSD-3-Clause and comes with no warranty." >> shrc
 echo -e "[\e[32mOk\e[0m]"
 
@@ -489,12 +477,9 @@ finish
 
 }
 
-# DJB2 hash, matching Hexagon.LibASM.PasswdHash.hash (lib/fasm/passwdHash.s)
-# byte for byte: hash = 5381, then hash = hash*33 + c for each character,
-# masked to 32 bits, formatted as 8 lowercase hex digits. Not cryptographic,
-# the same tradeoff the kernel-side implementation documents, the point is
-# that shadow.conf's plaintext passwords never reach the built disk image,
-# not that the hash resists a determined attacker
+# DJB2 hash byte for byte: hash = 5381, then hash = hash*33 + c for each character,
+# masked to 32 bits, formatted as 8 lowercase hex digits. Not cryptographic. 
+# shadow.conf's plaintext passwords never reach the built disk image
 
 function djb2Hash() {
 
@@ -590,6 +575,31 @@ finish
 
 }
 
+function fstab() {
+
+echo -e "Configuring fstab (mount table)..."
+
+cd Dist/etc
+
+if [ -e fstab ] ; then
+
+echo " > Removing previous fstab (mount table)..."
+
+sudo rm fstab
+
+fi
+
+echo -n " > Processing .conf file and creating fstab (mount table)... "
+echo -e $(cat fstab.conf) >> fstab
+echo -e "[\e[32mOk\e[0m]"
+
+cd ..
+cd ..
+
+finish
+
+}
+
 function finish() {
 
 echo -e "[\e[32mStep completed successfully\e[0m]"
@@ -645,7 +655,8 @@ verifyDependencies
 build
 users
 init
-host
+fstab
+hostname
 shrc
 
 echo -e "[\e[32mAll ready!\e[0m]"
@@ -681,7 +692,7 @@ echo -e "hx and hx modules are licensed under BSD-3-Clause and comes with no war
 
 }
 
-export CONFIGURE_VERSION="6.7.0"
+export CONFIGURE_VERSION="6.8.0"
 
 CONFIGURE1=$2
 CONFIGURE2=$3

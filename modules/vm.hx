@@ -94,7 +94,7 @@ startVirtualMachine
 
 function vmHexagonixWithoutSnd() {
 
-QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $DISK_IMAGE_PATH -m $MEMORY -k pt-br"
+QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -drive id=disk0,file=$DISK_IMAGE_PATH,format=raw,if=none -device ahci,id=ahci0 -device ide-hd,drive=disk0,bus=ahci0.0 -m $MEMORY -k pt-br"
 DRV_SOUND="none"
 NOTA="Using without sound device"
 
@@ -113,7 +113,7 @@ startVirtualMachine
 
 function vmHexagonixWithKVM() {
 
-QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -hda $DISK_IMAGE_PATH -m $MEMORY -audiodev $AUDIO_DEVICE -k pt-br"
+QEMU_ARGS="--enable-kvm -serial file:Serial.txt -cpu host -drive id=disk0,file=$DISK_IMAGE_PATH,format=raw,if=none -device ahci,id=ahci0 -device ide-hd,drive=disk0,bus=ahci0.0 -m $MEMORY -audiodev $AUDIO_DEVICE -k pt-br"
 NOTA="Using KVM and serial output to file"
 
 startVirtualMachine
@@ -122,7 +122,7 @@ startVirtualMachine
 
 function vmHexagonixWithoutSerialRedirection() {
 
-QEMU_ARGS="-serial stdio -hda $DISK_IMAGE_PATH -cpu $PROCESSOR -m $MEMORY -k pt-br"
+QEMU_ARGS="-serial stdio -drive id=disk0,file=$DISK_IMAGE_PATH,format=raw,if=none -device ahci,id=ahci0 -device ide-hd,drive=disk0,bus=ahci0.0 -cpu $PROCESSOR -m $MEMORY -k pt-br"
 NOTA="Using serial output to console"
 
 startVirtualMachine
