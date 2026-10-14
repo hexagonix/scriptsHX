@@ -110,20 +110,33 @@ cp rc $BUILD_DIRECTORY/etc
 
 echo " > rc successfully copied." >> $LOG
 
+cp fstab $BUILD_DIRECTORY/etc
+
+echo " > fstab successfully copied." >> $LOG
+
+cp protect $BUILD_DIRECTORY/etc
+
+echo " > protect successfully copied." >> $LOG
+
 cp shadow $BUILD_DIRECTORY/etc
 
 echo " > shadow successfully copied." >> $LOG
 
-cp host $BUILD_DIRECTORY/etc
+cp sudoers $BUILD_DIRECTORY/etc
 
-echo " > host configuration file successfully copied." >> $LOG
+echo " > sudoers successfully copied." >> $LOG
 
-cp *.unx $BUILD_DIRECTORY/etc
+cp hostname $BUILD_DIRECTORY/etc
 
-echo " > *.unx files successfully copied." >> $LOG
+echo " > hostname configuration file successfully copied." >> $LOG
 
-cp base.ocl $BUILD_DIRECTORY/hexgnix.ocl
+cp hexgnix.cfg $BUILD_DIRECTORY/hexgnix.cfg
 cp shrc $BUILD_DIRECTORY/etc
+
+mkdir -p $BUILD_DIRECTORY/boot
+cp boot.cfg $BUILD_DIRECTORY/boot
+
+echo " > boot.cfg successfully copied." >> $LOG
 cp shell.sh $BUILD_DIRECTORY
 
 echo " > shell.sh successfully copied." >> $LOG
@@ -206,6 +219,6 @@ callHXMod contribBuilder
 
 # Constants
 
-MOD_VER="0.6"
+MOD_VER="0.7"
 
 main $1
